@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:BasePage 
+	xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:BLE.Client.Pages;assembly=BLE.Client"
+    x:Class="BLE.Client.Pages.PageViewPage"
+    Title="Data">
+
+
+	<ScrollView>
+		<StackLayout Margin="0,100,0,0" VerticalOptions="Start">
+		<StackLayout Orientation="Horizontal" VerticalOptions="Start">
+			<Label x:Name="labelViewCharLength" HorizontalOptions="Start" />
+			<Label x:Name="labelViewBitLength" HorizontalOptions="Center" />
+			<Label x:Name="labelViewByteLength" HorizontalOptions="Center" />
+			<Label x:Name="labelViewWordLength" HorizontalOptions="End" />
+		</StackLayout>
+		<Button x:Name="buttonDisplayMode" BorderWidth ="1" BackgroundColor="#C3C3C3" Clicked="buttonDisplayModeClicked" PropertyChanged="buttonDisplayModePropertyChanged" />
+		<Editor x:Name="editorContent" />
+		</StackLayout>
+    </ScrollView>
+	
+</pages:BasePage>

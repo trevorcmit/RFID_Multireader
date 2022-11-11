@@ -1,0 +1,2 @@
+MainPackage=C:\Users\trevo\source\repos\RFID Deployment\CS108 Demo\BLE.Client.UWP\bin\x86\Release\BLE.Client.UWP_1.0.1.0_x86.msix
+SymbolPackage=C:\Users\trevo\source\repos\RFID Deployment\CS108 Demo\BLE.Client.UWP\obj\x86\Release\Symbols\BLE.Client.UWP_1.0.1.0_x86.appxsym

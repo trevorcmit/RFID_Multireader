@@ -1,0 +1,1 @@
+C:\Users\Admin\Desktop\CS108 RFID Reader Demo v3\CS108 Demo\BLE.Client.UWP\bin\x64\Release\Upload\BLE.Client.UWP_3.0.0.0\BLE.Client.UWP_3.0.0.0_x86_x64.appxbundle

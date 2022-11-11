@@ -1,0 +1,163 @@
+﻿<pages:BasePage 
+  xmlns="http://xamarin.com/schemas/2014/forms"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  xmlns:pages="clr-namespace:BLE.Client.Pages;assembly=BLE.Client"
+  x:Class="BLE.Client.Pages.PageRFMicroS3Inventory"
+  Title="Temperature Inventory"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Xamarin.Forms;assembly=LiveChartsCore.SkiaSharpView.XamarinForms"
+>
+
+  <StackLayout Orientation="Vertical" VerticalOptions="StartAndExpand"> <!-- Overarching Vertical Stacklayout -->
+
+    <StackLayout Orientation="Horizontal" HeightRequest="2000"> <!-- To Separate Data from Body Model -->
+            
+      <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand"> <!-- RFID Tag Section -->
+
+        <StackLayout Orientation="Vertical">
+          <ListView x:Name="liewViewTagData" ItemsSource="{Binding TagInfoList}" SelectedItem="{Binding objItemSelected, Mode=TwoWay}">
+            <ListView.Header>
+              <StackLayout BackgroundColor="#cccccc"> <!-- Gray color of the Column Header row -->
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.35*"/>    <!-- EPC -->
+                    <ColumnDefinition Width="0.20*"/>    <!-- Time -->
+                    <ColumnDefinition Width="0.15*"/>    <!-- RSSI -->
+                    <ColumnDefinition Width="0.15*"/>    <!-- Temperature -->
+                    <ColumnDefinition Width="0.15*"/>    <!-- Times Read-->
+                  </Grid.ColumnDefinitions>
+                  <Label                 Text="Tag ID"       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Small" VerticalOptions="CenterAndExpand" />
+                  <Label Grid.Column="1" Text="Time"         VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Small" VerticalOptions="CenterAndExpand" />
+                  <Label Grid.Column="2" Text="RSSI"         VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Small" VerticalOptions="CenterAndExpand" />
+                  <Label Grid.Column="3" Text="ºC"           VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Small" VerticalOptions="CenterAndExpand" />
+                  <Label Grid.Column="4" Text="Read Count"   VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Small" VerticalOptions="CenterAndExpand" />
+                </Grid>
+              </StackLayout>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+              <DataTemplate>
+                <ViewCell>
+                  <StackLayout Orientation="Vertical">
+                    <Grid>
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.35*"/>   <!-- EPC -->
+                        <ColumnDefinition Width="0.20*"/>   <!-- Time -->
+                        <ColumnDefinition Width="0.15*"/>   <!-- RSSI -->
+                        <ColumnDefinition Width="0.10*"/>   <!-- Temperature -->
+                        <ColumnDefinition Width="0.10*"/>   <!-- Times Read -->
+                      </Grid.ColumnDefinitions>
+                      <Label                 Text="{Binding DisplayName}"    VerticalTextAlignment="Start" FontSize="Small"/>
+                      <Label Grid.Column="1" Text="{Binding TimeString}"     VerticalTextAlignment="Start" HorizontalTextAlignment="Center"/>
+                      <Label Grid.Column="2" Text="{Binding OCRSSI}"         VerticalTextAlignment="Start" HorizontalTextAlignment="Center" TextColor="{Binding RSSIColor}"/>
+                      <Label Grid.Column="3" Text="{Binding SensorAvgValue}" VerticalTextAlignment="Start" HorizontalTextAlignment="Center"/>
+                      <Label Grid.Column="4" Text="{Binding SucessCount}"    VerticalTextAlignment="Start" HorizontalTextAlignment="Center"/>
+                    </Grid>
+                  </StackLayout>
+                </ViewCell>
+              </DataTemplate>
+            </ListView.ItemTemplate>
+          </ListView> 
+        </StackLayout>
+
+      </StackLayout> <!-- RFID Tag Section -->
+
+
+      <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+        <Grid VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="400">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+          </Grid.ColumnDefinitions> 
+          <Grid.RowDefinitions>
+            <RowDefinition/>  
+          </Grid.RowDefinitions>
+
+          <Label 
+            Text="{Binding Duty}" Font="Large" 
+            Grid.Row="0" Grid.Column="0"
+            HorizontalOptions="Center" VerticalOptions="Center"
+          />
+        </Grid>
+
+        <!-- <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" WidthRequest="450">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+          </Grid.ColumnDefinitions> 
+          <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>    
+          </Grid.RowDefinitions> -->
+        
+          <!-- <Image Source="{pages:ImageResource BLE.Client.Pages.leggings.png}" Aspect="AspectFit" Grid.Row="0" Grid.Column="0" Grid.RowSpan="12" Grid.ColumnSpan="12"/> -->
+
+          <!-- <Image Source="{Binding LeftGlute,  StringFormat='Assets/\{0\}.png'}" Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="3" Aspect="AspectFit" Opacity="0.8"/>
+          <Image Source="{Binding RightGlute, StringFormat='Assets/\{0\}.png'}" Grid.Row="1" Grid.Column="5" Grid.RowSpan="2" Grid.ColumnSpan="3" Aspect="AspectFit" Opacity="0.8"/>
+          <Image Source="{Binding LeftQuad,   StringFormat='Assets/\{0\}.png'}" Grid.Row="3" Grid.Column="3" Grid.RowSpan="2" Grid.ColumnSpan="3" Aspect="AspectFit" Opacity="0.8"/>
+          <Image Source="{Binding RightQuad,  StringFormat='Assets/\{0\}.png'}" Grid.Row="3" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="3" Aspect="AspectFit" Opacity="0.8"/>
+          <Image Source="{Binding LeftCalf,   StringFormat='Assets/\{0\}.png'}" Grid.Row="7" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="3" Aspect="AspectFit" Opacity="0.8"/>
+          <Image Source="{Binding RightCalf,  StringFormat='Assets/\{0\}.png'}" Grid.Row="7" Grid.Column="5" Grid.RowSpan="2" Grid.ColumnSpan="3" Aspect="AspectFit" Opacity="0.8"/> -->
+
+          <!-- <Label Text="{Binding LeftGluteTemp,  Mode=TwoWay}" Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="3" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large" FontAttributes="Bold"/>
+          <Label Text="{Binding RightGluteTemp, Mode=TwoWay}" Grid.Row="1" Grid.Column="5" Grid.RowSpan="2" Grid.ColumnSpan="3" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large" FontAttributes="Bold"/>
+          <Label Text="{Binding LeftQuadTemp,   Mode=TwoWay}" Grid.Row="3" Grid.Column="3" Grid.RowSpan="2" Grid.ColumnSpan="3" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large" FontAttributes="Bold"/>
+          <Label Text="{Binding RightQuadTemp,  Mode=TwoWay}" Grid.Row="3" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="3" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large" FontAttributes="Bold"/>
+          <Label Text="{Binding LeftCalfTemp,   Mode=TwoWay}" Grid.Row="7" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="3" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large" FontAttributes="Bold"/>
+          <Label Text="{Binding RightCalfTemp,  Mode=TwoWay}" Grid.Row="7" Grid.Column="5" Grid.RowSpan="2" Grid.ColumnSpan="3" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large" FontAttributes="Bold"/> -->
+
+        <!-- </Grid> -->
+
+      </StackLayout> 
+
+    </StackLayout> <!-- To Separate Data from Body Model -->
+
+
+    <StackLayout Orientation="Vertical" VerticalOptions="EndAndExpand" > <!-- Bottom Inventory/Clear/Share Section --> 
+      <Button Text="{Binding startInventoryButtonText}" Font="Large" Command="{Binding OnStartInventoryButtonCommand}"/>
+      <StackLayout Orientation="Horizontal">
+        <Button Text="Clear" Font="Large" TextColor="White"
+                CornerRadius="11"
+                Command="{Binding OnClearButtonCommand}" 
+                HorizontalOptions="StartAndExpand"
+                BackgroundColor="#3201ba"
+                WidthRequest="200"
+        />
+        <Button Text="Share" Font="Large" TextColor="White"
+                CornerRadius="11"
+                Command="{Binding OnShareDataCommand}"   
+                HorizontalOptions="CenterAndExpand"
+                BackgroundColor="#3201ba"
+        />
+        <Button Text="Add Name" Font="Large" TextColor="White"
+                CornerRadius="11"
+                Command="{Binding OnAddNicknameCommand}"   
+                HorizontalOptions="EndAndExpand"
+                BackgroundColor="#3201ba"
+                WidthRequest="200"
+        />
+      </StackLayout>
+    </StackLayout> <!-- Bottom Inventory/Clear/Share Section -->
+
+  </StackLayout> <!-- Overarching Vertical Stacklayout -->
+
+</pages:BasePage>

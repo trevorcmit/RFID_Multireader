@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:BasePage 
+  xmlns="http://xamarin.com/schemas/2014/forms"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  xmlns:pages="clr-namespace:BLE.Client.Pages;assembly=BLE.Client"
+  x:Class="BLE.Client.Pages.PageRFMicroReadTemp" Title="Temp/Humidity Read Temp"
+>
+
+  <ScrollView>
+    <StackLayout Padding="5, 3, 5, 0">
+
+      <StackLayout Orientation="Horizontal">
+        <Label Text="Selected EPC" WidthRequest="70" />
+		    <Editor Text="{ Binding entrySelectedEPC, Mode=TwoWay }" HorizontalOptions="FillAndExpand" />
+      </StackLayout>
+
+      <StackLayout Orientation="Horizontal">
+        <Label Text="Access PWD" WidthRequest="70" />
+        <Entry Text="{ Binding entrySelectedPWD, Mode=TwoWay }" HorizontalOptions="FillAndExpand" />
+      </StackLayout>
+
+      <StackLayout Orientation="Horizontal">
+        <Label Text="Upper Limit of on Chip RSSI" WidthRequest="170" />
+        <Entry Text="{ Binding entryUpperRSSILimit, Mode=TwoWay }" HorizontalOptions="FillAndExpand" />
+      </StackLayout>
+
+      <StackLayout Orientation="Horizontal">
+        <Label Text="Lower Limit of on Chip RSSI" WidthRequest="170" />
+        <Entry Text="{ Binding entryLowerRSSILimit, Mode=TwoWay }" HorizontalOptions="FillAndExpand" />
+      </StackLayout>
+      
+      <StackLayout Orientation="Horizontal">
+        <Switch IsToggled="{Binding switchRWTagIDIsToggled, Mode=TwoWay }" />
+        <Label Text="RW Tag ID" WidthRequest="80" VerticalOptions="Center" />
+        <Entry x:Name="entryRWTagID" Text="{ Binding entryRWTagID, Mode=TwoWay }" HorizontalOptions="FillAndExpand" />
+        <Label Text="{ Binding labelRWTagIDStatus }" WidthRequest="30" HorizontalOptions="End" VerticalOptions="Center" />		
+      </StackLayout>
+
+      <StackLayout Orientation="Horizontal">
+        <Switch IsToggled="{Binding switchCalibrationIsToggled, Mode=TwoWay }" />
+        <Label Text="Calibration" WidthRequest="80" VerticalOptions="Center" />
+        <Entry x:Name="entryCalibration" Text="{ Binding entryCalibration, Mode=TwoWay }" HorizontalOptions="FillAndExpand" />
+        <Label Text="{ Binding labelCalibrationStatus }" WidthRequest="30" HorizontalOptions="End" VerticalOptions="Center" />
+      </StackLayout>
+
+      <StackLayout Orientation="Horizontal">
+        <Switch IsToggled="{Binding switchSensorCodeIsToggled, Mode=TwoWay }" />
+        <Label Text="Sensor Code" WidthRequest="80" VerticalOptions="Center" />
+		    <Entry x:Name="entrySensorCode" Text="{ Binding entrySensorCode, Mode=TwoWay }" HorizontalOptions="FillAndExpand" />
+        <Label Text="{ Binding labelSensorCodeStatus }" WidthRequest="30" HorizontalOptions="End" VerticalOptions="Center" />		
+      </StackLayout> 
+        
+      <StackLayout Orientation="Horizontal">
+        <Switch IsToggled="{Binding switchRssiCodeIsToggled, Mode=TwoWay }" />
+        <Label Text="Rssi Code" WidthRequest="80" VerticalOptions="Center" />
+		    <Entry x:Name="entryRssiCode" Text="{ Binding entryRssiCode, Mode=TwoWay }" HorizontalOptions="FillAndExpand" />
+        <Label Text="{ Binding labelRssiCodeStatus }" WidthRequest="30" HorizontalOptions="End" VerticalOptions="Center" />		
+      </StackLayout>
+
+      <StackLayout Orientation="Horizontal">
+        <Switch IsToggled="{Binding switchTemperatureCodeIsToggled, Mode=TwoWay }" />
+        <Label Text="Temperature Code" WidthRequest="80" VerticalOptions="Center" />
+        <Entry x:Name="entryTemperatureCode" Text="{ Binding entryTemperatureCode, Mode=TwoWay }" HorizontalOptions="FillAndExpand" />
+        <Label Text="{ Binding labelTemperatureCodeStatus }" WidthRequest="30" HorizontalOptions="End" VerticalOptions="Center" />
+      </StackLayout>
+
+      <StackLayout Orientation="Horizontal">
+        <Label Text="On Chip RSSI" WidthRequest="100" VerticalOptions="Center" />
+        <Label x:Name="labelOCRSSI" Text="{ Binding labelOCRSSIText }" TextColor="{ Binding labelOCRSSITColor }" WidthRequest="130" HorizontalOptions="End" VerticalOptions="Center" />
+      </StackLayout>
+
+      <StackLayout Orientation="Horizontal">
+        <Label Text="Temperature " WidthRequest="100" VerticalOptions="Center" />
+        <Label x:Name="labelTemperature" Text="{ Binding labelTemperatureText }" WidthRequest="130" HorizontalOptions="End" VerticalOptions="Center" />
+      </StackLayout>
+      
+      <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
+        <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
+          <Button Text="Read" Font="Large" BackgroundColor="#C3C3C3" Command="{Binding OnReadButtonCommand}" />
+        </StackLayout>
+      
+      </StackLayout>
+    </StackLayout>
+  </ScrollView>
+</pages:BasePage>
+    

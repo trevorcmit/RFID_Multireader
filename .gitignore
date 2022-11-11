@@ -1,0 +1,29 @@
+.vs/
+
+.vs
+
+packages/
+
+packages
+
+CS108 UWP Demo
+CS108 UWP Demo/
+
+CS108 DesktopDemo
+CS108 DesktopDemo/
+
+CS108 XamarinFormsDemo
+CS108 XamarinFormsDemo/
+
+CS108 Demo/BLE.Client.UWP/bin
+CS108 Demo/BLE.Client.UWP/obj
+CS108 Demo/BLE.Client.UWP/bin/
+CS108 Demo/BLE.Client.UWP/obj/
+
+**/bin
+**/obj
+**/x86
+**/x64
+*.pdb
+*.mdilpdb
+**/Release

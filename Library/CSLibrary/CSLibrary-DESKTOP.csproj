@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3F5D0D75-9455-4797-9F63-28BE05221609}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CSLibrary</RootNamespace>
+    <AssemblyName>CSLibrary</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="wclBluetoothFramework">
+      <HintPath>HAL\btframework\wclBluetoothFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="wclCommon">
+      <HintPath>HAL\btframework\wclCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="wclCommunication">
+      <HintPath>HAL\btframework\wclCommunication.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BarcodeReader\ClassBarCode.cs" />
+    <Compile Include="BarcodeReader\Constants\CSLibrary.Barcode.Constants.cs" />
+    <Compile Include="BarcodeReader\Events\CSLibrary.Barcode.EventArgs.cs" />
+    <Compile Include="BarcodeReader\Structures\CSLibrary.Barcode.Structures.cs" />
+    <Compile Include="Battery\ClassBattery.cs" />
+    <Compile Include="BluetoothIC\ClassBluetoothIC.cs" />
+    <Compile Include="BluetoothProtocol\BTConnect.cs" />
+    <Compile Include="BluetoothProtocol\BTReceive.cs" />
+    <Compile Include="BluetoothProtocol\BTSend.cs" />
+    <Compile Include="BluetoothProtocol\ClassBleDebug.cs" />
+    <Compile Include="BluetoothProtocol\CSLibrary.Private.cs" />
+    <Compile Include="CSLibrary.cs" />
+    <Compile Include="HAL\btframework\ClassDebug.cs" />
+    <Compile Include="HAL\btframework\ClassDeviceFinder.cs" />
+    <Compile Include="HAL\btframework\CodeFileBLE.cs" />
+    <Compile Include="Notification\ClassNotification.cs" />
+    <Compile Include="RFIDReader\Antenna\Antenna.cs" />
+    <Compile Include="RFIDReader\Antenna\AntennaConfig.cs" />
+    <Compile Include="RFIDReader\Antenna\AntennaList.cs" />
+    <Compile Include="RFIDReader\Antenna\AntennaListTypeConverter.cs" />
+    <Compile Include="RFIDReader\Antenna\AntennaStatus.cs" />
+    <Compile Include="RFIDReader\Antenna\AntennaTypeConverter.cs" />
+    <Compile Include="RFIDReader\ClassRFID.cs" />
+    <Compile Include="RFIDReader\ClassRFID.Private.ByPassRegister.cs" />
+    <Compile Include="RFIDReader\ClassRFID.Private.Country.cs" />
+    <Compile Include="RFIDReader\ClassRFID.Private.cs" />
+    <Compile Include="RFIDReader\ClassRFID.Private.FM13DT160.cs" />
+    <Compile Include="RFIDReader\ClassRFID.Private.FrequencyChannel.cs" />
+    <Compile Include="RFIDReader\ClassRFID.Private.Inventory.cs" />
+    <Compile Include="RFIDReader\ClassRFID.Private.MacRegister.cs" />
+    <Compile Include="RFIDReader\ClassRFID.Private.OEM.cs" />
+    <Compile Include="RFIDReader\ClassRFID.Private.PowerManager.cs" />
+    <Compile Include="RFIDReader\ClassRFID.Private.QTCommand.cs" />
+    <Compile Include="RFIDReader\ClassRFID.Private.Read.cs" />
+    <Compile Include="RFIDReader\ClassRFID.Private.Select.cs" />
+    <Compile Include="RFIDReader\ClassRFID.Private.Write.cs" />
+    <Compile Include="RFIDReader\ClassRFID.Public.Algorithm.cs" />
+    <Compile Include="RFIDReader\ClassRFID.Public.Antenna.cs" />
+    <Compile Include="RFIDReader\ClassRFID.Public.Country.cs" />
+    <Compile Include="RFIDReader\ClassRFID.Public.FrequencyChannel.cs" />
+    <Compile Include="RFIDReader\ClassRFID.Public.Operation.cs" />
+    <Compile Include="RFIDReader\ClassRFID.Public.Power.cs" />
+    <Compile Include="RFIDReader\ClassRFID.Public.Profile.cs" />
+    <Compile Include="RFIDReader\ClassRFID.Public.QTCommandParms.cs" />
+    <Compile Include="RFIDReader\ClassRFID.Public.SetLNA.cs" />
+    <Compile Include="RFIDReader\Constants\AntennaPort.cs" />
+    <Compile Include="RFIDReader\Constants\AntennaSequenceMode.cs" />
+    <Compile Include="RFIDReader\Constants\CSLibrary.Constants.cs" />
+    <Compile Include="RFIDReader\Constants\CSLibrary.Constants.Packet.cs" />
+    <Compile Include="RFIDReader\Constants\FreqAgile.cs" />
+    <Compile Include="RFIDReader\Constants\Intel.Constants.cs" />
+    <Compile Include="RFIDReader\Constants\SelectFlags.cs" />
+    <Compile Include="RFIDReader\Events\CSLibrary.Events.cs" />
+    <Compile Include="RFIDReader\Structures\AntennaPortCollections.cs" />
+    <Compile Include="RFIDReader\Structures\CSLibrary.Structures.cs" />
+    <Compile Include="RFIDReader\Structures\CSLibrary.Structures.TagKill.cs" />
+    <Compile Include="RFIDReader\Structures\CSLibrary.Structures.TagLock.cs" />
+    <Compile Include="RFIDReader\Structures\CSLibrary.Structures.TagRead.cs" />
+    <Compile Include="RFIDReader\Structures\CSLibrary.Structures.TagWrite.cs" />
+    <Compile Include="RFIDReader\Structures\Intel.Structures.cs" />
+    <Compile Include="SiliconLabIC\ClassEvent.cs" />
+    <Compile Include="SiliconLabIC\ClassSiliconLabIC.cs" />
+    <Compile Include="Tools\ClassCRC16.cs" />
+    <Compile Include="Tools\ClassFIFIQueue.cs" />
+    <Compile Include="Tools\ClassTimer.cs" />
+    <Compile Include="Tools\HexEncoding.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Readme.txt" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>del ..\..\obj\project.assets.json</PreBuildEvent>
+  </PropertyGroup>
+</Project>

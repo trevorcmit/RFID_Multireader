@@ -1,0 +1,430 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Pages\PageInventory-cvs.xaml.cs" />
+    <Compile Remove="Pages\PageXerxesInventory.xaml.cs" />
+    <Compile Remove="ViewModels\ViewModelCS83045DataLog.cs" />
+    <Compile Remove="ViewModels\ViewModelInventorynScan-cvs.cs" />
+    <Compile Remove="ViewModels\ViewModelXerxesInventory.cs" />
+    <Compile Remove="ViewModels\ViewModelXerxesSetting.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Pages\PageXerxesInventory.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="BleMvxFormsApp.xaml" />
+    <None Remove="Calibre-Light.ttf" />
+    <None Remove="Pages\DeviceListPage.xaml" />
+    <None Remove="Pages\PageAbout.xaml" />
+    <None Remove="Pages\PageAxzonInventory.xaml" />
+    <None Remove="Pages\PageAxzonSetting.xaml" />
+    <None Remove="Pages\PageBarcodeScan.xaml" />
+    <None Remove="Pages\PageBlockWrite.xaml" />
+    <None Remove="Pages\PageCS83045DataLog.xaml" />
+    <None Remove="Pages\PageCS83045Inventory.xaml" />
+    <None Remove="Pages\PageCS83045Setting.xaml" />
+    <None Remove="Pages\PageCS83045ViewLog.xaml" />
+    <None Remove="Pages\PageCS9010Inventory.xaml" />
+    <None Remove="Pages\PageCTESIUSTempInventory.xaml" />
+    <None Remove="Pages\PageEM4152Inventory.xaml" />
+    <None Remove="Pages\PageEM4152SenseCalibrate.xaml" />
+    <None Remove="Pages\PageEM4152SensorCalibrationWord.xaml" />
+    <None Remove="Pages\PageEM4152SensorControlWord1.xaml" />
+    <None Remove="Pages\PageEM4152SensorDataStored.xaml" />
+    <None Remove="Pages\PageEM4152SystemConfigurationWord1.xaml" />
+    <None Remove="Pages\PageEM4152TamperLockWord.xaml" />
+    <None Remove="Pages\PageFilter.xaml" />
+    <None Remove="Pages\PageFM13DT160Inventory.xaml" />
+    <None Remove="Pages\PageFM13DT160ReadWriteMemory.xaml" />
+    <None Remove="Pages\PageFocusandFastIDInventory.xaml" />
+    <None Remove="Pages\PageFocusandFastIDSetting.xaml" />
+    <None Remove="Pages\PageGeiger.xaml" />
+    <None Remove="Pages\PageInventory-cvs.xaml" />
+    <None Remove="Pages\PageInventory.xaml" />
+    <None Remove="Pages\PageInventorynScan.xaml" />
+    <None Remove="Pages\PageMainMenu.xaml" />
+    <None Remove="Pages\PageMaxduraControls.xaml" />
+    <None Remove="Pages\PageMaxduraInventory.xaml" />
+    <None Remove="Pages\PageMultiBankInventory.xaml" />
+    <None Remove="Pages\PageMultiBankInventorySetting.xaml" />
+    <None Remove="Pages\PagePeriodicRead.xaml" />
+    <None Remove="Pages\PagePhaseChannelInventory.xaml" />
+    <None Remove="Pages\PagePostFilter.xaml" />
+    <None Remove="Pages\PagePreFilter.xaml" />
+    <None Remove="Pages\PageRead.xaml" />
+    <None Remove="Pages\PageReadWrite.xaml" />
+    <None Remove="Pages\PageRegisterTag.xaml" />
+    <None Remove="Pages\PageRFMicronInventory.xaml" />
+    <None Remove="Pages\PageRFMicronNickname.xaml" />
+    <None Remove="Pages\PageRFMicronS2Inventory.xaml" />
+    <None Remove="Pages\PageRFMicronS3Inventory.xaml" />
+    <None Remove="Pages\PageRFMicroReadTemp.xaml" />
+    <None Remove="Pages\PageRFMicroSetting.xaml" />
+    <None Remove="Pages\PageSecurity.xaml" />
+    <None Remove="Pages\PageSetting.xaml" />
+    <None Remove="Pages\PageSettingAdministration.xaml" />
+    <None Remove="Pages\PageSettingAntenna.xaml" />
+    <None Remove="Pages\PageSettingOperation.xaml" />
+    <None Remove="Pages\PageSettingPowerSequencing.xaml" />
+    <None Remove="Pages\PageSmartracThermologgerClearLogger.xaml" />
+    <None Remove="Pages\PageSmartracThermologgerInitLogger.xaml" />
+    <None Remove="Pages\PageSmartracThermologgerInventory.xaml" />
+    <None Remove="Pages\PageSmartracThermologgerReadCurrentValues.xaml" />
+    <None Remove="Pages\PageSmartracThermologgerReadLifetimeStatistics.xaml" />
+    <None Remove="Pages\PageSmartracThermologgerReadLoggerStatus.xaml" />
+    <None Remove="Pages\PageSmartracThermologgerReadMeasurementObject.xaml" />
+    <None Remove="Pages\PageSmartracThermologgerReadSystemInformation.xaml" />
+    <None Remove="Pages\PageSmartracThermologgerStartLogger.xaml" />
+    <None Remove="Pages\PageSmartracThermologgerStopLogger.xaml" />
+    <None Remove="Pages\PageSpecialFunctionsMenu.xaml" />
+    <None Remove="Pages\PageUCODEDNA.xaml" />
+    <None Remove="Pages\PageViewPage.xaml" />
+    <None Remove="Pages\PageXerxesAuthentication.xaml" />
+    <None Remove="Pages\PageXerxesConfiguration.xaml" />
+    <None Remove="Pages\PageXerxesInventory.xaml" />
+    <None Remove="Pages\PageXerxesReadTemp.xaml" />
+    <None Remove="Pages\PageXerxesSetting.xaml" />
+    <None Remove="Pages\PageXerxesTagList.xaml" />
+    <None Remove="Pages\ServiceListPage.xaml" />
+    <None Remove="Pages\yoga.png" />
+    <None Remove="ViewModels\beep-09.mp3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Calibre-Light.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Acr.UserDialogs" Version="6.5.1" />
+    <PackageReference Include="MvvmCross" Version="5.1.0" />
+    <PackageReference Include="MvvmCross.Binding" Version="5.1.0" />
+    <PackageReference Include="MvvmCross.Core" Version="5.1.0" />
+    <PackageReference Include="MvvmCross.Forms" Version="5.1.0" />
+    <PackageReference Include="MvvmCross.Platform" Version="5.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="PCLStorage" Version="1.0.2" />
+    <PackageReference Include="Plugin.Permissions" Version="2.0.1" />
+    <PackageReference Include="Plugin.Share" Version="7.0.1" />
+    <PackageReference Include="Prism.Core" Version="6.3.0" />
+    <PackageReference Include="Splat" Version="2.0.0" />
+    <PackageReference Include="Xam.Plugins.Settings" Version="3.0.1" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2291" />
+    <!-- <PackageReference Include="LiveChartsCore" Version="2.0.0-beta.230"/>
+    <PackageReference Include="LiveChartsCore.SkiaSharpView.XamarinForms" Version="2.0.0-beta.230"/> -->
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Library\BTWapper\MvvmCross.Plugins.BLE\MvvmCross.Plugins.BLE.csproj" />
+    <ProjectReference Include="..\..\Library\BTWapper\Plugin.BLE.Abstractions\Plugin.BLE.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Library\CSLibrary\CSLibrary-NETStandard.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Pages\yoga.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="PagesViewModelsSet\SpecialFuction\Monza4 QT\PublicModeInventory\PageQTPublicModeInventory.xaml.cs">
+      <DependentUpon>PageQTPublicModeInventory.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="PagesViewModelsSet\SpecialFuction\Monza4 QT\PrivateModeInventory\PageQTPrivateModeInventory.xaml.cs">
+      <DependentUpon>PageQTPrivateModeInventory.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="PagesViewModelsSet\SpecialFuction\Monza4 QT\ReadPublicModeData\PageQTReadPublicModeData.xaml.cs">
+      <DependentUpon>PageQTReadPublicModeData.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="PagesViewModelsSet\SpecialFuction\Monza4 QT\ReadWritePrivateModeData\PageQTReadWritePrivateModeData.xaml.cs">
+      <DependentUpon>PageQTReadWritePrivateModeData.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="PagesViewModelsSet\SpecialFuction\Monza4 QT\InventorySelectionMenu\PageQTInventorySlectionMenu.xaml.cs">
+      <DependentUpon>PageQTInventorySlectionMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="PagesViewModelsSet\SpecialFuction\Temperature tag with location demo for Tablet\PageTempGPSInventory.xaml.cs">
+      <DependentUpon>PageTempGPSInventory.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="PagesViewModelsSet\SpecialFuction\Temperature tag with location demo for Tablet\PageTempGPSSetting.xaml.cs">
+      <DependentUpon>PageTempGPSSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\PageFM13DT160DeepSleep.xaml.cs">
+      <DependentUpon>PageFM13DT160DeepSleep.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\PageFM13DT160InitRegFile.xaml.cs">
+      <DependentUpon>PageFM13DT160InitRegFile.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\PageFM13DT160LedCtrl.xaml.cs">
+      <DependentUpon>PageFM13DT160LedCtrl.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\PageFM13DT160OpModeCheck.xaml.cs">
+      <DependentUpon>PageFM13DT160OpModeCheck.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\PagePerformanceTest.xaml.cs">
+      <DependentUpon>PagePerformanceTest.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\PageWriteAnyEPC.xaml.cs">
+      <DependentUpon>PageWriteAnyEPC.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="BleMvxFormsApp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="PagesViewModelsSet\SpecialFuction\Monza4 QT\PublicModeInventory\PageQTPublicModeInventory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="PagesViewModelsSet\SpecialFuction\Monza4 QT\PrivateModeInventory\PageQTPrivateModeInventory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="PagesViewModelsSet\SpecialFuction\Monza4 QT\ReadPublicModeData\PageQTReadPublicModeData.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="PagesViewModelsSet\SpecialFuction\Monza4 QT\ReadWritePrivateModeData\PageQTReadWritePrivateModeData.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="PagesViewModelsSet\SpecialFuction\Monza4 QT\InventorySelectionMenu\PageQTInventorySlectionMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="PagesViewModelsSet\SpecialFuction\Temperature tag with location demo for Tablet\PageTempGPSInventory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="PagesViewModelsSet\SpecialFuction\Temperature tag with location demo for Tablet\PageTempGPSSetting.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\DeviceListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageAbout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageAxzonInventory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageAxzonSetting.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageBarcodeScan.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageBlockWrite.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageCS83045DataLog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageCS83045Inventory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageCS83045Setting.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageCS83045ViewLog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageCS9010Inventory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageCTESIUSTempInventory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageEM4152Inventory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageEM4152SenseCalibrate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageEM4152SensorCalibrationWord.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageEM4152SensorControlWord1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageEM4152SensorDataStored.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageFM13DT160DeepSleep.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageFM13DT160InitRegFile.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageFM13DT160LedCtrl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageFM13DT160OpModeCheck.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageEM4152SystemConfigurationWord1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageEM4152TamperLockWord.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageFilter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageFM13DT160Inventory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageFM13DT160ReadWriteMemory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageFocusandFastIDInventory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageFocusandFastIDSetting.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageGeiger.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PagePerformanceTest.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageInventory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageInventorynScan.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageMainMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageMaxduraControls.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageMaxduraInventory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageMultiBankInventory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageMultiBankInventorySetting.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PagePeriodicRead.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PagePhaseChannelInventory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PagePostFilter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PagePreFilter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageRead.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageRFMicronS3Inventory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageWriteAnyEPC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageReadWrite.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageRegisterTag.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageRFMicronInventory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageRFMicronNickname.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageRFMicronS2Inventory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageRFMicroReadTemp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageRFMicroSetting.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageSecurity.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageSetting.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageSettingAdministration.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageSettingAntenna.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageSettingOperation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageSettingPowerSequencing.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageSmartracThermologgerClearLogger.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageSmartracThermologgerInitLogger.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageSmartracThermologgerInventory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageSmartracThermologgerReadCurrentValues.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageSmartracThermologgerReadLifetimeStatistics.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageSmartracThermologgerReadLoggerStatus.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageSmartracThermologgerReadMeasurementObject.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageSmartracThermologgerReadSystemInformation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageSmartracThermologgerStartLogger.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageSmartracThermologgerStopLogger.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageSpecialFunctionsMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageUCODEDNA.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageViewPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageXerxesAuthentication.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageXerxesConfiguration.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageXerxesReadTemp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageXerxesSetting.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PageXerxesTagList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\ServiceListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

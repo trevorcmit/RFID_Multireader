@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<pages:BasePage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:BLE.Client.Pages;assembly=BLE.Client"
+    x:Class="BLE.Client.Pages.PageRenameTags"
+    Title="Renaming RFID Tags">
+
+    <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" WidthRequest="1000">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Button
+            FontFamily="CalibreLight" Text="{Binding TagOneText}" Font="Large" CornerRadius="15"
+            BackgroundColor="{Binding TagOneColor}" TextColor="White"
+            Grid.Row="1" Grid.Column="1"
+            Command="{Binding TagSetOneCommand}" CommandParameter="1"
+        />
+
+        <Button
+            FontFamily="CalibreLight" Text="Tag Set #2" Font="Large" CornerRadius="15"
+            BackgroundColor="#ba0900" TextColor="White"
+            Grid.Row="1" Grid.Column="3"
+            Command="{Binding TagSetTwoCommand}" CommandParameter="1"
+        />
+
+        <Button
+            FontFamily="CalibreLight" Text="Tag Set #2" Font="Large" CornerRadius="15"
+            BackgroundColor="#ba0900" TextColor="White"
+            Grid.Row="3" Grid.Column="1"
+            Command="{Binding TagSetThreeCommand}" CommandParameter="1"
+        />
+
+        <Button
+            FontFamily="CalibreLight" Text="Tag Set #2" Font="Large" CornerRadius="15"
+            BackgroundColor="#ba0900" TextColor="White"
+            Grid.Row="3" Grid.Column="3"
+            Command="{Binding TagSetThreeCommand}" CommandParameter="1"
+        />
+
+    </Grid>
+
+</pages:BasePage>

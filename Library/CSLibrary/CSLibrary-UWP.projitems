@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>c0bb13cd-7403-4079-9ecd-df5ac5f96078</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>CSLibrary</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Battery\ClassBattery.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CSLibrary.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BarcodeReader\ClassBarCode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BarcodeReader\Constants\CSLibrary.Barcode.Constants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BarcodeReader\Events\CSLibrary.Barcode.EventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BarcodeReader\Structures\CSLibrary.Barcode.Structures.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BluetoothIC\ClassBluetoothIC.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BluetoothProtocol\BTConnect.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BluetoothProtocol\BTReceive.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BluetoothProtocol\BTSend.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BluetoothProtocol\ClassBleDebug.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BluetoothProtocol\CSLibrary.Private.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HAL\UWP\ClassDebug.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HAL\UWP\ClassDeviceFinder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HAL\UWP\CodeFileBLE.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Notification\ClassNotification.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\Antenna\Antenna.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\Antenna\AntennaConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\Antenna\AntennaList.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\Antenna\AntennaListTypeConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\Antenna\AntennaStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\Antenna\AntennaTypeConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\ClassRFID.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\ClassRFID.Private.ByPassRegister.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\ClassRFID.Private.Country.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\ClassRFID.Private.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\ClassRFID.Private.FM13DT160.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\ClassRFID.Private.FrequencyChannel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\ClassRFID.Private.Inventory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\ClassRFID.Private.MacRegister.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\ClassRFID.Private.OEM.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\ClassRFID.Private.PowerManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\ClassRFID.Private.QTCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\ClassRFID.Private.Read.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\ClassRFID.Private.Select.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\ClassRFID.Private.Write.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\ClassRFID.Public.Algorithm.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\ClassRFID.Public.Antenna.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\ClassRFID.Public.Country.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\ClassRFID.Public.FrequencyChannel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\ClassRFID.Public.Operation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\ClassRFID.Public.Power.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\ClassRFID.Public.Profile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\ClassRFID.Public.QTCommandParms.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\ClassRFID.Public.SetLNA.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\Constants\AntennaPort.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\Constants\AntennaSequenceMode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\Constants\CSLibrary.Constants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\Constants\CSLibrary.Constants.Packet.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\Constants\FreqAgile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\Constants\Intel.Constants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\Constants\SelectFlags.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\Events\CSLibrary.Events.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\Structures\AntennaPortCollections.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\Structures\CSLibrary.Structures.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\Structures\CSLibrary.Structures.TagKill.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\Structures\CSLibrary.Structures.TagLock.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\Structures\CSLibrary.Structures.TagRead.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\Structures\CSLibrary.Structures.TagWrite.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RFIDReader\Structures\Intel.Structures.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SiliconLabIC\ClassEvent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SiliconLabIC\ClassSiliconLabIC.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tools\ClassCRC16.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tools\ClassFIFIQueue.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tools\ClassTimer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tools\HexEncoding.cs" />
+  </ItemGroup>
+</Project>

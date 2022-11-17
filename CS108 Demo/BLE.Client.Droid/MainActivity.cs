@@ -29,8 +29,6 @@ namespace BLE.Client.Droid {
             else
                 this.RequestedOrientation = ScreenOrientation.Landscape;
 
-            //ActivityCompat.RequestPermissions(CrossCurrentActivity.Current.Activity, new[] { Manifest.Permission.AccessBackgroundLocation.ToString() }, 1000);
-
             UserDialogs.Init(this);
             Forms.Init(this, bundle);
             var formsApp = new BleMvxFormsApp();
@@ -45,5 +43,6 @@ namespace BLE.Client.Droid {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+
     }
 }

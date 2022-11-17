@@ -11,9 +11,9 @@
 
   <StackLayout Orientation="Vertical" VerticalOptions="StartAndExpand"> <!-- Overarching Vertical Stacklayout -->
 
-    <StackLayout Orientation="Horizontal" HeightRequest="2000"> <!-- To Separate Data from Body Model -->
+    <StackLayout Orientation="Vertical"> <!-- To Separate Data from Body Model -->
             
-      <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand"> <!-- RFID Tag Section -->
+      <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" WidthRequest="3000"> <!-- RFID Tag Section -->
 
         <StackLayout Orientation="Vertical">
           <ListView x:Name="liewViewTagData" ItemsSource="{Binding TagInfoList}" SelectedItem="{Binding objItemSelected, Mode=TwoWay}">
@@ -62,9 +62,8 @@
 
       </StackLayout> <!-- RFID Tag Section -->
 
-
-      <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
-        <Grid VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="400">
+      <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand">
+        <Grid VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="200">
           <Grid.ColumnDefinitions>
             <ColumnDefinition/>
           </Grid.ColumnDefinitions> 
@@ -72,60 +71,17 @@
             <RowDefinition/>  
           </Grid.RowDefinitions>
 
+          <!-- <BoxView 
+            Grid.Row="0" Grid.Column="0" CornerRadius="8" BackgroundColor="Transparent"
+            HorizontalOptions="Center" VerticalOptions="Center" OutlineColor="Black" BorderWidth="2"
+          /> -->
+
           <Label 
-            Text="{Binding Duty}" Font="Large" 
+            Text="{Binding Duty}" Font="Large" FontAttributes="Bold"
             Grid.Row="0" Grid.Column="0"
             HorizontalOptions="Center" VerticalOptions="Center"
           />
         </Grid>
-
-        <!-- <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" WidthRequest="450">
-          <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-          </Grid.ColumnDefinitions> 
-          <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>    
-          </Grid.RowDefinitions> -->
-        
-          <!-- <Image Source="{pages:ImageResource BLE.Client.Pages.leggings.png}" Aspect="AspectFit" Grid.Row="0" Grid.Column="0" Grid.RowSpan="12" Grid.ColumnSpan="12"/> -->
-
-          <!-- <Image Source="{Binding LeftGlute,  StringFormat='Assets/\{0\}.png'}" Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="3" Aspect="AspectFit" Opacity="0.8"/>
-          <Image Source="{Binding RightGlute, StringFormat='Assets/\{0\}.png'}" Grid.Row="1" Grid.Column="5" Grid.RowSpan="2" Grid.ColumnSpan="3" Aspect="AspectFit" Opacity="0.8"/>
-          <Image Source="{Binding LeftQuad,   StringFormat='Assets/\{0\}.png'}" Grid.Row="3" Grid.Column="3" Grid.RowSpan="2" Grid.ColumnSpan="3" Aspect="AspectFit" Opacity="0.8"/>
-          <Image Source="{Binding RightQuad,  StringFormat='Assets/\{0\}.png'}" Grid.Row="3" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="3" Aspect="AspectFit" Opacity="0.8"/>
-          <Image Source="{Binding LeftCalf,   StringFormat='Assets/\{0\}.png'}" Grid.Row="7" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="3" Aspect="AspectFit" Opacity="0.8"/>
-          <Image Source="{Binding RightCalf,  StringFormat='Assets/\{0\}.png'}" Grid.Row="7" Grid.Column="5" Grid.RowSpan="2" Grid.ColumnSpan="3" Aspect="AspectFit" Opacity="0.8"/> -->
-
-          <!-- <Label Text="{Binding LeftGluteTemp,  Mode=TwoWay}" Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="3" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large" FontAttributes="Bold"/>
-          <Label Text="{Binding RightGluteTemp, Mode=TwoWay}" Grid.Row="1" Grid.Column="5" Grid.RowSpan="2" Grid.ColumnSpan="3" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large" FontAttributes="Bold"/>
-          <Label Text="{Binding LeftQuadTemp,   Mode=TwoWay}" Grid.Row="3" Grid.Column="3" Grid.RowSpan="2" Grid.ColumnSpan="3" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large" FontAttributes="Bold"/>
-          <Label Text="{Binding RightQuadTemp,  Mode=TwoWay}" Grid.Row="3" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="3" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large" FontAttributes="Bold"/>
-          <Label Text="{Binding LeftCalfTemp,   Mode=TwoWay}" Grid.Row="7" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="3" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large" FontAttributes="Bold"/>
-          <Label Text="{Binding RightCalfTemp,  Mode=TwoWay}" Grid.Row="7" Grid.Column="5" Grid.RowSpan="2" Grid.ColumnSpan="3" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large" FontAttributes="Bold"/> -->
-
-        <!-- </Grid> -->
 
       </StackLayout> 
 
@@ -140,8 +96,8 @@
                 Command="{Binding OnClearButtonCommand}" 
                 HorizontalOptions="StartAndExpand"
                 BackgroundColor="#3201ba"
-                WidthRequest="200"
         />
+        <!-- WidthRequest="200" -->
         <Button Text="Share" Font="Large" TextColor="White"
                 CornerRadius="11"
                 Command="{Binding OnShareDataCommand}"   
@@ -153,7 +109,6 @@
                 Command="{Binding OnAddNicknameCommand}"   
                 HorizontalOptions="EndAndExpand"
                 BackgroundColor="#3201ba"
-                WidthRequest="200"
         />
       </StackLayout>
     </StackLayout> <!-- Bottom Inventory/Clear/Share Section -->

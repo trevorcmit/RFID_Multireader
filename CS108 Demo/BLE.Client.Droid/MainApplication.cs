@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Runtime;
 using Plugin.CurrentActivity;
 
+
 namespace BLE.Client.Droid {
     [Application]
     public class MainApplication : Application, Application.IActivityLifecycleCallbacks {
@@ -37,5 +38,6 @@ namespace BLE.Client.Droid {
             CrossCurrentActivity.Current.Activity = activity;
         }
         public void OnActivityStopped(Activity activity) {}
+
     }
 }

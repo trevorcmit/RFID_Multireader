@@ -516,8 +516,8 @@ namespace BLE.Client.ViewModels {
                                                         break;
                                                     default: // C
                                                         double SAV = Math.Round(getTempC(temp, caldata), 2);                                               
-                                                        // TagInfoList[cnt].SensorAvgValue = SAV.ToString();
-                                                        TagInfoList[cnt].SensorAvgValue = _labelVoltage;
+                                                        TagInfoList[cnt].SensorAvgValue = SAV.ToString();
+                                                        // TagInfoList[cnt].SensorAvgValue = _labelVoltage;
                                                         TagInfoList[cnt].TimeString = DateTime.Now.ToString("HH:mm:ss");
 
                                                         try {
@@ -534,13 +534,13 @@ namespace BLE.Client.ViewModels {
                                                             }
 
                                                             if (!tag_Data.ContainsKey(TagInfoList[cnt].EPC)) { // Check Tag_Data contains tags, add new data
-                                                                // List<string> t_data = new List<string>{TagInfoList[cnt].SensorAvgValue};
-                                                                List<string> t_data = new List<string>{_labelVoltage};
+                                                                List<string> t_data = new List<string>{TagInfoList[cnt].SensorAvgValue};
+                                                                // List<string> t_data = new List<string>{_labelVoltage};
                                                                 tag_Data.Add(TagInfoList[cnt].EPC, t_data);
                                                             }
                                                             else {
-                                                                // tag_Data[TagInfoList[cnt].EPC].Add(TagInfoList[cnt].SensorAvgValue);
-                                                                tag_Data[TagInfoList[cnt].EPC].Add(_labelVoltage);
+                                                                tag_Data[TagInfoList[cnt].EPC].Add(TagInfoList[cnt].SensorAvgValue);
+                                                                // tag_Data[TagInfoList[cnt].EPC].Add(_labelVoltage);
                                                             }
                                                         }
 
@@ -561,80 +561,6 @@ namespace BLE.Client.ViewModels {
                                                             //             RaisePropertyChanged(() => LeftCalf);
                                                             //         }
                                                             //         break;
-
-                                                            //     case "E282403E000207D6F9775A25": // Right Calf
-                                                            //             _RightCalfTemp = TagInfoList[cnt].SensorAvgValue + "°";
-                                                            //             RaisePropertyChanged(() => RightCalfTemp);
-
-                                                            //             if ((SAV > 20) && (_RightCalf!="green")) {
-                                                            //                 _RightCalf = "green";
-                                                            //                 RaisePropertyChanged(() => RightCalf);
-                                                            //             }
-                                                            //             else if ((SAV <= 20) && (_RightCalf!="red")) {
-                                                            //                 _RightCalf = "red";
-                                                            //                 RaisePropertyChanged(() => RightCalf);
-                                                            //             }
-                                                            //             break;
-
-                                                            //     case "E282403E000207D6F9770273": // Left Quad 
-                                                            //         _LeftQuadTemp = TagInfoList[cnt].SensorAvgValue + "°";
-                                                            //         RaisePropertyChanged(() => LeftQuadTemp);
-
-                                                            //         if ((SAV > 20) && (_LeftQuad!="green")) {
-                                                            //             _LeftQuad = "green";
-                                                            //             RaisePropertyChanged(() => LeftQuad);
-                                                            //         }
-                                                            //         else if ((SAV <= 20) && (_LeftQuad!="red")) {
-                                                            //             _LeftQuad = "red";
-                                                            //             RaisePropertyChanged(() => LeftQuad);
-                                                            //         }
-                                                            //         break;
-
-                                                            //     case "E282403E000207D6F97786D2": // Right Quad
-                                                            //         _RightQuadTemp = TagInfoList[cnt].SensorAvgValue + "°";
-                                                            //         RaisePropertyChanged(() => RightQuadTemp);
-
-                                                            //         if ((SAV>20) && (_RightQuad!="green")) {
-                                                            //             _RightQuad = "green";
-                                                            //             RaisePropertyChanged(() => RightQuad);
-                                                            //         }
-                                                            //         else if ((SAV<=20) && (_RightQuad!="red")) {
-                                                            //             _RightQuad = "red";
-                                                            //             RaisePropertyChanged(() => RightQuad);
-                                                            //         }
-                                                            //         break;
-
-                                                            //     case "E282403E000207D6F97748C0": // Right Glute
-                                                            //         _RightGluteTemp = TagInfoList[cnt].SensorAvgValue + "°";
-                                                            //         RaisePropertyChanged(() => RightGluteTemp);
-
-                                                            //         if ((SAV>20) && (_RightGlute!="green")) {
-                                                            //             _RightGlute = "green";
-                                                            //             RaisePropertyChanged(() => RightGlute);
-                                                            //         }
-                                                            //         else if ((SAV<=20) && (_RightGlute!="red")) {
-                                                            //             _RightGlute = "red";
-                                                            //             RaisePropertyChanged(() => RightGlute);
-                                                            //         }
-                                                            //         break;
-
-                                                            //     case "E282403E000207D6F9773098": // Left Glute
-                                                            //         _LeftGluteTemp = TagInfoList[cnt].SensorAvgValue + "°";
-                                                            //         RaisePropertyChanged(() => LeftGluteTemp);
-
-                                                            //         if ((SAV>20) && (_LeftGlute!="green")) {
-                                                            //             _LeftGlute = "green";
-                                                            //             RaisePropertyChanged(() => LeftGlute);
-                                                            //         }
-                                                            //         else if ((SAV<=20) && (_LeftGlute!="red")) {
-                                                            //             _LeftGlute = "red";
-                                                            //             RaisePropertyChanged(() => LeftGlute);
-                                                            //         }
-                                                            //         break;
-
-                                                            //     default:
-                                                            //         break;
-                                                            //     }
                                                             }
                                                         break;
                                                 }
@@ -681,23 +607,20 @@ namespace BLE.Client.ViewModels {
                                             if (caldata == 0) item.SensorAvgValue = "NoCalData";
                                             else
                                                 switch (BleMvxApplication._rfMicro_SensorUnit) {
-                                                    case 0: // code
-                                                        // item._sensorValueSum = temp;
-                                                        // item.SensorAvgValue = item._sensorValueSum.ToString();
+                                                    case 0:      // code
                                                         break;
-                                                    case 2: // F
-                                                        // item._sensorValueSum = getTempF(temp, caldata);
-                                                        // item.SensorAvgValue = Math.Round(item._sensorValueSum, 2).ToString();
+                                                    case 2:      // F
                                                         break;
-                                                    default: // C
+                                                    default:     // C
                                                         double SAV = Math.Round(getTempC(temp, caldata), 2);   
-                                                        // item.SensorAvgValue = SAV.ToString();
-                                                        item.SensorAvgValue = _labelVoltage;
+                                                        item.SensorAvgValue = SAV.ToString();
+                                                        // item.SensorAvgValue = _labelVoltage;
                                                         item.TimeString = DateTime.Now.ToString("HH:mm:ss");
 
                                                         // if (epcs.Contains(item.EPC)) {
-                                                            List<string> t_time = new List<string>{item.TimeString};
-                                                            List<string> t_data = new List<string>{ _labelVoltage};
+                                                            List<string> t_time = new List<string>{ item.TimeString };
+                                                            // List<string> t_data = new List<string>{ _labelVoltage};
+                                                            List<string> t_data = new List<string>{ item.SensorAvgValue };
 
                                                             try {
                                                                 tag_Time.Add(item.EPC, t_time);
@@ -801,9 +724,6 @@ namespace BLE.Client.ViewModels {
             InvokeOnMainThread(()=> {
                 string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "tags.txt");
                 using (StreamWriter writer = new StreamWriter(fileName, true)) {
-
-                // var file = await Xamarin.Essentials.FilePicker.PickAsync();
-                // using (StreamWriter writer = new StreamWriter(file.FileName, true)) {
 
                     foreach (string name in tag_List) {
                         writer.WriteLine(name + "\n" + "[");

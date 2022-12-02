@@ -76,7 +76,6 @@ namespace BLE.Client.ViewModels {
             _userDialogs = userDialogs;
             _settings = settings;
 
-            // quick and dirty :>
             _bluetoothLe.StateChanged += OnStateChanged;
             Adapter.DeviceDiscovered += OnDeviceDiscovered;
             Adapter.ScanTimeoutElapsed += Adapter_ScanTimeoutElapsed;
@@ -305,8 +304,12 @@ namespace BLE.Client.ViewModels {
 
             try {
                 CancellationTokenSource tokenSource = new CancellationTokenSource();
-                ConnectParameters connectParameters = new ConnectParameters();
 
+                // Default CONNECTPARAMETERS
+                // ConnectParameters connectParameters = new ConnectParameters();
+
+                // New connect parameters forcing Reconnect on Android
+                ConnectParameters connectParameters = new ConnectParameters(true, false);
                 await Adapter.ConnectToDeviceAsync(device.Device, connectParameters, tokenSource.Token);
 
                 _userDialogs.ShowSuccess($"Initializing Reader, Please Wait.", 8000);

@@ -116,8 +116,6 @@
     <PackageReference Include="Xam.Plugins.Settings" Version="3.0.1" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2291" />
-    <!-- <PackageReference Include="LiveChartsCore" Version="2.0.0-beta.230"/>
-    <PackageReference Include="LiveChartsCore.SkiaSharpView.XamarinForms" Version="2.0.0-beta.230"/> -->
   </ItemGroup>
 
   <ItemGroup>

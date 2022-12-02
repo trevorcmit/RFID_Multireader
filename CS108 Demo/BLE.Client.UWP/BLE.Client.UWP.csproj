@@ -22,7 +22,7 @@
     </PackageCertificateThumbprint>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
-    <AppxBundle>Always</AppxBundle>
+    <AppxBundle>Auto</AppxBundle>
     <AppxBundlePlatforms>x64</AppxBundlePlatforms>
     <AppInstallerUpdateFrequency>0</AppInstallerUpdateFrequency>
     <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
@@ -30,7 +30,7 @@
     <AppxPackageDir>C:\Users\trevo\Downloads\</AppxPackageDir>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
-    <GenerateTestArtifacts>True</GenerateTestArtifacts>
+    <GenerateTestArtifacts>False</GenerateTestArtifacts>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
     <GenerateTemporaryStoreCertificate>True</GenerateTemporaryStoreCertificate>
   </PropertyGroup>
@@ -128,10 +128,10 @@
     <None Include="BLE.Client.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Assets\leggings.png" />
     <Content Include="Assets\beep-07.wav" />
     <EmbeddedResource Include="Assets\beep-09.mp3" />
     <Content Include="Assets\clipboard.png" />
+    <Content Include="Assets\digitalbackground.jpg" />
     <Content Include="Assets\digitalcamo.jpg" />
     <Content Include="Assets\gears.png" />
     <Content Include="Assets\gray.png" />
@@ -139,7 +139,6 @@
     <Content Include="Assets\multicam.png" />
     <Content Include="Assets\play.png" />
     <Content Include="Assets\red.png" />
-    <Content Include="Assets\soldiers.png" />
     <Content Include="Assets\StoreLogo.scale-200.png" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Assets\StoreLogo.scale-100.png" />

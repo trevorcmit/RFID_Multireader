@@ -136,7 +136,6 @@ namespace BLE.Client.Pages {
 
         public async void btnFunctionSelectedClicked(object sender, EventArgs e) {
             var answer = await DisplayActionSheet(null, BLE.Client.CONFIG.MAINMENUSHORTCUT.FUNCTION.NONE.ToString(), null, BLE.Client.CONFIG.MAINMENUSHORTCUT.FUNCTION.INVENTORY.ToString(), BLE.Client.CONFIG.MAINMENUSHORTCUT.FUNCTION.BARCODE.ToString());
-
             Button b = (Button)sender;
             b.Text = answer;
         }

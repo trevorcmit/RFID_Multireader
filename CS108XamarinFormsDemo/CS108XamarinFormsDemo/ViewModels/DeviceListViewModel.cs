@@ -308,7 +308,6 @@ namespace CS108XamarinFormsDemo.ViewModels {
                 return false;
             }
             finally {
-                //_userDialogs.HideLoading();
                 device.Update();
             }
         }
@@ -317,8 +316,6 @@ namespace CS108XamarinFormsDemo.ViewModels {
             Trace.Message("device name :" + _device.Name);
             await BleMvxApplication._reader.ConnectAsync(Adapter, _device);
             Trace.Message("load config");
-            //bool LoadSuccess = await BleMvxApplication.LoadConfig(_device.Name);
-            //BleMvxApplication._config.readerID = _device.Name;
             bool LoadSuccess = await BleMvxApplication.LoadConfig(_device.Id.ToString());
             BleMvxApplication._config.readerID = _device.Id.ToString();
         }
@@ -344,13 +341,11 @@ namespace CS108XamarinFormsDemo.ViewModels {
                     device = await Adapter.ConnectToKnownDeviceAsync(PreviousGuid, connectParameters, tokenSource.Token);
                 }
 
-                //_userDialogs.ShowSuccess($"Connected to {device.Name}.");
 
                 var deviceItem = Devices.FirstOrDefault(d => d.Device.Id == device.Id);
                 if (deviceItem == null) {
                     deviceItem = new DeviceListItemViewModel(device);
                     Devices.Add(deviceItem);
-                    //await Task.Delay(9000);
                 }
                 else {
                     deviceItem.Update(device);
@@ -367,20 +362,8 @@ namespace CS108XamarinFormsDemo.ViewModels {
         private async void ConnectAndDisposeDevice(DeviceListItemViewModel item) {
             try {
                 using (item.Device) {
-                    //_userDialogs.ShowLoading($"Connecting to {item.Name} ...");
                     await Adapter.ConnectToDeviceAsync(item.Device);
                     item.Update();
-                    //_userDialogs.ShowSuccess($"Connected {item.Device.Name}");
-
-                    //_userDialogs.HideLoading();
-                    //for (var i = 5; i >= 1; i--)
-                    //{
-                    //    _userDialogs.ShowLoading($"Disconnect in {i}s...");
-
-                    //    await Task.Delay(1000);
-
-                    //    _userDialogs.HideLoading();
-                    //}
                 }
             }
             catch (Exception ex) {

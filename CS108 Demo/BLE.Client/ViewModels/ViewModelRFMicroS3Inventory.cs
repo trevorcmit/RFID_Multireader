@@ -366,7 +366,6 @@ namespace BLE.Client.ViewModels {
                 case 2:
                     // uint[] i_dwells = new uint[] {2000, 2000};
                     // BleMvxApplication._reader.rfid.SetPowerSequencing(numberofPower:0, dwell:i_dwells);
-
                     BleMvxApplication._reader.rfid.SetPowerSequencing(0);
                     BleMvxApplication._reader.rfid.SetPowerLevel(300);
                     break;
@@ -545,23 +544,9 @@ namespace BLE.Client.ViewModels {
                                                         }
 
                                                         finally {
+                                                            ShareDataButtonClick();
+                                                        }
 
-                                                            // switch (TagInfoList[cnt].EPC) {
-
-                                                            //     case "E282403E000207D6F9779863": // Left Calf
-                                                            //         _LeftCalfTemp = TagInfoList[cnt].SensorAvgValue + "°";
-                                                            //         RaisePropertyChanged(() => LeftCalfTemp);
-
-                                                            //         if ((SAV>20) && (_LeftCalf!="green")) {
-                                                            //             _LeftCalf = "green";
-                                                            //             RaisePropertyChanged(() => LeftCalf);
-                                                            //         }
-                                                            //         else if ((SAV<=20) && (_LeftCalf!="red")) {
-                                                            //             _LeftCalf = "red";
-                                                            //             RaisePropertyChanged(() => LeftCalf);
-                                                            //         }
-                                                            //         break;
-                                                            }
                                                         break;
                                                 }
                                             }
@@ -720,9 +705,11 @@ namespace BLE.Client.ViewModels {
 		}
 
         private void ShareDataButtonClick() { // Function for Sharing time series data from tags
-            // InvokeOnMainThread(async () => {
             InvokeOnMainThread(()=> {
                 string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "tags.txt");
+
+                File.WriteAllText(fileName, String.Empty);
+
                 using (StreamWriter writer = new StreamWriter(fileName, true)) {
 
                     foreach (string name in tag_List) {

@@ -89,8 +89,7 @@ namespace Plugin.BLE.UWP {
         }
 
         public override List<IDevice> GetSystemConnectedOrPairedDevices(Guid[] services = null) {
-            //currently no way to retrieve paired and connected devices on windows without using an
-            //async method. 
+            //currently no way to retrieve paired and connected devices on windows without using an async method. 
             Trace.Message("Returning devices connected by this app only");
             return (List<IDevice>) ConnectedDevices;
         }

@@ -5,7 +5,6 @@
     xmlns:pages="clr-namespace:BLE.Client.Pages;assembly=BLE.Client"
     x:Class="BLE.Client.Pages.PageSettingAntenna"
     Title="Antenna Setting">
-  
 
     <ScrollView>
         <StackLayout Padding="10, 10, 10, 0">

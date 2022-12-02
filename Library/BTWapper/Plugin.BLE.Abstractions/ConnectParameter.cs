@@ -1,10 +1,5 @@
-﻿namespace Plugin.BLE.Abstractions
-{
-    /// <summary>
-    /// Connection parameters. Contains platform specific parameters needed to achieved connection
-    /// </summary>
-    public struct ConnectParameters
-    {
+﻿namespace Plugin.BLE.Abstractions {
+    public struct ConnectParameters {
         /// <summary>
         /// Android only, from documnetation:  
         /// boolean: Whether to directly connect to the remote device (false) or to automatically connect as soon as the remote device becomes available (true).

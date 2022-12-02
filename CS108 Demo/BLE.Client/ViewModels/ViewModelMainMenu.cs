@@ -8,6 +8,7 @@ using System;
 using System.IO;
 using System.Windows.Input;
 using Xamarin.Forms;
+using BLE.Client;
 
 
 namespace BLE.Client.ViewModels {
@@ -33,12 +34,12 @@ namespace BLE.Client.ViewModels {
             OnRenameButtonCommand = new Command(OnRenameButtonClicked);
 
             BleMvxApplication._reader.OnReaderStateChanged += new EventHandler<CSLibrary.Events.OnReaderStateChangedEventArgs>(ReaderStateCChangedEvent);
+            GetLocationPermission();
         }
 
         ~ViewModelMainMenu() {
             BleMvxApplication._reader.OnReaderStateChanged -= new EventHandler<CSLibrary.Events.OnReaderStateChangedEventArgs>(ReaderStateCChangedEvent);
         }
-
 
         // MUST be geant location permission
         private async void GetLocationPermission() {

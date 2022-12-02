@@ -7,37 +7,24 @@ using Plugin.BLE.Abstractions.EventArgs;
 using Plugin.BLE.Abstractions.Exceptions;
 using Plugin.BLE.Abstractions.Utils;
 
-namespace Plugin.BLE.Abstractions.Extensions
-{
-    public static class AdapterExtenstion
-    {
-        /// <summary>
-        /// Starts scanning for BLE devices.
-        /// </summary>
+
+namespace Plugin.BLE.Abstractions.Extensions {
+    public static class AdapterExtenstion {
         /// <param name="adapter">Target adapter.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task that represents the asynchronous read operation. The Task will finish after the scan has ended.</returns>
-        public static Task StartScanningForDevicesAsync(this IAdapter adapter, CancellationToken cancellationToken)
-        {
+        public static Task StartScanningForDevicesAsync(this IAdapter adapter, CancellationToken cancellationToken) {
             return adapter.StartScanningForDevicesAsync(cancellationToken: cancellationToken);
         }
 
-        /// <summary>
-        /// Starts scanning for BLE devices that advertise the services included in <paramref name="serviceUuids"/>.
-        /// </summary>
         /// <param name="adapter">Target adapter.</param>
         /// <param name="serviceUuids">Requested service Ids.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>
         /// <returns>A task that represents the asynchronous read operation. The Task will finish after the scan has ended.</returns>
-        public static Task StartScanningForDevicesAsync(this IAdapter adapter, Guid[] serviceUuids, CancellationToken cancellationToken = default(CancellationToken))
-        {
+        public static Task StartScanningForDevicesAsync(this IAdapter adapter, Guid[] serviceUuids, CancellationToken cancellationToken = default(CancellationToken)) {
             return adapter.StartScanningForDevicesAsync(serviceUuids, null, cancellationToken: cancellationToken);
         }
 
-        /// <summary>
-        /// Starts scanning for BLE devices that fulfill the <paramref name="deviceFilter"/>.
-        /// DeviceDiscovered will only be called, if <paramref name="deviceFilter"/> returns <c>true</c> for the discovered device.
-        /// </summary>
         /// <param name="adapter">Target adapter.</param>
         /// <param name="deviceFilter">Function that filters the devices.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is None.</param>

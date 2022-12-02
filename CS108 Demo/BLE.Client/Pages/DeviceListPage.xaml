@@ -51,8 +51,8 @@
                 </ViewCell>
             </DataTemplate>
         </ResourceDictionary>
-
     </pages:BaseTabbedPage.Resources>
+
     <pages:BaseTabbedPage.Children>
         <pages:BasePage Title="Scan for devices">
             <Grid>
@@ -62,6 +62,8 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
+
+                <!-- <Label Text="{Binding StateText}" Grid.Row="0" Grid.Column="0"/> -->
 
                 <StackLayout BackgroundColor="#FF6969" Padding="10" IsVisible="{Binding IsStateOn, Converter={StaticResource InverseBoolean}}">
                     <Label Text="{Binding StateText}" FontSize="18" HorizontalTextAlignment="Center"></Label>
@@ -87,7 +89,6 @@
 
             </Grid>
         </pages:BasePage>
-
     </pages:BaseTabbedPage.Children>
 
 </pages:BaseTabbedPage>

@@ -28,8 +28,8 @@
         <Image Grid.Row="0" Grid.Column="0" Aspect="AspectFill" Opacity="0.95">
             <Image.Source>
                 <OnPlatform x:TypeArguments="FileImageSource">
-                        <On Platform="UWP" Value="Assets/multicam.png" />
-                        <On Platform="UWP" Value="digitalcamo.jpg" />
+                        <On Platform="UWP"     Value="Assets/digitalbackground.jpg" />
+                        <On Platform="Android" Value="digitalcamo.jpg" />
                 </OnPlatform>
             </Image.Source>
         </Image>
@@ -51,7 +51,7 @@
                 </RelativeLayout.WidthConstraint>
                 <RelativeLayout.YConstraint>
                     <OnPlatform x:TypeArguments="Constraint">
-                        <On Platform="UWP"     Value="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.25, Constant=2}"/>
+                        <On Platform="UWP"     Value="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.20, Constant=2}"/>
                         <On Platform="Android" Value="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.02, Constant=2}"/>
                     </OnPlatform>
                 </RelativeLayout.YConstraint>
@@ -77,7 +77,7 @@
                 </RelativeLayout.WidthConstraint>
                 <RelativeLayout.YConstraint>
                     <OnPlatform x:TypeArguments="Constraint">
-                        <On Platform="UWP"     Value="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.25, Constant=2}"/>
+                        <On Platform="UWP"     Value="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.20, Constant=2}"/>
                         <On Platform="Android" Value="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.30, Constant=2}"/>
                     </OnPlatform>
                 </RelativeLayout.YConstraint>
@@ -103,7 +103,7 @@
                 </RelativeLayout.WidthConstraint>
                 <RelativeLayout.YConstraint>
                     <OnPlatform x:TypeArguments="Constraint">
-                        <On Platform="UWP"     Value="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.25, Constant=2}"/>
+                        <On Platform="UWP"     Value="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.20, Constant=2}"/>
                         <On Platform="Android" Value="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.58, Constant=2}"/>
                     </OnPlatform>
                 </RelativeLayout.YConstraint>

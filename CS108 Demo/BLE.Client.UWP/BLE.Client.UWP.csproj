@@ -128,7 +128,6 @@
     <None Include="BLE.Client.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\beep-07.wav" />
     <EmbeddedResource Include="Assets\beep-09.mp3" />
     <Content Include="Assets\clipboard.png" />
     <Content Include="Assets\digitalbackground.jpg" />

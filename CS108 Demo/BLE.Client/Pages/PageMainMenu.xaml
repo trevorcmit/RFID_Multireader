@@ -211,10 +211,10 @@
             <Button
                 Text="{Binding connectedButton}" CornerRadius="25"
                 HorizontalOptions="FillAndExpand"
-                BackgroundColor="#e1e1e1"
                 FontSize="Medium"
-                Opacity="0.90"
-                TextColor="{Binding connectedButtonTextColor}"
+                Opacity="0.92"
+                BackgroundColor="{Binding connectedButtonTextColor}"
+                TextColor="#fefefe"
                 Command="{Binding OnConnectButtonCommand}" CommandParameter="1"
             >
                 <RelativeLayout.XConstraint>

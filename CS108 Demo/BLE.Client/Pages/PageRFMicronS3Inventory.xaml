@@ -44,8 +44,8 @@
                         <ColumnDefinition Width="0.35*"/>   <!-- EPC -->
                         <ColumnDefinition Width="0.20*"/>   <!-- Time -->
                         <ColumnDefinition Width="0.15*"/>   <!-- RSSI -->
-                        <ColumnDefinition Width="0.10*"/>   <!-- Temperature -->
-                        <ColumnDefinition Width="0.10*"/>   <!-- Times Read -->
+                        <ColumnDefinition Width="0.15*"/>   <!-- Temperature -->
+                        <ColumnDefinition Width="0.15*"/>   <!-- Times Read -->
                       </Grid.ColumnDefinitions>
                       <Label                 Text="{Binding DisplayName}"    VerticalTextAlignment="Start" FontSize="Small"/>
                       <Label Grid.Column="1" Text="{Binding TimeString}"     VerticalTextAlignment="Start" HorizontalTextAlignment="Center"/>

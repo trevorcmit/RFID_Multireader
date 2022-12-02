@@ -516,7 +516,6 @@ namespace BLE.Client.ViewModels {
                                                     default: // C
                                                         double SAV = Math.Round(getTempC(temp, caldata), 2);                                               
                                                         TagInfoList[cnt].SensorAvgValue = SAV.ToString();
-                                                        // TagInfoList[cnt].SensorAvgValue = _labelVoltage;
                                                         TagInfoList[cnt].TimeString = DateTime.Now.ToString("HH:mm:ss");
 
                                                         try {
@@ -534,12 +533,10 @@ namespace BLE.Client.ViewModels {
 
                                                             if (!tag_Data.ContainsKey(TagInfoList[cnt].EPC)) { // Check Tag_Data contains tags, add new data
                                                                 List<string> t_data = new List<string>{TagInfoList[cnt].SensorAvgValue};
-                                                                // List<string> t_data = new List<string>{_labelVoltage};
                                                                 tag_Data.Add(TagInfoList[cnt].EPC, t_data);
                                                             }
                                                             else {
                                                                 tag_Data[TagInfoList[cnt].EPC].Add(TagInfoList[cnt].SensorAvgValue);
-                                                                // tag_Data[TagInfoList[cnt].EPC].Add(_labelVoltage);
                                                             }
                                                         }
 
@@ -599,12 +596,10 @@ namespace BLE.Client.ViewModels {
                                                     default:     // C
                                                         double SAV = Math.Round(getTempC(temp, caldata), 2);   
                                                         item.SensorAvgValue = SAV.ToString();
-                                                        // item.SensorAvgValue = _labelVoltage;
                                                         item.TimeString = DateTime.Now.ToString("HH:mm:ss");
 
                                                         // if (epcs.Contains(item.EPC)) {
                                                             List<string> t_time = new List<string>{ item.TimeString };
-                                                            // List<string> t_data = new List<string>{ _labelVoltage};
                                                             List<string> t_data = new List<string>{ item.SensorAvgValue };
 
                                                             try {
@@ -633,14 +628,14 @@ namespace BLE.Client.ViewModels {
             for (int index = 0; index < ViewModelRFMicroNickname._TagNicknameList.Count; index++)
                 if (ViewModelRFMicroNickname._TagNicknameList[index].EPC == EPC)
                     return ViewModelRFMicroNickname._TagNicknameList[index].Nickname;
-            return "";
+            return EPC;
         }
 
         string GetTagName(string EPC) {
             for (int index = 0; index < ViewModelRFMicroNickname._TagNicknameList.Count; index++)
                 if (ViewModelRFMicroNickname._TagNicknameList[index].EPC == EPC)
                     return ViewModelRFMicroNickname._TagNicknameList[index].TagName;
-            return "";
+            return EPC;
         }
 
         async void Add_Nickname() {
@@ -689,7 +684,6 @@ namespace BLE.Client.ViewModels {
         void VoltageEvent(object sender, CSLibrary.Notification.VoltageEventArgs e) {
             if (e.Voltage == 0xffff) { _labelVoltage = "CS108 Bat. ERROR"; }
             else {
-                // to fix CS108 voltage bug
                 if (_cancelVoltageValue) { _cancelVoltageValue = false; return; }
 
                 switch (BleMvxApplication._config.BatteryLevelIndicatorFormat) {

@@ -60,19 +60,16 @@ namespace BLE.Client.iOS
             progress.Progress = progress.Progress + 1;
         }
 
-        public void Include(UISwitch sw)
-        {
+        public void Include(UISwitch sw) {
             sw.On = !sw.On;
             sw.ValueChanged += (sender, args) => { sw.On = false; };
         }
 
-        public void Include(MvxViewController vc)
-        {
+        public void Include(MvxViewController vc) {
             vc.Title = vc.Title + "";
         }
 
-        public void Include(UIStepper s)
-        {
+        public void Include(UIStepper s) {
             s.Value = s.Value + 1;
             s.ValueChanged += (sender, args) => { s.Value = 0; };
         }

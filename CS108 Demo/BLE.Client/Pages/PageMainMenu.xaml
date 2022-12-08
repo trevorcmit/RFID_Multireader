@@ -129,7 +129,7 @@
                 <RelativeLayout.WidthConstraint>
                     <OnPlatform x:TypeArguments="Constraint">
                         <On Platform="UWP"     Value="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.24, Constant=-4}"/>
-                        <On Platform="Android" Value="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.41, Constant=-4}"/>
+                        <On Platform="Android" Value="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.90, Constant=-4}"/>
                     </OnPlatform>
                 </RelativeLayout.WidthConstraint>
                 <RelativeLayout.YConstraint>
@@ -141,7 +141,7 @@
                 <RelativeLayout.HeightConstraint>
                     <OnPlatform x:TypeArguments="Constraint">
                         <On Platform="UWP"     Value="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.65, Constant=-4}"/>
-                        <On Platform="Android" Value="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.41, Constant=-4}"/>
+                        <On Platform="Android" Value="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.26, Constant=-4}"/>
                     </OnPlatform>
                 </RelativeLayout.HeightConstraint>
             </Button>
@@ -153,25 +153,25 @@
                 <RelativeLayout.XConstraint>
                     <OnPlatform x:TypeArguments="Constraint">
                         <On Platform="UWP"     Value="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.38, Constant=2}"/>
-                        <On Platform="Android" Value="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.54, Constant=2}"/>
+                        <On Platform="Android" Value="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.05, Constant=2}"/>
                     </OnPlatform>
                 </RelativeLayout.XConstraint>
                 <RelativeLayout.WidthConstraint>
                     <OnPlatform x:TypeArguments="Constraint">
                         <On Platform="UWP"     Value="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.24, Constant=-4}"/>
-                        <On Platform="Android" Value="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.41, Constant=-4}"/>
+                        <On Platform="Android" Value="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.90, Constant=-4}"/>
                     </OnPlatform>
                 </RelativeLayout.WidthConstraint>
                 <RelativeLayout.YConstraint>
                     <OnPlatform x:TypeArguments="Constraint">
                         <On Platform="UWP"     Value="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.07, Constant=2}"/>
-                        <On Platform="Android" Value="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.05, Constant=2}"/>
+                        <On Platform="Android" Value="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.30, Constant=2}"/>
                     </OnPlatform>
                 </RelativeLayout.YConstraint>
                 <RelativeLayout.HeightConstraint>
                     <OnPlatform x:TypeArguments="Constraint">
                         <On Platform="UWP"     Value="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.65, Constant=-4}"/>
-                        <On Platform="Android" Value="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.41, Constant=-4}"/>
+                        <On Platform="Android" Value="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.26, Constant=-4}"/>
                     </OnPlatform>
                 </RelativeLayout.HeightConstraint>
             </Button>
@@ -189,19 +189,19 @@
                 <RelativeLayout.WidthConstraint>
                     <OnPlatform x:TypeArguments="Constraint">
                         <On Platform="UWP"     Value="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.24, Constant=-4}"/>
-                        <On Platform="Android" Value="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.41, Constant=-4}"/>
+                        <On Platform="Android" Value="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.90, Constant=-4}"/>
                     </OnPlatform>
                 </RelativeLayout.WidthConstraint>
                 <RelativeLayout.YConstraint>
                     <OnPlatform x:TypeArguments="Constraint">
                         <On Platform="UWP"     Value="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.07, Constant=2}"/>
-                        <On Platform="Android" Value="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.54, Constant=2}"/>
+                        <On Platform="Android" Value="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.58, Constant=2}"/>
                     </OnPlatform>
                 </RelativeLayout.YConstraint>
                 <RelativeLayout.HeightConstraint>
                     <OnPlatform x:TypeArguments="Constraint">
                         <On Platform="UWP"     Value="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.65, Constant=-4}"/>
-                        <On Platform="Android" Value="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.41, Constant=-4}"/>
+                        <On Platform="Android" Value="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.26, Constant=-4}"/>
                     </OnPlatform>
                 </RelativeLayout.HeightConstraint>
             </Button>

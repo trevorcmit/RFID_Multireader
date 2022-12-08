@@ -541,7 +541,8 @@ namespace BLE.Client.ViewModels {
                                                         }
 
                                                         finally {
-                                                            ShareDataButtonClick();
+                                                            // ShareDataButtonClick();
+                                                            AutoSaveData();
                                                         }
 
                                                         break;
@@ -698,7 +699,7 @@ namespace BLE.Client.ViewModels {
 			RaisePropertyChanged(() => labelVoltage);
 		}
 
-        private void ShareDataButtonClick() { // Function for Sharing time series data from tags
+        private void AutoSaveData() { // Function for Sharing time series data from tags
             InvokeOnMainThread(()=> {
                 string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "tags.txt");
 
@@ -715,6 +716,14 @@ namespace BLE.Client.ViewModels {
                     }
                 }
 
+            });
+        }
+
+        private async void ShareDataButtonClick() {
+            string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "tags.txt");
+            await Share.RequestAsync(new ShareFileRequest {
+                Title = "Share Tags",
+                File = new ShareFile(fileName)
             });
         }
 

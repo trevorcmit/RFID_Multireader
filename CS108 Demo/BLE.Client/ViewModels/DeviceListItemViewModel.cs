@@ -19,5 +19,6 @@ namespace BLE.Client.ViewModels {
             RaisePropertyChanged(nameof(IsConnected));
             RaisePropertyChanged(nameof(Rssi));
         }
+
     }
 }

@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pages="clr-namespace:BLE.Client.Pages;assembly=BLE.Client"
     x:Class="BLE.Client.Pages.DeviceListPage"
-    Title="List of CS108 Detected "
+    Title="List of Readers Detected"
     x:Name="DevicePage">
 
     <pages:BaseTabbedPage.Resources>
@@ -63,9 +63,7 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <!-- <Label Text="{Binding StateText}" Grid.Row="0" Grid.Column="0"/> -->
-
-                <StackLayout BackgroundColor="#FF6969" Padding="10" IsVisible="{Binding IsStateOn, Converter={StaticResource InverseBoolean}}">
+                <StackLayout BackgroundColor="#fe6a6a" Padding="10" IsVisible="{Binding IsStateOn, Converter={StaticResource InverseBoolean}}">
                     <Label Text="{Binding StateText}" FontSize="18" HorizontalTextAlignment="Center"></Label>
                 </StackLayout>
 

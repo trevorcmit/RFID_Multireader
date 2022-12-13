@@ -34,6 +34,10 @@ namespace BLE.Client.ViewModels {
             get {return _previousGuid;}
             set {
                 _previousGuid = value;
+
+                // Added to make sure global variable is updated
+                ConnectionGuid = _previousGuid.ToString();
+
                 _settings.AddOrUpdateValue("lastguid", _previousGuid.ToString());
                 RaisePropertyChanged();
                 RaisePropertyChanged(() => ConnectToPreviousCommand);

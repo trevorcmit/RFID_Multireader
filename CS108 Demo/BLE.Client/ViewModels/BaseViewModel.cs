@@ -14,6 +14,8 @@ namespace BLE.Client.ViewModels {
         protected const string CharacteristicIdKey = "CharacteristicIdNavigationKey";
         protected const string DescriptorIdKey = "DescriptorIdNavigationKey";
 
+        public string ConnectionGuid; // Global ConnectionGuid variable to reconnect in any window
+
         public BaseViewModel(IAdapter adapter) { Adapter = adapter; }
 
         public virtual void Resume() {

@@ -14,6 +14,8 @@ using Xamarin;
 using Xamarin.Forms;
 using Xamarin.Essentials;
 
+using DeviceListViewModel1 = BLE.Client.ViewModels.DeviceListViewModel;
+
 
 namespace BLE.Client.ViewModels {
 
@@ -53,6 +55,26 @@ namespace BLE.Client.ViewModels {
         public ICommand OnClearButtonCommand {protected set; get;}
         public ICommand OnShareDataCommand {protected set; get;}
         public ICommand OnAddNicknameCommand {protected set; get;}
+
+        public MvxCommand ConnectToPreviousCommand {protected set; get;}
+
+        // private async void Reconnect() {
+        //     DeviceListViewModel1 dlvm1 = new DeviceListViewModel1();
+        //     dlvm1.ConnectToPreviousDeviceAsync();
+        // }
+        //private bool CanConnectToPrevious() {
+        //    return PreviousGuid != default(Guid);
+        //}
+        //private Guid _previousGuid;
+        //public Guid PreviousGuid {
+         //   get {return _previousGuid;}
+         //   set {
+           //     _previousGuid = value;
+           //     _settings.AddOrUpdateValue("lastguid", _previousGuid.ToString());
+           //     RaisePropertyChanged();
+          //      RaisePropertyChanged(() => ConnectToPreviousCommand);
+         //   }
+        //}
 
         private ObservableCollection<RFMicroTagInfoViewModel> _TagInfoList = new ObservableCollection<RFMicroTagInfoViewModel>();
         public ObservableCollection<RFMicroTagInfoViewModel> TagInfoList {get {return _TagInfoList;} set {SetProperty(ref _TagInfoList, value);}}
@@ -114,13 +136,14 @@ namespace BLE.Client.ViewModels {
             LeftCalfTemp   = "N/A";
             RightCalfTemp  = "N/A";
             LeftGlute   = "gray";
-            RightGlute  = "gray";  // Default Image colors
+            RightGlute  = "gray";    // Default Image colors
             LeftQuad    = "gray";
             RightQuad   = "gray";
             LeftCalf    = "gray";
             RightCalf   = "gray";
 
-            GetTimes();
+
+            GetTimes(); // Get Duty Cycle Times
 
             map = new Dictionary<string, string> {
                 {"E282403E000207D6F9773098", "Left Glute"},
@@ -149,9 +172,6 @@ namespace BLE.Client.ViewModels {
             OnClearButtonCommand = new Command(ClearClick);
             OnShareDataCommand = new Command(ShareDataButtonClick);
             OnAddNicknameCommand = new Command(Add_Nickname);
-
-            // ActiveTimer();
-            // DownTimer();
         }
 
         async void GetTimes() {
@@ -217,35 +237,34 @@ namespace BLE.Client.ViewModels {
                 tag_Time.Clear();
                 tag_List.Clear();
 
-                LeftGluteTemp  = "N/A";
-                RightGluteTemp = "N/A";  // Default Label values
-                LeftQuadTemp   = "N/A";
-                RightQuadTemp  = "N/A";
-                LeftCalfTemp   = "N/A";
-                RightCalfTemp  = "N/A";
+                // LeftGluteTemp  = "N/A";
+                // RightGluteTemp = "N/A";  // Default Label values
+                // LeftQuadTemp   = "N/A";
+                // RightQuadTemp  = "N/A";
+                // LeftCalfTemp   = "N/A";
+                // RightCalfTemp  = "N/A";
 
-                LeftGlute   = "gray";
-                RightGlute  = "gray";  // Default Image colors
-                LeftQuad    = "gray";
-                RightQuad   = "gray";
-                LeftCalf    = "gray";
-                RightCalf   = "gray";
+                // LeftGlute   = "gray";
+                // RightGlute  = "gray";  // Default Image colors
+                // LeftQuad    = "gray";
+                // RightQuad   = "gray";
+                // LeftCalf    = "gray";
+                // RightCalf   = "gray";
 
-                Duty = "N/A";
-                RaisePropertyChanged(() => Duty);
-
-                RaisePropertyChanged(() => LeftGluteTemp);
-                RaisePropertyChanged(() => RightGluteTemp);
-                RaisePropertyChanged(() => LeftQuadTemp);
-                RaisePropertyChanged(() => RightQuadTemp);
-                RaisePropertyChanged(() => LeftCalfTemp);
-                RaisePropertyChanged(() => RightCalfTemp);
-                RaisePropertyChanged(() => LeftGlute);
-                RaisePropertyChanged(() => RightGlute);
-                RaisePropertyChanged(() => LeftQuad);
-                RaisePropertyChanged(() => RightQuad);
-                RaisePropertyChanged(() => LeftCalf);
-                RaisePropertyChanged(() => RightCalf);
+                // Duty = "N/A";
+                // RaisePropertyChanged(() => Duty);
+                // RaisePropertyChanged(() => LeftGluteTemp);
+                // RaisePropertyChanged(() => RightGluteTemp);
+                // RaisePropertyChanged(() => LeftQuadTemp);
+                // RaisePropertyChanged(() => RightQuadTemp);
+                // RaisePropertyChanged(() => LeftCalfTemp);
+                // RaisePropertyChanged(() => RightCalfTemp);
+                // RaisePropertyChanged(() => LeftGlute);
+                // RaisePropertyChanged(() => RightGlute);
+                // RaisePropertyChanged(() => LeftQuad);
+                // RaisePropertyChanged(() => RightQuad);
+                // RaisePropertyChanged(() => LeftCalf);
+                // RaisePropertyChanged(() => RightCalf);
             });
         }
 

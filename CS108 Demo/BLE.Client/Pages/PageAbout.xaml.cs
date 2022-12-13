@@ -18,7 +18,7 @@ namespace BLE.Client.Pages {
             labelBtFwVer.Text = "Bluetooth Firmware Version " + Version2String(BleMvxApplication._reader.bluetoothIC.GetFirmwareVersion());
             labelRFIDFwVer.Text = "RFID Firmware Version " + Version2String(BleMvxApplication._reader.rfid.GetFirmwareVersion());
             labelSiliconlabFwVer.Text = "SiliconLab IC Firmware Version " + Version2String(BleMvxApplication._reader.siliconlabIC.GetFirmwareVersion());
-            labelPcbVer.Text = "Main Board PCB Version " + GetPCBVersion ();
+            labelPcbVer.Text = "Main Board PCB Version " + GetPCBVersion();
             labelSerialNumber.Text = "CS108 Serial Number " + BleMvxApplication._reader.siliconlabIC.GetSerialNumberSync();
         }
 

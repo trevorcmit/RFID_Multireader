@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+
 
 namespace BLE.Client.Pages {
 	public partial class PageSettingOperation {
@@ -254,15 +254,12 @@ namespace BLE.Client.Pages {
                 case "S0":
                     BleMvxApplication._config.RFID_TagGroup.session = CSLibrary.Constants.Session.S0;
                     break;
-
                 case "S1":
                     BleMvxApplication._config.RFID_TagGroup.session = CSLibrary.Constants.Session.S1;
                     break;
-
                 case "S2":
                     BleMvxApplication._config.RFID_TagGroup.session = CSLibrary.Constants.Session.S2;
                     break;
-
                 case "S3":
                     BleMvxApplication._config.RFID_TagGroup.session = CSLibrary.Constants.Session.S3;
                     break;
@@ -296,13 +293,11 @@ namespace BLE.Client.Pages {
             }
 
             BleMvxApplication._config.RFID_Profile = UInt16.Parse(buttonProfile.Text.Substring(0, 1));
-
             BleMvxApplication._config.RFID_DynamicQParms.startQValue = uint.Parse(entryQOverride.Text);
             BleMvxApplication._config.RFID_FixedQParms.qValue = uint.Parse(entryQOverride.Text);
             
             BleMvxApplication._config.RFID_TagDelayTime = int.Parse(entryTagDelay.Text);
             BleMvxApplication._config.RFID_Antenna_Dwell[0] = UInt32.Parse(entryInventoryDuration.Text);
-            //BleMvxApplication._config.RFID_NewTagLocation = switchNewTagLocation.IsToggled;
             BleMvxApplication._config.RFID_Focus = switchFocus.IsToggled;
             BleMvxApplication._config.RFID_RFLNAcompression = int.Parse(buttonRFLNAcompression.Text);
             BleMvxApplication._config.RFID_RFLNAGain = int.Parse(buttonRFLNAGain.Text);
@@ -351,8 +346,7 @@ namespace BLE.Client.Pages {
             
             answer = await DisplayActionSheet("Frequence Channel Order", "Cancel", null, _freqOrderOptions);
 
-            if (answer != null && answer !="Cancel")
-                buttonFrequencyOrder.Text = answer;
+            if (answer != null && answer !="Cancel") buttonFrequencyOrder.Text = answer;
 
             checkbuttonFixedChannel();
         }
@@ -360,8 +354,7 @@ namespace BLE.Client.Pages {
         public async void buttonFixedChannelClicked(object sender, EventArgs e) {
             var answer = await DisplayActionSheet("Frequence Channel Order", "Cancel", null, ActiveFrequencyTextList);
 
-            if (answer != null && answer !="Cancel")
-                buttonFixedChannel.Text = answer;
+            if (answer != null && answer !="Cancel") buttonFixedChannel.Text = answer;
         }
 
         public async void entryPowerCompleted(object sender, EventArgs e) {
@@ -369,8 +362,7 @@ namespace BLE.Client.Pages {
 
             try {
                 value = uint.Parse(entryPower.Text);
-                if (value < 0 || value > 330)
-                    throw new System.ArgumentException("Value not valid", "tagPopulation");
+                if (value < 0 || value > 330) throw new System.ArgumentException("Value not valid", "tagPopulation");
                 entryPower.Text = value.ToString();
             }
             catch (Exception ex) {
@@ -380,12 +372,9 @@ namespace BLE.Client.Pages {
         }
 
         public async void entryTagPopulationCompleted(object sender, EventArgs e) {
-
             //////////////////////////////////////////////////////////////////////////////////////////////////////////
-
             // Attempt at Changing Default value to 8192
             uint tagPopulation = 8192;
-
             //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             try {
@@ -478,16 +467,14 @@ namespace BLE.Client.Pages {
                 buttonTarget.Text = answer;
         }
 
-        public async void buttonAlgorithmClicked(object sender, EventArgs e)
-        {
+        public async void buttonAlgorithmClicked(object sender, EventArgs e) {
             var answer = await DisplayAlert("Algorithm", "", "DYNAMICQ", "FIXEDQ");
             buttonAlgorithm.Text = answer ? "DYNAMICQ" : "FIXEDQ";
         }
 
         void SetQvalue ()
         {
-            switch (buttonAlgorithm.Text)
-            {
+            switch (buttonAlgorithm.Text) {
                 default:
                     entryQOverride.Text = "0";
                     break;
@@ -507,10 +494,8 @@ namespace BLE.Client.Pages {
             int cnt;
             CSLibrary.Constants.RegionCode region = CSLibrary.Constants.RegionCode.UNKNOWN;
 
-            for (cnt = 0; cnt < _regionsName.Length; cnt++)
-            {
-                if (_regionsName[cnt] == buttonRegion.Text)
-                {
+            for (cnt = 0; cnt < _regionsName.Length; cnt++) {
+                if (_regionsName[cnt] == buttonRegion.Text) {
                     region = _regionsCode[cnt];
                     break;
                 }
@@ -531,9 +516,7 @@ namespace BLE.Client.Pages {
 
         public async void buttonRFLNAcompressionClicked(object sender, EventArgs e) {
             var answer = await DisplayActionSheet(null, "Cancel", null, "0", "1");
-
-            if (answer != null && answer != "Cancel")
-                buttonRFLNAcompression.Text = answer;
+            if (answer != null && answer != "Cancel") buttonRFLNAcompression.Text = answer;
         }
 
         public async void buttonRFLNAGainClicked(object sender, EventArgs e) {
@@ -541,7 +524,6 @@ namespace BLE.Client.Pages {
 
             if (answer != null && answer != "Cancel") {
                 buttonRFLNAGain.Text = answer;
-
                 if (answer == "13") {
                     buttonRFLNAcompression.Text = "0";
                     buttonRFLNAcompression.IsEnabled = false;
@@ -554,13 +536,11 @@ namespace BLE.Client.Pages {
 
         public async void buttonIFLNAGainClicked(object sender, EventArgs e) {
             var answer = await DisplayActionSheet(null, "Cancel", null, "24", "18", "12", "6");
-
             if (answer != null && answer != "Cancel") buttonIFLNAGain.Text = answer;
         }
 
         public async void buttonAGCGainClicked(object sender, EventArgs e) {
             var answer = await DisplayActionSheet(null, "Cancel", null, "-12", "-6", "0", "6");
-
             if (answer != null && answer != "Cancel") buttonAGCGain.Text = answer;
         }
 

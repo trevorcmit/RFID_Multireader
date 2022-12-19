@@ -32,5 +32,6 @@ namespace BLE.Client.Droid {
             };
             base.OnCreate(bundle);
         }
+
     }
 }

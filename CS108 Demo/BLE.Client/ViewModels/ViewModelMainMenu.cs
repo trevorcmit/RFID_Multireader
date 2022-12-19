@@ -56,7 +56,7 @@ namespace BLE.Client.ViewModels {
                 connectedButtonTextColor = "Green";
 
                 // Added to keep Guid present after disconnect
-                ConnectionGuid = BleMvxApplication._config.readerID;
+                // ConnectionGuid = BleMvxApplication._config.readerID;
             }
             else {
                 connectedButton = "Press to Scan/Connect Reader";

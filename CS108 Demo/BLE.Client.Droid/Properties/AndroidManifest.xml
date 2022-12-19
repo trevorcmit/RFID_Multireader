@@ -1,15 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="csl.cs108fulldemo.demo" android:installLocation="preferExternal" android:versionCode="268" android:versionName="3.1.15">
-	<!-- <uses-sdk android:minSdkVersion="18" android:targetSdkVersion="29" /> -->
 	<uses-sdk android:minSdkVersion="18" android:targetSdkVersion="29" />
 
+	<!-- Default CSL Permissions for Bluetooth Usage -->
 	<uses-permission android:name="android.permission.BLUETOOTH" />
 	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.CONTROL_LOCATION_UPDATES" />
-	<uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
-	<application android:label="CS108 C# Demo" android:icon="@drawable/icon" android:theme="@style/MyTheme"></application>
+	<!-- Deprecated, but added for Save of Files to Public Storage -->
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+	<!-- Supposedly new version of Storage Permission -->
+	<uses-permission android:name="android.permission.READ_STORAGE_PERMISSION"/>
+	<uses-permission android:name="android.permission.WRITE_STORAGE_PERMISSION"/>
+
+	<application 
+		android:label="IFM fID-T" 
+		android:icon="@drawable/icon" 
+		android:theme="@style/MyTheme"
+		android:requestLegacyExternalStorage="true"
+	></application>
 </manifest>

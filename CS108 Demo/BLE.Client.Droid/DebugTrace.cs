@@ -21,5 +21,6 @@ namespace BLE.Client.Droid {
                 Trace(MvxTraceLevel.Error, tag, "Exception during trace of {0} {1}", level, message);
             }
         }
+
     }
 }

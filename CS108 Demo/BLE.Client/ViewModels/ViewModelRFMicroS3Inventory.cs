@@ -14,13 +14,15 @@ using Xamarin;
 using Xamarin.Forms;
 using Xamarin.Essentials;
 
-using DeviceListViewModel1 = BLE.Client.ViewModels.DeviceListViewModel;
 
-
+// [assembly: Xamarin.Forms.Dependency(typeof(RFMicroTagInfoViewModel))]
 namespace BLE.Client.ViewModels {
 
-    public class ViewModelRFMicroS3Inventory : BaseViewModel {
+    public interface IAccessFileService {
+        void CreateFile(string FileName);
+    }
 
+    public class ViewModelRFMicroS3Inventory : BaseViewModel {
         public class RFMicroTagInfoViewModel : BindableBase {
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -89,20 +91,6 @@ namespace BLE.Client.ViewModels {
         Dictionary<string, List<string>> tag_Time = new Dictionary<string, List<string>>();
         Dictionary<string, List<string>> tag_Data = new Dictionary<string, List<string>>();
 
-        ///////////////// Public/Private Variables for Body Model /////////////////
-        private string _LeftGluteTemp; public string LeftGluteTemp {get => _LeftGluteTemp; set {_LeftGluteTemp = value; OnPropertyChanged("LeftGluteTemp");}}
-        private string _RightGluteTemp; public string RightGluteTemp {get => _RightGluteTemp; set {_RightGluteTemp = value; OnPropertyChanged("RightGluteTemp");}}
-        private string _LeftQuadTemp; public string LeftQuadTemp {get => _LeftQuadTemp; set {_LeftQuadTemp = value; OnPropertyChanged("LeftQuadTemp");}}
-        private string _RightQuadTemp; public string RightQuadTemp {get => _RightQuadTemp; set {_RightQuadTemp = value; OnPropertyChanged("RightQuadTemp");}}
-        private string _LeftCalfTemp; public string LeftCalfTemp {get => _LeftCalfTemp; set {_LeftCalfTemp = value; OnPropertyChanged("LeftCalfTemp");}}
-        private string _RightCalfTemp; public string RightCalfTemp {get => _RightCalfTemp; set {_RightCalfTemp = value; OnPropertyChanged("RightCalfTemp");}}
-        private string _LeftGlute; public string LeftGlute {get => _LeftGlute; set {_LeftGlute = value; OnPropertyChanged("LeftGlute");}}
-        private string _RightGlute; public string RightGlute {get => _RightGlute; set {_RightGlute = value; OnPropertyChanged("RightGlute");}}
-        private string _LeftQuad; public string LeftQuad {get => _LeftQuad; set {_LeftQuad = value; OnPropertyChanged("LeftQuad");}}
-        private string _RightQuad; public string RightQuad {get => _RightQuad; set {_RightQuad = value; OnPropertyChanged("RightQuad");}}
-        private string _LeftCalf; public string LeftCalf {get => _LeftCalf; set {_LeftCalf = value; OnPropertyChanged("LeftCalf");}}
-        private string _RightCalf; public string RightCalf {get => _RightCalf; set {_RightCalf = value; OnPropertyChanged("RightCalf");}}
-
         private string _Duty; public string Duty {get => _Duty; set {_Duty = value; OnPropertyChanged("Duty");}}
         private int _active_time; public int active_time {get => _active_time; set {_active_time = value; OnPropertyChanged("active_time");}}
         private int _inactive_time; public int inactive_time {get => _inactive_time; set {_inactive_time = value; OnPropertyChanged("inactive_time");}}
@@ -125,49 +113,19 @@ namespace BLE.Client.ViewModels {
         public System.Timers.Timer activetimer = new System.Timers.Timer();
         public System.Timers.Timer downtimer = new System.Timers.Timer();
 
+        // Save FilePicker.PickAsync() result for use in Autosave function
+        public FileResult pick_result; 
+
         #endregion
 
         public ViewModelRFMicroS3Inventory(IAdapter adapter, IUserDialogs userDialogs) : base(adapter) {
             _userDialogs = userDialogs;
-            LeftGluteTemp  = "N/A";
-            RightGluteTemp = "N/A";  // Default Label values
-            LeftQuadTemp   = "N/A";
-            RightQuadTemp  = "N/A";
-            LeftCalfTemp   = "N/A";
-            RightCalfTemp  = "N/A";
-            LeftGlute   = "gray";
-            RightGlute  = "gray";    // Default Image colors
-            LeftQuad    = "gray";
-            RightQuad   = "gray";
-            LeftCalf    = "gray";
-            RightCalf   = "gray";
-
 
             GetTimes(); // Get Duty Cycle Times
 
-            map = new Dictionary<string, string> {
-                {"E282403E000207D6F9773098", "Left Glute"},
-                {"E282403E000207D6F97748C0", "Right Glute"},
-                {"E282403E000207D6F9770273", "Left Quad"},
-                {"E282403E000207D6F97786D2", "Right Quad"},
-                {"E282403E000207D6F9779863", "Left Calf"},
-                {"E282403E000207D6F9775A25", "Right Calf"},
-                {"E282403E000207D6F9778E53", "Left Sock"},
-                {"4761627269656C52536F636B", "Right Sock"}
-            };
+            Duty = "N/A"; 
+            RaisePropertyChanged(() => Duty);
 
-            epcs = new List<string> {
-                "E282403E000207D6F9770273",  // Left Quad
-                "E282403E000207D6F97786D2",  // Right Quad
-                "E282403E000207D6F9773098",  // Left Glute
-                "E282403E000207D6F97748C0",  // Right Glute
-                "E282403E000207D6F9779863",  // Left Calf
-                "E282403E000207D6F9775A25",  // Right Calf
-                "E282403E000207D6F9778E53", // LEFT SOCK
-                "4761627269656C52536F636B", // RIGHT SOCK
-            };
-
-            Duty = "N/A"; RaisePropertyChanged(() => Duty);
             OnStartInventoryButtonCommand = new Command(StartInventoryClick);
             OnClearButtonCommand = new Command(ClearClick);
             OnShareDataCommand = new Command(ShareDataButtonClick);
@@ -183,9 +141,11 @@ namespace BLE.Client.ViewModels {
 
             string inactive_time_str = await Application.Current.MainPage.DisplayPromptAsync( // Get tag name
                 title: "Input INACTIVE Time for Duty Cycle",
-                message: "Example: 2000 (means 2 seconds)",
+                message: "Example: 3000 (means 3 seconds)",
                 placeholder: ""
             );
+
+            // pick_result = await FilePicker.PickAsync();
 
             _active_time   = Convert.ToInt32(active_time_str);
             _inactive_time = Convert.ToInt32(inactive_time_str);
@@ -236,37 +196,12 @@ namespace BLE.Client.ViewModels {
                 tag_Data.Clear();
                 tag_Time.Clear();
                 tag_List.Clear();
-
-                // LeftGluteTemp  = "N/A";
-                // RightGluteTemp = "N/A";  // Default Label values
-                // LeftQuadTemp   = "N/A";
-                // RightQuadTemp  = "N/A";
-                // LeftCalfTemp   = "N/A";
-                // RightCalfTemp  = "N/A";
-
-                // LeftGlute   = "gray";
-                // RightGlute  = "gray";  // Default Image colors
-                // LeftQuad    = "gray";
-                // RightQuad   = "gray";
-                // LeftCalf    = "gray";
-                // RightCalf   = "gray";
-
-                // Duty = "N/A";
-                // RaisePropertyChanged(() => Duty);
-                // RaisePropertyChanged(() => LeftGluteTemp);
-                // RaisePropertyChanged(() => RightGluteTemp);
-                // RaisePropertyChanged(() => LeftQuadTemp);
-                // RaisePropertyChanged(() => RightQuadTemp);
-                // RaisePropertyChanged(() => LeftCalfTemp);
-                // RaisePropertyChanged(() => RightCalfTemp);
-                // RaisePropertyChanged(() => LeftGlute);
-                // RaisePropertyChanged(() => RightGlute);
-                // RaisePropertyChanged(() => LeftQuad);
-                // RaisePropertyChanged(() => RightQuad);
-                // RaisePropertyChanged(() => LeftCalf);
-                // RaisePropertyChanged(() => RightCalf);
             });
         }
+
+        // private void Reconnect() {
+        //     BleMvxApplication._reader.ConnectLostAsync();
+        // }
 
         public RFMicroTagInfoViewModel objItemSelected {
             set {
@@ -381,14 +316,12 @@ namespace BLE.Client.ViewModels {
                     BleMvxApplication._reader.rfid.SetPowerLevel(230);
                     break;
                 
-                // ##### ACTIVE CASE #####
+                // ####### ACTIVE CASE #######
                 case 2:
-                    // uint[] i_dwells = new uint[] {2000, 2000};
-                    // BleMvxApplication._reader.rfid.SetPowerSequencing(numberofPower:0, dwell:i_dwells);
                     BleMvxApplication._reader.rfid.SetPowerSequencing(0);
                     BleMvxApplication._reader.rfid.SetPowerLevel(300);
                     break;
-                // #######################
+                // ###########################
 
                 case 3:
                     SetPower(_powerRunning);
@@ -468,7 +401,6 @@ namespace BLE.Client.ViewModels {
         void TagInventoryEvent(object sender, CSLibrary.Events.OnAsyncCallbackEventArgs e) {
             if (e.type != CSLibrary.Constants.CallbackType.TAG_RANGING) return;
             if (e.info.Bank1Data == null || e.info.Bank2Data == null) return;
-
             InvokeOnMainThread(() => { AddOrUpdateTagData(e.info); });
         }
 
@@ -560,7 +492,6 @@ namespace BLE.Client.ViewModels {
                                                         }
 
                                                         finally {
-                                                            // ShareDataButtonClick();
                                                             AutoSaveData();
                                                         }
 
@@ -677,7 +608,7 @@ namespace BLE.Client.ViewModels {
         }
 
         double getTempF(UInt16 temp, UInt64 CalCode) {
-            return (getTemperatue(temp, CalCode) * 1.800 + 32.000);
+            return (getTemperatue(temp, CalCode) * 1.8 + 32.0);
         }
 
         double getTempC(UInt16 temp, UInt64 CalCode) {
@@ -718,14 +649,39 @@ namespace BLE.Client.ViewModels {
 			RaisePropertyChanged(() => labelVoltage);
 		}
 
+        // public class AccessFileImplement : IAccessFileService {
+        //     public void CreateFile(string FileName) {
+        //         string rootPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        //         var filePathDir = Path.Combine(rootPath, "folder");
+                
+        //         if (!File.Exists(filePathDir)) {
+        //             Directory.CreateDirectory(filePathDir); // Check if "folder" exists, if not create it
+        //         }
+
+        //         string filePath = Path.Combine(filePathDir, FileName);
+        //         File.WriteAllText(filePath, String.Empty);
+        //         using (StreamWriter writer = new StreamWriter(filePath, true)) {
+        //             foreach (string name in this.tag_List) {
+        //                 writer.WriteLine(name + "\n" + "[");
+        //                 foreach (var i in tag_Time[name]) { writer.WriteLine(i); }
+        //                 writer.WriteLine("]\n[");
+        //                 foreach (var j in tag_Data[name]) { writer.WriteLine(j); }
+        //                 writer.WriteLine("]\n ");
+        //             }
+        //         }
+        //     }
+        // }
+
         private void AutoSaveData() { // Function for Sharing time series data from tags
             InvokeOnMainThread(()=> {
-                string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "tags.txt");
+                // string fileName = Path.Combine(FileSystem.AppDataDirectory, "tags.txt");
+                // string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "tags.txt");
+
+                string fileName = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "tags.txt");
 
                 File.WriteAllText(fileName, String.Empty);
 
                 using (StreamWriter writer = new StreamWriter(fileName, true)) {
-
                     foreach (string name in tag_List) {
                         writer.WriteLine(name + "\n" + "[");
                         foreach (var i in tag_Time[name]) { writer.WriteLine(i); }
@@ -733,13 +689,38 @@ namespace BLE.Client.ViewModels {
                         foreach (var j in tag_Data[name]) { writer.WriteLine(j); }
                         writer.WriteLine("]\n ");
                     }
+                    writer.Close();
                 }
+
+                // Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).mkdirs();
+                // var fullPath = Path.Combine(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath, "file_name.txt");
+                // Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).mkdirs();
+                // var fullPath = Path.Combine(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath, "file_name.txt");
+                // FileInfo fi = new FileInfo(fullPath);
+
+                // var fsToWrite = fi.Open(FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
+                // // var sw = new StreamWriter(fsToWrite);
+                // // sw.WriteLine("Another line from streamwriter");
+                // // sw.Close();
+                // using (StreamWriter writer = new StreamWriter(fsToWrite)) {
+                //     foreach (string name in tag_List) {
+                //         writer.WriteLine(name + "\n" + "[");
+                //         foreach (var i in tag_Time[name]) { writer.WriteLine(i); }
+                //         writer.WriteLine("]\n[");
+                //         foreach (var j in tag_Data[name]) { writer.WriteLine(j); }
+                //         writer.WriteLine("]\n ");
+                //     }
+                //     writer.Close();
+                // }
+                // fsToWrite.Close();
 
             });
         }
 
         private async void ShareDataButtonClick() {
-            string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "tags.txt");
+            // string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "tags.txt");
+
+            string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "..", "cache", "tags.txt");
             await Share.RequestAsync(new ShareFileRequest {
                 Title = "Share Tags",
                 File = new ShareFile(fileName)
@@ -747,7 +728,6 @@ namespace BLE.Client.ViewModels {
         }
 
         #region Key_event
-
         void HotKeys_OnKeyEvent(object sender, CSLibrary.Notification.HotKeyEventArgs e) {
             if (e.KeyCode == CSLibrary.Notification.Key.BUTTON) {
                 if (e.KeyDown) { StartInventory(); }

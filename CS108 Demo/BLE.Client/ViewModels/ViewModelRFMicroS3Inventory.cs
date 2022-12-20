@@ -116,6 +116,8 @@ namespace BLE.Client.ViewModels {
         // Save FilePicker.PickAsync() result for use in Autosave function
         public FileResult pick_result; 
 
+        private string _DebugLabel; public string DebugLabel {get => _DebugLabel; set {_DebugLabel = value; OnPropertyChanged("DebugLabel");}}
+
         #endregion
 
         public ViewModelRFMicroS3Inventory(IAdapter adapter, IUserDialogs userDialogs) : base(adapter) {
@@ -145,7 +147,10 @@ namespace BLE.Client.ViewModels {
                 placeholder: ""
             );
 
-            // pick_result = await FilePicker.PickAsync();
+            pick_result = await FilePicker.PickAsync();
+
+            _DebugLabel = pick_result.FullPath;
+            RaisePropertyChanged(() => DebugLabel);
 
             _active_time   = Convert.ToInt32(active_time_str);
             _inactive_time = Convert.ToInt32(inactive_time_str);
@@ -198,10 +203,6 @@ namespace BLE.Client.ViewModels {
                 tag_List.Clear();
             });
         }
-
-        // private void Reconnect() {
-        //     BleMvxApplication._reader.ConnectLostAsync();
-        // }
 
         public RFMicroTagInfoViewModel objItemSelected {
             set {
@@ -653,11 +654,9 @@ namespace BLE.Client.ViewModels {
         //     public void CreateFile(string FileName) {
         //         string rootPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         //         var filePathDir = Path.Combine(rootPath, "folder");
-                
         //         if (!File.Exists(filePathDir)) {
         //             Directory.CreateDirectory(filePathDir); // Check if "folder" exists, if not create it
         //         }
-
         //         string filePath = Path.Combine(filePathDir, FileName);
         //         File.WriteAllText(filePath, String.Empty);
         //         using (StreamWriter writer = new StreamWriter(filePath, true)) {
@@ -672,15 +671,11 @@ namespace BLE.Client.ViewModels {
         //     }
         // }
 
-        private void AutoSaveData() { // Function for Sharing time series data from tags
+        private void AutoSaveData() {    // Function for Sharing time series data from tags
             InvokeOnMainThread(()=> {
-                // string fileName = Path.Combine(FileSystem.AppDataDirectory, "tags.txt");
-                // string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "tags.txt");
+                string fileName = pick_result.FullPath;    // Get file name from picker
 
-                string fileName = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "tags.txt");
-
-                File.WriteAllText(fileName, String.Empty);
-
+                File.WriteAllText(fileName, String.Empty); // Empty text file to rewrite database
                 using (StreamWriter writer = new StreamWriter(fileName, true)) {
                     foreach (string name in tag_List) {
                         writer.WriteLine(name + "\n" + "[");
@@ -691,36 +686,12 @@ namespace BLE.Client.ViewModels {
                     }
                     writer.Close();
                 }
-
-                // Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).mkdirs();
-                // var fullPath = Path.Combine(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath, "file_name.txt");
-                // Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).mkdirs();
-                // var fullPath = Path.Combine(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath, "file_name.txt");
-                // FileInfo fi = new FileInfo(fullPath);
-
-                // var fsToWrite = fi.Open(FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
-                // // var sw = new StreamWriter(fsToWrite);
-                // // sw.WriteLine("Another line from streamwriter");
-                // // sw.Close();
-                // using (StreamWriter writer = new StreamWriter(fsToWrite)) {
-                //     foreach (string name in tag_List) {
-                //         writer.WriteLine(name + "\n" + "[");
-                //         foreach (var i in tag_Time[name]) { writer.WriteLine(i); }
-                //         writer.WriteLine("]\n[");
-                //         foreach (var j in tag_Data[name]) { writer.WriteLine(j); }
-                //         writer.WriteLine("]\n ");
-                //     }
-                //     writer.Close();
-                // }
-                // fsToWrite.Close();
-
             });
         }
 
         private async void ShareDataButtonClick() {
-            // string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "tags.txt");
+            string fileName = pick_result.FullPath;
 
-            string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "..", "cache", "tags.txt");
             await Share.RequestAsync(new ShareFileRequest {
                 Title = "Share Tags",
                 File = new ShareFile(fileName)

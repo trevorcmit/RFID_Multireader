@@ -68,17 +68,18 @@
             <ColumnDefinition/>
           </Grid.ColumnDefinitions> 
           <Grid.RowDefinitions>
-            <RowDefinition/>  
+            <RowDefinition/> 
+            <RowDefinition/>   
           </Grid.RowDefinitions>
-
-          <!-- <BoxView 
-            Grid.Row="0" Grid.Column="0" CornerRadius="8" BackgroundColor="Transparent"
-            HorizontalOptions="Center" VerticalOptions="Center" OutlineColor="Black" BorderWidth="2"
-          /> -->
 
           <Label 
             Text="{Binding Duty}" Font="Large" FontAttributes="Bold"
             Grid.Row="0" Grid.Column="0"
+            HorizontalOptions="Center" VerticalOptions="Center"
+          />
+          <Label 
+            Text="{Binding DebugLabel}"
+            Grid.Row="1" Grid.Column="0"
             HorizontalOptions="Center" VerticalOptions="Center"
           />
         </Grid>

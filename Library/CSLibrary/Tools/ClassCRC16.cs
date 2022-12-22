@@ -1,36 +1,14 @@
-﻿/*
-Copyright (c) 2018 Convergence Systems Limited
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CSLibrary.Tools
-{
+
+namespace CSLibrary.Tools {
     #region BT CRC
 
-    public static class Crc
-    {
+    public static class Crc {
         static readonly ushort[] crc_lookup_table = new ushort[]{
                 0x0000, 0x1189, 0x2312, 0x329b, 0x4624, 0x57ad, 0x6536, 0x74bf,
                 0x8c48, 0x9dc1, 0xaf5a, 0xbed3, 0xca6c, 0xdbe5, 0xe97e, 0xf8f7,
@@ -65,14 +43,11 @@ namespace CSLibrary.Tools
                 0xf78f, 0xe606, 0xd49d, 0xc514, 0xb1ab, 0xa022, 0x92b9, 0x8330,
                 0x7bc7, 0x6a4e, 0x58d5, 0x495c, 0x3de3, 0x2c6a, 0x1ef1, 0x0f78};
 
-        public static ushort ComputeChecksum(byte[] dataIn)
-        {
+        public static ushort ComputeChecksum(byte[] dataIn) {
             ushort checksum = 0;
 
-            for (int i = 0; i < (dataIn[2] + 8); i++)
-            {
-                if (i != 6 && i != 7)
-                {
+            for (int i = 0; i < (dataIn[2] + 8); i++) {
+                if (i != 6 && i != 7) {
                     int index = (checksum ^ ((byte)dataIn[i] & 0x0FF)) & 0x0FF;
                     checksum = (ushort)((checksum >> 8) ^ crc_lookup_table[index]);
                 }
@@ -80,8 +55,7 @@ namespace CSLibrary.Tools
 
             return checksum;
         }
+
     }
-
     #endregion
-
 }

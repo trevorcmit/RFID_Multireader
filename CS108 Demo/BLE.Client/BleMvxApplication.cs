@@ -148,7 +148,7 @@ namespace BLE.Client {
 
             RFID_Vibration = false;
             RFID_VibrationTag = false;      // false = New, true = All
-            RFID_VibrationWindow = 2;      // 2 seconds
+            RFID_VibrationWindow = 2;       // 2 seconds
             RFID_VibrationTime = 300;       // 500 ms
 
             RFID_BatteryPollingTime = 300;  // 300s

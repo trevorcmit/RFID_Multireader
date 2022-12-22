@@ -15,7 +15,6 @@ using Xamarin.Forms;
 using Xamarin.Essentials;
 
 
-// [assembly: Xamarin.Forms.Dependency(typeof(RFMicroTagInfoViewModel))]
 namespace BLE.Client.ViewModels {
 
     public interface IAccessFileService {
@@ -123,7 +122,7 @@ namespace BLE.Client.ViewModels {
         public ViewModelRFMicroS3Inventory(IAdapter adapter, IUserDialogs userDialogs) : base(adapter) {
             _userDialogs = userDialogs;
 
-            GetTimes(); // Get Duty Cycle Times
+            GetTimes();   // Get Duty Cycle Times
 
             Duty = "N/A"; 
             RaisePropertyChanged(() => Duty);
@@ -395,6 +394,9 @@ namespace BLE.Client.ViewModels {
         private void DownEvent(object sender, System.Timers.ElapsedEventArgs e) {
             _Duty = "DOWN"; RaisePropertyChanged(() => Duty);
             StopInventory();
+
+            AutoSaveData(); // Autosave while Down is occurring
+
             activetimer.Enabled = true;
             downtimer.Enabled = false;
         }
@@ -493,7 +495,7 @@ namespace BLE.Client.ViewModels {
                                                         }
 
                                                         finally {
-                                                            AutoSaveData();
+                                                            // AutoSaveData();
                                                         }
 
                                                         break;
@@ -649,27 +651,6 @@ namespace BLE.Client.ViewModels {
             }
 			RaisePropertyChanged(() => labelVoltage);
 		}
-
-        // public class AccessFileImplement : IAccessFileService {
-        //     public void CreateFile(string FileName) {
-        //         string rootPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-        //         var filePathDir = Path.Combine(rootPath, "folder");
-        //         if (!File.Exists(filePathDir)) {
-        //             Directory.CreateDirectory(filePathDir); // Check if "folder" exists, if not create it
-        //         }
-        //         string filePath = Path.Combine(filePathDir, FileName);
-        //         File.WriteAllText(filePath, String.Empty);
-        //         using (StreamWriter writer = new StreamWriter(filePath, true)) {
-        //             foreach (string name in this.tag_List) {
-        //                 writer.WriteLine(name + "\n" + "[");
-        //                 foreach (var i in tag_Time[name]) { writer.WriteLine(i); }
-        //                 writer.WriteLine("]\n[");
-        //                 foreach (var j in tag_Data[name]) { writer.WriteLine(j); }
-        //                 writer.WriteLine("]\n ");
-        //             }
-        //         }
-        //     }
-        // }
 
         private void AutoSaveData() {    // Function for Sharing time series data from tags
             InvokeOnMainThread(()=> {

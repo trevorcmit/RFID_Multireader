@@ -1,81 +1,46 @@
-﻿/*
-Copyright (c) 2018 Convergence Systems Limited
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CSLibrary.Tools
-{
-    public class Queue
-    {
+
+namespace CSLibrary.Tools {
+    public class Queue {
         private int MAXBUFFERSIZE;
         private byte[] _dataStream;
         object _dataStreamLock = new object();
         private int _dataStreamStartPoint = 0;
         private int _dataStreamSize = 0;
 
-        public Queue(int size = 1024)
-        {
+        public Queue(int size = 1024) {
             MAXBUFFERSIZE = size;
             _dataStream = new byte[MAXBUFFERSIZE];
         }
 
-        ~Queue()
-        {
-        }
+        ~Queue() {}
 
-        public int length
-        {
+        public int length {
             get { return _dataStreamSize; }
         }
 
-        public void Clear()
-        {
-            lock (_dataStreamLock)
-            {
+        public void Clear() {
+            lock (_dataStreamLock) {
                 _dataStreamStartPoint = 0;
                 _dataStreamSize = 0;
             }
         }
 
-        /// <summary>
-        /// all data will be clear
-        /// </summary>
         /// <param name="size"></param>
         /// <returns></returns>
-        public bool ReSize(int size)
-        {
-            lock (_dataStreamLock)
-            {
-                try
-                {
+        public bool ReSize(int size) {
+            lock (_dataStreamLock) {
+                try {
                     _dataStream = new byte[size];
                     _dataStreamStartPoint = 0;
                     _dataStreamSize = 0;
                 }
-                catch (Exception ex)
-                {
+                catch (Exception ex) {
                     return false;
                 }
             }
@@ -83,10 +48,8 @@ namespace CSLibrary.Tools
             return true;
         }
 
-        public bool DataIn(byte[] data, int offset = 0, int size = -1)
-        {
-			if (size < 0)
-				size = data.Length - offset;
+        public bool DataIn(byte[] data, int offset = 0, int size = -1) {
+			if (size < 0) size = data.Length - offset;
 
 			if (size == 0)
 				return true;
@@ -94,18 +57,14 @@ namespace CSLibrary.Tools
 			if (_dataStreamSize + size > MAXBUFFERSIZE)
 				return false;
 
-			lock (_dataStreamLock)
-			{
-				if (_dataStreamStartPoint + _dataStreamSize + size < MAXBUFFERSIZE)
-				{
+			lock (_dataStreamLock) {
+				if (_dataStreamStartPoint + _dataStreamSize + size < MAXBUFFERSIZE) {
 					Array.Copy(data, offset, _dataStream, _dataStreamStartPoint + _dataStreamSize, size);
 				}
-				else if ((_dataStreamStartPoint + _dataStreamSize) >= MAXBUFFERSIZE)
-                {
+				else if ((_dataStreamStartPoint + _dataStreamSize) >= MAXBUFFERSIZE) {
                     Array.Copy(data, offset, _dataStream, ((_dataStreamStartPoint + _dataStreamSize) - MAXBUFFERSIZE), size);
                 }
-                else
-                {
+                else {
 					int headerLength = MAXBUFFERSIZE - _dataStreamStartPoint - _dataStreamSize;
 					int footerlength = size - headerLength;
 
@@ -120,10 +79,8 @@ namespace CSLibrary.Tools
         }
 
 #if !oldcode
-		public bool DataDel(int dataDelectLength)
-		{
-			lock (_dataStreamLock)
-			{
+		public bool DataDel(int dataDelectLength) {
+			lock (_dataStreamLock) {
 				if (_dataStreamSize == 0)
 					return true;
 
@@ -215,8 +172,7 @@ namespace CSLibrary.Tools
 		}
 
 #if !oldcode
-		public byte[] DataOut(int outDataLength = 1)
-		{
+		public byte[] DataOut(int outDataLength = 1) {
 			byte[] outData = DataPreOut (outDataLength);
 
 			if (outData.Length != 0)
@@ -225,14 +181,11 @@ namespace CSLibrary.Tools
 			return outData;
 		}
 #else
-		public byte[] DataOut(int outDataLength)
-        {
-            lock (_dataStreamLock)
-            {
+		public byte[] DataOut(int outDataLength) {
+            lock (_dataStreamLock) {
                 byte[] outData;
 
-                if (_dataStreamSize == 0)
-                    return new byte[0];
+                if (_dataStreamSize == 0) return new byte[0];
 
                 if (outDataLength < _dataStreamSize)
                 {
@@ -359,21 +312,13 @@ namespace CSLibrary.Tools
             }
         }
 
-        /// <summary>
-        /// Special function for Inventory
-        /// </summary>
         /// <returns></returns>
-        public int IndexOfValidInventoryResponsePacket()
-        {
+        public int IndexOfValidInventoryResponsePacket() {
             return -1;
         }
 
-        /// <summary>
-        /// Special function for Inventory
-        /// </summary>
         /// <returns></returns>
-        public int IndexOfTagResponsePacket(int offSet = 0)
-        {
+        public int IndexOfTagResponsePacket(int offSet = 0) {
             const int PKTVER = 0x03;
             const int PKTTYP1 = 0x05;
             const int PKTTYP2 = 0x80;
@@ -382,16 +327,14 @@ namespace CSLibrary.Tools
 
             int headerIndex;
 
-            lock (_dataStreamLock)
-            {
+            lock (_dataStreamLock) {
                 if (_dataStreamSize < 8)
                 return -1;
 
                 Defragment();
                 headerIndex = Array.IndexOf(_dataStream, PKTVER, offSet, _dataStreamSize);
 
-                if (headerIndex >= 0)
-                {
+                if (headerIndex >= 0) {
                     if (_dataStream[headerIndex + 2] == PKTTYP1 &&
                         _dataStream[headerIndex + 3] == PKTTYP2 &&
                         _dataStream[headerIndex + 6] == PKTREV1 &&
@@ -403,12 +346,9 @@ namespace CSLibrary.Tools
             return -1;
         }
 
-        public void Skip(int skipSize)
-        {
-            lock (_dataStreamLock)
-            {
-                if (skipSize >= _dataStreamSize)
-                {
+        public void Skip(int skipSize) {
+            lock (_dataStreamLock) {
+                if (skipSize >= _dataStreamSize) {
                     Clear ();
                     return;
                 }
@@ -451,18 +391,16 @@ namespace CSLibrary.Tools
                     }
                 }
 
-                if (index == _dataStreamSize)
-                {
+                if (index == _dataStreamSize) {
                     _dataStreamSize = 0;
                 }
-                else
-                {
+                else {
                     _dataStreamStartPoint = index;
                     _dataStreamSize -= index;
                 }
             }
-
             return -1;
         }
+
     }
 }

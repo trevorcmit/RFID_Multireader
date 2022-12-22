@@ -139,13 +139,9 @@ namespace BLE.Client.ViewModels {
             });
         }
 
-        //private TagInfoViewModel _ItemSelected;
-        void SetConfigPower()
-        {
-            if (BleMvxApplication._reader.rfid.GetAntennaPort() == 1)
-            {
-                if (BleMvxApplication._config.RFID_PowerSequencing_NumberofPower == 0)
-                {
+        void SetConfigPower() {
+            if (BleMvxApplication._reader.rfid.GetAntennaPort() == 1) {
+                if (BleMvxApplication._config.RFID_PowerSequencing_NumberofPower == 0) {
                     BleMvxApplication._reader.rfid.SetPowerSequencing(0);
                     BleMvxApplication._reader.rfid.SetPowerLevel(BleMvxApplication._config.RFID_Antenna_Power[0]);
                 }
@@ -443,5 +439,6 @@ namespace BLE.Client.ViewModels {
                 await System.Threading.Tasks.Task.Delay(1000);
             }
         }
+
     }
 }

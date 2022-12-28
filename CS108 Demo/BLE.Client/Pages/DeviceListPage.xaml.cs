@@ -1,5 +1,8 @@
 ﻿namespace BLE.Client.Pages {
     public partial class DeviceListPage {
-        public DeviceListPage() { InitializeComponent(); }
+        public DeviceListPage() {
+            InitializeComponent();
+        }
+
     }
 }

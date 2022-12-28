@@ -5,6 +5,12 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using Plugin.BLE.Abstractions.Contracts;
 
+// New Imports for Bluetooth Autoconnect
+using System.Collections.ObjectModel;
+using System.Threading;
+using Plugin.BLE.Abstractions;
+using System.ComponentModel;
+
 
 namespace BLE.Client.ViewModels {
     public class BaseViewModel : MvxViewModel {
@@ -14,7 +20,47 @@ namespace BLE.Client.ViewModels {
         protected const string CharacteristicIdKey = "CharacteristicIdNavigationKey";
         protected const string DescriptorIdKey = "DescriptorIdNavigationKey";
 
-        public string ConnectionGuid; // Global ConnectionGuid variable to reconnect in any window
+
+
+
+
+
+
+
+
+        // Moved from DeviceListViewModel to the BaseViewModel for all ViewModels to inherit
+        public ObservableCollection<DeviceListItemViewModel> Devices {get; set;} = new ObservableCollection<DeviceListItemViewModel>();
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName = null) {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        protected private Guid _ConnectionGuid;  // Global ConnectionGuid variable to reconnect in any window
+        public Guid ConnectionGuid {
+            get => _ConnectionGuid; 
+            set { _ConnectionGuid = value; OnPropertyChanged("ConnectionGuid"); }
+        }
+
+
+        // public DeviceListItemViewModel _ConnectionDevice; // Global ConnectionDevice variable to reconnect in any window
+
+        public IDevice ConnectionDevice { get; set; }
+        // public DeviceListItemViewModel ConnectionDevice { get; set; }
+
+        protected private string _ConnectionDeviceName;  // Global ConnectionGuid variable to reconnect in any window
+        public virtual string ConnectionDeviceName {
+            get => _ConnectionDeviceName; 
+            set { _ConnectionDeviceName = value; OnPropertyChanged("ConnectionDeviceName"); }
+        }
+
+
+
+
+
+
+
+
 
         public BaseViewModel(IAdapter adapter) { Adapter = adapter; }
 
@@ -61,6 +107,39 @@ namespace BLE.Client.ViewModels {
             if (characteristic == null || !parameters.Data.ContainsKey(DescriptorIdKey)) { return null; }
             var descriptorId = parameters.Data[DescriptorIdKey];
             return await characteristic.GetDescriptorAsync(Guid.Parse(descriptorId));
+        }
+
+        // Connect function available in all ViewModels
+        public virtual async void Connect(IDevice _device) 
+        {
+            await BleMvxApplication._reader.ConnectAsync(Adapter, _device);
+
+            bool LoadSuccess = await BleMvxApplication.LoadConfig(_device.Id.ToString());
+            BleMvxApplication._config.readerID = _device.Id.ToString();
+        }
+
+        public virtual async Task<bool> ConnectDeviceAsync(DeviceListItemViewModel device, bool showPrompt=true) 
+        {
+            try {
+
+                // Default CONNECTPARAMETERS
+                // ConnectParameters connectParameters = new ConnectParameters();
+
+                // New connect parameters forcing Reconnect on Android
+                ConnectParameters connectParameters = new ConnectParameters(true, false);
+                CancellationTokenSource tokenSource = new CancellationTokenSource();
+                await Adapter.ConnectToDeviceAsync(device.Device, connectParameters, tokenSource.Token);
+
+
+                return true;
+            }
+            catch (Exception ex) {
+                Mvx.Trace(ex.Message);
+                return false;
+            }
+            finally {
+                device.Update();
+            }
         }
 
     }

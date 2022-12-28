@@ -16,5 +16,6 @@ namespace BLE.Client.UWP {
         public int GetBuild() {
             return version.Revision;
         }
+
     }
 }

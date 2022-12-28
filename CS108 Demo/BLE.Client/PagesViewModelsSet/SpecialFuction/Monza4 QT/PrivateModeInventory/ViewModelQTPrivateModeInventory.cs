@@ -222,8 +222,7 @@ namespace BLE.Client.ViewModels {
             RaisePropertyChanged(() => startInventoryButtonText);
         }
 
-        void StopInventory()
-        {
+        void StopInventory() {
             _startInventory = true;
             _startInventoryButtonText = "Start Inventory";
 
@@ -232,26 +231,21 @@ namespace BLE.Client.ViewModels {
             RaisePropertyChanged(() => startInventoryButtonText);
         }
 
-        void StartInventoryClick()
-        {
-            if (_startInventory)
-            {
+        void StartInventoryClick() {
+            if (_startInventory) {
                 StartInventory();
             }
-            else
-            {
+            else {
                 StopInventory();
             }
         }
 
-        void StartTagCount()
-        {
+        void StartTagCount() {
             tagsCount = 0;
             _tagCount = true;
 
             // Create a timer that waits one second, then invokes every second.
-            Xamarin.Forms.Device.StartTimer(TimeSpan.FromMilliseconds(1000), () =>
-            {
+            Xamarin.Forms.Device.StartTimer(TimeSpan.FromMilliseconds(1000), () => {
                 _InventoryTime = (DateTime.Now - InventoryStartTime).TotalSeconds;
                 RaisePropertyChanged(() => InventoryTime);
 
@@ -271,13 +265,11 @@ namespace BLE.Client.ViewModels {
             });
         }
 
-        void StopInventoryClick()
-        {
+        void StopInventoryClick() {
             BleMvxApplication._reader.rfid.StopOperation();
         }
 
-        void TagInventoryEvent(object sender, CSLibrary.Events.OnAsyncCallbackEventArgs e)
-        {
+        void TagInventoryEvent(object sender, CSLibrary.Events.OnAsyncCallbackEventArgs e) {
             if (e.type != CSLibrary.Constants.CallbackType.TAG_RANGING)
                 return;
 
@@ -289,13 +281,10 @@ namespace BLE.Client.ViewModels {
             if (e.info.Bank1Data[0] != 0x8304 && e.info.Bank1Data[0] != 0x8305)
                 return;
 
-            InvokeOnMainThread(() =>
-            {
+            InvokeOnMainThread(() => {
                 _tagCountForAlert++;
-                if (_tagCountForAlert == 1)
-                {
-                    if (BleMvxApplication._config.RFID_InventoryAlertSound)
-                    {
+                if (_tagCountForAlert == 1) {
+                    if (BleMvxApplication._config.RFID_InventoryAlertSound) {
                         if (_newTagFound)
                             Xamarin.Forms.DependencyService.Get<ISystemSound>().SystemSound(3);
                         else
@@ -311,17 +300,13 @@ namespace BLE.Client.ViewModels {
             });
         }
 
-        void StateChangedEvent(object sender, CSLibrary.Events.OnStateChangedEventArgs e)
-        {
-            InvokeOnMainThread(() =>
-            {
-                switch (e.state)
-                {
+        void StateChangedEvent(object sender, CSLibrary.Events.OnStateChangedEventArgs e) {
+            InvokeOnMainThread(() => {
+                switch (e.state) {
                     case CSLibrary.Constants.RFState.IDLE:
                         ClassBattery.SetBatteryMode(ClassBattery.BATTERYMODE.IDLE);
                         _cancelVoltageValue = true;
-                        switch (BleMvxApplication._reader.rfid.LastMacErrorCode)
-                        {
+                        switch (BleMvxApplication._reader.rfid.LastMacErrorCode) {
                             case 0x00:  // normal end
                                 break;
 
@@ -338,13 +323,11 @@ namespace BLE.Client.ViewModels {
             });
         }
 
-        private void AddOrUpdateTagData(CSLibrary.Structures.TagCallbackInfo info)
-        {
+        private void AddOrUpdateTagData(CSLibrary.Structures.TagCallbackInfo info) {
             bool found = false;
             int cnt;
 
-            lock (TagInfoList)
-            {
+            lock (TagInfoList) {
                 string EPC = info.epc.ToString();
                 float RSSI = info.rssi;
 

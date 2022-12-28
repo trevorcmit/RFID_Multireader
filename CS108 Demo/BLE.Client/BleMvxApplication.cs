@@ -250,15 +250,13 @@ namespace BLE.Client {
             item = new RFMicroTagNicknameViewModel(); item.EPC = "E282403E000207D6F97786D2"; item.Nickname=""; item.TagName = "Right Quad #1";  ViewModelRFMicroNickname._TagNicknameList.Add(item);
             item = new RFMicroTagNicknameViewModel(); item.EPC = "E282403E000207D6F9773098"; item.Nickname=""; item.TagName = "Left Glute #1";  ViewModelRFMicroNickname._TagNicknameList.Add(item);
             item = new RFMicroTagNicknameViewModel(); item.EPC = "E282403E000207D6F97748C0"; item.Nickname=""; item.TagName = "Right Glute #1"; ViewModelRFMicroNickname._TagNicknameList.Add(item);
-    
             item = new RFMicroTagNicknameViewModel(); item.EPC = "E282403E000207D6F9779863"; item.Nickname=""; item.TagName = "Lower Left #1";  ViewModelRFMicroNickname._TagNicknameList.Add(item);
             item = new RFMicroTagNicknameViewModel(); item.EPC = "E282403E000207D6F9775A25"; item.Nickname=""; item.TagName = "Lower Right #1"; ViewModelRFMicroNickname._TagNicknameList.Add(item);
-
             item = new RFMicroTagNicknameViewModel(); item.EPC = "4761627269656C4C536F636B"; item.Nickname=""; item.TagName = "Left Sock";      ViewModelRFMicroNickname._TagNicknameList.Add(item);
             item = new RFMicroTagNicknameViewModel(); item.EPC = "4761627269656C52536F636B"; item.Nickname=""; item.TagName = "Right Sock";     ViewModelRFMicroNickname._TagNicknameList.Add(item);
-
             item = new RFMicroTagNicknameViewModel(); item.EPC = "E282403E000207D6F9778E53"; item.Nickname=""; item.TagName = "Left Sock";      ViewModelRFMicroNickname._TagNicknameList.Add(item);
 
+            // FIRST VIEWMODEL ON LAUNCH
             RegisterAppStart<ViewModelMainMenu>();
         }
 

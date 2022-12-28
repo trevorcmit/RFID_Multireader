@@ -22,6 +22,11 @@ namespace BLE.Client.ViewModels {
         public string connectedButtonTextColor { get; set; } = "Black";
 
 
+        /////////////////////////////////////////
+        ///////////// CLASS METHODS /////////////
+        /////////////////////////////////////////
+
+        // Constructor of the ViewModel
         public ViewModelMainMenu(IBluetoothLE bluetoothLe, IAdapter adapter, IUserDialogs userDialogs, ISettings settings, IPermissions permissions) : base(adapter) {
             _userDialogs = userDialogs;
             _permissions = permissions;
@@ -35,6 +40,13 @@ namespace BLE.Client.ViewModels {
 
             BleMvxApplication._reader.OnReaderStateChanged += new EventHandler<CSLibrary.Events.OnReaderStateChangedEventArgs>(ReaderStateCChangedEvent);
             GetLocationPermission();
+
+            // _ConnectionDeviceName = "MAIN MENU DEFAULT VALUE";
+            // RaisePropertyChanged(() => ConnectionDeviceName);
+
+            // Jump to connection screen without Button Press
+            // OnConnectButtonClicked();
+            // this.OnConnectButtonCommand.Execute(null);
         }
 
         ~ViewModelMainMenu() {
@@ -233,10 +245,6 @@ namespace BLE.Client.ViewModels {
 
         public ICommand OnRenameButtonCommand { protected set; get; }
         void OnRenameButtonClicked() {
-            // if (BleMvxApplication._reader.Status == CSLibrary.HighLevelInterface.READERSTATE.DISCONNECT) {
-            //     ShowConnectionWarringMessage();
-            //     return;
-            // }
             ShowViewModel<ViewModelRenameTags>(new MvxBundle());
         }
 
@@ -301,7 +309,10 @@ namespace BLE.Client.ViewModels {
 
             labelVoltage = "";
             RaisePropertyChanged(() => labelVoltage);
+
+            // ShowViewModel destroys current class inherited?
             ShowViewModel<DeviceListViewModel>(new MvxBundle());
+            // ShowViewModel<DeviceListViewModel>();
 
             CheckConnection();
         }

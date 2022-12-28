@@ -38,6 +38,11 @@ namespace BLE.Client.ViewModels {
         }
 
         void OnOKButtonClicked(object ind) {
+            //////////////////////////////////////////////////
+            ConnectionDeviceName = "Microsetting reached";
+            RaisePropertyChanged(() => ConnectionDeviceName);
+            //////////////////////////////////////////////////
+
             if (ind != null)
                 if ((int)ind == 1)
                     switch (BleMvxApplication._rfMicro_TagType) {

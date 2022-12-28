@@ -1,6 +1,7 @@
 ﻿using Acr.UserDialogs;
 using MvvmCross.Core.ViewModels;
 using Plugin.BLE.Abstractions.Contracts;
+using Plugin.BLE.Abstractions.EventArgs;
 using Plugin.BLE.Abstractions;
 using Prism.Mvvm;
 using System;
@@ -91,6 +92,7 @@ namespace BLE.Client.ViewModels {
         Dictionary<string, List<string>> tag_Data = new Dictionary<string, List<string>>();
 
         private string _Duty; public string Duty {get => _Duty; set {_Duty = value; OnPropertyChanged("Duty");}}
+        private string _DutyColor; public string DutyColor {get => _DutyColor; set {_DutyColor = value; OnPropertyChanged("DutyColor");}}
         private int _active_time; public int active_time {get => _active_time; set {_active_time = value; OnPropertyChanged("active_time");}}
         private int _inactive_time; public int inactive_time {get => _inactive_time; set {_inactive_time = value; OnPropertyChanged("inactive_time");}}
         private List<string> _epcs; public List<string> epcs {get => _epcs; set {_epcs = value; OnPropertyChanged("epcs");}}
@@ -127,10 +129,39 @@ namespace BLE.Client.ViewModels {
             Duty = "N/A"; 
             RaisePropertyChanged(() => Duty);
 
+            DutyColor = "#ffffff"; 
+            RaisePropertyChanged(() => DutyColor);
+
             OnStartInventoryButtonCommand = new Command(StartInventoryClick);
             OnClearButtonCommand = new Command(ClearClick);
             OnShareDataCommand = new Command(ShareDataButtonClick);
             OnAddNicknameCommand = new Command(Add_Nickname);
+
+            Adapter.DeviceDisconnected += OnDeviceDisconnected;
+
+            // NOT TRIGGERED WHEN DEVICE IS DISCONNECTED
+            // Adapter.DeviceConnectionLost += OnDeviceConnectionLost;
+        }
+
+        private async void OnDeviceDisconnected(object sender, DeviceEventArgs e) {
+            _DutyColor = "#d6002e"; 
+            RaisePropertyChanged(() => DutyColor);
+            StopInventory();
+
+            try {
+                // if (await ConnectDeviceAsync(ConnectionDevice)) {
+                    // Connect to CS108
+                    var device = Adapter.ConnectedDevices.FirstOrDefault(d => d.Id.Equals(ConnectionGuid));
+
+                    if (device == null) return;
+
+                    Connect(device);
+                    Close(this);
+                // }
+            }
+            catch (Exception ex) {
+                _userDialogs.Alert(ex.Message, "Disconnect error!");
+            }
         }
 
         async void GetTimes() {
@@ -395,7 +426,7 @@ namespace BLE.Client.ViewModels {
             _Duty = "DOWN"; RaisePropertyChanged(() => Duty);
             StopInventory();
 
-            AutoSaveData(); // Autosave while Down is occurring
+            // AutoSaveData(); // Autosave while Down is occurring
 
             activetimer.Enabled = true;
             downtimer.Enabled = false;

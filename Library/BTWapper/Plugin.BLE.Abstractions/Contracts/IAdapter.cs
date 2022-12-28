@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Plugin.BLE.Abstractions.EventArgs;
 using Plugin.BLE.Abstractions.Exceptions;
 
+
 namespace Plugin.BLE.Abstractions.Contracts {
     public interface IAdapter {
         event EventHandler<DeviceEventArgs> DeviceAdvertised;
@@ -14,7 +15,7 @@ namespace Plugin.BLE.Abstractions.Contracts {
         event EventHandler<DeviceErrorEventArgs> DeviceConnectionLost;
         event EventHandler ScanTimeoutElapsed;
 
-        bool IsScanning {get;}
+        bool IsScanning { get; }
 
         int ScanTimeout {get; set;}
 
@@ -67,10 +68,10 @@ namespace Plugin.BLE.Abstractions.Contracts {
 
         /// <summary>
         /// Returns all BLE devices connected to the system. For android the implementations uses getConnectedDevices(GATT) & getBondedDevices()
-        /// and for ios the implementation uses get retrieveConnectedPeripherals(services)
+        /// and for iOS the implementation uses get retrieveConnectedPeripherals(services)
         /// https://developer.apple.com/reference/corebluetooth/cbcentralmanager/1518924-retrieveconnectedperipherals
         /// 
-        /// For android this function merges the functionality of thw following API calls:
+        /// For Android this function merges the functionality of the following API calls:
         /// https://developer.android.com/reference/android/bluetooth/BluetoothManager.html#getConnectedDevices(int)
         /// https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#getBondedDevices()
         /// In order to use the device in the app you have to first call ConnectAsync.
@@ -78,5 +79,6 @@ namespace Plugin.BLE.Abstractions.Contracts {
         /// <param name="services">IMPORTANT: Only considered by iOS due to platform limitations. Filters devices by advertised services. SET THIS VALUE FOR ANY RESULTS</param>
         /// <returns>List of IDevices connected to the OS.  In case of no devices the list is empty.</returns>
         List<IDevice> GetSystemConnectedOrPairedDevices(Guid[] services = null);
+
     }
 }

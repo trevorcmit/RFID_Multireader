@@ -55,13 +55,31 @@
 
     <pages:BaseTabbedPage.Children>
         <pages:BasePage Title="Scan for devices">
+
+            <!-- 
+            RelativeLayout.XConstraint ="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.0, Constant=2}"
+			RelativeLayout.YConstraint ="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.96, Constant=2}"
+			RelativeLayout.HeightConstraint="{ConstraintExpression Type = RelativeToParent, Property=Height, Factor=0.04, Constant=-4}" 
+			RelativeLayout.WidthConstraint ="{ConstraintExpression Type = RelativeToParent, Property=Width, Factor=1.0, Constant=-4}" 	 
+            -->
+
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
+
+                    <!-- ROW FOR DEBUGGING LABEL -->
+                    <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
+
+                <Label
+                    Text="{Binding ConnectionDeviceName}" 
+                    BackgroundColor="#FFFFFF"
+                    HorizontalOptions="FillAndExpand"
+                    Grid.Row="4"
+			    />
 
                 <StackLayout BackgroundColor="#fe6a6a" Padding="10" IsVisible="{Binding IsStateOn, Converter={StaticResource InverseBoolean}}">
                     <Label Text="{Binding StateText}" FontSize="18" HorizontalTextAlignment="Center"></Label>

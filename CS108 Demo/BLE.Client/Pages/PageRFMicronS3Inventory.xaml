@@ -74,7 +74,7 @@
 
           <Label 
             Text="{Binding Duty}" Font="Large" FontAttributes="Bold"
-            Grid.Row="0" Grid.Column="0"
+            Grid.Row="0" Grid.Column="0" BackgroundColor="{Binding DutyColor}"
             HorizontalOptions="Center" VerticalOptions="Center"
           />
           <Label 

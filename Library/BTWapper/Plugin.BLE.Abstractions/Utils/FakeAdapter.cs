@@ -47,5 +47,6 @@ namespace Plugin.BLE.Abstractions.Utils
             TraceUnavailability();
             return new List<IDevice>();
         }
+
     }
 }

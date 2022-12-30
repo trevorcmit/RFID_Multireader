@@ -110,37 +110,37 @@ namespace BLE.Client.ViewModels {
         }
 
         // Connect function available in all ViewModels
-        public virtual async void Connect(IDevice _device) 
-        {
-            await BleMvxApplication._reader.ConnectAsync(Adapter, _device);
+        // public virtual async void Connect(IDevice _device) 
+        // {
+        //     await BleMvxApplication._reader.ConnectAsync(Adapter, _device);
 
-            bool LoadSuccess = await BleMvxApplication.LoadConfig(_device.Id.ToString());
-            BleMvxApplication._config.readerID = _device.Id.ToString();
-        }
+        //     bool LoadSuccess = await BleMvxApplication.LoadConfig(_device.Id.ToString());
+        //     BleMvxApplication._config.readerID = _device.Id.ToString();
+        // }
 
-        public virtual async Task<bool> ConnectDeviceAsync(DeviceListItemViewModel device, bool showPrompt=true) 
-        {
-            try {
+        // public virtual async Task<bool> ConnectDeviceAsync(DeviceListItemViewModel device, bool showPrompt=true) 
+        // {
+        //     try {
 
-                // Default CONNECTPARAMETERS
-                // ConnectParameters connectParameters = new ConnectParameters();
+        //         // Default CONNECTPARAMETERS
+        //         // ConnectParameters connectParameters = new ConnectParameters();
 
-                // New connect parameters forcing Reconnect on Android
-                ConnectParameters connectParameters = new ConnectParameters(true, false);
-                CancellationTokenSource tokenSource = new CancellationTokenSource();
-                await Adapter.ConnectToDeviceAsync(device.Device, connectParameters, tokenSource.Token);
+        //         // New connect parameters forcing Reconnect on Android
+        //         ConnectParameters connectParameters = new ConnectParameters(true, false);
+        //         CancellationTokenSource tokenSource = new CancellationTokenSource();
+        //         await Adapter.ConnectToDeviceAsync(device.Device, connectParameters, tokenSource.Token);
 
 
-                return true;
-            }
-            catch (Exception ex) {
-                Mvx.Trace(ex.Message);
-                return false;
-            }
-            finally {
-                device.Update();
-            }
-        }
+        //         return true;
+        //     }
+        //     catch (Exception ex) {
+        //         Mvx.Trace(ex.Message);
+        //         return false;
+        //     }
+        //     finally {
+        //         device.Update();
+        //     }
+        // }
 
     }
 }

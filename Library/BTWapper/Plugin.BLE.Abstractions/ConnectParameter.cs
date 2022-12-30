@@ -11,7 +11,6 @@
         /// </summary>
         public bool ForceBleTransport { get; }
 
-
         public static ConnectParameters None { get; } = new ConnectParameters();
 
         /// <summary>
@@ -24,5 +23,6 @@
             AutoConnect = autoConnect;
             ForceBleTransport = forceBleTransport;
         }
+
     }
 }

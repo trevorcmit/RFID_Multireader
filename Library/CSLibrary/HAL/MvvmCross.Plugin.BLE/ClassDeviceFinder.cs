@@ -1,148 +1,33 @@
-﻿/*
-Copyright (c) 2018 Convergence Systems Limited
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*/
-
-#if __MwwmCrossPluginBLE
+﻿#if __MwwmCrossPluginBLE
 
 using System;
 using System.Collections.Generic;
-
 using Plugin.BLE.Abstractions;
 using Plugin.BLE.Abstractions.Contracts;
 using Plugin.BLE.Abstractions.EventArgs;
 
-namespace CSLibrary
-{
-    public partial class DeviceFinder
-    {
-        /// <summary>
-        /// DeviceFinder Argument
-        /// </summary>
+
+namespace CSLibrary {
+    public partial class DeviceFinder {
         public class DeviceFinderArgs : EventArgs
         {
             private DeviceInfomation _data;
 
-            /// <summary>
-            /// Device Finder 
-            /// </summary>
             /// <param name="data"></param>
-            public DeviceFinderArgs(DeviceInfomation data)
-            {
+            public DeviceFinderArgs(DeviceInfomation data) {
                 _data = data;
             }
 
-            /// <summary>
-            /// Device finder information
-            /// </summary>
-            public DeviceInfomation Found
-            {
+            public DeviceInfomation Found {
                 get { return _data; }
                 set { _data = value; }
             }
         }
 
-        /// <summary>
-        /// Netfinder information return from device
-        /// </summary>
-        public class DeviceInfomation
-        {
+        public class DeviceInfomation {
             public uint ID;
-
             public string deviceName;
-
             public object nativeDeviceInformation;
-
-            /*
-                    /// <summary>
-                    /// Reserved for future use
-                    /// </summary>
-                    public Mode Mode = Mode.Unknown; 
-                    /// <summary>
-                    /// Total time on network
-                    /// </summary>
-                    public TimeEvent TimeElapsedNetwork = new TimeEvent();
-                    /// <summary>
-                    /// Total Power on time
-                    /// </summary>
-                    public TimeEvent TimeElapsedPowerOn = new TimeEvent();
-                    /// <summary>
-                    /// MAC address
-                    /// </summary>
-                    public MAC MACAddress = new MAC();//[6];
-                    /// <summary>
-                    /// IP address
-                    /// </summary>
-                    public IP IPAddress = new IP();
-                    /// <summary>
-                    /// Subnet Mask
-                    /// </summary>
-                    public IP SubnetMask = new IP();
-                    /// <summary>
-                    /// Gateway
-                    /// </summary>
-                    public IP Gateway = new IP();
-                    /// <summary>
-                    /// Trusted hist IP
-                    /// </summary>
-                    public IP TrustedServer = new IP();
-                    /// <summary>
-                    /// Inducated trusted server enable or not.
-                    /// </summary>
-                    public Boolean TrustedServerEnabled = false;
-                    /// <summary>
-                    /// UDP Port
-                    /// </summary>
-                    public ushort Port; // Get port from UDP header
-                    /// <summary>
-                    /// Reserved for future use, Server mode ip
-                    /// </summary>
-                    public byte[] serverip = new byte[4];
-                    /// <summary>
-                    /// enable or disable DHCP
-                    /// </summary>
-                    public bool DHCPEnabled;
-                    /// <summary>
-                    /// Reserved for future use, Server mode port
-                    /// </summary>
-                    public ushort serverport;
-                    /// <summary>
-                    /// DHCP retry
-                    /// </summary>
-                    public byte DHCPRetry;
-                    /// <summary>
-                    /// Device name, user can change it.
-                    /// </summary>
-                    public string DeviceName;
-                    /// <summary>
-                    /// Mode discription
-                    /// </summary>
-                    public string Description;
-                    /// <summary>
-                    /// Connect Mode
-                    /// </summary>        
-                    public byte ConnectMode;
-                    /// <summary>
-                    /// Gateway check reset mode
-                    /// </summary>
-                    public int GatewayCheckResetMode;
-            */
         }
 
         static private Windows.Devices.Enumeration.DeviceWatcher deviceWatcher;
@@ -177,13 +62,8 @@ namespace CSLibrary
         }
 
 
-        static public void Stop()
-        {
-            /// <summary>
-            /// Stops watching for all nearby Bluetooth devices.
-            /// </summary>
-            if (deviceWatcher != null)
-            {
+        static public void Stop() {
+            if (deviceWatcher != null) {
                 // Unregister the event handlers.
                 deviceWatcher.Added -= DeviceWatcher_Added;
 
@@ -193,23 +73,19 @@ namespace CSLibrary
             }
         }
 
-	    static public void ClearDeviceList()
-	    {
+	    static public void ClearDeviceList() {
 		    _deviceDB.Clear ();
 	    }
 
-        static public DeviceInformation GetDeviceInformation(int id)
-        {
+        static public DeviceInformation GetDeviceInformation(int id) {
             if (id < _deviceDB.Count)
                 return _deviceDB[id];
 
             return null;
         }
 
-        static public DeviceInformation GetDeviceInformation (string readername)
-	    {
-		    foreach (DeviceInformation item in _deviceDB)
-		    {
+        static public DeviceInformation GetDeviceInformation (string readername) {
+		    foreach (DeviceInformation item in _deviceDB) {
 			    if (item.Id == readername)
 				    return item;
 		    }
@@ -217,18 +93,15 @@ namespace CSLibrary
 		    return null;		
 	    }
 
-	    static public List<DeviceInformation> GetAllDeviceInformation ()
-	    {
+	    static public List<DeviceInformation> GetAllDeviceInformation () {
 		    return _deviceDB;
 	    }
 
-        static private async void DeviceWatcher_Added(DeviceWatcher sender, Windows.Devices.Enumeration.DeviceInformation deviceInfo)
-        {
+        static private async void DeviceWatcher_Added(DeviceWatcher sender, Windows.Devices.Enumeration.DeviceInformation deviceInfo) {
             Debug.WriteLine(String.Format("Added {0}{1}", deviceInfo.Id, deviceInfo.Name));
 
             // Protect against race condition if the task runs after the app stopped the deviceWatcher.
-            if (sender == deviceWatcher)
-            {
+            if (sender == deviceWatcher) {
                 CSLibrary.DeviceFinder.DeviceInfomation di = new CSLibrary.DeviceFinder.DeviceInfomation();
                 di.deviceName = deviceInfo.Name;
                 di.ID = (uint)_deviceDB.Count;
@@ -240,24 +113,12 @@ namespace CSLibrary
             }
         }
 
-        static private async void DeviceWatcher_Updated(DeviceWatcher sender, DeviceInformationUpdate deviceInfoUpdate)
-        {
-        }
+        static private async void DeviceWatcher_Updated(DeviceWatcher sender, DeviceInformationUpdate deviceInfoUpdate) {}
+        static private async void DeviceWatcher_Removed(DeviceWatcher sender, DeviceInformationUpdate deviceInfoUpdate) {}
+        static private async void DeviceWatcher_EnumerationCompleted(DeviceWatcher sender, object e) {}
+        static private async void DeviceWatcher_Stopped(DeviceWatcher sender, object e) {}
 
-        static private async void DeviceWatcher_Removed(DeviceWatcher sender, DeviceInformationUpdate deviceInfoUpdate)
-        {
-        }
-
-        static private async void DeviceWatcher_EnumerationCompleted(DeviceWatcher sender, object e)
-        {
-        }
-
-        static private async void DeviceWatcher_Stopped(DeviceWatcher sender, object e)
-        {
-        }
-
-        static private void RaiseEvent<T>(EventHandler<T> eventHandler, T e)
-            where T : EventArgs
+        static private void RaiseEvent<T>(EventHandler<T> eventHandler, T e) where T : EventArgs
         {
             if (eventHandler != null)
             {
@@ -265,8 +126,8 @@ namespace CSLibrary
             }
             return;
         }
-    }
 
+    }
 }
 
 #endif

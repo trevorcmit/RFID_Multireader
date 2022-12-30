@@ -19,21 +19,20 @@ namespace CSLibrary {
         /// <returns></returns>
         int BLE_Init() { return 0; }
 
-        public async Task<bool> ConnectAsync(IAdapter adapter, IDevice device)
-        {
-            if (_readerState != READERSTATE.DISCONNECT)
-                return false; // reader can not reconnect
+        // public async Task<bool> ConnectAsync(IAdapter adapter, IDevice device)
 
-            try
-            {
+        public async Task<string> ConnectAsync(IAdapter adapter, IDevice device)
+        {
+            // REMOVED FOR BLUETOOTH AUTOCONNECT CODE
+            if (_readerState != READERSTATE.DISCONNECT)
+                return "False, Readerstate is not Disconnect";   // Reader can not reconnect
+
+            try {
                 _service = await device.GetServiceAsync(Guid.Parse("00009800-0000-1000-8000-00805f9b34fb"));
                 if (_service == null)
-                    return false;
+                    return "False, Can not find service";
             }
-            catch (Exception ex)
-            {
-
-            }
+            catch (Exception ex) {}
 
             _readerState = READERSTATE.IDLE;
 
@@ -43,53 +42,43 @@ namespace CSLibrary {
             _adapter.DeviceConnectionLost -= OnDeviceConnectionLost;
             _adapter.DeviceConnectionLost += OnDeviceConnectionLost;
 
-            try
-            {
+            try {
                 _characteristicWrite = await _service.GetCharacteristicAsync(Guid.Parse("00009900-0000-1000-8000-00805f9b34fb"));
                 _characteristicUpdate = await _service.GetCharacteristicAsync(Guid.Parse("00009901-0000-1000-8000-00805f9b34fb"));
             }
-            catch (Exception ex)
-            {
-                CSLibrary.Debug.WriteLine("Can not set characters");
+            catch (Exception ex) {
+                CSLibrary.Debug.WriteLine("Cannot set characters");
             }
 
             _characteristicUpdate.ValueUpdated -= BLE_Recv;
             _characteristicUpdate.ValueUpdated += BLE_Recv;
-            //            _characteristicWrite.ValueUpdated += CharacteristicOnWriteUpdated;
 
             await _characteristicUpdate.StartUpdatesAsync();
-            //            await _characteristicWrite.StartUpdatesAsync();
 
             _readerState = READERSTATE.IDLE;
             BTTimer = new Timer(TimerFunc, this, 0, 1000);
 
             HardwareInit();
-
-            return true;
+            // return true;
+            return "True, Finished to the End";
         }
 
         public async Task<bool> DisconnectAsync()
         {
-            try
-            {
-                if (Status != READERSTATE.IDLE)
-                    return false;
+            try {
+                if (Status != READERSTATE.IDLE) return false;
 
-                if (_readerState != READERSTATE.DISCONNECT)
-                {
+                if (_readerState != READERSTATE.DISCONNECT) {
                     BARCODEPowerOff();
                     WhenBLEFinish(ClearConnection);
                 }
-                else
-                {
+                else {
                     await ClearConnection();
                 }
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 Debug.WriteLine("Disconnect error " + ex.Message.ToString());
             }
-
             return true;
         }
 
@@ -110,20 +99,14 @@ namespace CSLibrary {
             }
         }
 
-        private void CharacteristicOnWriteUpdated(object sender, CharacteristicUpdatedEventArgs characteristicUpdatedEventArgs)
-        {
+        private void CharacteristicOnWriteUpdated(object sender, CharacteristicUpdatedEventArgs characteristicUpdatedEventArgs) {
             CSLibrary.Debug.WriteBytes("BT: Write data success updated", characteristicUpdatedEventArgs.Characteristic.Value);
         }
 
-        private void OnStateChanged(object sender, BluetoothStateChangedArgs e)
-        {
-        }
+        private void OnStateChanged(object sender, BluetoothStateChangedArgs e) {}
 
-        private void OnDeviceConnectionLost(object sender, DeviceErrorEventArgs e)
-        {
-            if (e.Device.Id == _device.Id)
-            {
-                //DisconnectAsync();
+        private void OnDeviceConnectionLost(object sender, DeviceErrorEventArgs e) {
+            if (e.Device.Id == _device.Id) {
                 ConnectLostAsync();
             }
         }
@@ -163,18 +146,13 @@ namespace CSLibrary {
             _characteristicWrite = null;
             _service = null;
 
-            try
-            {
-                if (_device.State == DeviceState.Connected)
-                {
+            try {
+                if (_device.State == DeviceState.Connected) {
                     await _adapter.DisconnectDeviceAsync(_device);
                 }
             }
-            catch (Exception ex)
-            {
-            }
+            catch (Exception ex) {}
             _device = null;
-
             _readerState = READERSTATE.DISCONNECT;
         }
 

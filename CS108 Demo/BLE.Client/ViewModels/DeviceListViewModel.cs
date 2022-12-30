@@ -34,6 +34,17 @@ namespace BLE.Client.ViewModels {
         private string _version;
         public string version { get; set; }
 
+
+        ///////////////////////////////////////////////////
+        // Variable added to Debug Bluetooth Autoconnect //
+        protected private string _DebugVar;  // Global ConnectionGuid variable to reconnect in any window
+        public virtual string DebugVar {
+            get => _DebugVar; 
+            set { _DebugVar = value; OnPropertyChanged("DebugVar"); }
+        }
+        ///////////////////////////////////////////////////
+
+
         public Guid PreviousGuid {
             get { return _previousGuid; }
             set {
@@ -82,8 +93,8 @@ namespace BLE.Client.ViewModels {
             BleMvxApplication._reader.DisconnectAsync();
 
             // Debugging Code
-            _ConnectionDeviceName = "DeviceListViewModel Constructor Reached";
-            RaisePropertyChanged(() => ConnectionDeviceName);
+            // _ConnectionDeviceName = "DeviceListViewModel Constructor Reached";
+            // RaisePropertyChanged(() => ConnectionDeviceName);
         }
 
         // Called when the ViewModel is loaded, and new Devices are discovered by BT Adapter
@@ -157,73 +168,51 @@ namespace BLE.Client.ViewModels {
         }
 
         // Called by SelectedDevice to begin connection process...
-        private async void HandleSelectedDevice(DeviceListItemViewModel devices) 
-        {   
-            // /////////////////////////////////////////////
-            // _ConnectionDevice = devices;
-            // RaisePropertyChanged(() => ConnectionDevice);
-            _ConnectionDeviceName = "HandleSelectedDevice Reached";
-            RaisePropertyChanged(() => ConnectionDeviceName);
-            // /////////////////////////////////////////////
-
+        private async void HandleSelectedDevice(DeviceListItemViewModel devices, bool showPrompt=true) 
+        {
             try {
-                if (await ConnectDeviceAsync(devices)) {
-                    // Connect to CS108
+                if (await ConnectDeviceAsync(devices, showPrompt)) {
                     var device = Adapter.ConnectedDevices.FirstOrDefault(d => d.Id.Equals(devices.Device.Id));
 
-                    if (device == null) return;
+                    if (device == null) 
+                        return;
 
                     Connect(device);
-                    Close(this);     // Directive to return to ViewModelMainMenu
+                    // Close(this);     // Directive to return to ViewModelMainMenu
                 }
             }
             catch (Exception ex) {
                 _userDialogs.Alert(ex.Message, "Disconnect error!");
             }
-
-            // Added to go to Main Menu after Device Connection
-            // ShowViewModel<DeviceListViewModel>(new MvxBundle());
         }
 
         // Connect Function to connect to BleMvxApplication._reader
         // Added to BaseViewModel, originally private async void before override change
-        public override async void Connect(IDevice _device)
+        // public override async void Connect(IDevice _device)
+        public async void Connect(IDevice _device)
         {
             Trace.Message("device name :" + _device.Name);
-            await BleMvxApplication._reader.ConnectAsync(Adapter, _device);
+            string BLE_result = await BleMvxApplication._reader.ConnectAsync(Adapter, _device);
             Trace.Message("load config");
-
-            /////////////////////////////////////////////
-            // ConnectionDevice = _device;
-            // RaisePropertyChanged(() => ConnectionDevice);
-
-            _ConnectionDeviceName = "ConnectionDevice Updated";
-            RaisePropertyChanged(() => ConnectionDeviceName);
-            /////////////////////////////////////////////
 
             bool LoadSuccess = await BleMvxApplication.LoadConfig(_device.Id.ToString());
             BleMvxApplication._config.readerID = _device.Id.ToString();
+
+            /////////////////////////////////////////////
+            _ConnectionDeviceName = "Connection Complete, " + BLE_result + ", " + LoadSuccess.ToString();
+            RaisePropertyChanged(() => ConnectionDeviceName);
+            /////////////////////////////////////////////
         }
 
         // Connect Function to connect to asynchronously
         // Added to BaseViewModel, originally private async void before override change
-        public override async Task<bool> ConnectDeviceAsync(DeviceListItemViewModel device, bool showPrompt = true) {
+        public async Task<bool> ConnectDeviceAsync(DeviceListItemViewModel device, bool showPrompt=true) {
             if (showPrompt && !await _userDialogs.ConfirmAsync($"Connect to device '{device.Name}'?")) {
                 return false;
             }
 
-            /////////////////////////////////////////////
-            // _ConnectionDevice = device;
-            // RaisePropertyChanged(() => ConnectionDevice);
-            /////////////////////////////////////////////
-
             try {
                 CancellationTokenSource tokenSource = new CancellationTokenSource();
-
-                // Default CONNECTPARAMETERS
-                // ConnectParameters connectParameters = new ConnectParameters();
-
-                // New connect parameters forcing Reconnect on Android
                 ConnectParameters connectParameters = new ConnectParameters(true, false);
                 await Adapter.ConnectToDeviceAsync(device.Device, connectParameters, tokenSource.Token);
 
@@ -267,6 +256,17 @@ namespace BLE.Client.ViewModels {
             Devices.FirstOrDefault(d => d.Id == e.Device.Id)?.Update();
             _userDialogs.HideLoading();
             _userDialogs.Toast($"Disconnected {e.Device.Name}");
+
+            // DisconnectDevice(d => d.Id == e.Device.Id);
+            // RaisePropertyChanged(() => ConnectToPreviousCommand);
+
+            // if (CanConnectToPrevious()) {
+                // _userDialogs.Toast("Attempting to reconnect to previous device");
+                // ConnectToPreviousCommand.Execute(null);
+            
+            ConnectToPreviousDeviceAsync();
+
+            // }
         }
 
         // Event for Lost Connection
@@ -411,7 +411,7 @@ namespace BLE.Client.ViewModels {
             IDevice device;
             try {
                 CancellationTokenSource tokenSource = new CancellationTokenSource();
-                ConnectParameters connectParameters = new ConnectParameters();
+                ConnectParameters connectParameters = new ConnectParameters(true, false);
 
                 var config = new ProgressDialogConfig() {
                     Title = $"Searching for '{PreviousGuid}'",
@@ -422,7 +422,6 @@ namespace BLE.Client.ViewModels {
 
                 using (var progress = _userDialogs.Progress(config)) {
                     progress.Show();
-
                     device = await Adapter.ConnectToKnownDeviceAsync(PreviousGuid, connectParameters, tokenSource.Token);
                 }
 
@@ -433,12 +432,20 @@ namespace BLE.Client.ViewModels {
                 }
                 else {
                     deviceItem.Update(device);
+
+                    HandleSelectedDevice(deviceItem, false);
+                    RaisePropertyChanged();
+                    // Close(this);
                 }
             }
+
             catch (Exception ex) {
                 _userDialogs.ShowError(ex.Message, 5000);
                 return;
             }
+
+            _ConnectionDeviceName = "ConnectToPreviousDeviceAsync Finished.";
+            RaisePropertyChanged(() => ConnectionDeviceName);
         }
 
         private bool CanConnectToPrevious() {

@@ -137,32 +137,32 @@ namespace BLE.Client.ViewModels {
             OnShareDataCommand = new Command(ShareDataButtonClick);
             OnAddNicknameCommand = new Command(Add_Nickname);
 
-            Adapter.DeviceDisconnected += OnDeviceDisconnected;
+            // Adapter.DeviceDisconnected += OnDeviceDisconnected;
 
             // NOT TRIGGERED WHEN DEVICE IS DISCONNECTED
             // Adapter.DeviceConnectionLost += OnDeviceConnectionLost;
         }
 
-        private async void OnDeviceDisconnected(object sender, DeviceEventArgs e) {
-            _DutyColor = "#d6002e"; 
-            RaisePropertyChanged(() => DutyColor);
-            StopInventory();
+        // private async void OnDeviceDisconnected(object sender, DeviceEventArgs e) {
+        //     _DutyColor = "#d6002e"; 
+        //     RaisePropertyChanged(() => DutyColor);
+        //     StopInventory();
 
-            try {
-                // if (await ConnectDeviceAsync(ConnectionDevice)) {
-                    // Connect to CS108
-                    var device = Adapter.ConnectedDevices.FirstOrDefault(d => d.Id.Equals(ConnectionGuid));
+        //     try {
+        //         // if (await ConnectDeviceAsync(ConnectionDevice)) {
+        //             // Connect to CS108
+        //             var device = Adapter.ConnectedDevices.FirstOrDefault(d => d.Id.Equals(ConnectionGuid));
 
-                    if (device == null) return;
+        //             if (device == null) return;
 
-                    Connect(device);
-                    Close(this);
-                // }
-            }
-            catch (Exception ex) {
-                _userDialogs.Alert(ex.Message, "Disconnect error!");
-            }
-        }
+        //             Connect(device);
+        //             Close(this);
+        //         // }
+        //     }
+        //     catch (Exception ex) {
+        //         _userDialogs.Alert(ex.Message, "Disconnect error!");
+        //     }
+        // }
 
         async void GetTimes() {
             string active_time_str = await Application.Current.MainPage.DisplayPromptAsync( // Get tag name

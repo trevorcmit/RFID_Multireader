@@ -20,7 +20,6 @@ namespace CSLibrary {
         int BLE_Init() { return 0; }
 
         // public async Task<bool> ConnectAsync(IAdapter adapter, IDevice device)
-
         public async Task<string> ConnectAsync(IAdapter adapter, IDevice device)
         {
             // REMOVED FOR BLUETOOTH AUTOCONNECT CODE
@@ -59,6 +58,7 @@ namespace CSLibrary {
             BTTimer = new Timer(TimerFunc, this, 0, 1000);
 
             HardwareInit();
+
             // return true;
             return "True, Finished to the End";
         }
@@ -82,7 +82,6 @@ namespace CSLibrary {
             return true;
         }
 
-        /// <returns></returns>
         private async Task<bool> BLE_Send (byte[] data) {
             return await _characteristicWrite.WriteAsync(data);
         }
@@ -133,7 +132,8 @@ namespace CSLibrary {
             FireReaderStateChangedEvent(new Events.OnReaderStateChangedEventArgs(null, Constants.ReaderCallbackType.CONNECTION_LOST));
         }
 
-        async Task ClearConnection()
+        // async Task ClearConnection()
+        public async Task ClearConnection()
         {
             _readerState = READERSTATE.READYFORDISCONNECT;
             // Stop Timer;
@@ -154,6 +154,16 @@ namespace CSLibrary {
             catch (Exception ex) {}
             _device = null;
             _readerState = READERSTATE.DISCONNECT;
+        }
+
+
+        // ADDED: Set the reader state to disconnect for auto-reconnect
+        public void Set_Disconnect() 
+        {
+            _readerState = READERSTATE.DISCONNECT;
+
+            // _characteristicUpdate.ValueUpdated -= BLE_Recv;
+            // _adapter.DeviceConnectionLost -= OnDeviceConnectionLost;
         }
 
     }

@@ -1,16 +1,8 @@
 using Acr.UserDialogs;
-using MvvmCross.Core.ViewModels;
 using Plugin.BLE.Abstractions.Contracts;
-using System;
-using System.Collections.ObjectModel;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Windows.Input;
 using Xamarin.Forms;
-using Plugin.BLE.Abstractions;
-using Plugin.Settings.Abstractions;
-using Plugin.Permissions.Abstractions;
 
 
 namespace BLE.Client.ViewModels {

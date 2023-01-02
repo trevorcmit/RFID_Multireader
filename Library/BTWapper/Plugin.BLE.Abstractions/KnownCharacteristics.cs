@@ -2,18 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Plugin.BLE.Abstractions
-{
-    public static class KnownCharacteristics
-    {
-        static KnownCharacteristics()
-        {
-            //ToDo do we need a lock here?
+
+namespace Plugin.BLE.Abstractions {
+    public static class KnownCharacteristics {
+        static KnownCharacteristics() {
             LookupTable = Characteristics.ToDictionary(c => c.Id, c => c);
         }
 
-        public static KnownCharacteristic Lookup(Guid id)
-        {
+        public static KnownCharacteristic Lookup(Guid id) {
             return LookupTable.ContainsKey(id) ? LookupTable[id] : new KnownCharacteristic("Unknown characteristic", Guid.Empty);
         }
 
@@ -22,8 +18,7 @@ namespace Plugin.BLE.Abstractions
         /// <summary>
         /// https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicsHome.aspx
         /// </summary>
-        private static readonly List<KnownCharacteristic> Characteristics = new List<KnownCharacteristic>()
-        {
+        private static readonly List<KnownCharacteristic> Characteristics = new List<KnownCharacteristic>() {
             new KnownCharacteristic("Alert Category ID", Guid.ParseExact("00002a43-0000-1000-8000-00805f9b34fb", "d")),
             new KnownCharacteristic("Alert Category ID Bit Mask", Guid.ParseExact("00002a42-0000-1000-8000-00805f9b34fb", "d")),
             new KnownCharacteristic("Alert Level", Guid.ParseExact("00002a06-0000-1000-8000-00805f9b34fb", "d")),
@@ -216,5 +211,6 @@ namespace Plugin.BLE.Abstractions
             new KnownCharacteristic("RedBearLabs Biscuit VERSION_CHAR_UUID unknown", Guid.ParseExact("713d0006-503e-4c75-ba94-3148f18d941e", "d")),
             new KnownCharacteristic("RedBearLabs Biscuit TX_POWER_CHAR_UUID unknown", Guid.ParseExact("713d0007-503e-4c75-ba94-3148f18d941e", "d")),
         };
+
     }
 }

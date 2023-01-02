@@ -8,5 +8,6 @@ namespace BLE.Client.ViewModels {
         public ViewModelAbout (IAdapter adapter, IUserDialogs userDialogs) : base(adapter) {
             _userDialogs = userDialogs;
         }
+
     }
 }

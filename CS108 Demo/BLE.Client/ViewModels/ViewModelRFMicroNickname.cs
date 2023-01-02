@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using Acr.UserDialogs;
 using MvvmCross.Core.ViewModels;
-using System.Windows.Input;
 using Plugin.BLE.Abstractions.Contracts;
 using Prism.Mvvm;
 

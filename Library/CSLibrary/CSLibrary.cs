@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace CSLibrary {
     public partial class HighLevelInterface {
         #region Constant
@@ -96,27 +97,20 @@ namespace CSLibrary {
             get { return _handleBarCodeReader; }
         }
 
-        public Notification notification
-        {
+        public Notification notification {
             get { return _handleNotification; }
-            //set { _handleNotification = value; }
         }
 
-        public BluetoothIC bluetoothIC
-        {
+        public BluetoothIC bluetoothIC {
             get { return _handleBluetoothIC; }
-            //set { _handleBluetoothIC = value; }
         }
 
-        public Battery battery
-        {
+        public Battery battery {
             get { return _handleBattery; }
         }
 
-        public string ReaderName
-        {
-            get
-            {
+        public string ReaderName {
+            get {
                 var value = _handleBluetoothIC.GetDeviceName();
 
                 if (value == null)
@@ -187,11 +181,9 @@ namespace CSLibrary {
             switch (data[3]) {
                 case 0xc2:
                     // check packet running number
-                    if (data[5] == 0x9e && data[8] == 0x81 && data[9] == 0x00)
-                    {
+                    if (data[5] == 0x9e && data[8] == 0x81 && data[9] == 0x00) {
                         _blePacketRunningNumber++;
-                        if (!_handleSiliconLabIC._firmwareOlderT108 && data[4] != _blePacketRunningNumber)
-                        {
+                        if (!_handleSiliconLabIC._firmwareOlderT108 && data[4] != _blePacketRunningNumber) {
                             if (data[4] > _blePacketRunningNumber)
                                 InventoryDebug.InventorySkipPackerAdd((uint)(data[4] - _blePacketRunningNumber));
                             else 
@@ -206,8 +198,7 @@ namespace CSLibrary {
                     break;
 
                 case 0x6a:
-                    switch (RecvBarcodePacket(data))
-                    {
+                    switch (RecvBarcodePacket(data)) {
                         case BARCODECOMMANDRESPONSETYPE.CONTROLCOMMAND:
                             _currentCommandResponse |= BTWAITCOMMANDRESPONSETYPE.BTAPIRESPONSE;
                             break;
@@ -227,7 +218,6 @@ namespace CSLibrary {
                     if (RecvNofigicationPacket (data))
 						_currentCommandResponse |= BTWAITCOMMANDRESPONSETYPE.BTAPIRESPONSE;
 					break;
-                    //return false;
 
                 case 0xe8:
                     _currentCommandResponse |= _handleSiliconLabIC.ProcessDataPacket(data);
@@ -243,10 +233,8 @@ namespace CSLibrary {
             return true;
         }
 
-        void TimerFunc(object o)
-        {
-            if (_readerState == READERSTATE.READYFORDISCONNECT || _readerState == READERSTATE.DISCONNECT)
-            {
+        void TimerFunc(object o) {
+            if (_readerState == READERSTATE.READYFORDISCONNECT || _readerState == READERSTATE.DISCONNECT) {
                 BTTimer.Cancel();
                 _sendBuffer.Clear();
                 _NeedCommandResponseType = BTWAITCOMMANDRESPONSETYPE.NOWAIT;
@@ -258,8 +246,7 @@ namespace CSLibrary {
             return;
         }
 
-		internal CSLibrary.HighLevelInterface.BTWAITCOMMANDRESPONSETYPE RecvRFIDPacket(byte[] recvData)
-        {
+		internal CSLibrary.HighLevelInterface.BTWAITCOMMANDRESPONSETYPE RecvRFIDPacket(byte[] recvData) {
             CSLibrary.Debug.WriteLine("Routine : RecvRFIDPacket");
 
             UInt16 eventCode = (UInt16)((UInt16)recvData[8] << 8 | (UInt16)recvData[9]);
@@ -304,12 +291,10 @@ namespace CSLibrary {
             ERROR
         }
 
-		BARCODECOMMANDRESPONSETYPE RecvBarcodePacket (byte[] recvData)
-        {
+		BARCODECOMMANDRESPONSETYPE RecvBarcodePacket (byte[] recvData) {
             UInt16 eventCode = (UInt16)((UInt16)recvData[8] << 8 | (UInt16)recvData[9]);
 
-            switch (eventCode)
-            {
+            switch (eventCode) {
                 case 0x9000:
                     {
                         // power on
@@ -351,24 +336,20 @@ namespace CSLibrary {
             return BARCODECOMMANDRESPONSETYPE.ERROR;
         }
 
-        internal bool RecvNofigicationPacket(byte[] recvData)
-        {
+        internal bool RecvNofigicationPacket(byte[] recvData) {
 			UInt16 eventCode = (UInt16)((UInt16)recvData[8] << 8 | (UInt16)recvData[9]);
 
-			switch (eventCode)
-			{
+			switch (eventCode) {
 				case 0xa000:    // Current battery voltage
                     _handleNotification.DeviceRecvVoltage((UInt16)((UInt16)recvData[10] << 8 | (UInt16)recvData[11]));
                     return false;
 					break;
 
 				case 0xa001:    // Button Status
-					switch (recvData[10])
-					{
+					switch (recvData[10]) {
 						case 0x00:
 							_handleNotification.DeviceRecvState(1);              // Send event to application
 							break;
-
 						case 0x01:
 							_handleNotification.DeviceRecvState(0);              // Send event to application
 							break;
@@ -397,29 +378,24 @@ namespace CSLibrary {
 					return false;
 					break;
 			}
-
 			return true;
         }
 
         // public RFID function
-        internal void RFIDPowerOn()
-        {
+        internal void RFIDPowerOn() {
             SendAsync(0, 0, DOWNLINKCMD.RFIDPOWERON, null, BTWAITCOMMANDRESPONSETYPE.WAIT_BTAPIRESPONSE);
         }
 
-		internal void RFIDPowerOff()
-        {
+		internal void RFIDPowerOff() {
             SendAsync(0, 0, DOWNLINKCMD.RFIDPOWEROFF, null, BTWAITCOMMANDRESPONSETYPE.WAIT_BTAPIRESPONSE);
         }
 
         // public barcode function
-        internal void BARCODEPowerOn()
-        {
+        internal void BARCODEPowerOn() {
 			SendAsync(0, 1, DOWNLINKCMD.BARCODEPOWERON, null, BTWAITCOMMANDRESPONSETYPE.WAIT_BTAPIRESPONSE);
         }
 
-        internal void BARCODEPowerOff()
-        {
+        internal void BARCODEPowerOff() {
             SendAsync(0, 1, DOWNLINKCMD.BARCODEPOWEROFF, null, BTWAITCOMMANDRESPONSETYPE.WAIT_BTAPIRESPONSE);
         }
 

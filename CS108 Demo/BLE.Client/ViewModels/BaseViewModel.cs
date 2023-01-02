@@ -7,9 +7,9 @@ using Plugin.BLE.Abstractions.Contracts;
 
 // New Imports for Bluetooth Autoconnect
 using System.Collections.ObjectModel;
-using System.Threading;
-using Plugin.BLE.Abstractions;
 using System.ComponentModel;
+using Acr.UserDialogs;
+
 
 
 namespace BLE.Client.ViewModels {
@@ -20,9 +20,8 @@ namespace BLE.Client.ViewModels {
         protected const string CharacteristicIdKey = "CharacteristicIdNavigationKey";
         protected const string DescriptorIdKey = "DescriptorIdNavigationKey";
 
-
-
-
+        // New Private _userDialogs for Bluetooth Autoconnect
+        private readonly IUserDialogs _userDialogs;
 
 
 
@@ -53,9 +52,6 @@ namespace BLE.Client.ViewModels {
             get => _ConnectionDeviceName; 
             set { _ConnectionDeviceName = value; OnPropertyChanged("ConnectionDeviceName"); }
         }
-
-
-
 
 
 
@@ -109,38 +105,33 @@ namespace BLE.Client.ViewModels {
             return await characteristic.GetDescriptorAsync(Guid.Parse(descriptorId));
         }
 
-        // Connect function available in all ViewModels
-        // public virtual async void Connect(IDevice _device) 
-        // {
-        //     await BleMvxApplication._reader.ConnectAsync(Adapter, _device);
-
-        //     bool LoadSuccess = await BleMvxApplication.LoadConfig(_device.Id.ToString());
-        //     BleMvxApplication._config.readerID = _device.Id.ToString();
-        // }
-
-        // public virtual async Task<bool> ConnectDeviceAsync(DeviceListItemViewModel device, bool showPrompt=true) 
-        // {
-        //     try {
-
-        //         // Default CONNECTPARAMETERS
-        //         // ConnectParameters connectParameters = new ConnectParameters();
-
-        //         // New connect parameters forcing Reconnect on Android
-        //         ConnectParameters connectParameters = new ConnectParameters(true, false);
-        //         CancellationTokenSource tokenSource = new CancellationTokenSource();
-        //         await Adapter.ConnectToDeviceAsync(device.Device, connectParameters, tokenSource.Token);
 
 
-        //         return true;
-        //     }
-        //     catch (Exception ex) {
-        //         Mvx.Trace(ex.Message);
-        //         return false;
-        //     }
-        //     finally {
-        //         device.Update();
-        //     }
-        // }
+
+
+        //////////////////////////////////////////////
+        ///////////// NEW GLOBAL METHODS /////////////
+        //////////////////////////////////////////////
+
+        //<summary>
+        // This method is called from the DeviceListViewModel to connect to a device
+        //</summary>
+        public async void Connect(IDevice _device)
+        {
+            // Trace.Message("device name :" + _device.Name);
+            string BLE_result = await BleMvxApplication._reader.ConnectAsync(Adapter, _device);
+            // Trace.Message("load config");
+
+            bool LoadSuccess = await BleMvxApplication.LoadConfig(_device.Id.ToString());
+            BleMvxApplication._config.readerID = _device.Id.ToString();
+
+            // ONLY FOR VISIBILITY
+            _ConnectionDeviceName = "Connection Complete, " + BLE_result + ", " + LoadSuccess.ToString();
+            RaisePropertyChanged(() => ConnectionDeviceName);
+        }
+
+
+
 
     }
 }

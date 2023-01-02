@@ -2,22 +2,18 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-
 using Windows.Security.Cryptography;
 using Windows.Storage.Streams;
-
 using Windows.Devices.Bluetooth;
 using Windows.Devices.Bluetooth.GenericAttributeProfile;
 
-namespace CSLibrary
-{
-    class IDevice
-    {
+
+namespace CSLibrary {
+    class IDevice {
         public string Name = "";
     }
 
-    public partial class HighLevelInterface
-    {
+    public partial class HighLevelInterface {
         #region Error Codes
         readonly int E_BLUETOOTH_ATT_WRITE_NOT_PERMITTED = unchecked((int)0x80650003);
         readonly int E_BLUETOOTH_ATT_INVALID_PDU = unchecked((int)0x80650004);
@@ -36,24 +32,17 @@ namespace CSLibrary
 
         IDevice _device = new IDevice();
 
-        /// <summary>
-        /// return error code
-        /// </summary>
         /// <returns></returns>
-        int BLE_Init()
-        {
+        int BLE_Init() {
             return 0;
         }
 
-        public async Task<bool> ConnectAsync(string id)
-        {
-            try
-            {
+        public async Task<bool> ConnectAsync(string id) {
+            try {
                 // BT_Code: BluetoothLEDevice.FromIdAsync must be called from a UI thread because it may prompt for consent.
                 bluetoothLeDevice = await BluetoothLEDevice.FromIdAsync(id);
 
-                if (bluetoothLeDevice == null)
-                {
+                if (bluetoothLeDevice == null) {
                     Debug.WriteLine("Failed to connect to device.");
                     return false;
                 }
@@ -66,33 +55,26 @@ namespace CSLibrary
 
             GattDeviceServicesResult result = await bluetoothLeDevice.GetGattServicesAsync(BluetoothCacheMode.Uncached);
 
-            if (result.Status == GattCommunicationStatus.Success)
-            {
+            if (result.Status == GattCommunicationStatus.Success) {
                 services = result.Services;
-
                 Debug.WriteLine(String.Format("Found {0} services", services.Count));
             }
-            else
-            {
+            else {
                 Debug.WriteLine("Device unreachable");
             }
 
             if (services.Count < 2)
                 return false;
 
-            foreach (GattDeviceService service in services)
-            {
-                if (service.Uuid == Guid.Parse("00009800-0000-1000-8000-00805f9b34fb"))
-                {
+            foreach (GattDeviceService service in services) {
+                if (service.Uuid == Guid.Parse("00009800-0000-1000-8000-00805f9b34fb")) {
                     characteristics = null;
 
-                    try
-                    {
+                    try {
                         // Ensure we have access to the device.
                         var accessStatus = await service.RequestAccessAsync();
 
-                        if (accessStatus == Windows.Devices.Enumeration.DeviceAccessStatus.Allowed)
-                        {
+                        if (accessStatus == Windows.Devices.Enumeration.DeviceAccessStatus.Allowed) {
                             // BT_Code: Get all the child characteristics of a service. Use the cache mode to specify uncached characterstics only 
                             // and the new Async functions to get the characteristics of unpaired devices as well. 
                             var result1 = await service.GetCharacteristicsAsync(BluetoothCacheMode.Uncached);
@@ -106,17 +88,12 @@ namespace CSLibrary
                                 return false;
                             }
                         }
-                        else
-                        {
-                            // Not granted access
-                            // On error, act as if there are no characteristics.
+                        else {
+                            // Not granted access. On error, act as if there are no characteristics.
                             return false;
                         }
                     }
-                    catch (Exception ex)
-                    {
-                        // On error, act as if there are no characteristics.
-                        //characteristics = new List<GattCharacteristic>();
+                    catch (Exception ex) {
                         return false;
                     }
                 }
@@ -124,10 +101,8 @@ namespace CSLibrary
 
             // Find notification characteristic
             notificationCharacteristic = null;
-            foreach (GattCharacteristic characteristic in characteristics)
-            {
-                if (characteristic.Uuid == Guid.Parse("00009901-0000-1000-8000-00805f9b34fb"))
-                {
+            foreach (GattCharacteristic characteristic in characteristics) {
+                if (characteristic.Uuid == Guid.Parse("00009901-0000-1000-8000-00805f9b34fb")) {
                     notificationCharacteristic = characteristic;
                     break;
                 }
@@ -138,28 +113,23 @@ namespace CSLibrary
             // Turn notification on
             GattCommunicationStatus status = GattCommunicationStatus.Unreachable;
             var cccdValue = GattClientCharacteristicConfigurationDescriptorValue.None;
-            if (notificationCharacteristic.CharacteristicProperties.HasFlag(GattCharacteristicProperties.Indicate))
-            {
+            if (notificationCharacteristic.CharacteristicProperties.HasFlag(GattCharacteristicProperties.Indicate)) {
                 cccdValue = GattClientCharacteristicConfigurationDescriptorValue.Indicate;
             }
-            else if (notificationCharacteristic.CharacteristicProperties.HasFlag(GattCharacteristicProperties.Notify))
-            {
+            else if (notificationCharacteristic.CharacteristicProperties.HasFlag(GattCharacteristicProperties.Notify)) {
                 cccdValue = GattClientCharacteristicConfigurationDescriptorValue.Notify;
             }
 
             // Set notification call back
-            try
-            {
+            try {
                 // BT_Code: Must write the CCCD in order for server to send indications.
                 // We receive them in the ValueChanged event handler.
                 status = await notificationCharacteristic.WriteClientCharacteristicConfigurationDescriptorAsync(cccdValue);
 
-                if (status == GattCommunicationStatus.Success)
-                {
+                if (status == GattCommunicationStatus.Success) {
                     notificationCharacteristic.ValueChanged += BLE_Recv;
                 }
-                else
-                {
+                else {
                     return false;
                 }
             }
@@ -170,13 +140,11 @@ namespace CSLibrary
                 return false;
             }
 
-
             // Find write characteristic
             writeCharacteristic = null;
             foreach (GattCharacteristic characteristic in characteristics)
             {
-                if (characteristic.Uuid == Guid.Parse("00009900-0000-1000-8000-00805f9b34fb"))
-                {
+                if (characteristic.Uuid == Guid.Parse("00009900-0000-1000-8000-00805f9b34fb")) {
                     writeCharacteristic = characteristic;
                     break;
                 }

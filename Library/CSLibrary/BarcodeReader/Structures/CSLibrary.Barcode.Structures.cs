@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
 using CSLibrary.Barcode.Constants;
+
 
 namespace CSLibrary.Barcode.Structures
 {
@@ -68,33 +68,15 @@ namespace CSLibrary.Barcode.Structures
         public int height;
     }
 
-    /// <summary>
-    /// Image Size
-    /// </summary>
     public struct RECT
     {
-        /// <summary>
-        /// left position
-        /// </summary>
         public Int32 left;
-        /// <summary>
-        /// top position
-        /// </summary>
         public Int32 top;
-        /// <summary>
-        /// right position
-        /// </summary>
         public Int32 right;
-        /// <summary>
-        /// bottom position
-        /// </summary>
         public Int32 bottom;
     }
 
     #region Message
-    ///<summary>
-    /// Image information structure
-    ///</summary>
     public class ImageMessage : MessageBase
     {
         /// <summary>
@@ -447,7 +429,7 @@ namespace CSLibrary.Barcode.Structures
         /// </summary>
         public bool bInfinityFilter;
         /// <summary>
-        /// This is a boolean flag (TRUE or FALSE) that flips the image 180¡ã 
+        /// This is a boolean flag (TRUE or FALSE) that flips the image 180ï¿½ï¿½ 
         /// </summary>
         public bool bFlipImage;
         /// <summary>

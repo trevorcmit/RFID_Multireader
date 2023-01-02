@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+// using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -186,25 +186,6 @@ namespace BLE.Client.ViewModels {
             }
         }
 
-        // Connect Function to connect to BleMvxApplication._reader
-        // Added to BaseViewModel, originally private async void before override change
-        // public override async void Connect(IDevice _device)
-        public async void Connect(IDevice _device)
-        {
-            Trace.Message("device name :" + _device.Name);
-            string BLE_result = await BleMvxApplication._reader.ConnectAsync(Adapter, _device);
-            Trace.Message("load config");
-
-            bool LoadSuccess = await BleMvxApplication.LoadConfig(_device.Id.ToString());
-            BleMvxApplication._config.readerID = _device.Id.ToString();
-
-            /////////////////////////////////////////////
-            _ConnectionDeviceName = "Connection Complete, " + BLE_result + ", " + LoadSuccess.ToString();
-            RaisePropertyChanged(() => ConnectionDeviceName);
-            /////////////////////////////////////////////
-        }
-
-        // Connect Function to connect to asynchronously
         // Added to BaseViewModel, originally private async void before override change
         public async Task<bool> ConnectDeviceAsync(DeviceListItemViewModel device, bool showPrompt=true) {
             if (showPrompt && !await _userDialogs.ConfirmAsync($"Connect to device '{device.Name}'?")) {
@@ -219,7 +200,6 @@ namespace BLE.Client.ViewModels {
                 _userDialogs.ShowSuccess($"Initializing Reader, Please Wait.", 8000);
 
                 PreviousGuid = device.Device.Id;
-
                 return true;
             }
             catch (Exception ex) {
@@ -257,16 +237,10 @@ namespace BLE.Client.ViewModels {
             _userDialogs.HideLoading();
             _userDialogs.Toast($"Disconnected {e.Device.Name}");
 
-            // DisconnectDevice(d => d.Id == e.Device.Id);
-            // RaisePropertyChanged(() => ConnectToPreviousCommand);
+            // Added to reset so that reader can reach READERSTATE.IDLE
+            BleMvxApplication._reader.DisconnectAsync();
 
-            // if (CanConnectToPrevious()) {
-                // _userDialogs.Toast("Attempting to reconnect to previous device");
-                // ConnectToPreviousCommand.Execute(null);
-            
             ConnectToPreviousDeviceAsync();
-
-            // }
         }
 
         // Event for Lost Connection
@@ -433,8 +407,14 @@ namespace BLE.Client.ViewModels {
                 else {
                     deviceItem.Update(device);
 
+                    // DOES NOT WORK
+                    // await BleMvxApplication._reader.ClearConnection();
+
+                    BleMvxApplication._reader.ConnectLostAsync();
+
                     HandleSelectedDevice(deviceItem, false);
-                    RaisePropertyChanged();
+
+                    // RaisePropertyChanged();
                     // Close(this);
                 }
             }

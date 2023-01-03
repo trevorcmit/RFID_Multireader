@@ -11,8 +11,8 @@ namespace BLE.Client.ViewModels {
         public ViewModelSetting(IAdapter adapter, IUserDialogs userDialogs) : base(adapter) {
             _userDialogs = userDialogs;
 
-            _ConnectionDeviceName = "ViewModelSetting Reached.";
-            RaisePropertyChanged(() => ConnectionDeviceName);
+            // _ConnectionDeviceName = "ViewModelSetting Reached.";
+            // RaisePropertyChanged(() => ConnectionDeviceName);
         }
 
         public override void Resume() {

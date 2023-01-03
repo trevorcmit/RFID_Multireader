@@ -4,8 +4,7 @@ using System.Text;
 using CSLibrary.Barcode.Constants;
 
 
-namespace CSLibrary.Barcode.Structures
-{
+namespace CSLibrary.Barcode.Structures {
     using OCR_T         =  SymCodeOCR;
     using AZTEC_T       =  SymFlagsRange;
     using CODABAR_T     =  SymFlagsRange;
@@ -53,18 +52,9 @@ namespace CSLibrary.Barcode.Structures
     using UPUIDTAG_T   =   SymFlagsOnly;
     using CODE4CB_T     =  SymFlagsOnly;
 
-    /// <summary>
-    /// Image Size
-    /// </summary>
     public struct SIZE
     {
-        /// <summary>
-        /// width
-        /// </summary>
         public int width;
-        /// <summary>
-        /// height
-        /// </summary>
         public int height;
     }
 
@@ -79,45 +69,15 @@ namespace CSLibrary.Barcode.Structures
     #region Message
     public class ImageMessage : MessageBase
     {
-        /// <summary>
-        /// Pointer Buffer for image
-        /// </summary>
         public IntPtr puchBuffer;
-        /// <summary>
-        /// Size of buffer in bytes
-        /// </summary>
         public Int32 nBufferSize;
-        /// <summary>
-        /// Image Format for returned data
-        /// </summary>
         public ImgFormat imageFormat;
-        /// <summary>
-        /// JPEG Quality Factor, default 80%
-        /// </summary>
-        public uint dwJpegQFactor = 80;
-        /// <summary>
-        /// Number of bytes returned.
-        /// </summary>
-        public Int32 nBytesReturned;
-        /// <summary>
-        /// Size of image returned.
-        /// </summary>
+        public uint dwJpegQFactor = 80; // JPEG Quality Factor, default 80%
+        public Int32 nBytesReturned;    // Number of bytes returned.
         public SIZE imgSize;
-        /// <summary>
-        /// Number of frames captured prior to this image
-        /// </summary>
         public Int32 nCapturedFrames;
-        /// <summary>
-        /// Gain value used to capture this image
-        /// </summary>
         public Int32 nGain;
-        /// <summary>
-        /// Exposure time used to capture this image
-        /// </summary>
         public Int32 nExposureTime;
-        /// <summary>
-        /// Number of underexposed pixels in image
-        /// </summary>
         public Int32 nUnderexposedPixels;
         /// <summary>
         /// Number of overexposed pixels in image
@@ -126,46 +86,19 @@ namespace CSLibrary.Barcode.Structures
         /// <summary>
         /// Constructor
         /// </summary>
-        public ImageMessage()
-        {
-//            base.length = 52;
-        }
+        public ImageMessage() {}
 
     }
-    /// <summary>
-    /// error message structure
-    /// </summary>
+
     public class ErrorMessage : MessageBase
     {
-        /// <summary>
-        /// decoded message data
-        /// </summary>
         public String message;
-        /// <summary>
-        /// AIM Id of symbology
-        /// </summary>
         public Result result;
     }
-    /// <summary>
-    /// decode structure
-    /// </summary>
+
     public class DecodeMessage : MessageBase
     {
-        /// <summary>
-        /// decoded message data
-        /// </summary>
-        public String pchMessage;
-        /// <summary>
-        /// AIM Id of symbology
-        /// </summary>
-        //public AimID chCodeID;
-        /// <summary>
-        /// HHP Id of symbology
-        /// </summary>
-        //public SymID chSymLetter;
-        /// <summary>
-        /// Modifier characters.
-        /// </summary>
+        public String pchMessage;  // decoded message data
         public Char chSymModifier;
         /// <summary>
         /// length of the decoded message
@@ -174,14 +107,9 @@ namespace CSLibrary.Barcode.Structures
         /// <summary>
         /// Constructor
         /// </summary>
-        public DecodeMessage()
-        {
-//            base.length = 8208;
-        }
+        public DecodeMessage() {}
     }
-    /// <summary>
-    /// Raw decode structure
-    /// </summary>
+
     public class RawDecodeMessage : MessageBase
     {
         /// <summary>

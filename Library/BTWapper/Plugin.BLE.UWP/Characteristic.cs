@@ -63,35 +63,28 @@ namespace Plugin.BLE.UWP
             return readResult;
         }
 
-        protected async override Task StartUpdatesNativeAsync()
-        {
+        protected async override Task StartUpdatesNativeAsync() {
             _nativeCharacteristic.ValueChanged += OnCharacteristicValueChanged;
             var result = await _nativeCharacteristic.WriteClientCharacteristicConfigurationDescriptorWithResultAsync(GattClientCharacteristicConfigurationDescriptorValue.Notify);
-            //output trace message with status of update
-            if (result.Status == GattCommunicationStatus.Success)
-            {
+            
+            if (result.Status == GattCommunicationStatus.Success) {
                 Trace.Message("Start Updates Successful");
             }
-            else if (result.Status == GattCommunicationStatus.AccessDenied)
-            {
+            else if (result.Status == GattCommunicationStatus.AccessDenied) {
                 Trace.Message("Incorrect permissions to start updates");
             }
-            else if (result.Status == GattCommunicationStatus.ProtocolError && result.ProtocolError != null)
-            {
+            else if (result.Status == GattCommunicationStatus.ProtocolError && result.ProtocolError != null) {
                 Trace.Message("Start updates returned with error: {0}", parseError(result.ProtocolError));
             }
-            else if (result.Status == GattCommunicationStatus.ProtocolError)
-            {
+            else if (result.Status == GattCommunicationStatus.ProtocolError) {
                 Trace.Message("Start updates returned with unknown error");
             }
-            else if (result.Status == GattCommunicationStatus.Unreachable)
-            {
+            else if (result.Status == GattCommunicationStatus.Unreachable) {
                 Trace.Message("Characteristic properties are unreachable");
             }
         }
 
-        protected async override Task StopUpdatesNativeAsync()
-        {
+        protected async override Task StopUpdatesNativeAsync() {
             _nativeCharacteristic.ValueChanged -= OnCharacteristicValueChanged;
             var result  = await _nativeCharacteristic.WriteClientCharacteristicConfigurationDescriptorWithResultAsync(GattClientCharacteristicConfigurationDescriptorValue.None);
             if (result.Status == GattCommunicationStatus.Success)

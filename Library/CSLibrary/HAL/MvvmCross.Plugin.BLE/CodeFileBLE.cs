@@ -16,13 +16,10 @@ namespace CSLibrary {
         ICharacteristic _characteristicWrite;
         ICharacteristic _characteristicUpdate;
 
-        /// <returns></returns>
         int BLE_Init() { return 0; }
 
-        // public async Task<bool> ConnectAsync(IAdapter adapter, IDevice device)
         public async Task<string> ConnectAsync(IAdapter adapter, IDevice device)
         {
-            // REMOVED FOR BLUETOOTH AUTOCONNECT CODE
             if (_readerState != READERSTATE.DISCONNECT)
                 return "False, Readerstate is not Disconnect";   // Reader can not reconnect
 
@@ -63,23 +60,29 @@ namespace CSLibrary {
             return "True, Finished to the End";
         }
 
-        public async Task<bool> DisconnectAsync()
+        public async Task<string> DisconnectAsync()
         {
             try {
-                if (Status != READERSTATE.IDLE) return false;
+                if (Status != READERSTATE.IDLE) 
+                    return "false, reader state is not idle";
 
                 if (_readerState != READERSTATE.DISCONNECT) {
                     BARCODEPowerOff();
                     WhenBLEFinish(ClearConnection);
+
+                    _readerState = READERSTATE.DISCONNECT;
+
+                    return "if != disconnect";
                 }
                 else {
                     await ClearConnection();
+                    return "else case";
                 }
             }
             catch (Exception ex) {
                 Debug.WriteLine("Disconnect error " + ex.Message.ToString());
             }
-            return true;
+            return "true, finished to the end";
         }
 
         private async Task<bool> BLE_Send (byte[] data) {
@@ -110,7 +113,7 @@ namespace CSLibrary {
             }
         }
 
-        public async void ConnectLostAsync() {
+        public async Task<string> ConnectLostAsync() {
             _readerState = READERSTATE.READYFORDISCONNECT;
 
             _characteristicUpdate.ValueUpdated -= BLE_Recv;
@@ -130,14 +133,15 @@ namespace CSLibrary {
             _device = null;
             _readerState = READERSTATE.DISCONNECT;
             FireReaderStateChangedEvent(new Events.OnReaderStateChangedEventArgs(null, Constants.ReaderCallbackType.CONNECTION_LOST));
+
+            // ADDED RETURN TO MAKE AWAIT-ABLE
+            return "Completed ConnectLostAsync";
         }
 
-        // async Task ClearConnection()
-        public async Task ClearConnection()
-        {
+        public async Task ClearConnection() {
             _readerState = READERSTATE.READYFORDISCONNECT;
-            // Stop Timer;
-            await _characteristicUpdate.StopUpdatesAsync();
+
+            await _characteristicUpdate.StopUpdatesAsync(); // Stop Timer;
 
             _characteristicUpdate.ValueUpdated -= BLE_Recv;
             _adapter.DeviceConnectionLost -= OnDeviceConnectionLost;
@@ -152,18 +156,15 @@ namespace CSLibrary {
                 }
             }
             catch (Exception ex) {}
+
             _device = null;
             _readerState = READERSTATE.DISCONNECT;
         }
 
-
         // ADDED: Set the reader state to disconnect for auto-reconnect
-        public void Set_Disconnect() 
+        public string Get_ReaderState_String() 
         {
-            _readerState = READERSTATE.DISCONNECT;
-
-            // _characteristicUpdate.ValueUpdated -= BLE_Recv;
-            // _adapter.DeviceConnectionLost -= OnDeviceConnectionLost;
+            return _readerState.ToString();
         }
 
     }

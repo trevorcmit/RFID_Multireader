@@ -5,29 +5,18 @@ using System.Threading.Tasks;
 using Plugin.BLE.Abstractions.EventArgs;
 using Plugin.BLE.Abstractions.Exceptions;
 
-namespace Plugin.BLE.Abstractions.Contracts
-{
-    /// <summary>
-    /// A bluetooth LE GATT characteristic.
-    /// </summary>
-    public interface ICharacteristic
-    {
+
+namespace Plugin.BLE.Abstractions.Contracts {
+    public interface ICharacteristic {
         /// <summary>
-        /// Event gets raised, when the davice notifies a value change on this characteristic.
+        /// Event gets raised, when the device notifies a value change on this characteristic.
         /// To start listening, call <see cref="StartUpdates"/>.
         /// </summary>
         event EventHandler<CharacteristicUpdatedEventArgs> ValueUpdated;
 
-        /// <summary>
-        /// Id of the characteristic.
-        /// </summary>
-        Guid Id { get; }
+        Guid Id { get; }       // Id of the characteristic.
 
-        /// <summary>
-        /// TODO: review: do we need this in any case?
-        /// Uuid of the characteristic.
-        /// </summary>
-        string Uuid { get; }
+        string Uuid { get; }   // TODO: review: do we need this in any case?, Uuid of the characteristic.
 
         /// <summary>
         /// Name of the charakteristic.
@@ -35,49 +24,25 @@ namespace Plugin.BLE.Abstractions.Contracts
         /// </summary>
         string Name { get; }
 
-        /// <summary>
-        /// Gets the last known value of the characteristic.
-        /// </summary>
-        byte[] Value { get; }
+        byte[] Value { get; }   // Gets the last known value of the characteristic.
 
         /// <summary>
         /// Gets <see cref="Value"/> as UTF8 encoded string representation.
         /// </summary>
         string StringValue { get; }
 
-        /// <summary>
-        /// Properties of the characteristic.
-        /// </summary>
-        CharacteristicPropertyType Properties { get; }
+        CharacteristicPropertyType Properties { get; } // Properties of the characteristic.
 
         /// <summary>
         /// Specifies how the <see cref="WriteAsync"/> function writes the value.
         /// </summary>
         CharacteristicWriteType WriteType { get; set; }
 
-        /// <summary>
-        /// Indicates wheter the characteristic can be read or not.
-        /// </summary>
         bool CanRead { get; }
-
-        /// <summary>
-        /// Indicates wheter the characteristic can be written or not.
-        /// </summary>
         bool CanWrite { get; }
-
-        /// <summary>
-        /// Indicates wheter the characteristic supports notify or not.
-        /// </summary>
         bool CanUpdate { get; }
-        
-        /// <summary>
-        /// Returns the parent service. Use this to access the device.
-        /// </summary>
-        IService Service { get; }
+        IService Service { get; }   // Returns the parent service. Use this to access the device.
 
-        /// <summary>
-        /// Reads the characteristic value from the device. The result is also stored inisde the Value property.
-        /// </summary>
         /// <param name="cancellationToken"></param>
         /// <returns>A task that represents the asynchronous read operation. The Result property will contain the read bytes.</returns>
         /// <exception cref="InvalidOperationException">Thrown if characteristic doesn't support read. See: <see cref="CanRead"/></exception>
@@ -112,9 +77,6 @@ namespace Plugin.BLE.Abstractions.Contracts
         /// </summary>
         Task StopUpdatesAsync();
 
-        /// <summary>
-        /// Gets the descriptors of the characteristic.
-        /// </summary>
         /// <param name="cancellationToken"></param>
         /// <returns>A task that represents the asynchronous read operation. The Result property will contain a list of descriptors.</returns> 
         Task<IList<IDescriptor>> GetDescriptorsAsync(CancellationToken cancellationToken = default(CancellationToken));

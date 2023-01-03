@@ -1,34 +1,12 @@
-﻿/*
-Copyright (c) 2018 Convergence Systems Limited
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CSLibrary
-{
-    public partial class HighLevelInterface
-    {
+
+namespace CSLibrary {
+    public partial class HighLevelInterface {
         readonly byte[] destinationsID = { 0xc2, 0x6a, 0xd9, 0xe8, 0x5f };
 
         internal enum BTCOMMANDTYPE
@@ -77,7 +55,6 @@ namespace CSLibrary
         }
 
         private List<SENDBUFFER> _sendBuffer = new List<SENDBUFFER>();
-        //private bool _PROTOCOL_HardwareDiagnosticsMode = true;
         private uint _PROTOCOL_RetryCount = 0;
 
         private object _bleEngineLock = new object();
@@ -90,19 +67,16 @@ namespace CSLibrary
 
         #region ---- Internal function ----
 
-        internal bool SendAsync(int connection, int destination, byte[] eventCode = null, byte[] payload = null, BTWAITCOMMANDRESPONSETYPE sendRemark = BTWAITCOMMANDRESPONSETYPE.WAIT_BTAPIRESPONSE, UInt32 cmdRemark = 0xffffffff)
-        {
+        internal bool SendAsync(int connection, int destination, byte[] eventCode = null, byte[] payload = null, BTWAITCOMMANDRESPONSETYPE sendRemark = BTWAITCOMMANDRESPONSETYPE.WAIT_BTAPIRESPONSE, UInt32 cmdRemark = 0xffffffff) {
             byte[] sendData;
 
-            if (eventCode == null && payload == null)
-            {
+            if (eventCode == null && payload == null) {
                 sendData = new byte[8];
 
                 sendData[6] = 0x00;
                 sendData[7] = 0x00;
             }
-            else if (payload == null)
-            {
+            else if (payload == null) {
                 if (eventCode.Length > (255 - 8))
                     return false;
 
@@ -112,8 +86,7 @@ namespace CSLibrary
 
                 sendData[2] = (byte)eventCode.Length;
             }
-            else
-            {
+            else {
                 if ((eventCode.Length + payload.Length) > (255 - 8))
                     return false;
 
@@ -144,12 +117,10 @@ namespace CSLibrary
             return true;
         }
 
-        internal bool SendAsyncUrgent(int connection, int destination, byte[] eventCode = null, byte[] payload = null, BTWAITCOMMANDRESPONSETYPE sendRemark = BTWAITCOMMANDRESPONSETYPE.WAIT_BTAPIRESPONSE, UInt32 cmdRemark = 0xffffffff)
-        {
+        internal bool SendAsyncUrgent(int connection, int destination, byte[] eventCode = null, byte[] payload = null, BTWAITCOMMANDRESPONSETYPE sendRemark = BTWAITCOMMANDRESPONSETYPE.WAIT_BTAPIRESPONSE, UInt32 cmdRemark = 0xffffffff) {
             byte[] sendData;
 
-            if (eventCode == null && payload == null)
-            {
+            if (eventCode == null && payload == null) {
                 sendData = new byte[8];
 
                 sendData[6] = 0x00;
@@ -264,8 +235,7 @@ namespace CSLibrary
         }
 
         static readonly byte[] RFIDCommand = new byte[] { 0xA7, 0xB3, 0x0A, 0xC2, 0x82, 0x37, 0x00, 0x00, 0x80, 0x02, 0x70, 0x01, 0x00, 0xF0 };
-        bool CheckRFIDCommand()
-        {
+        bool CheckRFIDCommand() {
             // A7 B3 0A C2 82 37 00 00 80 02 70 01 00 F0       0F 00 00 00
 
             if (_sendBuffer[0].packetData.Length != 18)
@@ -277,12 +247,10 @@ namespace CSLibrary
 
             _handlerRFIDReader._readerMode = 1; // record reader static to command mode
 
-            if (_sendBuffer[0].packetData[14] == 0x14 && _sendBuffer[0].packetData[15] == 0x00 && _sendBuffer[0].packetData[16] == 0x00 && _sendBuffer[0].packetData[17] == 0x00)
-            {
+            if (_sendBuffer[0].packetData[14] == 0x14 && _sendBuffer[0].packetData[15] == 0x00 && _sendBuffer[0].packetData[16] == 0x00 && _sendBuffer[0].packetData[17] == 0x00) {
                 _handlerRFIDReader._SetRFIDToStandbyMode = false;
             }
-            else
-            {
+            else {
                 _handlerRFIDReader._SetRFIDToStandbyMode = true;
             }
 
@@ -291,16 +259,12 @@ namespace CSLibrary
 
 
 
-        async void BLERWEngineTimer()
-        {
+        async void BLERWEngineTimer() {
             await Task.Delay(10);
 
-            lock (_bleEngineLock)
-            {
-                if (_readerState != READERSTATE.DISCONNECT)
-                {
-                    if (_NeedCommandResponseType != BTWAITCOMMANDRESPONSETYPE.NOWAIT)
-                    {
+            lock (_bleEngineLock) {
+                if (_readerState != READERSTATE.DISCONNECT) {
+                    if (_NeedCommandResponseType != BTWAITCOMMANDRESPONSETYPE.NOWAIT) {
                         CSLibrary.Debug.WriteLine("wait response : " + _NeedCommandResponseType.ToString() + ":" + _currentCommandResponse);
                         if ((_currentCommandResponse & _NeedCommandResponseType) == _NeedCommandResponseType)
                         {
@@ -310,10 +274,8 @@ namespace CSLibrary
                             _NeedCommandResponseType = BTWAITCOMMANDRESPONSETYPE.NOWAIT;
                             _PROTOCOL_RetryCount = 0;
                         }
-                        else if (DateTime.Now > _packetResponseTimeout)
-                        {
-                            switch (_sendBuffer[0].type)
-                            {
+                        else if (DateTime.Now > _packetResponseTimeout) {
+                            switch (_sendBuffer[0].type) {
                                 case BTCOMMANDTYPE.None:
                                 case BTCOMMANDTYPE.Normal:
                                     if (_PROTOCOL_RetryCount > 19) // retry 19 times (~40s)
@@ -326,8 +288,7 @@ namespace CSLibrary
                                         _sendBuffer.Clear();
                                         _PROTOCOL_RetryCount = 0;
                                     }
-                                    else
-                                    {
+                                    else {
                                         _PROTOCOL_RetryCount++;
                                         CSLibrary.Debug.WriteLine("Command timeout");
                                         _NeedCommandResponseType = BTWAITCOMMANDRESPONSETYPE.NOWAIT;
@@ -335,8 +296,7 @@ namespace CSLibrary
                                     break;
 
                                 case BTCOMMANDTYPE.Validate:
-                                    if (_PROTOCOL_RetryCount > 0) // retry 1 times
-                                    {
+                                    if (_PROTOCOL_RetryCount > 0) { // retry 1 times
                                         // cancel all command and send error event
 
                                         CSLibrary.Debug.WriteLine("hardware fail!!");
@@ -347,8 +307,7 @@ namespace CSLibrary
                                         _sendBuffer.RemoveAt(0);
                                         _PROTOCOL_RetryCount = 0;
                                     }
-                                    else
-                                    {
+                                    else {
                                         _PROTOCOL_RetryCount++;
                                         CSLibrary.Debug.WriteLine("Hardware vaildate command timeout");
                                         _NeedCommandResponseType = BTWAITCOMMANDRESPONSETYPE.NOWAIT;

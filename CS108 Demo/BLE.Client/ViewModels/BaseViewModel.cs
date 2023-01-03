@@ -28,7 +28,7 @@ namespace BLE.Client.ViewModels {
 
 
         // Moved from DeviceListViewModel to the BaseViewModel for all ViewModels to inherit
-        public ObservableCollection<DeviceListItemViewModel> Devices {get; set;} = new ObservableCollection<DeviceListItemViewModel>();
+        public ObservableCollection<DeviceListItemViewModel> Devices { get; set; } = new ObservableCollection<DeviceListItemViewModel>();
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName = null) {

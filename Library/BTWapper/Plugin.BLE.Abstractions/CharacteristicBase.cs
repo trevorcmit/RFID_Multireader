@@ -102,29 +102,20 @@ namespace Plugin.BLE.Abstractions
                 CharacteristicWriteType.WithoutResponse;
         }
 
-        public Task StartUpdatesAsync()
-        {
-            if (!CanUpdate)
-            {
-                throw new InvalidOperationException("Characteristic does not support update.");
-            }
+        public Task StartUpdatesAsync() {
+            if (!CanUpdate) { throw new InvalidOperationException("Characteristic does not support update."); }
 
             Trace.Message("Characteristic.StartUpdates");
             return StartUpdatesNativeAsync();
         }
 
-        public Task StopUpdatesAsync()
-        {
-            if (!CanUpdate)
-            {
-                throw new InvalidOperationException("Characteristic does not support update.");
-            }
+        public Task StopUpdatesAsync() {
+            if (!CanUpdate) { throw new InvalidOperationException("Characteristic does not support update."); }
 
             return StopUpdatesNativeAsync();
         }
 
-        public async Task<IList<IDescriptor>> GetDescriptorsAsync(CancellationToken cancellationToken = default(CancellationToken))
-        {
+        public async Task<IList<IDescriptor>> GetDescriptorsAsync(CancellationToken cancellationToken = default(CancellationToken)) {
             if (_descriptors == null)
                 _descriptors = await GetDescriptorsNativeAsync();
             return _descriptors;

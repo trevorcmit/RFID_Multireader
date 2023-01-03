@@ -40,13 +40,6 @@ namespace BLE.Client.ViewModels {
 
             BleMvxApplication._reader.OnReaderStateChanged += new EventHandler<CSLibrary.Events.OnReaderStateChangedEventArgs>(ReaderStateCChangedEvent);
             GetLocationPermission();
-
-            // _ConnectionDeviceName = "MAIN MENU DEFAULT VALUE";
-            // RaisePropertyChanged(() => ConnectionDeviceName);
-
-            // Jump to connection screen without Button Press
-            // OnConnectButtonClicked();
-            // this.OnConnectButtonCommand.Execute(null);
         }
 
         ~ViewModelMainMenu() {
@@ -176,8 +169,10 @@ namespace BLE.Client.ViewModels {
                         }
                         break;
 
-                    case CSLibrary.Constants.ReaderCallbackType.CONNECTION_LOST: break;
-                    default: break;
+                    case CSLibrary.Constants.ReaderCallbackType.CONNECTION_LOST:
+                        break;
+                    default: 
+                        break;
                 }
                 CheckConnection();
             });
@@ -310,7 +305,6 @@ namespace BLE.Client.ViewModels {
             labelVoltage = "";
             RaisePropertyChanged(() => labelVoltage);
 
-            // ShowViewModel destroys current class inherited?
             ShowViewModel<DeviceListViewModel>(new MvxBundle());
             // ShowViewModel<DeviceListViewModel>();
 

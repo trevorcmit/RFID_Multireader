@@ -132,10 +132,10 @@
     <Content Include="Assets\clipboard.png" />
     <Content Include="Assets\digitalbackground.jpg" />
     <Content Include="Assets\digitalcamo.jpg" />
+    <Content Include="Assets\front_back.jpg" />
     <Content Include="Assets\gears.png" />
     <Content Include="Assets\gray.png" />
     <Content Include="Assets\green.png" />
-    <Content Include="Assets\multicam.png" />
     <Content Include="Assets\play.png" />
     <Content Include="Assets\red.png" />
     <Content Include="Assets\StoreLogo.scale-200.png" />

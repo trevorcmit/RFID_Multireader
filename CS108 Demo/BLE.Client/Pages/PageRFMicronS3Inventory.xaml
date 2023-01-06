@@ -9,111 +9,113 @@
   xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Xamarin.Forms;assembly=LiveChartsCore.SkiaSharpView.XamarinForms"
 >
 
-  <StackLayout Orientation="Vertical" VerticalOptions="StartAndExpand"> <!-- Overarching Vertical Stacklayout -->
+    <StackLayout Orientation="Vertical">
+      <StackLayout Orientation="Horizontal"> <!-- Horizontal Stacklayout placing people side by side -->
 
-    <StackLayout Orientation="Vertical"> <!-- To Separate Data from Body Model -->
-            
-      <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" WidthRequest="3000"> <!-- RFID Tag Section -->
-
-        <StackLayout Orientation="Vertical">
-          <ListView x:Name="liewViewTagData" ItemsSource="{Binding TagInfoList}" SelectedItem="{Binding objItemSelected, Mode=TwoWay}">
-            <ListView.Header>
-              <StackLayout BackgroundColor="#cccccc"> <!-- Gray color of the Column Header row -->
-                <Grid>
-                  <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.35*"/>    <!-- EPC -->
-                    <ColumnDefinition Width="0.20*"/>    <!-- Time -->
-                    <ColumnDefinition Width="0.15*"/>    <!-- RSSI -->
-                    <ColumnDefinition Width="0.15*"/>    <!-- Temperature -->
-                    <ColumnDefinition Width="0.15*"/>    <!-- Times Read-->
-                  </Grid.ColumnDefinitions>
-                  <Label                 Text="Tag ID"       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Small" VerticalOptions="CenterAndExpand" />
-                  <Label Grid.Column="1" Text="Time"         VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Small" VerticalOptions="CenterAndExpand" />
-                  <Label Grid.Column="2" Text="RSSI"         VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Small" VerticalOptions="CenterAndExpand" />
-                  <Label Grid.Column="3" Text="ºC"           VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Small" VerticalOptions="CenterAndExpand" />
-                  <Label Grid.Column="4" Text="Read Count"   VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Small" VerticalOptions="CenterAndExpand" />
-                </Grid>
-              </StackLayout>
-            </ListView.Header>
-            <ListView.ItemTemplate>
-              <DataTemplate>
-                <ViewCell>
-                  <StackLayout Orientation="Vertical">
-                    <Grid>
-                      <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.35*"/>   <!-- EPC -->
-                        <ColumnDefinition Width="0.20*"/>   <!-- Time -->
-                        <ColumnDefinition Width="0.15*"/>   <!-- RSSI -->
-                        <ColumnDefinition Width="0.15*"/>   <!-- Temperature -->
-                        <ColumnDefinition Width="0.15*"/>   <!-- Times Read -->
-                      </Grid.ColumnDefinitions>
-                      <Label                 Text="{Binding DisplayName}"    VerticalTextAlignment="Start" FontSize="Small"/>
-                      <Label Grid.Column="1" Text="{Binding TimeString}"     VerticalTextAlignment="Start" HorizontalTextAlignment="Center"/>
-                      <Label Grid.Column="2" Text="{Binding OCRSSI}"         VerticalTextAlignment="Start" HorizontalTextAlignment="Center" TextColor="{Binding RSSIColor}"/>
-                      <Label Grid.Column="3" Text="{Binding SensorAvgValue}" VerticalTextAlignment="Start" HorizontalTextAlignment="Center"/>
-                      <Label Grid.Column="4" Text="{Binding SucessCount}"    VerticalTextAlignment="Start" HorizontalTextAlignment="Center"/>
-                    </Grid>
-                  </StackLayout>
-                </ViewCell>
-              </DataTemplate>
-            </ListView.ItemTemplate>
-          </ListView> 
-        </StackLayout>
-
-      </StackLayout> <!-- RFID Tag Section -->
-
-      <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand">
-        <Grid VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="200">
-          <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-          </Grid.ColumnDefinitions> 
+      <!-- Left Side Person -->
+      <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+        <Grid>
           <Grid.RowDefinitions>
-            <RowDefinition/> 
-            <RowDefinition/>   
+            <RowDefinition Height="0.15*"/> <!-- PICKER #1 -->
+            <RowDefinition Height="*"/> <!-- BODY #1 -->
           </Grid.RowDefinitions>
 
-          <Label 
-            Text="{Binding Duty}" Font="Large" FontAttributes="Bold"
-            Grid.Row="0" Grid.Column="0" BackgroundColor="{Binding DutyColor}"
-            HorizontalOptions="Center" VerticalOptions="Center"
-          />
-          <Label 
-            Text="{Binding DebugLabel}"
-            Grid.Row="1" Grid.Column="0"
-            HorizontalOptions="Center" VerticalOptions="Center"
-          />
+          <Picker 
+            Grid.Row="0" HorizontalOptions="CenterAndExpand"
+            Title="Select a Person" TitleColor="#010101"
+          >
+            <Picker.Items>
+              <x:String>One</x:String>
+              <x:String>Two</x:String>
+              <x:String>Three</x:String>
+              <x:String>Four</x:String>
+              <x:String>Five</x:String>
+              <x:String>Six</x:String>
+              <x:String>Seven</x:String>
+              <x:String>Eight</x:String>
+              <x:String>Nine</x:String>
+              <x:String>Ten</x:String>
+            </Picker.Items>
+          </Picker>
+
+          <Image Grid.Row="1" Aspect="AspectFit" Opacity="1.0">
+            <Image.Source>
+              <OnPlatform x:TypeArguments="FileImageSource">
+                <On Platform="UWP"     Value="Assets/front_back.jpg" />
+                <On Platform="Android" Value="front_back.jpg" />
+              </OnPlatform>
+            </Image.Source>
+          </Image>
         </Grid>
-
-      </StackLayout> 
-
-    </StackLayout> <!-- To Separate Data from Body Model -->
-
-
-    <StackLayout Orientation="Vertical" VerticalOptions="EndAndExpand" > <!-- Bottom Inventory/Clear/Share Section --> 
-      <Button Text="{Binding startInventoryButtonText}" Font="Large" Command="{Binding OnStartInventoryButtonCommand}"/>
-      <StackLayout Orientation="Horizontal">
-        <Button Text="Clear" Font="Large" TextColor="White"
-                CornerRadius="11"
-                Command="{Binding OnClearButtonCommand}" 
-                HorizontalOptions="StartAndExpand"
-                BackgroundColor="#3201ba"
-        />
-        <!-- WidthRequest="200" -->
-        <Button Text="Share" Font="Large" TextColor="White"
-                CornerRadius="11"
-                Command="{Binding OnShareDataCommand}"   
-                HorizontalOptions="CenterAndExpand"
-                BackgroundColor="#3201ba"
-        />
-        <Button Text="Add Name" Font="Large" TextColor="White"
-                CornerRadius="11"
-                Command="{Binding OnAddNicknameCommand}"   
-                HorizontalOptions="EndAndExpand"
-                BackgroundColor="#3201ba"
-        />
       </StackLayout>
-    </StackLayout> <!-- Bottom Inventory/Clear/Share Section -->
 
-  </StackLayout> <!-- Overarching Vertical Stacklayout -->
+      <!-- Right Side Person -->
+      <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="0.15*"/> <!-- PICKER #1 -->
+            <RowDefinition Height="*"/> <!-- BODY #1 -->
+          </Grid.RowDefinitions>
+
+          <Picker 
+            Grid.Row="0" HorizontalOptions="CenterAndExpand"
+            Title="Select a Person" TitleColor="#010101"
+          >
+            <Picker.Items>
+              <x:String>One</x:String>
+              <x:String>Two</x:String>
+              <x:String>Three</x:String>
+              <x:String>Four</x:String>
+              <x:String>Five</x:String>
+              <x:String>Six</x:String>
+              <x:String>Seven</x:String>
+              <x:String>Eight</x:String>
+              <x:String>Nine</x:String>
+              <x:String>Ten</x:String>
+            </Picker.Items>
+          </Picker>
+
+
+          <Image Grid.Row="1" Aspect="AspectFit" Opacity="1.0">
+            <Image.Source>
+              <OnPlatform x:TypeArguments="FileImageSource">
+                <On Platform="UWP"     Value="Assets/front_back.jpg" />
+                <On Platform="Android" Value="front_back.jpg" />
+              </OnPlatform>
+            </Image.Source>
+          </Image>
+        </Grid>
+      </StackLayout>
+
+      </StackLayout> <!-- Horizontal Stacklayout placing people side by side -->
+
+
+      <StackLayout Orientation="Vertical" VerticalOptions="EndAndExpand"> <!-- Bottom Inventory/Clear/Share Section --> 
+        <Button Text="{Binding startInventoryButtonText}" Font="Large" Command="{Binding OnStartInventoryButtonCommand}"/>
+          <StackLayout Orientation="Horizontal">
+            <Button Text="Clear" Font="Large" TextColor="White"
+                    CornerRadius="11"
+                    Command="{Binding OnClearButtonCommand}" 
+                    HorizontalOptions="StartAndExpand"
+                    BackgroundColor="#3201ba"
+            />
+            <!-- WidthRequest="200" -->
+            <Button Text="Share" Font="Large" TextColor="White"
+                    CornerRadius="11"
+                    Command="{Binding OnShareDataCommand}"   
+                    HorizontalOptions="CenterAndExpand"
+                    BackgroundColor="#3201ba"
+            />
+            <Button Text="Add Name" Font="Large" TextColor="White"
+                    CornerRadius="11"
+                    Command="{Binding OnAddNicknameCommand}"   
+                    HorizontalOptions="EndAndExpand"
+                    BackgroundColor="#3201ba"
+            />
+          </StackLayout>
+      </StackLayout> <!-- Bottom Inventory/Clear/Share Section -->
+
+    </StackLayout>
+
 
 </pages:BasePage>

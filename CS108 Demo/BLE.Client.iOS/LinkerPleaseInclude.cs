@@ -6,8 +6,7 @@ using UIKit;
 using MvvmCross.Binding.BindingContext;
 
 
-namespace BLE.Client.iOS
-{
+namespace BLE.Client.iOS {
     // This class is never actually executed, but when Xamarin linking is enabled it does ensure types and properties
     // are preserved in the deployed app
     [Preserve(AllMembers = true)]

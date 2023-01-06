@@ -18,9 +18,9 @@ using Xamarin.Essentials;
 
 namespace BLE.Client.ViewModels {
 
-    public interface IAccessFileService {
-        void CreateFile(string FileName);
-    }
+    // public interface IAccessFileService {
+    //     void CreateFile(string FileName);
+    // }
 
     public class ViewModelRFMicroS3Inventory : BaseViewModel {
         public class RFMicroTagInfoViewModel : BindableBase {
@@ -28,10 +28,9 @@ namespace BLE.Client.ViewModels {
             /////////////////////////////////////////////////////////////////////////////////////////////////////////
             // CLASS UPDATES/ADDITIONS
             private string _TimeString; // Time at which last tag was read
-            public string TimeString {get {return this._TimeString;} set{this.SetProperty(ref this._TimeString, value);}}
+            public string TimeString { get { return this._TimeString; } set { this.SetProperty(ref this._TimeString, value); } }
             private DateTime _CurrentTime; // DateTime object for Live Plotting Comparison
-            public DateTime CurrentTime {get {return this._CurrentTime;} set{this.SetProperty(ref this._CurrentTime, value);}}
-            private double _SAV; public double SAV;
+            public DateTime CurrentTime { get { return this._CurrentTime; } set { this.SetProperty(ref this._CurrentTime, value); } }
             /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             private string _EPC; public string EPC {get {return this._EPC;} set {this.SetProperty(ref this._EPC, value);}}
@@ -57,26 +56,8 @@ namespace BLE.Client.ViewModels {
         public ICommand OnClearButtonCommand {protected set; get;}
         public ICommand OnShareDataCommand {protected set; get;}
         public ICommand OnAddNicknameCommand {protected set; get;}
+        // public MvxCommand ConnectToPreviousCommand {protected set; get;}
 
-        public MvxCommand ConnectToPreviousCommand {protected set; get;}
-
-        // private async void Reconnect() {
-        //     DeviceListViewModel1 dlvm1 = new DeviceListViewModel1();
-        //     dlvm1.ConnectToPreviousDeviceAsync();
-        // }
-        //private bool CanConnectToPrevious() {
-        //    return PreviousGuid != default(Guid);
-        //}
-        //private Guid _previousGuid;
-        //public Guid PreviousGuid {
-         //   get {return _previousGuid;}
-         //   set {
-           //     _previousGuid = value;
-           //     _settings.AddOrUpdateValue("lastguid", _previousGuid.ToString());
-           //     RaisePropertyChanged();
-          //      RaisePropertyChanged(() => ConnectToPreviousCommand);
-         //   }
-        //}
 
         private ObservableCollection<RFMicroTagInfoViewModel> _TagInfoList = new ObservableCollection<RFMicroTagInfoViewModel>();
         public ObservableCollection<RFMicroTagInfoViewModel> TagInfoList {get {return _TagInfoList;} set {SetProperty(ref _TagInfoList, value);}}
@@ -119,10 +100,48 @@ namespace BLE.Client.ViewModels {
 
         private string _DebugLabel; public string DebugLabel {get => _DebugLabel; set {_DebugLabel = value; OnPropertyChanged("DebugLabel");}}
 
+
+        private string _SelectedPerson1 = "Select Person";
+        public string SelectedPerson1 {
+            get => _SelectedPerson1;
+            set {
+                _SelectedPerson1 = value;
+                OnPropertyChanged("SelectedPerson1");
+            }
+        }
+
+        private string _SelectedPerson2 = "Select Person";
+        public string SelectedPerson2 {
+            get => _SelectedPerson2;
+            set {
+                _SelectedPerson2 = value;
+                OnPropertyChanged("SelectedPerson2");
+            }
+        }
+
+
+        public IList<string> PersonList1;
+        public IList<string> PersonList2;
+
+
         #endregion
 
         public ViewModelRFMicroS3Inventory(IAdapter adapter, IUserDialogs userDialogs) : base(adapter) {
             _userDialogs = userDialogs;
+
+            PersonList1 = new List<string>();
+            PersonList1.Add("One");
+            PersonList1.Add("Two");
+            PersonList1.Add("Three");
+            PersonList1.Add("Four");
+            PersonList1.Add("Five");
+            PersonList1.Add("Six");
+            PersonList1.Add("Seven");
+            PersonList1.Add("Eight");
+            PersonList1.Add("Nine");
+            PersonList1.Add("Ten");
+
+            PersonList2 = new List<string>{ "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten" };
 
             GetTimes();   // Get Duty Cycle Times
 
@@ -141,54 +160,6 @@ namespace BLE.Client.ViewModels {
 
             // NOT TRIGGERED WHEN DEVICE IS DISCONNECTED
             // Adapter.DeviceConnectionLost += OnDeviceConnectionLost;
-        }
-
-        // private async void OnDeviceDisconnected(object sender, DeviceEventArgs e) {
-        //     _DutyColor = "#d6002e"; 
-        //     RaisePropertyChanged(() => DutyColor);
-        //     StopInventory();
-
-        //     try {
-        //         // if (await ConnectDeviceAsync(ConnectionDevice)) {
-        //             // Connect to CS108
-        //             var device = Adapter.ConnectedDevices.FirstOrDefault(d => d.Id.Equals(ConnectionGuid));
-
-        //             if (device == null) return;
-
-        //             Connect(device);
-        //             Close(this);
-        //         // }
-        //     }
-        //     catch (Exception ex) {
-        //         _userDialogs.Alert(ex.Message, "Disconnect error!");
-        //     }
-        // }
-
-        async void GetTimes() {
-            string active_time_str = await Application.Current.MainPage.DisplayPromptAsync( // Get tag name
-                title: "Input ACTIVE Time for Duty Cycle", 
-                message: "Example: 2000 (means 2 seconds)",
-                placeholder: ""
-            );
-
-            string inactive_time_str = await Application.Current.MainPage.DisplayPromptAsync( // Get tag name
-                title: "Input INACTIVE Time for Duty Cycle",
-                message: "Example: 3000 (means 3 seconds)",
-                placeholder: ""
-            );
-
-            pick_result = await FilePicker.PickAsync();
-
-            _DebugLabel = pick_result.FullPath;
-            RaisePropertyChanged(() => DebugLabel);
-
-            _active_time   = Convert.ToInt32(active_time_str);
-            _inactive_time = Convert.ToInt32(inactive_time_str);
-            RaisePropertyChanged(() => active_time);
-            RaisePropertyChanged(() => inactive_time);
-
-            ActiveTimer();
-            DownTimer();
         }
 
         ~ViewModelRFMicroS3Inventory() {}
@@ -244,126 +215,6 @@ namespace BLE.Client.ViewModels {
             get => null;
         }
 
-        async void InventorySetting() {
-
-            switch (BleMvxApplication._config.RFID_FrequenceSwitch) {
-                case 0:
-                    BleMvxApplication._reader.rfid.SetHoppingChannels(BleMvxApplication._config.RFID_Region);
-                    break;
-                case 1:
-                    BleMvxApplication._reader.rfid.SetFixedChannel(BleMvxApplication._config.RFID_Region, BleMvxApplication._config.RFID_FixedChannel);
-                    break;
-                case 2:
-                    BleMvxApplication._reader.rfid.SetAgileChannels(BleMvxApplication._config.RFID_Region);
-                    break;
-            }
-            BleMvxApplication._reader.rfid.Options.TagRanging.flags = CSLibrary.Constants.SelectFlags.ZERO;
-
-            // Setting 1
-            SetPower(BleMvxApplication._rfMicro_Power);
-
-            // Setting 3
-            BleMvxApplication._config.RFID_DynamicQParms.toggleTarget = (BleMvxApplication._rfMicro_Target == 2) ? 1U : 0U;
-            BleMvxApplication._config.RFID_DynamicQParms.retryCount = 5; // for RFMicro special setting
-            BleMvxApplication._reader.rfid.SetDynamicQParms(BleMvxApplication._config.RFID_DynamicQParms);
-            BleMvxApplication._config.RFID_DynamicQParms.retryCount = 0; // reset to normal
-
-            // Setting 4
-            BleMvxApplication._config.RFID_FixedQParms.toggleTarget = (BleMvxApplication._rfMicro_Target == 2) ? 1U : 0U;
-            BleMvxApplication._config.RFID_FixedQParms.retryCount = 5; // for RFMicro special setting
-            BleMvxApplication._reader.rfid.SetFixedQParms(BleMvxApplication._config.RFID_FixedQParms);
-            BleMvxApplication._config.RFID_FixedQParms.retryCount = 0; // reset to normal
-
-            // Setting 2
-            BleMvxApplication._reader.rfid.SetOperationMode(BleMvxApplication._config.RFID_OperationMode);
-            BleMvxApplication._reader.rfid.SetTagGroup(CSLibrary.Constants.Selected.ASSERTED, BleMvxApplication._config.RFID_TagGroup.session, (BleMvxApplication._rfMicro_Target != 1) ? CSLibrary.Constants.SessionTarget.A : CSLibrary.Constants.SessionTarget.B);
-            BleMvxApplication._reader.rfid.SetCurrentSingulationAlgorithm(BleMvxApplication._config.RFID_Algorithm);
-            BleMvxApplication._reader.rfid.SetCurrentLinkProfile(BleMvxApplication._config.RFID_Profile);
-
-            // Select RFMicro S3 filter
-            {
-                CSLibrary.Structures.SelectCriterion extraSlecetion = new CSLibrary.Structures.SelectCriterion();
-
-                extraSlecetion.action = new CSLibrary.Structures.SelectAction(CSLibrary.Constants.Target.SELECTED, CSLibrary.Constants.Action.ASLINVA_DSLINVB, 0);
-                extraSlecetion.mask = new CSLibrary.Structures.SelectMask(CSLibrary.Constants.MemoryBank.TID, 0, 28, new byte[] { 0xe2, 0x82, 0x40, 0x30 });
-                BleMvxApplication._reader.rfid.SetSelectCriteria(0, extraSlecetion);
-
-                // Set OCRSSI Limit
-                extraSlecetion.action = new CSLibrary.Structures.SelectAction(CSLibrary.Constants.Target.SELECTED, CSLibrary.Constants.Action.NOTHING_DSLINVB, 0);
-                extraSlecetion.mask = new CSLibrary.Structures.SelectMask(CSLibrary.Constants.MemoryBank.BANK3, 0xd0, 8, new byte[] { (byte)(0x20 | BleMvxApplication._rfMicro_minOCRSSI) });
-                BleMvxApplication._reader.rfid.SetSelectCriteria(1, extraSlecetion);
-
-                extraSlecetion.action = new CSLibrary.Structures.SelectAction(CSLibrary.Constants.Target.SELECTED, CSLibrary.Constants.Action.NOTHING_DSLINVB, 0);
-                extraSlecetion.mask = new CSLibrary.Structures.SelectMask(CSLibrary.Constants.MemoryBank.BANK3, 0xd0, 8, new byte[] { (byte)(BleMvxApplication._rfMicro_maxOCRSSI) });
-                BleMvxApplication._reader.rfid.SetSelectCriteria(2, extraSlecetion);
-
-                // Temperature and Sensor code
-                extraSlecetion.action = new CSLibrary.Structures.SelectAction(CSLibrary.Constants.Target.SELECTED, CSLibrary.Constants.Action.NOTHING_DSLINVB, 0);
-                extraSlecetion.mask = new CSLibrary.Structures.SelectMask(CSLibrary.Constants.MemoryBank.BANK3, 0xe0, 0, new byte[] { 0x00 });
-                BleMvxApplication._reader.rfid.SetSelectCriteria(3, extraSlecetion);
-
-                BleMvxApplication._reader.rfid.Options.TagRanging.flags |= CSLibrary.Constants.SelectFlags.SELECT;
-            }
-
-            // Multi bank inventory
-            BleMvxApplication._reader.rfid.Options.TagRanging.multibanks = 2;
-            BleMvxApplication._reader.rfid.Options.TagRanging.bank1 = CSLibrary.Constants.MemoryBank.BANK0;
-            BleMvxApplication._reader.rfid.Options.TagRanging.offset1 = 12; // Address C
-            BleMvxApplication._reader.rfid.Options.TagRanging.count1 = 3;
-            BleMvxApplication._reader.rfid.Options.TagRanging.bank2 = CSLibrary.Constants.MemoryBank.USER;
-            BleMvxApplication._reader.rfid.Options.TagRanging.offset2 = 8;
-            BleMvxApplication._reader.rfid.Options.TagRanging.count2 = 4;
-            BleMvxApplication._reader.rfid.Options.TagRanging.compactmode = false;
-            BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_PRERANGING);
-        }
-
-        void SetConfigPower() {
-            if (BleMvxApplication._reader.rfid.GetAntennaPort() == 1) {
-                if (BleMvxApplication._config.RFID_PowerSequencing_NumberofPower == 0) {
-                    BleMvxApplication._reader.rfid.SetPowerSequencing(0);
-                    BleMvxApplication._reader.rfid.SetPowerLevel(BleMvxApplication._config.RFID_Antenna_Power[0]);
-                }
-                else BleMvxApplication._reader.rfid.SetPowerSequencing(
-                    BleMvxApplication._config.RFID_PowerSequencing_NumberofPower, 
-                    BleMvxApplication._config.RFID_PowerSequencing_Level, 
-                    BleMvxApplication._config.RFID_PowerSequencing_DWell
-                );
-            }
-            else {
-                for (uint cnt = BleMvxApplication._reader.rfid.GetAntennaPort() - 1; cnt >= 0; cnt--) {
-                    BleMvxApplication._reader.rfid.SetPowerLevel(BleMvxApplication._config.RFID_Antenna_Power[cnt], cnt);
-                }
-            }
-        }
-
-        void SetPower(int index) {
-            switch (index) {
-                case 0:
-                    BleMvxApplication._reader.rfid.SetPowerSequencing(0);
-                    BleMvxApplication._reader.rfid.SetPowerLevel(160);
-                    break;
-                case 1:
-                    BleMvxApplication._reader.rfid.SetPowerSequencing(0);
-                    BleMvxApplication._reader.rfid.SetPowerLevel(230);
-                    break;
-                
-                // ####### ACTIVE CASE #######
-                case 2:
-                    BleMvxApplication._reader.rfid.SetPowerSequencing(0);
-                    BleMvxApplication._reader.rfid.SetPowerLevel(300);
-                    break;
-                // ###########################
-
-                case 3:
-                    SetPower(_powerRunning);
-                    break;
-                case 4:
-                    SetConfigPower();
-                    break;
-            }
-        }
-
-        int _powerRunning = 0;
         void StartInventory() {
             if (_startInventory == false) return;
 
@@ -386,9 +237,6 @@ namespace BLE.Client.ViewModels {
 
             BleMvxApplication._reader.rfid.StopOperation();
             RaisePropertyChanged(() => startInventoryButtonText);
-
-            if (_powerRunning >= 2) _powerRunning = 0;
-            else                    _powerRunning++;
         }
 
         void StartInventoryClick() {
@@ -403,6 +251,38 @@ namespace BLE.Client.ViewModels {
             }
         }
 
+
+
+        //////////////////////////////////////////////////////////////////
+        //////////////// Timer Function and Event Section ////////////////
+        //////////////////////////////////////////////////////////////////
+
+        async void GetTimes() {
+            string active_time_str = await Application.Current.MainPage.DisplayPromptAsync( // Get tag name
+                title: "Input ACTIVE Time for Duty Cycle", 
+                message: "Example: 2000 (means 2 seconds)",
+                placeholder: ""
+            );
+
+            string inactive_time_str = await Application.Current.MainPage.DisplayPromptAsync( // Get tag name
+                title: "Input INACTIVE Time for Duty Cycle",
+                message: "Example: 3000 (means 3 seconds)",
+                placeholder: ""
+            );
+
+            pick_result = await FilePicker.PickAsync();
+
+            _DebugLabel = pick_result.FullPath;
+            RaisePropertyChanged(() => DebugLabel);
+
+            _active_time   = Convert.ToInt32(active_time_str);
+            _inactive_time = Convert.ToInt32(inactive_time_str);
+            RaisePropertyChanged(() => active_time);
+            RaisePropertyChanged(() => inactive_time);
+
+            ActiveTimer();
+            DownTimer();
+        }
         private void ActiveTimer() {  
             activetimer.Interval = inactive_time;       // READER IS OFF FOR THIS DURATION
             activetimer.Elapsed += ActiveEvent;  
@@ -431,6 +311,10 @@ namespace BLE.Client.ViewModels {
             activetimer.Enabled = true;
             downtimer.Enabled = false;
         }
+
+        //////////////////////////////////////////////////////////////////
+
+
 
         void TagInventoryEvent(object sender, CSLibrary.Events.OnAsyncCallbackEventArgs e) {
             if (e.type != CSLibrary.Constants.CallbackType.TAG_RANGING) return;
@@ -488,11 +372,6 @@ namespace BLE.Client.ViewModels {
                                             if (caldata == 0) { TagInfoList[cnt].SensorAvgValue = "NoCalData"; }
                                             else {
                                                 switch (BleMvxApplication._rfMicro_SensorUnit) {
-                                                    case 0: // Code
-                                                        TagInfoList[cnt]._sensorValueSum += temp;
-                                                        SensorAvgValue = Math.Round(TagInfoList[cnt]._sensorValueSum / TagInfoList[cnt].SucessCount, 2);
-                                                        TagInfoList[cnt].SensorAvgValue = SensorAvgValue.ToString();
-                                                        break;
                                                     case 2: // F
                                                         TagInfoList[cnt]._sensorValueSum += getTempF(temp, caldata);
                                                         SensorAvgValue = Math.Round(TagInfoList[cnt]._sensorValueSum / TagInfoList[cnt].SucessCount, 2);
@@ -556,7 +435,6 @@ namespace BLE.Client.ViewModels {
                             item._sensorValueSum = 0;
                             item.SensorAvgValue = "";
                             item.RSSIColor = "Black";
-                            item.SAV = 0;
                             item.Performance = "";
 
                             if (ocRSSI >= BleMvxApplication._rfMicro_minOCRSSI && ocRSSI <= BleMvxApplication._rfMicro_maxOCRSSI) {
@@ -574,8 +452,6 @@ namespace BLE.Client.ViewModels {
                                             if (caldata == 0) item.SensorAvgValue = "NoCalData";
                                             else
                                                 switch (BleMvxApplication._rfMicro_SensorUnit) {
-                                                    case 0:      // code
-                                                        break;
                                                     case 2:      // F
                                                         break;
                                                     default:     // C
@@ -641,31 +517,6 @@ namespace BLE.Client.ViewModels {
             }
         }
 
-        double getTempF(UInt16 temp, UInt64 CalCode) {
-            return (getTemperatue(temp, CalCode) * 1.8 + 32.0);
-        }
-
-        double getTempC(UInt16 temp, UInt64 CalCode) {
-            return getTemperatue(temp, CalCode);
-        }
-
-        double getTemperatue(UInt16 temp, UInt64 CalCode) { // VERIFIED FROM MAGNUS AXZON DOCUMENTATION
-            int crc      = (int)(CalCode >> 48) & 0xffff;
-            int calCode1 = (int)(CalCode >> 36) & 0x0fff;
-            int calTemp1 = (int)(CalCode >> 25) & 0x07ff;
-            int calCode2 = (int)(CalCode >> 13) & 0x0fff;
-            int calTemp2 = (int)(CalCode >> 2) & 0x7FF;
-            int calVer   = (int)(CalCode & 0x03);
-
-            double fTemperature = temp;
-            fTemperature  = ((double)calTemp2 - (double)calTemp1) * (fTemperature - (double)calCode1);
-            fTemperature /= ((double)(calCode2) - (double)calCode1);
-            fTemperature += (double)calTemp1;
-            fTemperature -= 800;
-            fTemperature /= 10;
-            return fTemperature;
-        }
-
         void VoltageEvent(object sender, CSLibrary.Notification.VoltageEventArgs e) {
             if (e.Voltage == 0xffff) { _labelVoltage = "CS108 Bat. ERROR"; }
             else {
@@ -701,7 +552,8 @@ namespace BLE.Client.ViewModels {
             });
         }
 
-        private async void ShareDataButtonClick() {
+        private async void ShareDataButtonClick()
+        {
             string fileName = pick_result.FullPath;
 
             await Share.RequestAsync(new ShareFileRequest {
@@ -711,7 +563,8 @@ namespace BLE.Client.ViewModels {
         }
 
         #region Key_event
-        void HotKeys_OnKeyEvent(object sender, CSLibrary.Notification.HotKeyEventArgs e) {
+        void HotKeys_OnKeyEvent(object sender, CSLibrary.Notification.HotKeyEventArgs e)
+        {
             if (e.KeyCode == CSLibrary.Notification.Key.BUTTON) {
                 if (e.KeyDown) { StartInventory(); }
                 else           { StopInventory(); }
@@ -719,7 +572,8 @@ namespace BLE.Client.ViewModels {
         }
         #endregion
 
-        async void ShowDialog(string Msg) {
+        async void ShowDialog(string Msg)
+        {
             var config = new ProgressDialogConfig() {
                 Title = Msg,
                 IsDeterministic = true,

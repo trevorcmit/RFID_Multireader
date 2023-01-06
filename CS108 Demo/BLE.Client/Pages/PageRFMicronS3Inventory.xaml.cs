@@ -5,7 +5,6 @@ using System.Reflection;
 
 
 namespace BLE.Client.Pages {
-
     [ContentProperty (nameof(Source))]
     public class ImageResourceExtension : IMarkupExtension {
         public string Source {get; set;}
@@ -16,6 +15,7 @@ namespace BLE.Client.Pages {
             var imageSource = ImageSource.FromResource(Source);
             return imageSource;
         }
+
     }
     
     public partial class PageRFMicroS3Inventory {

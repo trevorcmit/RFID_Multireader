@@ -243,17 +243,16 @@
                 </RelativeLayout.HeightConstraint>
             </Button>
 
-
-            <!-- TextColor="{Binding labelVoltageTextColor}" -->
-            <!-- Text ="{Binding labelVoltage}" TextColor="{Binding labelVoltageTextColor}" -->
             <Label
-                Text="{Binding ConnectionDeviceName}" BackgroundColor="#FFFFFF"
+                Text ="{Binding labelVoltage}" TextColor="{Binding labelVoltageTextColor}"
+            />
+
+            <!--    Text="{Binding ConnectionDeviceName}" BackgroundColor="#FFFFFF"
 				RelativeLayout.XConstraint ="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.0, Constant=2}"
 				RelativeLayout.YConstraint ="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.96, Constant=2}"
 				RelativeLayout.HeightConstraint="{ConstraintExpression Type = RelativeToParent, Property=Height, Factor=0.04, Constant=-4}" 
 				RelativeLayout.WidthConstraint ="{ConstraintExpression Type = RelativeToParent, Property=Width, Factor=1.0, Constant=-4}" 	
-			/>
-
+			/> -->
             <!-- <Label
 				Text = "{Binding ConnectionDeviceName}" 
                 BackgroundColor="#fefefe"

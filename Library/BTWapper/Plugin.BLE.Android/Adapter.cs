@@ -14,10 +14,9 @@ using Object = Java.Lang.Object;
 using Trace = Plugin.BLE.Abstractions.Trace;
 using Android.App;
 
-namespace Plugin.BLE.Android
-{
-    public class Adapter : AdapterBase
-    {
+
+namespace Plugin.BLE.Android {
+    public class Adapter : AdapterBase {
         private readonly BluetoothManager _bluetoothManager;
         private readonly BluetoothAdapter _bluetoothAdapter;
         private readonly Api18BleScanCallback _api18ScanCallback;
@@ -25,9 +24,6 @@ namespace Plugin.BLE.Android
 
         public override IList<IDevice> ConnectedDevices => ConnectedDeviceRegistry.Values.ToList();
 
-        /// <summary>
-        /// Used to store all connected devices
-        /// </summary>
         public Dictionary<string, IDevice> ConnectedDeviceRegistry { get; }
 
         public Adapter(BluetoothManager bluetoothManager)
@@ -37,46 +33,28 @@ namespace Plugin.BLE.Android
 
             ConnectedDeviceRegistry = new Dictionary<string, IDevice>();
 
-            // TODO: bonding
-            //var bondStatusBroadcastReceiver = new BondStatusBroadcastReceiver();
-            //Application.Context.RegisterReceiver(bondStatusBroadcastReceiver,
-            //    new IntentFilter(BluetoothDevice.ActionBondStateChanged));
-
-            ////forward events from broadcast receiver
-            //bondStatusBroadcastReceiver.BondStateChanged += (s, args) =>
-            //{
-            //    //DeviceBondStateChanged(this, args);
-            //};
-
-            if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
-            {
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop) {
                 _api21ScanCallback = new Api21BleScanCallback(this);
             }
-            else
-            {
+            else {
                 _api18ScanCallback = new Api18BleScanCallback(this);
             }
         }
 
-        protected override Task StartScanningForDevicesNativeAsync(Guid[] serviceUuids, bool allowDuplicatesKey, CancellationToken scanCancellationToken)
-        {
-            // clear out the list
-            DiscoveredDevices.Clear();
+        protected override Task StartScanningForDevicesNativeAsync(Guid[] serviceUuids, bool allowDuplicatesKey, CancellationToken scanCancellationToken) {
+            DiscoveredDevices.Clear(); // clear out the list
 
-            if (Build.VERSION.SdkInt < BuildVersionCodes.Lollipop)
-            {
+            if (Build.VERSION.SdkInt < BuildVersionCodes.Lollipop) {
                 StartScanningOld(serviceUuids);
             }
-            else
-            {
+            else {
                 StartScanningNew(serviceUuids);
             }
 
             return Task.FromResult(true);
         }
 
-        private void StartScanningOld(Guid[] serviceUuids)
-        {
+        private void StartScanningOld(Guid[] serviceUuids) {
             var hasFilter = serviceUuids?.Any() ?? false;
             UUID[] uuids = null;
             if (hasFilter)
@@ -89,13 +67,11 @@ namespace Plugin.BLE.Android
 #pragma warning restore 618
         }
 
-        private void StartScanningNew(Guid[] serviceUuids)
-        {
+        private void StartScanningNew(Guid[] serviceUuids) {
             var hasFilter = serviceUuids?.Any() ?? false;
             List<ScanFilter> scanFilters = null;
 
-            if (hasFilter)
-            {
+            if (hasFilter) {
                 scanFilters = new List<ScanFilter>();
                 foreach (var serviceUuid in serviceUuids)
                 {
@@ -147,11 +123,7 @@ namespace Plugin.BLE.Android
             return Task.CompletedTask;
         }
 
-        protected override void DisconnectDeviceNative(IDevice device)
-        {
-            //make sure everything is disconnected
-            ((Device)device).Disconnect();
-        }
+        protected override void DisconnectDeviceNative(IDevice device) { ((Device)device).Disconnect(); }
 
         public override async Task<IDevice> ConnectToKnownDeviceAsync(Guid deviceGuid, ConnectParameters connectParameters = default(ConnectParameters), CancellationToken cancellationToken = default(CancellationToken))
         {
@@ -193,8 +165,7 @@ namespace Plugin.BLE.Android
         }
 
 
-        public class Api18BleScanCallback : Object, BluetoothAdapter.ILeScanCallback
-        {
+        public class Api18BleScanCallback : Object, BluetoothAdapter.ILeScanCallback {
             private readonly Adapter _adapter;
 
             public Api18BleScanCallback(Adapter adapter)
@@ -202,81 +173,31 @@ namespace Plugin.BLE.Android
                 _adapter = adapter;
             }
 
-            public void OnLeScan(BluetoothDevice bleDevice, int rssi, byte[] scanRecord)
-            {
+            public void OnLeScan(BluetoothDevice bleDevice, int rssi, byte[] scanRecord) {
                 Trace.Message("Adapter.LeScanCallback: " + bleDevice.Name);
-
                 _adapter.HandleDiscoveredDevice(new Device(_adapter, bleDevice, null, rssi, scanRecord));
             }
         }
 
 
-        public class Api21BleScanCallback : ScanCallback
-        {
+        public class Api21BleScanCallback : ScanCallback {
             private readonly Adapter _adapter;
-            public Api21BleScanCallback(Adapter adapter)
-            {
+            public Api21BleScanCallback(Adapter adapter) {
                 _adapter = adapter;
             }
 
-            public override void OnScanFailed(ScanFailure errorCode)
-            {
+            public override void OnScanFailed(ScanFailure errorCode) {
                 Trace.Message("Adapter: Scan failed with code {0}", errorCode);
                 base.OnScanFailed(errorCode);
             }
 
-            public override void OnScanResult(ScanCallbackType callbackType, ScanResult result)
-            {
+            public override void OnScanResult(ScanCallbackType callbackType, ScanResult result) {
                 base.OnScanResult(callbackType, result);
-
-                /* Might want to transition to parsing the API21+ ScanResult, but sort of a pain for now 
-                List<AdvertisementRecord> records = new List<AdvertisementRecord>();
-                records.Add(new AdvertisementRecord(AdvertisementRecordType.Flags, BitConverter.GetBytes(result.ScanRecord.AdvertiseFlags)));
-                if (!string.IsNullOrEmpty(result.ScanRecord.DeviceName))
-                {
-                    records.Add(new AdvertisementRecord(AdvertisementRecordType.CompleteLocalName, Encoding.UTF8.GetBytes(result.ScanRecord.DeviceName)));
-                }
-                for (int i = 0; i < result.ScanRecord.ManufacturerSpecificData.Size(); i++)
-                {
-                    int key = result.ScanRecord.ManufacturerSpecificData.KeyAt(i);
-                    var arr = result.ScanRecord.GetManufacturerSpecificData(key);
-                    byte[] data = new byte[arr.Length + 2];
-                    BitConverter.GetBytes((ushort)key).CopyTo(data,0);
-                    arr.CopyTo(data, 2);
-                    records.Add(new AdvertisementRecord(AdvertisementRecordType.ManufacturerSpecificData, data));
-                }
-
-                foreach(var uuid in result.ScanRecord.ServiceUuids)
-                {
-                    records.Add(new AdvertisementRecord(AdvertisementRecordType.UuidsIncomplete128Bit, uuid.Uuid.));
-                }
-
-                foreach(var key in result.ScanRecord.ServiceData.Keys)
-                {
-                    records.Add(new AdvertisementRecord(AdvertisementRecordType.ServiceData, result.ScanRecord.ServiceData));
-                }*/
-
                 var device = new Device(_adapter, result.Device, null, result.Rssi, result.ScanRecord.GetBytes());
-
-                //Device device;
-                //if (result.ScanRecord.ManufacturerSpecificData.Size() > 0)
-                //{
-                //    int key = result.ScanRecord.ManufacturerSpecificData.KeyAt(0);
-                //    byte[] mdata = result.ScanRecord.GetManufacturerSpecificData(key);
-                //    byte[] mdataWithKey = new byte[mdata.Length + 2];
-                //    BitConverter.GetBytes((ushort)key).CopyTo(mdataWithKey, 0);
-                //    mdata.CopyTo(mdataWithKey, 2);
-                //    device = new Device(result.Device, null, null, result.Rssi, mdataWithKey);
-                //}
-                //else
-                //{
-                //    device = new Device(result.Device, null, null, result.Rssi, new byte[0]);
-                //}
-
                 _adapter.HandleDiscoveredDevice(device);
-
             }
         }
+
     }
 }
 

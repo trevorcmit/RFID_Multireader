@@ -306,7 +306,6 @@ namespace BLE.Client.ViewModels {
             RaisePropertyChanged(() => labelVoltage);
 
             ShowViewModel<DeviceListViewModel>(new MvxBundle());
-            // ShowViewModel<DeviceListViewModel>();
 
             CheckConnection();
         }

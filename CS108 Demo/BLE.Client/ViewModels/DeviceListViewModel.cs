@@ -186,7 +186,7 @@ namespace BLE.Client.ViewModels {
                         return;
 
                     Connect(device);
-                    // Close(this);     // Directive to return to ViewModelMainMenu
+                    Close(this);     // Directive to return to ViewModelMainMenu
 
 
                     /////////////////////////////////////////////////////
@@ -441,9 +441,6 @@ namespace BLE.Client.ViewModels {
                     // BleMvxApplication._reader.ConnectLostAsync();
 
                     HandleSelectedDevice(deviceItem, false);
-
-                    // RaisePropertyChanged();
-                    // Close(this);
                 }
             }
 

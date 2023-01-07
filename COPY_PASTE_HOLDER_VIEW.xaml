@@ -1,4 +1,4 @@
-﻿<pages:BasePage 
+<pages:BasePage 
   xmlns="http://xamarin.com/schemas/2014/forms"
   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
   xmlns:pages="clr-namespace:BLE.Client.Pages;assembly=BLE.Client"
@@ -86,7 +86,6 @@
             Grid.Row="0"
             Grid.Column="0" Grid.ColumnSpan="2"
             Title="Person #2" x:Name="picker2"
-            ItemsSource="{Binding pickerList2}"
           />
 
           <Image 

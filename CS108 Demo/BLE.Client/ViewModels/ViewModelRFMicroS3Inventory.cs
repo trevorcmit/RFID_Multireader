@@ -15,6 +15,17 @@ using Xamarin;
 using Xamarin.Forms;
 using Xamarin.Essentials;
 
+// using LiveChartsCore;
+// using LiveChartsCore.Defaults;
+// using LiveChartsCore.SkiaSharpView;
+// using LiveChartsCore.SkiaSharpView.Painting;
+// using LiveChartsCore.Drawing;
+// using LiveChartsCore.Kernel;
+// using LiveChartsCore.Kernel.Drawing;
+// using LiveChartsCore.Kernel.Sketches;
+// using LiveChartsCore.Measure;
+// using SkiaSharp;
+
 
 namespace BLE.Client.ViewModels {
 
@@ -33,13 +44,13 @@ namespace BLE.Client.ViewModels {
             public DateTime CurrentTime { get { return this._CurrentTime; } set { this.SetProperty(ref this._CurrentTime, value); } }
             /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            private string _EPC; public string EPC {get {return this._EPC;} set {this.SetProperty(ref this._EPC, value);}}
-            private string _NickName; public string NickName {get {return this._NickName;} set {this.SetProperty(ref this._NickName, value);}}
-            private string _TagName; public string TagName {get {return this._TagName;} set {this.SetProperty(ref this._TagName, value);}}
+            private string _EPC; public string EPC { get { return this._EPC; } set { this.SetProperty(ref this._EPC, value); } }
+            private string _NickName; public string NickName { get { return this._NickName; } set { this.SetProperty(ref this._NickName, value); } }
+            private string _TagName; public string TagName { get { return this._TagName; } set { this.SetProperty(ref this._TagName, value); } }
         
-            private string _DisplayName; public string DisplayName {get {return this._DisplayName;} set {this.SetProperty(ref this._DisplayName, value);}}
+            private string _DisplayName; public string DisplayName { get { return this._DisplayName; } set { this.SetProperty(ref this._DisplayName, value); } }
             private uint _OCRSSI; public uint OCRSSI {get {return this._OCRSSI;} set {this.SetProperty(ref this._OCRSSI, value);}}
-            public double _sensorValueSum; private string _sensorAvgValue;
+            private string _sensorAvgValue;
             public string SensorAvgValue {get {return this._sensorAvgValue;} set {this.SetProperty(ref this._sensorAvgValue, value);}}
             private uint _sucessCount; public uint SucessCount {get {return this._sucessCount;} set {this.SetProperty(ref this._sucessCount, value);}}
             private string _RSSIColor; public string RSSIColor {get {return this._RSSIColor;} set {this.SetProperty(ref this._RSSIColor, value);}}
@@ -56,30 +67,21 @@ namespace BLE.Client.ViewModels {
         public ICommand OnClearButtonCommand {protected set; get;}
         public ICommand OnShareDataCommand {protected set; get;}
         public ICommand OnAddNicknameCommand {protected set; get;}
-        // public MvxCommand ConnectToPreviousCommand {protected set; get;}
-
 
         private ObservableCollection<RFMicroTagInfoViewModel> _TagInfoList = new ObservableCollection<RFMicroTagInfoViewModel>();
         public ObservableCollection<RFMicroTagInfoViewModel> TagInfoList {get {return _TagInfoList;} set {SetProperty(ref _TagInfoList, value);}}
 
         private string _startInventoryButtonText = "Start Inventory"; public string startInventoryButtonText {get {return _startInventoryButtonText;}}
 
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // For Saving Data / CSV exporting
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////// For Saving Data / CSV exporting ///////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////
         List<string> tag_List = new List<string>();
         Dictionary<string, List<string>> tag_Time = new Dictionary<string, List<string>>();
         Dictionary<string, List<string>> tag_Data = new Dictionary<string, List<string>>();
-
-        private string _Duty; public string Duty {get => _Duty; set {_Duty = value; OnPropertyChanged("Duty");}}
-        private string _DutyColor; public string DutyColor {get => _DutyColor; set {_DutyColor = value; OnPropertyChanged("DutyColor");}}
-        private int _active_time; public int active_time {get => _active_time; set {_active_time = value; OnPropertyChanged("active_time");}}
-        private int _inactive_time; public int inactive_time {get => _inactive_time; set {_inactive_time = value; OnPropertyChanged("inactive_time");}}
         private List<string> _epcs; public List<string> epcs {get => _epcs; set {_epcs = value; OnPropertyChanged("epcs");}}
         private Dictionary<string, string> _map; public Dictionary<string, string> map {get => _map; set {_map = value; OnPropertyChanged("map");}}
-
-        ///////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName = null) {
@@ -92,74 +94,70 @@ namespace BLE.Client.ViewModels {
         private string _labelVoltage = ""; public string labelVoltage {get {return _labelVoltage;}}
         public bool _startInventory = true;
         bool _cancelVoltageValue = false;
+
+
+        ////////////////////////////////////////////////////
+        ///////////// Variables for Duty Cycle /////////////
+        ////////////////////////////////////////////////////
+        private string _Duty; public string Duty { get => _Duty; set { _Duty = value; OnPropertyChanged("Duty"); } }
+        private string _DutyColor; public string DutyColor { get => _DutyColor; set { _DutyColor = value; OnPropertyChanged("DutyColor"); } }
+        private int _active_time; public int active_time { get => _active_time; set { _active_time = value; OnPropertyChanged("active_time"); } }
+        private int _inactive_time; public int inactive_time { get => _inactive_time; set { _inactive_time = value; OnPropertyChanged("inactive_time"); } }
         public System.Timers.Timer activetimer = new System.Timers.Timer();
         public System.Timers.Timer downtimer = new System.Timers.Timer();
+        ////////////////////////////////////////////////////
 
         // Save FilePicker.PickAsync() result for use in Autosave function
         public FileResult pick_result; 
-
         private string _DebugLabel; public string DebugLabel {get => _DebugLabel; set {_DebugLabel = value; OnPropertyChanged("DebugLabel");}}
+  
+        #endregion
 
 
-        private string _SelectedPerson1 = "Select Person";
-        public string SelectedPerson1 {
-            get => _SelectedPerson1;
-            set {
-                _SelectedPerson1 = value;
-                OnPropertyChanged("SelectedPerson1");
-            }
-        }
+        #region ------------- Person Selection ----------------
 
-        private string _SelectedPerson2 = "Select Person";
-        public string SelectedPerson2 {
-            get => _SelectedPerson2;
-            set {
-                _SelectedPerson2 = value;
-                OnPropertyChanged("SelectedPerson2");
-            }
-        }
+        private string _Back1; public string Back1 { get => _Back1; set { _Back1 = value; OnPropertyChanged("Back1"); } }
+        private string _BackNeck1; public string BackNeck1 { get => _BackNeck1; set { _BackNeck1 = value; OnPropertyChanged("BackNeck1"); } }
+        private string _Chest1; public string Chest1 { get => _Chest1; set { _Chest1 = value; OnPropertyChanged("Chest1"); } }
+        private string _LeftAb1; public string LeftAb1 { get => _LeftAb1; set { _LeftAb1 = value; OnPropertyChanged("LeftAb1"); } }
+        private string _RightAb1; public string RightAb1 { get => _RightAb1; set { _RightAb1 = value; OnPropertyChanged("RightAb1"); } }
+        private string _LeftUpArm1; public string LeftUpArm1 { get => _LeftUpArm1; set { _LeftUpArm1 = value; OnPropertyChanged("LeftUpArm1"); } }
+        private string _RightUpArm1; public string RightUpArm1 { get => _RightUpArm1; set { _RightUpArm1 = value; OnPropertyChanged("RightUpArm1"); } }
+        private string _LeftLowArm1; public string LeftLowArm1 { get => _LeftLowArm1; set { _LeftLowArm1 = value; OnPropertyChanged("LeftLowArm1"); } }
+        private string _RightLowArm1; public string RightLowArm1 { get => _RightLowArm1; set { _RightLowArm1 = value; OnPropertyChanged("RightLowArm1"); } }
 
-
-        public IList<string> PersonList1;
-        public IList<string> PersonList2;
-
+        private string _Back1_T; public string Back1_T { get => _Back1_T; set { _Back1_T = value; OnPropertyChanged("Back1_T"); } }
+        private string _BackNeck1_T; public string BackNeck1_T { get => _BackNeck1_T; set { _BackNeck1_T = value; OnPropertyChanged("BackNeck1_T"); } }
+        private string _Chest1_T; public string Chest1_T { get => _Chest1_T; set { _Chest1_T = value; OnPropertyChanged("Chest1_T"); } }
+        private string _LeftAb1_T; public string LeftAb1_T { get => _LeftAb1_T; set { _LeftAb1_T = value; OnPropertyChanged("LeftAb1_T"); } }
+        private string _RightAb1_T; public string RightAb1_T { get => _RightAb1_T; set { _RightAb1_T = value; OnPropertyChanged("RightAb1_T"); } }
+        private string _LeftUpArm1_T; public string LeftUpArm1_T { get => _LeftUpArm1_T; set { _LeftUpArm1_T = value; OnPropertyChanged("LeftUpArm1_T"); } }
+        private string _RightUpArm1_T; public string RightUpArm1_T { get => _RightUpArm1_T; set { _RightUpArm1_T = value; OnPropertyChanged("RightUpArm1_T"); } }
+        private string _LeftLowArm1_T; public string LeftLowArm1_T { get => _LeftLowArm1_T; set { _LeftLowArm1_T = value; OnPropertyChanged("LeftLowArm1_T"); } }
+        private string _RightLowArm1_T; public string RightLowArm1_T { get => _RightLowArm1_T; set { _RightLowArm1_T = value; OnPropertyChanged("RightLowArm1_T"); } }
 
         #endregion
+
 
         public ViewModelRFMicroS3Inventory(IAdapter adapter, IUserDialogs userDialogs) : base(adapter) {
             _userDialogs = userDialogs;
 
-            PersonList1 = new List<string>();
-            PersonList1.Add("One");
-            PersonList1.Add("Two");
-            PersonList1.Add("Three");
-            PersonList1.Add("Four");
-            PersonList1.Add("Five");
-            PersonList1.Add("Six");
-            PersonList1.Add("Seven");
-            PersonList1.Add("Eight");
-            PersonList1.Add("Nine");
-            PersonList1.Add("Ten");
+            Back1        = "gray";
+            BackNeck1    = "gray";
+            Chest1       = "gray";
+            LeftAb1      = "gray";
+            RightAb1     = "gray";
+            LeftUpArm1   = "gray";
+            RightUpArm1  = "gray";
+            LeftLowArm1  = "gray";
+            RightLowArm1 = "gray";
 
-            PersonList2 = new List<string>{ "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten" };
-
-            GetTimes();   // Get Duty Cycle Times
-
-            Duty = "N/A"; 
-            RaisePropertyChanged(() => Duty);
-
-            DutyColor = "#ffffff"; 
-            RaisePropertyChanged(() => DutyColor);
+            GetTimes();        // Get Duty Cycle Times
 
             OnStartInventoryButtonCommand = new Command(StartInventoryClick);
             OnClearButtonCommand = new Command(ClearClick);
             OnShareDataCommand = new Command(ShareDataButtonClick);
             OnAddNicknameCommand = new Command(Add_Nickname);
-
-            // Adapter.DeviceDisconnected += OnDeviceDisconnected;
-
-            // NOT TRIGGERED WHEN DEVICE IS DISCONNECTED
-            // Adapter.DeviceConnectionLost += OnDeviceConnectionLost;
         }
 
         ~ViewModelRFMicroS3Inventory() {}
@@ -205,15 +203,15 @@ namespace BLE.Client.ViewModels {
             });
         }
 
-        public RFMicroTagInfoViewModel objItemSelected {
-            set {
-                if (value != null) {
-                    BleMvxApplication._SELECT_EPC = value.EPC;
-                    ShowViewModel<ViewModelRFMicroReadTemp>(new MvxBundle());
-                }
-            }
-            get => null;
-        }
+        public RFMicroTagInfoViewModel objItemSelected { get; set; }
+        //     set {
+                // if (value != null) {
+                    // BleMvxApplication._SELECT_EPC = value.EPC;
+                    // ShowViewModel<ViewModelRFMicroReadTemp>(new MvxBundle());
+                // }
+        //     }
+        //     get => null;
+        // }
 
         void StartInventory() {
             if (_startInventory == false) return;
@@ -240,11 +238,11 @@ namespace BLE.Client.ViewModels {
         }
 
         void StartInventoryClick() {
-            if (_startInventory) { 
+            if (_startInventory) {
                 activetimer.Enabled = true; 
                 StartInventory(); 
             }
-            else { 
+            else {
                 StopInventory();
                 activetimer.Enabled = false;
                 downtimer.Enabled = false; 
@@ -258,31 +256,36 @@ namespace BLE.Client.ViewModels {
         //////////////////////////////////////////////////////////////////
 
         async void GetTimes() {
-            string active_time_str = await Application.Current.MainPage.DisplayPromptAsync( // Get tag name
-                title: "Input ACTIVE Time for Duty Cycle", 
-                message: "Example: 2000 (means 2 seconds)",
-                placeholder: ""
-            );
+            // string active_time_str = await Application.Current.MainPage.DisplayPromptAsync( // Get tag name
+            //     title: "Input ACTIVE Time for Duty Cycle", 
+            //     message: "Example: 2000 (means 2 seconds)",
+            //     placeholder: ""
+            // );
 
-            string inactive_time_str = await Application.Current.MainPage.DisplayPromptAsync( // Get tag name
-                title: "Input INACTIVE Time for Duty Cycle",
-                message: "Example: 3000 (means 3 seconds)",
-                placeholder: ""
-            );
+            // string inactive_time_str = await Application.Current.MainPage.DisplayPromptAsync( // Get tag name
+            //     title: "Input INACTIVE Time for Duty Cycle",
+            //     message: "Example: 3000 (means 3 seconds)",
+            //     placeholder: ""
+            // );
 
+            // Necessary part for picking autosave location
             pick_result = await FilePicker.PickAsync();
-
             _DebugLabel = pick_result.FullPath;
             RaisePropertyChanged(() => DebugLabel);
 
-            _active_time   = Convert.ToInt32(active_time_str);
-            _inactive_time = Convert.ToInt32(inactive_time_str);
+            // Save every second and we cycle by half seconds
+            _active_time   = 500;
+            _inactive_time = 500;
+
+            // _active_time   = Convert.ToInt32(active_time_str);
+            // _inactive_time = Convert.ToInt32(inactive_time_str);
             RaisePropertyChanged(() => active_time);
             RaisePropertyChanged(() => inactive_time);
 
             ActiveTimer();
             DownTimer();
         }
+
         private void ActiveTimer() {  
             activetimer.Interval = inactive_time;       // READER IS OFF FOR THIS DURATION
             activetimer.Elapsed += ActiveEvent;  
@@ -296,18 +299,18 @@ namespace BLE.Client.ViewModels {
         }
 
         private void ActiveEvent(object sender, System.Timers.ElapsedEventArgs e) {  
-            _Duty = "ACTIVE"; RaisePropertyChanged(() => Duty);
-            StartInventory();
+            // _Duty = "ACTIVE"; RaisePropertyChanged(() => Duty);
+            // StartInventory();
+
             activetimer.Enabled = false;
             downtimer.Enabled = true;
         }
 
         private void DownEvent(object sender, System.Timers.ElapsedEventArgs e) {
-            _Duty = "DOWN"; RaisePropertyChanged(() => Duty);
-            StopInventory();
+            // _Duty = "DOWN"; RaisePropertyChanged(() => Duty);
+            // StopInventory();
 
-            // AutoSaveData(); // Autosave while Down is occurring
-
+            AutoSaveData();    // Autosave while Down is occurring
             activetimer.Enabled = true;
             downtimer.Enabled = false;
         }
@@ -347,9 +350,9 @@ namespace BLE.Client.ViewModels {
                 int cnt;
 
                 lock (TagInfoList) {
-                    UInt16 sensorCode = (UInt16)(info.Bank1Data[0] & 0x1ff);  // Address c
-                    UInt16 ocRSSI     = info.Bank1Data[1];                    // Address d
-                    UInt16 temp       = info.Bank1Data[2];                    // Address e
+                    UInt16 sensorCode = (UInt16)(info.Bank1Data[0] & 0x1ff);   // Address c
+                    UInt16 ocRSSI     = info.Bank1Data[1];                     // Address d
+                    UInt16 temp       = info.Bank1Data[2];                     // Address e
 
                     for (cnt = 0; cnt < TagInfoList.Count; cnt++) {
                         // if (epcs.Contains(info.epc.ToString()) && (TagInfoList[cnt].EPC == info.epc.ToString())) {
@@ -362,10 +365,10 @@ namespace BLE.Client.ViewModels {
                                 // BleMvxApplication._rfMicro_SensorUnit // 0 = code, 1 = f, 2 = c, 3 = %
 
                                 switch (BleMvxApplication._rfMicro_SensorType) {
-                                    case 0: break;
+                                    case 0: 
+                                        break;
                                     default:
                                         if (temp >= 1300 && temp <= 3500) {
-                                            double SensorAvgValue;
                                             TagInfoList[cnt].SucessCount++;
                                             UInt64 caldata = (UInt64)(((UInt64)info.Bank2Data[0] << 48) | ((UInt64)info.Bank2Data[1] << 32) | ((UInt64)info.Bank2Data[2] << 16) | ((UInt64)info.Bank2Data[3]));
 
@@ -373,9 +376,6 @@ namespace BLE.Client.ViewModels {
                                             else {
                                                 switch (BleMvxApplication._rfMicro_SensorUnit) {
                                                     case 2: // F
-                                                        TagInfoList[cnt]._sensorValueSum += getTempF(temp, caldata);
-                                                        SensorAvgValue = Math.Round(TagInfoList[cnt]._sensorValueSum / TagInfoList[cnt].SucessCount, 2);
-                                                        TagInfoList[cnt].SensorAvgValue = SensorAvgValue.ToString();
                                                         break;
                                                     default: // C
                                                         double SAV = Math.Round(getTempC(temp, caldata), 2);                                               
@@ -432,7 +432,6 @@ namespace BLE.Client.ViewModels {
 
                             item.OCRSSI = ocRSSI;
                             item.SucessCount = 0;
-                            item._sensorValueSum = 0;
                             item.SensorAvgValue = "";
                             item.RSSIColor = "Black";
                             item.Performance = "";

@@ -4,7 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pages="clr-namespace:BLE.Client.Pages;assembly=BLE.Client"
     x:Class="BLE.Client.Pages.PageRenameTags"
-    Title="Renaming RFID Tags">
+    Title="Renaming RFID Tags"
+>
 
     <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" WidthRequest="1000">
 

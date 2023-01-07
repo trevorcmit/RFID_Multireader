@@ -16807,7 +16807,7 @@ namespace BLE.Client.Droid
 			public const int design_snackbar_background = 2131165284;
 			
 			// aapt resource value: 0x7F070065
-			public const int digitalcamo = 2131165285;
+			public const int digitalbackground = 2131165285;
 			
 			// aapt resource value: 0x7F070066
 			public const int front_back = 2131165286;
@@ -17593,22 +17593,25 @@ namespace BLE.Client.Droid
 			public const int roundedbgdark = 2131165546;
 			
 			// aapt resource value: 0x7F07016B
-			public const int test_custom_background = 2131165547;
+			public const int singletorso = 2131165547;
 			
 			// aapt resource value: 0x7F07016C
-			public const int tooltip_frame_dark = 2131165548;
+			public const int test_custom_background = 2131165548;
 			
 			// aapt resource value: 0x7F07016D
-			public const int tooltip_frame_light = 2131165549;
+			public const int tooltip_frame_dark = 2131165549;
 			
 			// aapt resource value: 0x7F07016E
-			public const int white_clipboard = 2131165550;
+			public const int tooltip_frame_light = 2131165550;
 			
 			// aapt resource value: 0x7F07016F
-			public const int white_gear = 2131165551;
+			public const int white_clipboard = 2131165551;
 			
 			// aapt resource value: 0x7F070170
-			public const int white_play = 2131165552;
+			public const int white_gear = 2131165552;
+			
+			// aapt resource value: 0x7F070171
+			public const int white_play = 2131165553;
 			
 			static Drawable()
 			{

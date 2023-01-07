@@ -22,6 +22,20 @@ namespace BLE.Client.ViewModels {
         public string connectedButtonTextColor { get; set; } = "Black";
 
 
+        //////////////////////////////////////////////
+        //// Added to Remove Micro Setting Screen ////
+        //////////////////////////////////////////////
+        string[] _tagTypeOptions = {"Magnus S2", "Magnus S3"};
+        string[] _powerOptions = {"Low (16dBm)", "Mid (23dBm)", "High (30dBm)", "Cycle Power by Trigger Button", "Follow system Setting"};
+        string[] _targetOptions = {"A", "B", "Toggle A/B"};
+        string[] _indicatorsProfileOptions = {"Hot temperature", "Cold temperature", "Moisture detection"};
+        string[] _sensorTypeOptions = {"Humidity", "Temperature"};
+        string[] _sensorCodeUnitOptions = {"RAW Sensor Code", "Dry / Wet"};
+        string[] _temperatureUnitOptions = {"RAW Average", "ºF", "ºC"};
+        //////////////////////////////////////////////
+        //////////////////////////////////////////////
+
+
         /////////////////////////////////////////
         ///////////// CLASS METHODS /////////////
         /////////////////////////////////////////
@@ -262,7 +276,30 @@ namespace BLE.Client.ViewModels {
                 ShowConnectionWarringMessage();
                 return;
             }
-            ShowViewModel<ViewModelRFMicroSetting>(new MvxBundle());
+
+            // Initial Micro Setting for S3 Temp Tags with High Power Read
+            BleMvxApplication._rfMicro_TagType = Array.IndexOf(_tagTypeOptions, "Magnus S3");
+            BleMvxApplication._rfMicro_Power = Array.IndexOf(_powerOptions, "High (30dBm)");
+            BleMvxApplication._rfMicro_Target = Array.IndexOf(_targetOptions, "Toggle A/B"); 
+            BleMvxApplication._rfMicro_SensorType = Array.IndexOf(_sensorTypeOptions, "Temperature");
+
+            // Set to record Celsius temperature
+            BleMvxApplication._rfMicro_SensorUnit = 3;
+
+            // Set OCRSSI values
+            BleMvxApplication._rfMicro_minOCRSSI = 0;
+            BleMvxApplication._rfMicro_maxOCRSSI = 30;
+            
+            // Threshold values
+            BleMvxApplication._rfMicro_thresholdComparison = 0;
+            BleMvxApplication._rfMicro_thresholdValue = 100;
+            BleMvxApplication._rfMicro_thresholdColor = "Red";
+            BleMvxApplication._rfMicro_WetDryThresholdValue = 160;
+
+            // Skip Micro Setting Screen
+            ShowViewModel<ViewModelRFMicroS3Inventory>(new MvxBundle());
+
+            // ShowViewModel<ViewModelRFMicroSetting>(new MvxBundle());
         }
 
 		public ICommand OnSettingButtonCommand { protected set; get; }

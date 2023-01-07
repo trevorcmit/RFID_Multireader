@@ -28,8 +28,8 @@
         <Image Grid.Row="0" Grid.Column="0" Aspect="AspectFill" Opacity="0.95">
             <Image.Source>
                 <OnPlatform x:TypeArguments="FileImageSource">
-                        <On Platform="UWP"     Value="Assets/digitalbackground.jpg" />
-                        <On Platform="Android" Value="digitalcamo.jpg" />
+                    <On Platform="UWP"     Value="Assets/digitalbackground.jpg" />
+                    <On Platform="Android" Value="digitalbackground.jpg" />
                 </OnPlatform>
             </Image.Source>
         </Image>

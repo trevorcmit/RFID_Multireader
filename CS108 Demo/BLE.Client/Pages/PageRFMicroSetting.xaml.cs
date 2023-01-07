@@ -58,7 +58,6 @@ namespace BLE.Client.Pages {
 
         public async void buttonPowerClicked(object sender, EventArgs e) {
             var answer = await DisplayActionSheet("Power", "Cancel", null, _powerOptions);
-
             if (answer != null && answer !="Cancel") { buttonPower.Text = answer; }
         }
 

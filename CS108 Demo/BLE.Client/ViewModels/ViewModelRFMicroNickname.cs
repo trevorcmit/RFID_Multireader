@@ -1,8 +1,8 @@
-﻿using System.Collections.ObjectModel;
-using Acr.UserDialogs;
+﻿using Acr.UserDialogs;
 using MvvmCross.Core.ViewModels;
 using Plugin.BLE.Abstractions.Contracts;
 using Prism.Mvvm;
+using System.Collections.ObjectModel;
 
 
 namespace BLE.Client.ViewModels {

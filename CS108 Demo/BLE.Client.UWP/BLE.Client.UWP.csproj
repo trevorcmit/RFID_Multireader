@@ -138,6 +138,7 @@
     <Content Include="Assets\green.png" />
     <Content Include="Assets\play.png" />
     <Content Include="Assets\red.png" />
+    <Content Include="Assets\singletorso.jpg" />
     <Content Include="Assets\StoreLogo.scale-200.png" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Assets\StoreLogo.scale-100.png" />

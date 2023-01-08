@@ -144,20 +144,13 @@
                     CornerRadius="11"
                     Command="{Binding OnClearButtonCommand}" 
                     HorizontalOptions="StartAndExpand"
-                    BackgroundColor="#3201ba"
+                    BackgroundColor="#01196C"
             />
-            <!-- WidthRequest="200" -->
             <Button Text="Share" Font="Large" TextColor="White"
                     CornerRadius="11"
                     Command="{Binding OnShareDataCommand}"   
-                    HorizontalOptions="CenterAndExpand"
-                    BackgroundColor="#3201ba"
-            />
-            <Button Text="Add Name" Font="Large" TextColor="White"
-                    CornerRadius="11"
-                    Command="{Binding OnAddNicknameCommand}"   
                     HorizontalOptions="EndAndExpand"
-                    BackgroundColor="#3201ba"
+                    BackgroundColor="#01196C"
             />
           </StackLayout>
       </StackLayout>                                                      <!-- Bottom Inventory/Clear/Share Section -->

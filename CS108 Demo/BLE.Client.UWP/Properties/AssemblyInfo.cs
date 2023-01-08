@@ -16,7 +16,7 @@ using Xamarin.Forms;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-[assembly: ExportFont("Calibre-Light.ttf", Alias="CalibreLight")]
+// [assembly: ExportFont("Calibre-Light.ttf", Alias="CalibreLight")]
 
 // Version information for an assembly consists of the following four values:
 //

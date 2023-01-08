@@ -14,7 +14,6 @@ using System.Windows.Input;
 using Xamarin;
 using Xamarin.Forms;
 using Xamarin.Essentials;
-
 // using LiveChartsCore;
 // using LiveChartsCore.Defaults;
 // using LiveChartsCore.SkiaSharpView;
@@ -24,35 +23,20 @@ using Xamarin.Essentials;
 // using LiveChartsCore.Kernel.Drawing;
 // using LiveChartsCore.Kernel.Sketches;
 // using LiveChartsCore.Measure;
-// using SkiaSharp;
 
 
 
 namespace BLE.Client.ViewModels {
     public class ViewModelRFMicroS3Inventory : BaseViewModel {
         public class RFMicroTagInfoViewModel : BindableBase {
-
             /////////////////////////////////////////////////////////////////////////////////////////////////////////
             // CLASS UPDATES/ADDITIONS
-            private string _TimeString; // Time at which last tag was read
+            private string _TimeString;    // Time at which last tag was read
             public string TimeString { get { return this._TimeString; } set { this.SetProperty(ref this._TimeString, value); } }
-            private DateTime _CurrentTime; // DateTime object for Live Plotting Comparison
-            public DateTime CurrentTime { get { return this._CurrentTime; } set { this.SetProperty(ref this._CurrentTime, value); } }
             /////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            private string _EPC; public string EPC { get { return this._EPC; } set { this.SetProperty(ref this._EPC, value); } }
-            private string _NickName; public string NickName { get { return this._NickName; } set { this.SetProperty(ref this._NickName, value); } }
-            private string _TagName; public string TagName { get { return this._TagName; } set { this.SetProperty(ref this._TagName, value); } }
-        
-            private string _DisplayName; public string DisplayName { get { return this._DisplayName; } set { this.SetProperty(ref this._DisplayName, value); } }
-            private uint _OCRSSI; public uint OCRSSI {get {return this._OCRSSI;} set {this.SetProperty(ref this._OCRSSI, value);}}
-            private string _sensorAvgValue;
-            public string SensorAvgValue {get {return this._sensorAvgValue;} set {this.SetProperty(ref this._sensorAvgValue, value);}}
-            private uint _sucessCount; public uint SucessCount {get {return this._sucessCount;} set {this.SetProperty(ref this._sucessCount, value);}}
-            private string _RSSIColor; public string RSSIColor {get {return this._RSSIColor;} set {this.SetProperty(ref this._RSSIColor, value);}}
-            private string _Performance; public string Performance {get {return this._Performance;} set {this.SetProperty(ref this._Performance, value);}}
-
-            public RFMicroTagInfoViewModel() {}
+            private string _EPC;            public string EPC { get { return this._EPC; } set { this.SetProperty(ref this._EPC, value); } }
+            private string _sensorAvgValue; public string SensorAvgValue {get { return this._sensorAvgValue; } set { this.SetProperty(ref this._sensorAvgValue, value); } }
+            public RFMicroTagInfoViewModel() {}    // Class constructor (constructs nothing)
         }
 
         private readonly IUserDialogs _userDialogs;
@@ -62,7 +46,6 @@ namespace BLE.Client.ViewModels {
         public ICommand OnStartInventoryButtonCommand {protected set; get; }
         public ICommand OnClearButtonCommand { protected set; get; }
         public ICommand OnShareDataCommand { protected set; get; }
-        public ICommand OnAddNicknameCommand { protected set; get; }
 
         private ObservableCollection<RFMicroTagInfoViewModel> _TagInfoList = new ObservableCollection<RFMicroTagInfoViewModel>();
         public ObservableCollection<RFMicroTagInfoViewModel> TagInfoList {get {return _TagInfoList;} set {SetProperty(ref _TagInfoList, value);}}
@@ -83,14 +66,7 @@ namespace BLE.Client.ViewModels {
         protected virtual void OnPropertyChanged(string propertyName = null) {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        // private string _labelVoltage = ""; public string labelVoltage { get { return _labelVoltage; } }
         public bool _startInventory = true;
-        bool _cancelVoltageValue = false;
-
 
         ////////////////////////////////////////////////////
         ///////////// Variables for Duty Cycle /////////////
@@ -168,7 +144,6 @@ namespace BLE.Client.ViewModels {
                 _RightLowArm2_T = "--"; RaisePropertyChanged(() => RightLowArm2_T);
             }
         }
-        
 
         private string _Back1; public string Back1 { get => _Back1; set { _Back1 = value; OnPropertyChanged("Back1"); } }
         private string _BackNeck1; public string BackNeck1 { get => _BackNeck1; set { _BackNeck1 = value; OnPropertyChanged("BackNeck1"); } }
@@ -241,12 +216,26 @@ namespace BLE.Client.ViewModels {
             }
         }
 
-        Person person1 = new Person("7E1F", "ID6C", "458B", "3D03", "7B11", "0843", "4BA9", "56A4", "A268");
-        Person person2 = new Person("333B", "289B", "289B", "231D", "9879", "4067", "5FB6", "169E", "8D50");
-        Person person3 = new Person("886B", "47D0", "AE3E", "7645", "103F", "7E6F", "64C0", "2887", "8915");
-        Person person4 = new Person("9854", "A3B0", "9EC6", "9A91", "343B", "87D4", "81D4", "8A53", "1397");
-        Person person5 = new Person("777F", "67DB", "184A", "885D", "71CF", "BA4C", "8FA9", "B6A7", "2C97");
-
+        Person person1  = new Person("7E1F", "ID6C", "458B", "3D03", "7B11", "0843", "4BA9", "56A4", "A268");
+        Person person2  = new Person("333B", "289B", "289B", "231D", "9879", "4067", "5FB6", "169E", "8D50");
+        Person person3  = new Person("886B", "47D0", "AE3E", "7645", "103F", "7E6F", "64C0", "2887", "8915");
+        Person person4  = new Person("9854", "A3B0", "9EC6", "9A91", "343B", "87D4", "81D4", "8A53", "1397");
+        Person person5  = new Person("777F", "67DB", "184A", "885D", "71CF", "BA4C", "8FA9", "B6A7", "2C97");
+        Person person6  = new Person("71BB", "7705", "B25E", "3247", "A9B5", "6C38", "7662", "A983", "098F");
+        Person person7  = new Person("9857", "4BAC", "8988", "668B", "B77F", "B0A7", "8062", "7648", "5189");
+        Person person8  = new Person("1B6A", "0D42", "7AD4", "20AF", "493F", "404A", "6878", "1A3B", "546F");
+        Person person9  = new Person("1A91", "463C", "5199", "0483", "6003", "9F30", "334C", "9877", "5734");
+        Person person10 = new Person("366C", "AD8B", "AC42", "9AC9", "B53F", "76A4", "5E76", "68AE", "41D6");
+        Person person11 = new Person("2A1B", "238C", "731F", "9591", "7C98", "5F06", "4526", "461C", "5253");
+        Person person12 = new Person("87C3", "38D7", "A86F", "637A", "552E", "A34A", "9436", "7FAC", "0C90");
+        Person person13 = new Person("A033", "A0C0", "892F", "627F", "68D9", "3DB0", "8C97", "4ECF", "A73C");
+        Person person14 = new Person("462C", "5B60", "7415", "6310", "1851", "616A", "5DAA", "6D28", "1666");
+        Person person15 = new Person("9C54", "9968", "65E1", "5E23", "ACB3", "7AD3", "99A1", "B19D", "43C6");
+        Person person16 = new Person("959E", "1C5F", "5A59", "077A", "902A", "3B60", "8199", "4469", "8134");
+        Person person17 = new Person("6CC7", "8FB7", "7990", "6F8D", "6332", "5A1E", "92A5", "4A3D", "3EC9");
+        Person person18 = new Person("B43E", "19B1", "AEA6", "9152", "59D6", "3060", "7491", "893F", "38C3");
+        Person person19 = new Person("697F", "78A5", "5D0E", "7EC6", "AE59", "8158", "4A9B", "1D44", "2122");
+        Person person20 = new Person("84B5", "A02C", "0A80", "787B", "83D5", "77DB", "9FA0", "6EC4", "AF3F");
         Dictionary<int, Person> people = new Dictionary<int, Person>();
 
         #endregion
@@ -256,57 +245,32 @@ namespace BLE.Client.ViewModels {
         public ViewModelRFMicroS3Inventory(IAdapter adapter, IUserDialogs userDialogs) : base(adapter) {
             _userDialogs = userDialogs;
 
-            Back1        = "gray";
-            BackNeck1    = "gray";
-            Chest1       = "gray";
-            LeftAb1      = "gray";
-            RightAb1     = "gray";
-            LeftUpArm1   = "gray";
-            RightUpArm1  = "gray";
-            LeftLowArm1  = "gray";
-            RightLowArm1 = "gray";
-            Back2        = "gray";
-            BackNeck2    = "gray";
-            Chest2       = "gray";
-            LeftAb2      = "gray";
-            RightAb2     = "gray";
-            LeftUpArm2   = "gray";
-            RightUpArm2  = "gray";
-            LeftLowArm2  = "gray";
-            RightLowArm2 = "gray";
-            Back1_T = "--";
-            BackNeck1_T = "--";
-            Chest1_T = "--";
-            LeftAb1_T = "--";
-            RightAb1_T = "--";
-            LeftUpArm1_T = "--";
-            RightUpArm1_T = "--";
-            LeftLowArm1_T = "--";
-            RightLowArm1_T = "--";
-            Back2_T = "--";
-            BackNeck2_T = "--";
-            Chest2_T = "--";
-            LeftAb2_T = "--";
-            RightAb2_T = "--";
-            LeftUpArm2_T = "--";
-            RightUpArm2_T = "--";
-            LeftLowArm2_T = "--";
-            RightLowArm2_T = "--";
+            Back1        = "gray"; Back2        = "gray"; Back1_T        = "--"; Back2_T        = "--";
+            BackNeck1    = "gray"; BackNeck2    = "gray"; BackNeck1_T    = "--"; BackNeck2_T    = "--";
+            Chest1       = "gray"; Chest2       = "gray"; Chest1_T       = "--"; Chest2_T       = "--";
+            LeftAb1      = "gray"; LeftAb2      = "gray"; LeftAb1_T      = "--"; LeftAb2_T      = "--";
+            RightAb1     = "gray"; RightAb2     = "gray"; RightAb1_T     = "--"; RightAb2_T     = "--";
+            LeftUpArm1   = "gray"; LeftUpArm2   = "gray"; LeftUpArm1_T   = "--"; LeftUpArm2_T   = "--";
+            RightUpArm1  = "gray"; RightUpArm2  = "gray"; RightUpArm1_T  = "--"; RightUpArm2_T  = "--";
+            LeftLowArm1  = "gray"; LeftLowArm2  = "gray"; LeftLowArm1_T  = "--"; LeftLowArm2_T  = "--";
+            RightLowArm1 = "gray"; RightLowArm2 = "gray"; RightLowArm1_T = "--"; RightLowArm2_T = "--";
 
             people = new Dictionary<int, Person> {
-                {0, person1},
-                {1, person2},
-                {2, person3},
-                {3, person4},
-                {4, person5},
+                {0, person1},   {1, person2},   {2, person3},   {3, person4},   {4, person5}, 
+                {5, person6},   {6, person7},   {7, person8},   {8, person9},   {9, person10},
+                {10, person11}, {11, person12}, {12, person13}, {13, person14}, {14, person15},
+                {15, person16}, {16, person17}, {17, person18}, {18, person19}, {19, person20},
             };
-            // RaisePropertyChanged(() => people);
 
             // Setup Picker Lists on Initialization
-            // _pickerList1 = new List<string>{"One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"};
-            // _pickerList2 = new List<string>{"One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"};
-            _pickerList1 = new List<string>{ "One", "Two", "Three", "Four", "Five" };
-            _pickerList2 = new List<string>{ "One", "Two", "Three", "Four", "Five" };
+            _pickerList1 = new List<string>{
+                "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
+                "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen", "Twenty",
+            };
+            _pickerList2 = new List<string>{
+                "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
+                "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen", "Twenty",
+            };
             RaisePropertyChanged(() => pickerList1);
             RaisePropertyChanged(() => pickerList2);
 
@@ -315,7 +279,6 @@ namespace BLE.Client.ViewModels {
             OnStartInventoryButtonCommand = new Command(StartInventoryClick);
             OnClearButtonCommand = new Command(ClearClick);
             OnShareDataCommand = new Command(ShareDataButtonClick);
-            OnAddNicknameCommand = new Command(Add_Nickname);
         }
 
         ~ViewModelRFMicroS3Inventory() {}
@@ -374,7 +337,6 @@ namespace BLE.Client.ViewModels {
 
             BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_EXERANGING);
             ClassBattery.SetBatteryMode(ClassBattery.BATTERYMODE.INVENTORY);
-            _cancelVoltageValue = true;
 
             RaisePropertyChanged(() => startInventoryButtonText);
         }
@@ -406,22 +368,8 @@ namespace BLE.Client.ViewModels {
         //////////////////////////////////////////////////////////////////
 
         async void GetTimes() {
-            // string active_time_str = await Application.Current.MainPage.DisplayPromptAsync( // Get tag name
-            //     title: "Input ACTIVE Time for Duty Cycle", 
-            //     message: "Example: 2000 (means 2 seconds)",
-            //     placeholder: ""
-            // );
-
-            // string inactive_time_str = await Application.Current.MainPage.DisplayPromptAsync( // Get tag name
-            //     title: "Input INACTIVE Time for Duty Cycle",
-            //     message: "Example: 3000 (means 3 seconds)",
-            //     placeholder: ""
-            // );
-
             // Necessary part for picking autosave location
             pick_result = await FilePicker.PickAsync();
-            // _DebugLabel = pick_result.FullPath;
-            // RaisePropertyChanged(() => DebugLabel);
 
             // Save every second and we cycle by half seconds
             _active_time   = 1000;
@@ -449,18 +397,12 @@ namespace BLE.Client.ViewModels {
         }
 
         private void ActiveEvent(object sender, System.Timers.ElapsedEventArgs e) {  
-            // _Duty = "ACTIVE"; RaisePropertyChanged(() => Duty);
-            // StartInventory();
-
             activetimer.Enabled = false;
             downtimer.Enabled = true;
         }
 
         private void DownEvent(object sender, System.Timers.ElapsedEventArgs e) {
-            // _Duty = "DOWN"; RaisePropertyChanged(() => Duty);
-            // StopInventory();
-
-            // AutoSaveData();    // Autosave while Down is occurring
+            AutoSaveData();    // Autosave while Down is occurring
             activetimer.Enabled = true;
             downtimer.Enabled = false;
         }
@@ -479,7 +421,6 @@ namespace BLE.Client.ViewModels {
             switch (e.state) {
                 case CSLibrary.Constants.RFState.IDLE:
                     ClassBattery.SetBatteryMode(ClassBattery.BATTERYMODE.IDLE);
-                    _cancelVoltageValue = true;
                     switch (BleMvxApplication._reader.rfid.LastMacErrorCode) {
                         case 0x00: // Normal End
                             break;
@@ -506,61 +447,48 @@ namespace BLE.Client.ViewModels {
 
                     for (cnt = 0; cnt < TagInfoList.Count; cnt++) {
                         // if (epcs.Contains(info.epc.ToString()) && (TagInfoList[cnt].EPC == info.epc.ToString())) {
-                        if (TagInfoList[cnt].EPC == info.epc.ToString()) {
-                            TagInfoList[cnt].OCRSSI = ocRSSI;
-                            TagInfoList[cnt].RSSIColor = "Black";
+                        if (TagInfoList[cnt].EPC==info.epc.ToString()) {
 
                             if (ocRSSI >= BleMvxApplication._rfMicro_minOCRSSI && ocRSSI <= BleMvxApplication._rfMicro_maxOCRSSI) {
                                 // BleMvxApplication._rfMicro_SensorType // 0 = Sensor code, 1 = Temp
                                 // BleMvxApplication._rfMicro_SensorUnit // 0 = code, 1 = f, 2 = c, 3 = %
 
-                                switch (BleMvxApplication._rfMicro_SensorType) {
-                                    case 0: 
-                                        break;
-                                    default:
-                                        if (temp >= 1300 && temp <= 3500) {
-                                            TagInfoList[cnt].SucessCount++;
-                                            UInt64 caldata = (UInt64)(((UInt64)info.Bank2Data[0] << 48) | ((UInt64)info.Bank2Data[1] << 32) | ((UInt64)info.Bank2Data[2] << 16) | ((UInt64)info.Bank2Data[3]));
+                                if (temp >= 1300 && temp <= 3500) {
+                                    UInt64 caldata = (UInt64)(((UInt64)info.Bank2Data[0]<<48) | ((UInt64)info.Bank2Data[1]<<32) | ((UInt64)info.Bank2Data[2]<<16) | ((UInt64)info.Bank2Data[3]));
 
-                                            if (caldata == 0) { TagInfoList[cnt].SensorAvgValue = "NoCalData"; }
+                                    if (caldata == 0) { TagInfoList[cnt].SensorAvgValue = "NoCalData"; }
+                                    else {
+                                        double SAV = Math.Round(getTempC(temp, caldata), 2);   
+
+                                        // Hopefully makes computation faster
+                                        string DisplaySAV = Math.Round(SAV, 1).ToString();
+
+                                        TagInfoList[cnt].SensorAvgValue = SAV.ToString();
+                                        TagInfoList[cnt].TimeString = DateTime.Now.ToString("HH:mm:ss");
+
+                                        try {
+                                            if (!tag_List.Contains(TagInfoList[cnt].EPC)) { // Check Tag_List contains tags, add new data
+                                                tag_List.Add(TagInfoList[cnt].EPC);
+                                            }
+
+                                            if (!tag_Time.ContainsKey(TagInfoList[cnt].EPC)) { // Check Tag_Time contains tags, add new data
+                                                List<string> t_time = new List<string>{TagInfoList[cnt].TimeString};
+                                                tag_Time.Add(TagInfoList[cnt].EPC, t_time);
+                                            }
                                             else {
-                                                switch (BleMvxApplication._rfMicro_SensorUnit) {
-                                                    case 2: // F
-                                                        break;
-                                                    default: // C
-                                                        double SAV = Math.Round(getTempC(temp, caldata), 2);   
+                                                tag_Time[TagInfoList[cnt].EPC].Add(TagInfoList[cnt].TimeString);
+                                            }
 
-                                                        // Hopefully makes computation faster
-                                                        string DisplaySAV = Math.Round(SAV).ToString();
+                                            if (!tag_Data.ContainsKey(TagInfoList[cnt].EPC)) { // Check Tag_Data contains tags, add new data
+                                                List<string> t_data = new List<string>{TagInfoList[cnt].SensorAvgValue};
+                                                tag_Data.Add(TagInfoList[cnt].EPC, t_data);
+                                            }
+                                            else {
+                                                tag_Data[TagInfoList[cnt].EPC].Add(TagInfoList[cnt].SensorAvgValue);
+                                            }
+                                        }
 
-                                                        TagInfoList[cnt].SensorAvgValue = SAV.ToString();
-                                                        TagInfoList[cnt].TimeString = DateTime.Now.ToString("HH:mm:ss");
-
-                                                        try {
-                                                            if (!tag_List.Contains(TagInfoList[cnt].EPC)) { // Check Tag_List contains tags, add new data
-                                                                tag_List.Add(TagInfoList[cnt].EPC);
-                                                            }
-
-                                                            if (!tag_Time.ContainsKey(TagInfoList[cnt].EPC)) { // Check Tag_Time contains tags, add new data
-                                                                List<string> t_time = new List<string>{TagInfoList[cnt].TimeString};
-                                                                tag_Time.Add(TagInfoList[cnt].EPC, t_time);
-                                                            }
-                                                            else {
-                                                                tag_Time[TagInfoList[cnt].EPC].Add(TagInfoList[cnt].TimeString);
-                                                            }
-
-                                                            if (!tag_Data.ContainsKey(TagInfoList[cnt].EPC)) { // Check Tag_Data contains tags, add new data
-                                                                List<string> t_data = new List<string>{TagInfoList[cnt].SensorAvgValue};
-                                                                tag_Data.Add(TagInfoList[cnt].EPC, t_data);
-                                                            }
-                                                            else {
-                                                                tag_Data[TagInfoList[cnt].EPC].Add(TagInfoList[cnt].SensorAvgValue);
-                                                            }
-                                                        }
-
-                                                        finally {
-                                                            // AutoSaveData();
-
+                                        finally {
                                                             // Get Last Four Characters of EPC
                                                             string temp_EPC = TagInfoList[cnt].EPC.Substring(TagInfoList[cnt].EPC.Length - 4);
 
@@ -790,14 +718,14 @@ namespace BLE.Client.ViewModels {
                                                                 }
                                                             }
                                                         }
-                                                        break;
-                                                }
+                                                        // break;
+                                                // }
                                             }
-                                        }
-                                        break;
+                                        // }
+                                        // break;
                                 }
                             }
-                            else { TagInfoList[cnt].RSSIColor = "Red"; }
+                            else {}
                             found = true;
                             break;
                         }
@@ -806,58 +734,38 @@ namespace BLE.Client.ViewModels {
                     if (!found) {
                         // if (epcs.Contains(info.epc.ToString())) {
                             RFMicroTagInfoViewModel item = new RFMicroTagInfoViewModel();
-
                             item.EPC = info.epc.ToString();
-                            item.TagName  = GetTagName(item.EPC);
-                            item.NickName = GetNickName(item.EPC);
-                            item.DisplayName = GetTagName(item.EPC);
-
-                            item.OCRSSI = ocRSSI;
-                            item.SucessCount = 0;
                             item.SensorAvgValue = "";
-                            item.RSSIColor = "Black";
-                            item.Performance = "";
 
                             if (ocRSSI >= BleMvxApplication._rfMicro_minOCRSSI && ocRSSI <= BleMvxApplication._rfMicro_maxOCRSSI) {
                                 // BleMvxApplication._rfMicro_SensorType // 0 = Sensor code, 1 = Temp
                                 // BleMvxApplication._rfMicro_SensorUnit // 0 = code, 1 = f, 2 = c, 3 = %
 
-                                switch (BleMvxApplication._rfMicro_SensorType) {
-                                    case 0:
-                                        break;
-                                    default:
-                                        if (temp >= 1300 && temp <= 3500) {
-                                            item.SucessCount++;
-                                            UInt64 caldata = (UInt64)(((UInt64)info.Bank2Data[0] << 48) | ((UInt64)info.Bank2Data[1] << 32) | ((UInt64)info.Bank2Data[2] << 16) | ((UInt64)info.Bank2Data[3]));
+                                if (temp >= 1300 && temp <= 3500) {
+                                    UInt64 caldata = (UInt64)(((UInt64)info.Bank2Data[0] << 48) | ((UInt64)info.Bank2Data[1] << 32) | ((UInt64)info.Bank2Data[2] << 16) | ((UInt64)info.Bank2Data[3]));
 
-                                            if (caldata == 0) item.SensorAvgValue = "NoCalData";
-                                            else
-                                                switch (BleMvxApplication._rfMicro_SensorUnit) {
-                                                    case 2:      // F
-                                                        break;
-                                                    default:     // C
-                                                        double SAV = Math.Round(getTempC(temp, caldata), 2);   
-                                                        item.SensorAvgValue = SAV.ToString();
-                                                        item.TimeString = DateTime.Now.ToString("HH:mm:ss");
+                                    if (caldata==0) { item.SensorAvgValue = "NoCalData"; }
+                                    else {
+                                        double SAV = Math.Round(getTempC(temp, caldata), 2);   
+                                        item.SensorAvgValue = SAV.ToString();
+                                        item.TimeString = DateTime.Now.ToString("HH:mm:ss");
 
-                                                        // if (epcs.Contains(item.EPC)) {
-                                                            List<string> t_time = new List<string>{ item.TimeString };
-                                                            List<string> t_data = new List<string>{ item.SensorAvgValue };
+                                        // if (epcs.Contains(item.EPC)) {
+                                            List<string> t_time = new List<string>{ item.TimeString };
+                                            List<string> t_data = new List<string>{ item.SensorAvgValue };
 
-                                                            try {
-                                                                tag_Time.Add(item.EPC, t_time);
-                                                                tag_Data.Add(item.EPC, t_data);
-                                                                tag_List.Add(item.EPC);
-                                                            }
-                                                            finally {}
-                                                        // }
-                                                        break;
-                                                }
-                                        }
-                                        break;
+                                            try {
+                                                tag_Time.Add(item.EPC, t_time);
+                                                tag_Data.Add(item.EPC, t_data);
+                                                tag_List.Add(item.EPC);
+                                            }
+                                            finally {}
+                                        // }
+                                    }
                                 }
                             }
-                            else { item.RSSIColor = "Red"; }
+                            else {}
+
                             TagInfoList.Insert(0, item);
                             Trace.Message("EPC Data = {0}", item.EPC);
                         // }
@@ -880,39 +788,7 @@ namespace BLE.Client.ViewModels {
             return EPC;
         }
 
-        async void Add_Nickname() {
-            string tn = await Application.Current.MainPage.DisplayPromptAsync( // Get tag name
-                title: "Step 1: Pick Tag", 
-                message: "Which tag to select?",
-                placeholder: "Example: Left Sock #1"
-            );
-            
-            string nn = await Application.Current.MainPage.DisplayPromptAsync( // Set tag name
-                title: "Step 2: Select Nickname", 
-                message: "What is the tag's new name?",
-                placeholder: "Example: Gabriel's Left Sock"
-            );
-
-            for (int cnt = 0; cnt < TagInfoList.Count; cnt++) {
-                if (TagInfoList[cnt].TagName == tn) { TagInfoList[cnt].DisplayName = nn; }
-            }
-        }
-
         void VoltageEvent(object sender, CSLibrary.Notification.VoltageEventArgs e) {}
-            // if (e.Voltage == 0xffff) { _labelVoltage = "CS108 Bat. ERROR"; }
-            // else {
-            //     if (_cancelVoltageValue) { _cancelVoltageValue = false; return; }
-
-            //     switch (BleMvxApplication._config.BatteryLevelIndicatorFormat) {
-            //         case 0:
-            //             _labelVoltage = "" + ((double)e.Voltage / 1000).ToString("0.000") + "v";
-            //             break;
-            //         default:
-            //             _labelVoltage = "" + ClassBattery.Voltage2Percent((double)e.Voltage / 1000).ToString("0") + "%";
-            //             break;
-            //     }
-            // }
-		// }
 
         private void AutoSaveData() {    // Function for Sharing time series data from tags
             InvokeOnMainThread(()=> {

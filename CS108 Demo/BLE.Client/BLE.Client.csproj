@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <None Remove="BleMvxFormsApp.xaml" />
-    <None Remove="Calibre-Light.ttf" />
     <None Remove="Pages\DeviceListPage.xaml" />
     <None Remove="Pages\PageAbout.xaml" />
     <None Remove="Pages\PageAxzonInventory.xaml" />
@@ -94,10 +93,6 @@
     <None Remove="Pages\ServiceListPage.xaml" />
     <None Remove="Pages\yoga.png" />
     <None Remove="ViewModels\beep-09.mp3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Calibre-Light.ttf" />
   </ItemGroup>
 
   <ItemGroup>

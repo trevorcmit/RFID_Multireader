@@ -46,6 +46,7 @@ namespace BLE.Client.ViewModels {
         public ICommand OnStartInventoryButtonCommand {protected set; get; }
         public ICommand OnClearButtonCommand { protected set; get; }
         public ICommand OnShareDataCommand { protected set; get; }
+        public ICommand OnAddNicknameCommand { protected set; get; }
 
         private ObservableCollection<RFMicroTagInfoViewModel> _TagInfoList = new ObservableCollection<RFMicroTagInfoViewModel>();
         public ObservableCollection<RFMicroTagInfoViewModel> TagInfoList {get {return _TagInfoList;} set {SetProperty(ref _TagInfoList, value);}}
@@ -106,6 +107,7 @@ namespace BLE.Client.ViewModels {
                 _RightUpArm1  = "gray"; RaisePropertyChanged(() => RightUpArm1);
                 _LeftLowArm1  = "gray"; RaisePropertyChanged(() => LeftLowArm1);
                 _RightLowArm1 = "gray"; RaisePropertyChanged(() => RightLowArm1);
+                _Beanie1      = "gray"; RaisePropertyChanged(() => Beanie1);
                 _Back1_T        = "--"; RaisePropertyChanged(() => Back1_T);
                 _BackNeck1_T    = "--"; RaisePropertyChanged(() => BackNeck1_T);
                 _Chest1_T       = "--"; RaisePropertyChanged(() => Chest1_T);
@@ -115,6 +117,7 @@ namespace BLE.Client.ViewModels {
                 _RightUpArm1_T  = "--"; RaisePropertyChanged(() => RightUpArm1_T);
                 _LeftLowArm1_T  = "--"; RaisePropertyChanged(() => LeftLowArm1_T);
                 _RightLowArm1_T = "--"; RaisePropertyChanged(() => RightLowArm1_T);
+                _Beanie1_T      = "--"; RaisePropertyChanged(() => Beanie1_T);
             }
         }
 
@@ -133,6 +136,7 @@ namespace BLE.Client.ViewModels {
                 _RightUpArm2  = "gray"; RaisePropertyChanged(() => RightUpArm2);
                 _LeftLowArm2  = "gray"; RaisePropertyChanged(() => LeftLowArm2);
                 _RightLowArm2 = "gray"; RaisePropertyChanged(() => RightLowArm2);
+                _Beanie2      = "gray"; RaisePropertyChanged(() => Beanie2);
                 _Back2_T        = "--"; RaisePropertyChanged(() => Back2_T);
                 _BackNeck2_T    = "--"; RaisePropertyChanged(() => BackNeck2_T);
                 _Chest2_T       = "--"; RaisePropertyChanged(() => Chest2_T);
@@ -142,9 +146,11 @@ namespace BLE.Client.ViewModels {
                 _RightUpArm2_T  = "--"; RaisePropertyChanged(() => RightUpArm2_T);
                 _LeftLowArm2_T  = "--"; RaisePropertyChanged(() => LeftLowArm2_T);
                 _RightLowArm2_T = "--"; RaisePropertyChanged(() => RightLowArm2_T);
+                _Beanie2_T      = "--"; RaisePropertyChanged(() => Beanie2_T);
             }
         }
 
+        private string _Beanie1; public string Beanie1 { get => _Beanie1; set { _Beanie1 = value; OnPropertyChanged("Beanie1"); } }
         private string _Back1; public string Back1 { get => _Back1; set { _Back1 = value; OnPropertyChanged("Back1"); } }
         private string _BackNeck1; public string BackNeck1 { get => _BackNeck1; set { _BackNeck1 = value; OnPropertyChanged("BackNeck1"); } }
         private string _Chest1; public string Chest1 { get => _Chest1; set { _Chest1 = value; OnPropertyChanged("Chest1"); } }
@@ -155,6 +161,7 @@ namespace BLE.Client.ViewModels {
         private string _LeftLowArm1; public string LeftLowArm1 { get => _LeftLowArm1; set { _LeftLowArm1 = value; OnPropertyChanged("LeftLowArm1"); } }
         private string _RightLowArm1; public string RightLowArm1 { get => _RightLowArm1; set { _RightLowArm1 = value; OnPropertyChanged("RightLowArm1"); } }
 
+        private string _Beanie1_T; public string Beanie1_T { get => _Beanie1_T; set { _Beanie1_T = value; OnPropertyChanged("Beanie1_T"); } }
         private string _Back1_T; public string Back1_T { get => _Back1_T; set { _Back1_T = value; OnPropertyChanged("Back1_T"); } }
         private string _BackNeck1_T; public string BackNeck1_T { get => _BackNeck1_T; set { _BackNeck1_T = value; OnPropertyChanged("BackNeck1_T"); } }
         private string _Chest1_T; public string Chest1_T { get => _Chest1_T; set { _Chest1_T = value; OnPropertyChanged("Chest1_T"); } }
@@ -165,6 +172,7 @@ namespace BLE.Client.ViewModels {
         private string _LeftLowArm1_T; public string LeftLowArm1_T { get => _LeftLowArm1_T; set { _LeftLowArm1_T = value; OnPropertyChanged("LeftLowArm1_T"); } }
         private string _RightLowArm1_T; public string RightLowArm1_T { get => _RightLowArm1_T; set { _RightLowArm1_T = value; OnPropertyChanged("RightLowArm1_T"); } }
 
+        private string _Beanie2; public string Beanie2 { get => _Beanie2; set { _Beanie2 = value; OnPropertyChanged("Beanie2"); } }
         private string _Back2; public string Back2 { get => _Back2; set { _Back2 = value; OnPropertyChanged("Back2"); } }
         private string _BackNeck2; public string BackNeck2 { get => _BackNeck2; set { _BackNeck2 = value; OnPropertyChanged("BackNeck2"); } }
         private string _Chest2; public string Chest2 { get => _Chest2; set { _Chest2 = value; OnPropertyChanged("Chest2"); } }
@@ -175,6 +183,7 @@ namespace BLE.Client.ViewModels {
         private string _LeftLowArm2; public string LeftLowArm2 { get => _LeftLowArm2; set { _LeftLowArm2 = value; OnPropertyChanged("LeftLowArm2"); } }
         private string _RightLowArm2; public string RightLowArm2 { get => _RightLowArm2; set { _RightLowArm2 = value; OnPropertyChanged("RightLowArm2"); } }
 
+        private string _Beanie2_T; public string Beanie2_T { get => _Beanie2_T; set { _Beanie2_T = value; OnPropertyChanged("Beanie2_T"); } }
         private string _Back2_T; public string Back2_T { get => _Back2_T; set { _Back2_T = value; OnPropertyChanged("Back2_T"); } }
         private string _BackNeck2_T; public string BackNeck2_T { get => _BackNeck2_T; set { _BackNeck2_T = value; OnPropertyChanged("BackNeck2_T"); } }
         private string _Chest2_T; public string Chest2_T { get => _Chest2_T; set { _Chest2_T = value; OnPropertyChanged("Chest2_T"); } }
@@ -196,46 +205,59 @@ namespace BLE.Client.ViewModels {
             public string RightUpArm { get; set; }
             public string LeftLowArm { get; set; }
             public string RightLowArm { get; set; }
+            public List<string> Beanie { get; set; }
             public List<string> TagList { get; set; }
 
             public Person(
                 string backneck, string back, string chest, 
                 string leftab, string rightab, 
-                string rightuparm, string rightlowarm, string leftuparm, string leftlowarm) 
-            {
-                BackNeck = backneck;
-                Back = back;
-                Chest = chest;
-                LeftAb = leftab;
-                RightAb = rightab;
-                LeftUpArm = leftuparm;
-                RightUpArm = rightuparm;
-                LeftLowArm = leftlowarm;
+                string rightuparm, string rightlowarm, string leftuparm, string leftlowarm,
+                string beanie1, string beanie2, string beanie3, string beanieR, string beanieL
+            ) {
+                BackNeck    = backneck;
+                Back        = back;
+                Chest       = chest;
+                LeftAb      = leftab;
+                RightAb     = rightab;
+                LeftUpArm   = leftuparm;
+                RightUpArm  = rightuparm;
+                LeftLowArm  = leftlowarm;
                 RightLowArm = rightlowarm;
-                TagList = new List<string> {Back, BackNeck, Chest, LeftAb, RightAb, LeftUpArm, RightUpArm, LeftLowArm, RightLowArm};
+                Beanie = new List<string> { beanie1, beanie2, beanie3, beanieL, beanieR };
+                TagList = new List<string> { Back, BackNeck, Chest, LeftAb, RightAb, LeftUpArm, RightUpArm, LeftLowArm, RightLowArm };
             }
         }
 
-        Person person1  = new Person("7E1F", "ID6C", "458B", "3D03", "7B11", "0843", "4BA9", "56A4", "A268");
-        Person person2  = new Person("333B", "289B", "289B", "231D", "9879", "4067", "5FB6", "169E", "8D50");
-        Person person3  = new Person("886B", "47D0", "AE3E", "7645", "103F", "7E6F", "64C0", "2887", "8915");
-        Person person4  = new Person("9854", "A3B0", "9EC6", "9A91", "343B", "87D4", "81D4", "8A53", "1397");
-        Person person5  = new Person("777F", "67DB", "184A", "885D", "71CF", "BA4C", "8FA9", "B6A7", "2C97");
-        Person person6  = new Person("71BB", "7705", "B25E", "3247", "A9B5", "6C38", "7662", "A983", "098F");
-        Person person7  = new Person("9857", "4BAC", "8988", "668B", "B77F", "B0A7", "8062", "7648", "5189");
-        Person person8  = new Person("1B6A", "0D42", "7AD4", "20AF", "493F", "404A", "6878", "1A3B", "546F");
-        Person person9  = new Person("1A91", "463C", "5199", "0483", "6003", "9F30", "334C", "9877", "5734");
-        Person person10 = new Person("366C", "AD8B", "AC42", "9AC9", "B53F", "76A4", "5E76", "68AE", "41D6");
-        Person person11 = new Person("2A1B", "238C", "731F", "9591", "7C98", "5F06", "4526", "461C", "5253");
-        Person person12 = new Person("87C3", "38D7", "A86F", "637A", "552E", "A34A", "9436", "7FAC", "0C90");
-        Person person13 = new Person("A033", "A0C0", "892F", "627F", "68D9", "3DB0", "8C97", "4ECF", "A73C");
-        Person person14 = new Person("462C", "5B60", "7415", "6310", "1851", "616A", "5DAA", "6D28", "1666");
-        Person person15 = new Person("9C54", "9968", "65E1", "5E23", "ACB3", "7AD3", "99A1", "B19D", "43C6");
-        Person person16 = new Person("959E", "1C5F", "5A59", "077A", "902A", "3B60", "8199", "4469", "8134");
-        Person person17 = new Person("6CC7", "8FB7", "7990", "6F8D", "6332", "5A1E", "92A5", "4A3D", "3EC9");
-        Person person18 = new Person("B43E", "19B1", "AEA6", "9152", "59D6", "3060", "7491", "893F", "38C3");
-        Person person19 = new Person("697F", "78A5", "5D0E", "7EC6", "AE59", "8158", "4A9B", "1D44", "2122");
-        Person person20 = new Person("84B5", "A02C", "0A80", "787B", "83D5", "77DB", "9FA0", "6EC4", "AF3F");
+        Person person1  = new Person("7E1F", "ID6C", "458B", "3D03", "7B11", "0843", "4BA9", "56A4", "A268", "4E72", "5A88", "7342", "5481", "8839");
+        Person person2  = new Person("333B", "289B", "289B", "231D", "9879", "4067", "5FB6", "169E", "8D50", "74C4", "73DC", "DC4A", "884D", "1BA4");
+        Person person3  = new Person("886B", "47D0", "AE3E", "7645", "103F", "7E6F", "64C0", "2887", "8915", "6765", "A27E", "0C71", "7508", "A8BE");
+        Person person4  = new Person("9854", "A3B0", "9EC6", "9A91", "343B", "87D4", "81D4", "8A53", "1397", "A467", "4191", "4F07", "2966", "7B7F");
+        Person person5  = new Person("777F", "67DB", "184A", "885D", "71CF", "BA4C", "8FA9", "B6A7", "2C97", "91A6", "9B91", "6382", "79D1", "1748");
+        Person person6  = new Person("71BB", "7705", "B25E", "3247", "A9B5", "6C38", "7662", "A983", "098F", "B644", "7BCC", "B576", "70D1", "4D84");
+        Person person7  = new Person("9857", "4BAC", "8988", "668B", "B77F", "B0A7", "8062", "7648", "5189", "7033", "1B39", "9643", "9C6D", "A53C");
+        Person person8  = new Person("1B6A", "0D42", "7AD4", "20AF", "493F", "404A", "6878", "1A3B", "546F", "194B", "3133", "A847", "0D50", "7A61");
+        Person person9  = new Person("1A91", "463C", "5199", "0483", "6003", "9F30", "334C", "9877", "5734", "B384", "42A9", "149C", "3991", "5C23");
+        Person person10 = new Person("366C", "AD8B", "AC42", "9AC9", "B53F", "76A4", "5E76", "68AE", "41D6", "803F", "5757", "9E54", "----", "----");
+        Person person11 = new Person("2A1B", "238C", "731F", "9591", "7C98", "5F06", "4526", "461C", "5253", "B078", "3AC7", "566B", "65D4", "432B");
+        Person person12 = new Person("87C3", "38D7", "A86F", "637A", "552E", "A34A", "9436", "7FAC", "0C90", "1168", "0F7A", "0068", "175B", "746D");
+        Person person13 = new Person("A033", "A0C0", "892F", "627F", "68D9", "3DB0", "8C97", "4ECF", "A73C", "90AE", "78D3", "82D8", "312D", "2A29");
+        Person person14 = new Person("462C", "5B60", "7415", "6310", "1851", "616A", "5DAA", "6D28", "1666", "3B0E", "5374", "682C", "0A50", "1543");
+        Person person15 = new Person("9C54", "9968", "65E1", "5E23", "ACB3", "7AD3", "99A1", "B19D", "43C6", "7DCB", "9D35", "6FD0", "34CE", "62E3");
+        Person person16 = new Person("959E", "1C5F", "5A59", "077A", "902A", "3B60", "8199", "4469", "8134", "B7A4", "5163", "4DA5", "8995", "7972");
+        Person person17 = new Person("6CC7", "8FB7", "7990", "6F8D", "6332", "5A1E", "92A5", "4A3D", "3EC9", "16AB", "A66C", "6162", "A686", "7E1B");
+        Person person18 = new Person("B43E", "19B1", "AEA6", "9152", "59D6", "3060", "7491", "893F", "38C3", "1C81", "A49F", "137F", "AB34", "A82F");
+        Person person19 = new Person("697F", "78A5", "5D0E", "7EC6", "AE59", "8158", "4A9B", "1D44", "2122", "5C02", "2D90", "6DAB", "3374", "B1AB");
+        Person person20 = new Person("84B5", "A02C", "0A80", "787B", "83D5", "77DB", "9FA0", "6EC4", "AF3F", "963D", "A79C", "0E4D", "7A91", "460A");
+        Person person21 = new Person("8CB4", "4115", "4D74", "79A1", "4C9F", "ABB7", "7938", "390F", "21A5", "A697", "7C7D", "B689", "114D", "047A");
+        Person person22 = new Person("4F0D", "90D5", "0874", "45CE", "6CAC", "3EB2", "A26F", "888C", "50C3", "3767", "664F", "36A4", "2759", "BB8B");
+        Person person23 = new Person("0C7F", "8A16", "0C65", "350F", "468C", "0A89", "2D1F", "55D6", "7961", "2290", "798F", "B35B", "813B", "027B");
+        Person person24 = new Person("2240", "746B", "8E41", "433B", "BB81", "39AF", "4436", "826D", "8DBC", "9272", "862E", "3276", "58D6", "2858");
+        Person person25 = new Person("205E", "9A88", "9F3D", "6F32", "1F74", "51B0", "AD80", "3277", "1E53", "894A", "A258", "3434", "82D3", "51DF");
+        Person person26 = new Person("4813", "2791", "1F7A", "6F4A", "2383", "2977", "2E5C", "926A", "2E56", "158F", "5B06", "B28A", "73C6", "819C");
+        Person person27 = new Person("2FA1", "93BD", "913C", "3CD0", "145E", "A011", "3A3A", "7A7E", "9993", "5260", "3E8A", "B55B", "258F", "158E");
+        Person person28 = new Person("8977", "4EB3", "AA5E", "6626", "9ABE", "6CD0", "AB8E", "14AA", "6E94", "895D", "571F", "2D68", "8121", "198C");
+        Person person29 = new Person("1466", "75C7", "54C4", "A489", "814C", "755D", "5221", "4293", "5F0A", "703F", "9FBF", "8D33", "3416", "3DB7");
+        Person person30 = new Person("8339", "6E37", "3546", "686E", "0D9F", "9E2A", "4131", "B647", "8A97", "B690", "A688", "9647", "44D6", "94CB");
         Dictionary<int, Person> people = new Dictionary<int, Person>();
 
         #endregion
@@ -254,31 +276,38 @@ namespace BLE.Client.ViewModels {
             RightUpArm1  = "gray"; RightUpArm2  = "gray"; RightUpArm1_T  = "--"; RightUpArm2_T  = "--";
             LeftLowArm1  = "gray"; LeftLowArm2  = "gray"; LeftLowArm1_T  = "--"; LeftLowArm2_T  = "--";
             RightLowArm1 = "gray"; RightLowArm2 = "gray"; RightLowArm1_T = "--"; RightLowArm2_T = "--";
+            Beanie1      = "gray"; Beanie2      = "gray"; Beanie1_T      = "--"; Beanie2_T      = "--";
 
             people = new Dictionary<int, Person> {
                 {0, person1},   {1, person2},   {2, person3},   {3, person4},   {4, person5}, 
                 {5, person6},   {6, person7},   {7, person8},   {8, person9},   {9, person10},
                 {10, person11}, {11, person12}, {12, person13}, {13, person14}, {14, person15},
                 {15, person16}, {16, person17}, {17, person18}, {18, person19}, {19, person20},
+                {20, person21}, {21, person22}, {22, person23}, {23, person24}, {24, person25},
+                {25, person26}, {26, person27}, {27, person28}, {28, person29}, {29, person30},
             };
 
             // Setup Picker Lists on Initialization
             _pickerList1 = new List<string>{
                 "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
                 "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen", "Twenty",
+                "Twenty-One", "Twenty-Two", "Twenty-Three", "Twenty-Four", "Twenty-Five", "Twenty-Six", "Twenty-Seven", "Twenty-Eight", "Twenty-Nine", "Thirty",
             };
             _pickerList2 = new List<string>{
                 "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
                 "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen", "Twenty",
+                "Twenty-One", "Twenty-Two", "Twenty-Three", "Twenty-Four", "Twenty-Five", "Twenty-Six", "Twenty-Seven", "Twenty-Eight", "Twenty-Nine", "Thirty",
             };
             RaisePropertyChanged(() => pickerList1);
             RaisePropertyChanged(() => pickerList2);
 
-            GetTimes();        // Get Duty Cycle Times
+            GetTimes();      // Get Duty Cycle Times
 
             OnStartInventoryButtonCommand = new Command(StartInventoryClick);
             OnClearButtonCommand = new Command(ClearClick);
             OnShareDataCommand = new Command(ShareDataButtonClick);
+
+            OnAddNicknameCommand = new Command(Add_Nickname);
         }
 
         ~ViewModelRFMicroS3Inventory() {}
@@ -489,73 +518,73 @@ namespace BLE.Client.ViewModels {
                                         }
 
                                         finally {
-                                                            // Get Last Four Characters of EPC
-                                                            string temp_EPC = TagInfoList[cnt].EPC.Substring(TagInfoList[cnt].EPC.Length - 4);
+                                            // Get Last Four Characters of EPC
+                                            string temp_EPC = TagInfoList[cnt].EPC.Substring(TagInfoList[cnt].EPC.Length - 4);
 
-                                                            Person p1 = people[Selected1];
-                                                            Person p2 = people[Selected2];
+                                            Person p1 = people[Selected1];
+                                            Person p2 = people[Selected2];
 
-                                                            if (p1.TagList.Contains(temp_EPC)) {
-                                                                if (temp_EPC==p1.Back) { 
-                                                                    _Back1_T = DisplaySAV + "°";
-                                                                    RaisePropertyChanged(() => Back1_T);
-                                                                    if ((SAV>THRESHOLD) && (_Back1!="green")) {
-                                                                        _Back1 = "green";
-                                                                        RaisePropertyChanged(() => Back1);
-                                                                    }
-                                                                    else if ((SAV<=THRESHOLD) && (_Back1!="red")) {
-                                                                        _Back1 = "red";
-                                                                        RaisePropertyChanged(() => Back1);
-                                                                    } 
-                                                                }
-                                                                else if (temp_EPC==p1.Chest) { 
-                                                                    _Chest1_T = DisplaySAV + "°";
-                                                                    RaisePropertyChanged(() => Chest1_T);
-                                                                    if ((SAV>THRESHOLD) && (_Chest1!="green")) {
-                                                                        _Chest1 = "green";
-                                                                        RaisePropertyChanged(() => Chest1);
-                                                                    }
-                                                                    else if ((SAV<=THRESHOLD) && (_Chest1!="red")) {
-                                                                        _Chest1 = "red";
-                                                                        RaisePropertyChanged(() => Chest1);
-                                                                    }
-                                                                }
-                                                                else if (temp_EPC==p1.BackNeck) {
-                                                                    _BackNeck1_T = DisplaySAV + "°";
-                                                                    RaisePropertyChanged(() => BackNeck1_T);
-                                                                    if ((SAV>THRESHOLD) && (_BackNeck1!="green")) {
-                                                                        _BackNeck1 = "green";
-                                                                        RaisePropertyChanged(() => BackNeck1);
-                                                                    }
-                                                                    else if ((SAV<=THRESHOLD) && (_BackNeck1!="red")) {
-                                                                        _BackNeck1 = "red";
-                                                                        RaisePropertyChanged(() => BackNeck1);
-                                                                    }
-                                                                }
-                                                                else if (temp_EPC==p1.LeftAb) {
-                                                                    _LeftAb1_T = DisplaySAV + "°";
-                                                                    RaisePropertyChanged(() => LeftAb1_T);
-                                                                    if ((SAV>THRESHOLD) && (_LeftAb1!="green")) {
-                                                                        _LeftAb1 = "green";
-                                                                        RaisePropertyChanged(() => LeftAb1);
-                                                                    }
-                                                                    else if ((SAV<=THRESHOLD) && (_LeftAb1!="red")) {
-                                                                        _LeftAb1 = "red";
-                                                                        RaisePropertyChanged(() => LeftAb1);
-                                                                    }
-                                                                }
-                                                                else if (temp_EPC==p1.RightAb) {
-                                                                    _RightAb1_T = DisplaySAV + "°";
-                                                                    RaisePropertyChanged(() => RightAb1_T);
-                                                                    if ((SAV>THRESHOLD) && (_RightAb1!="green")) {
-                                                                        _RightAb1 = "green";
-                                                                        RaisePropertyChanged(() => RightAb1);
-                                                                    }
-                                                                    else if ((SAV<=THRESHOLD) && (_RightAb1!="red")) {
-                                                                        _RightAb1 = "red";
-                                                                        RaisePropertyChanged(() => RightAb1);
-                                                                    }
-                                                                }
+                                            if (p1.TagList.Contains(temp_EPC)) {
+                                                if (temp_EPC==p1.Back) { 
+                                                    _Back1_T = DisplaySAV + "°";
+                                                    RaisePropertyChanged(() => Back1_T);
+                                                    if ((SAV>THRESHOLD) && (_Back1!="green")) {
+                                                        _Back1 = "green";
+                                                        RaisePropertyChanged(() => Back1);
+                                                    }
+                                                    else if ((SAV<=THRESHOLD) && (_Back1!="red")) {
+                                                        _Back1 = "red";
+                                                        RaisePropertyChanged(() => Back1);
+                                                    } 
+                                                }
+                                                else if (temp_EPC==p1.Chest) { 
+                                                    _Chest1_T = DisplaySAV + "°";
+                                                    RaisePropertyChanged(() => Chest1_T);
+                                                    if ((SAV>THRESHOLD) && (_Chest1!="green")) {
+                                                        _Chest1 = "green";
+                                                        RaisePropertyChanged(() => Chest1);
+                                                    }
+                                                    else if ((SAV<=THRESHOLD) && (_Chest1!="red")) {
+                                                        _Chest1 = "red";
+                                                        RaisePropertyChanged(() => Chest1);
+                                                    }
+                                                }
+                                                else if (temp_EPC==p1.BackNeck) {
+                                                    _BackNeck1_T = DisplaySAV + "°";
+                                                    RaisePropertyChanged(() => BackNeck1_T);
+                                                    if ((SAV>THRESHOLD) && (_BackNeck1!="green")) {
+                                                        _BackNeck1 = "green";
+                                                        RaisePropertyChanged(() => BackNeck1);
+                                                    }
+                                                    else if ((SAV<=THRESHOLD) && (_BackNeck1!="red")) {
+                                                        _BackNeck1 = "red";
+                                                        RaisePropertyChanged(() => BackNeck1);
+                                                    }
+                                                }
+                                                else if (temp_EPC==p1.LeftAb) {
+                                                    _LeftAb1_T = DisplaySAV + "°";
+                                                    RaisePropertyChanged(() => LeftAb1_T);
+                                                    if ((SAV>THRESHOLD) && (_LeftAb1!="green")) {
+                                                        _LeftAb1 = "green";
+                                                        RaisePropertyChanged(() => LeftAb1);
+                                                    }
+                                                    else if ((SAV<=THRESHOLD) && (_LeftAb1!="red")) {
+                                                        _LeftAb1 = "red";
+                                                        RaisePropertyChanged(() => LeftAb1);
+                                                    }
+                                                }
+                                                else if (temp_EPC==p1.RightAb) {
+                                                    _RightAb1_T = DisplaySAV + "°";
+                                                    RaisePropertyChanged(() => RightAb1_T);
+                                                    if ((SAV>THRESHOLD) && (_RightAb1!="green")) {
+                                                        _RightAb1 = "green";
+                                                        RaisePropertyChanged(() => RightAb1);
+                                                    }
+                                                    else if ((SAV<=THRESHOLD) && (_RightAb1!="red")) {
+                                                        _RightAb1 = "red";
+                                                        RaisePropertyChanged(() => RightAb1);
+                                                    }
+                                                }
                                                                 else if (temp_EPC==p1.LeftUpArm) {
                                                                     _LeftUpArm1_T = DisplaySAV + "°";
                                                                     RaisePropertyChanged(() => LeftUpArm1_T);
@@ -604,10 +633,9 @@ namespace BLE.Client.ViewModels {
                                                                         RaisePropertyChanged(() => RightLowArm1);
                                                                     }
                                                                 }
+                                            }
 
-                                                            }
-
-                                                            if (p2.TagList.Contains(temp_EPC)) {
+                                            else if (p2.TagList.Contains(temp_EPC)) {
                                                                 if (temp_EPC==p2.Back) {
                                                                     _Back2_T = DisplaySAV + "°";
                                                                     RaisePropertyChanged(() => Back2_T);
@@ -692,37 +720,64 @@ namespace BLE.Client.ViewModels {
                                                                         RaisePropertyChanged(() => RightUpArm2);
                                                                     }
                                                                 }
-                                                                else if (temp_EPC==p2.LeftLowArm) {
-                                                                    _LeftLowArm2_T = DisplaySAV + "°";
-                                                                    RaisePropertyChanged(() => LeftLowArm2_T);
-                                                                    if ((SAV>THRESHOLD) && (_LeftLowArm2!="green")) {
-                                                                        _LeftLowArm2 = "green";
-                                                                        RaisePropertyChanged(() => LeftLowArm2);
-                                                                    }
-                                                                    else if ((SAV<=THRESHOLD) && (_LeftLowArm2!="red")) {
-                                                                        _LeftLowArm2 = "red";
-                                                                        RaisePropertyChanged(() => LeftLowArm2);
-                                                                    }
-                                                                }
-                                                                else if (temp_EPC==p2.RightLowArm) {
-                                                                    _RightLowArm2_T = DisplaySAV + "°";
-                                                                    RaisePropertyChanged(() => RightLowArm2_T);
-                                                                    if ((SAV>THRESHOLD) && (_RightLowArm2!="green")) {
-                                                                        _RightLowArm2 = "green";
-                                                                        RaisePropertyChanged(() => RightLowArm2);
-                                                                    }
-                                                                    else if ((SAV<=THRESHOLD) && (_RightLowArm2!="red")) {
-                                                                        _RightLowArm2 = "red";
-                                                                        RaisePropertyChanged(() => RightLowArm2);
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                        // break;
-                                                // }
+                                                else if (temp_EPC==p2.LeftLowArm) {
+                                                    _LeftLowArm2_T = DisplaySAV + "°";
+                                                    RaisePropertyChanged(() => LeftLowArm2_T);
+                                                    if ((SAV>THRESHOLD) && (_LeftLowArm2!="green")) {
+                                                        _LeftLowArm2 = "green";
+                                                        RaisePropertyChanged(() => LeftLowArm2);
+                                                    }
+                                                    else if ((SAV<=THRESHOLD) && (_LeftLowArm2!="red")) {
+                                                        _LeftLowArm2 = "red";
+                                                        RaisePropertyChanged(() => LeftLowArm2);
+                                                    }
+                                                }
+                                                else if (temp_EPC==p2.RightLowArm) {
+                                                    _RightLowArm2_T = DisplaySAV + "°";
+                                                    RaisePropertyChanged(() => RightLowArm2_T);
+                                                    if ((SAV>THRESHOLD) && (_RightLowArm2!="green")) {
+                                                        _RightLowArm2 = "green";
+                                                        RaisePropertyChanged(() => RightLowArm2);
+                                                    }
+                                                    else if ((SAV<=THRESHOLD) && (_RightLowArm2!="red")) {
+                                                        _RightLowArm2 = "red";
+                                                        RaisePropertyChanged(() => RightLowArm2);
+                                                    }
+                                                }
                                             }
-                                        // }
-                                        // break;
+
+                                            else if (p1.Beanie.Contains(temp_EPC)) {
+                                                double avg_SAV = (SAV + Convert.ToDouble(_Beanie1_T))/2.0; // Average w/ previous beanie temp
+                                                string avgSAVstr = avg_SAV.ToString();
+                                                _Beanie1_T = avgSAVstr + "°";
+                                                RaisePropertyChanged(() => Beanie1_T);
+                                                if ((avg_SAV>THRESHOLD) && (_Beanie1!="green")) {
+                                                    _Beanie1 = "green";
+                                                    RaisePropertyChanged(() => Beanie1);
+                                                }
+                                                else if ((avg_SAV<=THRESHOLD) && (_Beanie1!="red")) {
+                                                    _Beanie1 = "red";
+                                                    RaisePropertyChanged(() => Beanie1);
+                                                }
+                                            }
+
+                                            else if (p2.Beanie.Contains(temp_EPC)) {
+                                                double avg_SAV = (SAV + Convert.ToDouble(_Beanie2_T))/2.0; // Average w/ previous beanie temp
+                                                string avgSAVstr = avg_SAV.ToString();
+                                                _Beanie2_T = avgSAVstr + "°";
+                                                RaisePropertyChanged(() => Beanie2_T);
+                                                if ((avg_SAV>THRESHOLD) && (_Beanie2!="green")) {
+                                                    _Beanie2 = "green";
+                                                    RaisePropertyChanged(() => Beanie2);
+                                                }
+                                                else if ((avg_SAV<=THRESHOLD) && (_Beanie2!="red")) {
+                                                    _Beanie2 = "red";
+                                                    RaisePropertyChanged(() => Beanie2);
+                                                }
+                                            }
+
+                                        }
+                                    }
                                 }
                             }
                             else {}
@@ -806,6 +861,24 @@ namespace BLE.Client.ViewModels {
                     writer.Close();
                 }
             });
+        }
+
+        async void Add_Nickname() {
+            string tn = await Application.Current.MainPage.DisplayPromptAsync( // Get tag name
+                title: "Step 1: Pick Tag", 
+                message: "Which tag to select?",
+                placeholder: "Example: Left Sock #1"
+            );
+            
+            string nn = await Application.Current.MainPage.DisplayPromptAsync( // Set tag name
+                title: "Step 2: Select Nickname", 
+                message: "What is the tag's new name?",
+                placeholder: "Example: Gabriel's Left Sock"
+            );
+
+            // for (int cnt = 0; cnt < TagInfoList.Count; cnt++) {
+            //     if (TagInfoList[cnt].TagName == tn) { TagInfoList[cnt].DisplayName = nn; }
+            // }
         }
 
         private async void ShareDataButtonClick()

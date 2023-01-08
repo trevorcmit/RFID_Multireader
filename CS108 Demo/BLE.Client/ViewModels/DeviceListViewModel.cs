@@ -64,7 +64,7 @@ namespace BLE.Client.ViewModels {
         }
 
         public MvxCommand RefreshCommand => new MvxCommand(() => TryStartScanning(true));
-        // public MvxCommand<DeviceListItemViewModel> DisconnectCommand => new MvxCommand<DeviceListItemViewModel>(DisconnectDevice);
+        public MvxCommand<DeviceListItemViewModel> DisconnectCommand => new MvxCommand<DeviceListItemViewModel>(DisconnectDevice);
         public MvxCommand<DeviceListItemViewModel> ConnectDisposeCommand => new MvxCommand<DeviceListItemViewModel>(ConnectAndDisposeDevice);
 
         // public ObservableCollection<DeviceListItemViewModel> Devices {get; set;} = new ObservableCollection<DeviceListItemViewModel>();
@@ -384,7 +384,8 @@ namespace BLE.Client.ViewModels {
             }
         }
 
-        private async Task<bool> DisconnectDevice(DeviceListItemViewModel device) {
+        // private async Task<bool> DisconnectDevice(DeviceListItemViewModel device) {
+        private async void DisconnectDevice(DeviceListItemViewModel device) {
             if (BleMvxApplication._reader.Status != CSLibrary.HighLevelInterface.READERSTATE.DISCONNECT)
 
             // ORIGINAL NOT AWAITED. BleMvxApplication._reader.DisconnectAsync();
@@ -392,7 +393,7 @@ namespace BLE.Client.ViewModels {
 
             try {
                 if (!device.IsConnected) 
-                    return true;
+                    // return true;
                 _userDialogs.ShowLoading($"Disconnecting {device.Name}...");
                 await Adapter.DisconnectDeviceAsync(device.Device);
             }
@@ -403,7 +404,7 @@ namespace BLE.Client.ViewModels {
                 device.Update();
                 _userDialogs.HideLoading();
             }
-            return false;
+            // return false;
         }
 
         public MvxCommand ConnectToPreviousCommand => new MvxCommand(ConnectToPreviousDeviceAsync, CanConnectToPrevious);

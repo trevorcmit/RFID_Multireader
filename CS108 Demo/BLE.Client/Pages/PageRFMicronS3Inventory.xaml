@@ -14,7 +14,9 @@
       <!-- Left Side Person -->
       <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
         <Grid>
-          <Grid.ColumnDefinitions>
+          <Grid.ColumnDefinitions> <!-- Eight Columns -->
+            <ColumnDefinition/>
+            <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -30,7 +32,7 @@
             <RowDefinition Height="0.2*"/>
           </Grid.RowDefinitions>
 
-          <Image Grid.Row="0" Grid.RowSpan="5" Grid.Column="0" Grid.ColumnSpan="6" Aspect="AspectFit">
+          <Image Grid.Row="0" Grid.RowSpan="5" Grid.Column="0" Grid.ColumnSpan="8" Aspect="AspectFit">
             <Image.Source>
               <OnPlatform x:TypeArguments="FileImageSource">
                 <On Platform="UWP"     Value="Assets/singletorso.jpg"/>
@@ -46,29 +48,39 @@
             SelectedIndex="{Binding Selected1, Mode=OneWayToSource}"
           />
 
-          <!-- Back Neck, Back, and Chest -->
-          <Image Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.65" Source="{Binding BackNeck1, StringFormat='Assets/\{0\}.png'}"/>
-          <Image Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.65" Source="{Binding Back1, StringFormat='Assets/\{0\}.png'}"/>
-          <Image Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.65" Source="{Binding Chest1, StringFormat='Assets/\{0\}.png'}"/>
-          <Label Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding BackNeck1_T}"/>
-          <Label Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Back1_T}"/>
-          <Label Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Chest1_T}"/>
+          <!-- Beanie -->
+          <Image Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.65" Source="{Binding Beanie1, StringFormat='Assets/\{0\}.png'}"/>
+          <Label Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Beanie1_T}"/>
+
+          <!-- Back Neck, Back -->
+          <Image Grid.Row="1" Grid.Column="6" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.65" Source="{Binding BackNeck1, StringFormat='Assets/\{0\}.png'}"/>
+          <Image Grid.Row="3" Grid.Column="6" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.65" Source="{Binding Back1, StringFormat='Assets/\{0\}.png'}"/>
+          <Label Grid.Row="1" Grid.Column="6" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding BackNeck1_T}"/>
+          <Label Grid.Row="3" Grid.Column="6" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Back1_T}"/>
+          <Label Grid.Row="2" Grid.Column="6" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Start" FontAttributes="Bold" Text="Back of Neck"/>
+          <Label Grid.Row="4" Grid.Column="6" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Start" FontAttributes="Bold" Text="Back"/>
+
+          <!-- Chest -->
+          <Image Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.65" Source="{Binding Chest1, StringFormat='Assets/\{0\}.png'}"/>
+          <Label Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Chest1_T}"/>
 
           <!-- Left and Right Abs-->
-          <Image Grid.Row="3" Grid.Column="2" Aspect="AspectFit" Opacity="0.65" Source="{Binding RightAb1, StringFormat='Assets/\{0\}.png'}"/>
-          <Image Grid.Row="3" Grid.Column="3" Aspect="AspectFit" Opacity="0.65" Source="{Binding LeftAb1, StringFormat='Assets/\{0\}.png'}"/>
-          <Label Grid.Row="3" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding RightAb1, RightAb1_T}"/>
-          <Label Grid.Row="3" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding LeftAb1, LeftAb1_T}"/>
+          <Image Grid.Row="4" Grid.Column="3" Aspect="AspectFit" Opacity="0.65" Source="{Binding RightAb1, StringFormat='Assets/\{0\}.png'}"/>
+          <Image Grid.Row="4" Grid.Column="4" Aspect="AspectFit" Opacity="0.65" Source="{Binding LeftAb1, StringFormat='Assets/\{0\}.png'}"/>
+          <Label Grid.Row="4" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding RightAb1_T}"/>
+          <Label Grid.Row="4" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding LeftAb1_T}"/>
 
-          <!-- Upper and Lower Arms -->
-          <Image Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.65" Source="{Binding RightUpArm1, StringFormat='Assets/\{0\}.png'}"/>
-          <Image Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.65" Source="{Binding LeftUpArm1, StringFormat='Assets/\{0\}.png'}"/>
+          <!-- Upper Arms -->
+          <Image Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="1" Aspect="AspectFit" Opacity="0.65" Source="{Binding RightUpArm1, StringFormat='Assets/\{0\}.png'}"/>
+          <Image Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="1" Aspect="AspectFit" Opacity="0.65" Source="{Binding LeftUpArm1, StringFormat='Assets/\{0\}.png'}"/>
+          <Label Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding RightUpArm1_T}"/>
+          <Label Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding LeftUpArm1_T}"/>
+
+          <!-- Lower Arms -->
           <Image Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.65" Source="{Binding RightLowArm1, StringFormat='Assets/\{0\}.png'}"/>
-          <Image Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.65" Source="{Binding LeftLowArm1, StringFormat='Assets/\{0\}.png'}"/>
-          <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding RightUpArm1_T}"/>
-          <Label Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding LeftUpArm1_T}"/>
+          <Image Grid.Row="4" Grid.Column="5" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.65" Source="{Binding LeftLowArm1, StringFormat='Assets/\{0\}.png'}"/>
           <Label Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding RightLowArm1_T}"/>
-          <Label Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding LeftLowArm1_T}"/>
+          <Label Grid.Row="4" Grid.Column="5" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding LeftLowArm1_T}"/>
 
         </Grid>
       </StackLayout>
@@ -77,7 +89,9 @@
       <!-- Right Side Person -->
       <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
         <Grid>
-          <Grid.ColumnDefinitions>
+          <Grid.ColumnDefinitions> <!-- Eight Columns -->
+            <ColumnDefinition/>
+            <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -93,7 +107,7 @@
             <RowDefinition Height="0.2*"/>
           </Grid.RowDefinitions>
 
-          <Image Grid.Row="0" Grid.RowSpan="5" Grid.Column="0" Grid.ColumnSpan="6" Aspect="AspectFit">
+          <Image Grid.Row="0" Grid.RowSpan="5" Grid.Column="0" Grid.ColumnSpan="8" Aspect="AspectFit">
             <Image.Source>
               <OnPlatform x:TypeArguments="FileImageSource">
                 <On Platform="UWP"     Value="Assets/singletorso.jpg"/>
@@ -109,29 +123,39 @@
             SelectedIndex="{Binding Selected2, Mode=OneWayToSource}"
           />
 
-          <!-- Back Neck, Back, and Chest -->
-          <Image Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.65" Source="{Binding BackNeck2, StringFormat='Assets/\{0\}.png'}"/>
-          <Image Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.65" Source="{Binding Back2, StringFormat='Assets/\{0\}.png'}"/>
-          <Image Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.65" Source="{Binding Chest2, StringFormat='Assets/\{0\}.png'}"/>
-          <Label Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding BackNeck2_T}"/>
-          <Label Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Back2_T}"/>
-          <Label Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Chest2_T}"/>
+          <!-- Beanie -->
+          <Image Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.65" Source="{Binding Beanie2, StringFormat='Assets/\{0\}.png'}"/>
+          <Label Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Beanie2_T}"/>
+
+          <!-- Back Neck, Back -->
+          <Image Grid.Row="1" Grid.Column="6" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.65" Source="{Binding BackNeck2, StringFormat='Assets/\{0\}.png'}"/>
+          <Image Grid.Row="3" Grid.Column="6" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.65" Source="{Binding Back2, StringFormat='Assets/\{0\}.png'}"/>
+          <Label Grid.Row="1" Grid.Column="6" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding BackNeck2_T}"/>
+          <Label Grid.Row="3" Grid.Column="6" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Back2_T}"/>
+          <Label Grid.Row="2" Grid.Column="6" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Start" FontAttributes="Bold" Text="Back of Neck"/>
+          <Label Grid.Row="4" Grid.Column="6" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Start" FontAttributes="Bold" Text="Back"/>
+
+          <!-- Chest -->
+          <Image Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.65" Source="{Binding Chest2, StringFormat='Assets/\{0\}.png'}"/>
+          <Label Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Chest2_T}"/>
 
           <!-- Left and Right Abs-->
-          <Image Grid.Row="3" Grid.Column="2" Aspect="AspectFit" Opacity="0.65" Source="{Binding RightAb2, StringFormat='Assets/\{0\}.png'}"/>
-          <Image Grid.Row="3" Grid.Column="3" Aspect="AspectFit" Opacity="0.65" Source="{Binding LeftAb2, StringFormat='Assets/\{0\}.png'}"/>
-          <Label Grid.Row="3" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding RightAb2, RightAb1_T}"/>
-          <Label Grid.Row="3" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding LeftAb2, LeftAb1_T}"/>
+          <Image Grid.Row="4" Grid.Column="3" Aspect="AspectFit" Opacity="0.65" Source="{Binding RightAb2, StringFormat='Assets/\{0\}.png'}"/>
+          <Image Grid.Row="4" Grid.Column="4" Aspect="AspectFit" Opacity="0.65" Source="{Binding LeftAb2, StringFormat='Assets/\{0\}.png'}"/>
+          <Label Grid.Row="4" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding RightAb2_T}"/>
+          <Label Grid.Row="4" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding LeftAb2_T}"/>
 
-          <!-- Upper and Lower Arms -->
-          <Image Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.65" Source="{Binding RightUpArm2, StringFormat='Assets/\{0\}.png'}"/>
-          <Image Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.65" Source="{Binding LeftUpArm2, StringFormat='Assets/\{0\}.png'}"/>
+          <!-- Upper Arms -->
+          <Image Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="1" Aspect="AspectFit" Opacity="0.65" Source="{Binding RightUpArm2, StringFormat='Assets/\{0\}.png'}"/>
+          <Image Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="1" Aspect="AspectFit" Opacity="0.65" Source="{Binding LeftUpArm2, StringFormat='Assets/\{0\}.png'}"/>
+          <Label Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding RightUpArm2_T}"/>
+          <Label Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding LeftUpArm2_T}"/>
+
+          <!-- Lower Arms -->
           <Image Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.65" Source="{Binding RightLowArm2, StringFormat='Assets/\{0\}.png'}"/>
-          <Image Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.65" Source="{Binding LeftLowArm2, StringFormat='Assets/\{0\}.png'}"/>
-          <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding RightUpArm2_T}"/>
-          <Label Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding LeftUpArm2_T}"/>
+          <Image Grid.Row="4" Grid.Column="5" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.65" Source="{Binding LeftLowArm2, StringFormat='Assets/\{0\}.png'}"/>
           <Label Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding RightLowArm2_T}"/>
-          <Label Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding LeftLowArm2_T}"/>
+          <Label Grid.Row="4" Grid.Column="5" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding LeftLowArm2_T}"/>
 
         </Grid>
       </StackLayout>

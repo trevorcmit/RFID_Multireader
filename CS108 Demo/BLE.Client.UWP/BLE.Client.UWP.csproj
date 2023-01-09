@@ -128,15 +128,9 @@
     <None Include="BLE.Client.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Assets\beep-09.mp3" />
-    <Content Include="Assets\clipboard.png" />
     <Content Include="Assets\digitalbackground.jpg" />
-    <Content Include="Assets\digitalcamo.jpg" />
-    <Content Include="Assets\front_back.jpg" />
-    <Content Include="Assets\gears.png" />
     <Content Include="Assets\gray.png" />
     <Content Include="Assets\green.png" />
-    <Content Include="Assets\play.png" />
     <Content Include="Assets\red.png" />
     <Content Include="Assets\singletorso.jpg" />
     <Content Include="Assets\StoreLogo.scale-200.png" />

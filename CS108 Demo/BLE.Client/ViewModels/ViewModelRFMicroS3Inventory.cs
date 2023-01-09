@@ -60,7 +60,6 @@ namespace BLE.Client.ViewModels {
         Dictionary<string, List<string>> tag_Time = new Dictionary<string, List<string>>();
         Dictionary<string, List<string>> tag_Data = new Dictionary<string, List<string>>();
         // private List<string> _epcs; public List<string> epcs { get => _epcs; set { _epcs = value; OnPropertyChanged("epcs"); } }
-        // private Dictionary<string, string> _map; public Dictionary<string, string> map { get => _map; set { _map = value; OnPropertyChanged("map"); } }
         ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -72,8 +71,6 @@ namespace BLE.Client.ViewModels {
         ////////////////////////////////////////////////////
         ///////////// Variables for Duty Cycle /////////////
         ////////////////////////////////////////////////////
-        // private string _Duty; public string Duty { get => _Duty; set { _Duty = value; OnPropertyChanged("Duty"); } }
-        // private string _DutyColor; public string DutyColor { get => _DutyColor; set { _DutyColor = value; OnPropertyChanged("DutyColor"); } }
         private int _active_time; public int active_time { get => _active_time; set { _active_time = value; OnPropertyChanged("active_time"); } }
         private int _inactive_time; public int inactive_time { get => _inactive_time; set { _inactive_time = value; OnPropertyChanged("inactive_time"); } }
         public System.Timers.Timer activetimer = new System.Timers.Timer();
@@ -82,7 +79,6 @@ namespace BLE.Client.ViewModels {
 
         // Save FilePicker.PickAsync() result for use in Autosave function
         public FileResult pick_result; 
-        // private string _DebugLabel; public string DebugLabel { get => _DebugLabel; set { _DebugLabel = value; OnPropertyChanged("DebugLabel"); } }
   
         #endregion
 
@@ -223,7 +219,7 @@ namespace BLE.Client.ViewModels {
                 RightUpArm  = rightuparm;
                 LeftLowArm  = leftlowarm;
                 RightLowArm = rightlowarm;
-                Beanie = new List<string> { beanie1, beanie2, beanie3, beanieL, beanieR };
+                Beanie  = new List<string> { beanie1, beanie2, beanie3, beanieL, beanieR };
                 TagList = new List<string> { Back, BackNeck, Chest, LeftAb, RightAb, LeftUpArm, RightUpArm, LeftLowArm, RightLowArm };
             }
         }
@@ -289,9 +285,6 @@ namespace BLE.Client.ViewModels {
 
             // Setup Picker Lists on Initialization
             _pickerList1 = new List<string>{
-                // "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
-                // "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen", "Twenty",
-                // "Twenty-One", "Twenty-Two", "Twenty-Three", "Twenty-Four", "Twenty-Five", "Twenty-Six", "Twenty-Seven", "Twenty-Eight", "Twenty-Nine", "Thirty",
                 "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
                 "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
                 "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"
@@ -300,9 +293,6 @@ namespace BLE.Client.ViewModels {
                 "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
                 "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
                 "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"
-                // "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
-                // "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen", "Twenty",
-                // "Twenty-One", "Twenty-Two", "Twenty-Three", "Twenty-Four", "Twenty-Five", "Twenty-Six", "Twenty-Seven", "Twenty-Eight", "Twenty-Nine", "Thirty",
             };
             RaisePropertyChanged(() => pickerList1);
             RaisePropertyChanged(() => pickerList2);
@@ -312,8 +302,6 @@ namespace BLE.Client.ViewModels {
             OnStartInventoryButtonCommand = new Command(StartInventoryClick);
             OnClearButtonCommand = new Command(ClearClick);
             OnShareDataCommand = new Command(ShareDataButtonClick);
-
-            // OnAddNicknameCommand = new Command(Add_Nickname);
         }
 
         ~ViewModelRFMicroS3Inventory() {}
@@ -480,33 +468,28 @@ namespace BLE.Client.ViewModels {
                     UInt16 ocRSSI     = info.Bank1Data[1];                     // Address d
                     UInt16 temp       = info.Bank1Data[2];                     // Address e
 
-                    for (cnt = 0; cnt < TagInfoList.Count; cnt++) {
+                    for (cnt=0; cnt<TagInfoList.Count; cnt++) {
                         // if (epcs.Contains(info.epc.ToString()) && (TagInfoList[cnt].EPC == info.epc.ToString())) {
+
                         if (TagInfoList[cnt].EPC==info.epc.ToString()) {
-
                             if (ocRSSI >= BleMvxApplication._rfMicro_minOCRSSI && ocRSSI <= BleMvxApplication._rfMicro_maxOCRSSI) {
-                                // BleMvxApplication._rfMicro_SensorType // 0 = Sensor code, 1 = Temp
-                                // BleMvxApplication._rfMicro_SensorUnit // 0 = code, 1 = f, 2 = c, 3 = %
-
                                 if (temp >= 1300 && temp <= 3500) {
                                     UInt64 caldata = (UInt64)(((UInt64)info.Bank2Data[0]<<48) | ((UInt64)info.Bank2Data[1]<<32) | ((UInt64)info.Bank2Data[2]<<16) | ((UInt64)info.Bank2Data[3]));
 
                                     if (caldata == 0) { TagInfoList[cnt].SensorAvgValue = "NoCalData"; }
                                     else {
                                         double SAV = Math.Round(getTempC(temp, caldata), 2);   
-
-                                        // Hopefully makes computation faster
                                         string DisplaySAV = Math.Round(SAV, 1).ToString();
 
                                         TagInfoList[cnt].SensorAvgValue = SAV.ToString();
                                         TagInfoList[cnt].TimeString = DateTime.Now.ToString("HH:mm:ss");
 
                                         try {
-                                            if (!tag_List.Contains(TagInfoList[cnt].EPC)) { // Check Tag_List contains tags, add new data
+                                            if (!tag_List.Contains(TagInfoList[cnt].EPC)) {      // Check Tag_List contains tags, add new data
                                                 tag_List.Add(TagInfoList[cnt].EPC);
                                             }
 
-                                            if (!tag_Time.ContainsKey(TagInfoList[cnt].EPC)) { // Check Tag_Time contains tags, add new data
+                                            if (!tag_Time.ContainsKey(TagInfoList[cnt].EPC)) {   // Check Tag_Time contains tags, add new data
                                                 List<string> t_time = new List<string>{TagInfoList[cnt].TimeString};
                                                 tag_Time.Add(TagInfoList[cnt].EPC, t_time);
                                             }
@@ -514,7 +497,7 @@ namespace BLE.Client.ViewModels {
                                                 tag_Time[TagInfoList[cnt].EPC].Add(TagInfoList[cnt].TimeString);
                                             }
 
-                                            if (!tag_Data.ContainsKey(TagInfoList[cnt].EPC)) { // Check Tag_Data contains tags, add new data
+                                            if (!tag_Data.ContainsKey(TagInfoList[cnt].EPC)) {   // Check Tag_Data contains tags, add new data
                                                 List<string> t_data = new List<string>{TagInfoList[cnt].SensorAvgValue};
                                                 tag_Data.Add(TagInfoList[cnt].EPC, t_data);
                                             }
@@ -532,7 +515,7 @@ namespace BLE.Client.ViewModels {
 
                                             if (p1.TagList.Contains(temp_EPC)) {
                                                 if (temp_EPC==p1.Back) { 
-                                                    _Back1_T = DisplaySAV + "°";
+                                                    _Back1_T = DisplaySAV;
                                                     RaisePropertyChanged(() => Back1_T);
                                                     if ((SAV>THRESHOLD) && (_Back1!="green")) {
                                                         _Back1 = "green";
@@ -544,7 +527,7 @@ namespace BLE.Client.ViewModels {
                                                     } 
                                                 }
                                                 else if (temp_EPC==p1.Chest) { 
-                                                    _Chest1_T = DisplaySAV + "°";
+                                                    _Chest1_T = DisplaySAV;
                                                     RaisePropertyChanged(() => Chest1_T);
                                                     if ((SAV>THRESHOLD) && (_Chest1!="green")) {
                                                         _Chest1 = "green";
@@ -556,7 +539,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (temp_EPC==p1.BackNeck) {
-                                                    _BackNeck1_T = DisplaySAV + "°";
+                                                    _BackNeck1_T = DisplaySAV;
                                                     RaisePropertyChanged(() => BackNeck1_T);
                                                     if ((SAV>THRESHOLD) && (_BackNeck1!="green")) {
                                                         _BackNeck1 = "green";
@@ -568,7 +551,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (temp_EPC==p1.LeftAb) {
-                                                    _LeftAb1_T = DisplaySAV + "°";
+                                                    _LeftAb1_T = DisplaySAV;
                                                     RaisePropertyChanged(() => LeftAb1_T);
                                                     if ((SAV>THRESHOLD) && (_LeftAb1!="green")) {
                                                         _LeftAb1 = "green";
@@ -580,7 +563,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (temp_EPC==p1.RightAb) {
-                                                    _RightAb1_T = DisplaySAV + "°";
+                                                    _RightAb1_T = DisplaySAV;
                                                     RaisePropertyChanged(() => RightAb1_T);
                                                     if ((SAV>THRESHOLD) && (_RightAb1!="green")) {
                                                         _RightAb1 = "green";
@@ -592,7 +575,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (temp_EPC==p1.LeftUpArm) {
-                                                    _LeftUpArm1_T = DisplaySAV + "°";
+                                                    _LeftUpArm1_T = DisplaySAV;
                                                     RaisePropertyChanged(() => LeftUpArm1_T);
                                                     if ((SAV>THRESHOLD) && (_LeftUpArm1!="green")) {
                                                         _LeftUpArm1 = "green";
@@ -604,7 +587,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (temp_EPC==p1.RightUpArm) {
-                                                    _RightUpArm1_T = DisplaySAV + "°";
+                                                    _RightUpArm1_T = DisplaySAV;
                                                     RaisePropertyChanged(() => RightUpArm1_T);
                                                     if ((SAV>THRESHOLD) && (_RightUpArm1!="green")) {
                                                         _RightUpArm1 = "green";
@@ -616,7 +599,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (temp_EPC==p1.LeftLowArm) {
-                                                    _LeftLowArm1_T = DisplaySAV + "°";
+                                                    _LeftLowArm1_T = DisplaySAV;
                                                     RaisePropertyChanged(() => LeftLowArm1_T);
                                                     if ((SAV>THRESHOLD) && (_LeftLowArm1!="green")) {
                                                         _LeftLowArm1 = "green";
@@ -628,7 +611,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (temp_EPC==p1.RightLowArm) {
-                                                    _RightLowArm1_T = DisplaySAV + "°";
+                                                    _RightLowArm1_T = DisplaySAV;
                                                     RaisePropertyChanged(() => RightLowArm1_T);
                                                     if ((SAV>THRESHOLD) && (_RightLowArm1!="green")) {
                                                         _RightLowArm1 = "green";
@@ -641,9 +624,22 @@ namespace BLE.Client.ViewModels {
                                                 }
                                             }
 
-                                            else if (p2.TagList.Contains(temp_EPC)) {
+                                            else if (p1.Beanie.Contains(temp_EPC)) {
+                                                _Beanie1_T = DisplaySAV;
+                                                RaisePropertyChanged(() => Beanie1_T);
+                                                if ((SAV>THRESHOLD) && (_Beanie1!="green"))
+                                                {
+                                                    _Beanie1 = "green"; RaisePropertyChanged(() => Beanie1);
+                                                }
+                                                else if ((SAV<=THRESHOLD) && (_Beanie1!="red"))
+                                                {
+                                                    _Beanie1 = "red"; RaisePropertyChanged(() => Beanie1);
+                                                }
+                                            }
+
+                                            if (p2.TagList.Contains(temp_EPC)) {
                                                 if (temp_EPC==p2.Back) {
-                                                    _Back2_T = DisplaySAV + "°";
+                                                    _Back2_T = DisplaySAV;
                                                     RaisePropertyChanged(() => Back2_T);
                                                     if ((SAV>THRESHOLD) && (_Back2!="green")) {
                                                         _Back2 = "green";
@@ -655,7 +651,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (temp_EPC==p2.Chest) {
-                                                    _Chest2_T = DisplaySAV + "°";
+                                                    _Chest2_T = DisplaySAV;
                                                     RaisePropertyChanged(() => Chest2_T);
                                                     if ((SAV>THRESHOLD) && (_Chest2!="green")) {
                                                         _Chest2 = "green";
@@ -667,7 +663,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (temp_EPC==p2.BackNeck) {
-                                                    _BackNeck2_T = DisplaySAV + "°";
+                                                    _BackNeck2_T = DisplaySAV;
                                                     RaisePropertyChanged(() => BackNeck2_T);
                                                     if ((SAV>THRESHOLD) && (_BackNeck2!="green")) {
                                                         _BackNeck2 = "green";
@@ -679,7 +675,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (temp_EPC==p2.LeftAb) {
-                                                    _LeftAb2_T = DisplaySAV + "°";
+                                                    _LeftAb2_T = DisplaySAV;
                                                     RaisePropertyChanged(() => LeftAb2_T);
                                                     if ((SAV>THRESHOLD) && (_LeftAb2!="green")) {
                                                         _LeftAb2 = "green";
@@ -691,7 +687,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (temp_EPC==p2.RightAb) {
-                                                    _RightAb2_T = DisplaySAV + "°";
+                                                    _RightAb2_T = DisplaySAV;
                                                     RaisePropertyChanged(() => RightAb2_T);
                                                     if ((SAV>THRESHOLD) && (_RightAb2!="green")) {
                                                         _RightAb2 = "green";
@@ -703,7 +699,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (temp_EPC==p2.LeftUpArm) {
-                                                    _LeftUpArm2_T = DisplaySAV + "°";
+                                                    _LeftUpArm2_T = DisplaySAV;
                                                     RaisePropertyChanged(() => LeftUpArm2_T);
                                                     if ((SAV>THRESHOLD) && (_LeftUpArm2!="green")) {
                                                         _LeftUpArm2 = "green";
@@ -715,7 +711,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (temp_EPC==p2.RightUpArm) {
-                                                    _RightUpArm2_T = DisplaySAV + "°";
+                                                    _RightUpArm2_T = DisplaySAV;
                                                     RaisePropertyChanged(() => RightUpArm2_T);
                                                     if ((SAV>THRESHOLD) && (_RightUpArm2!="green")) {
                                                         _RightUpArm2 = "green";
@@ -727,7 +723,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (temp_EPC==p2.LeftLowArm) {
-                                                    _LeftLowArm2_T = DisplaySAV + "°";
+                                                    _LeftLowArm2_T = DisplaySAV;
                                                     RaisePropertyChanged(() => LeftLowArm2_T);
                                                     if ((SAV>THRESHOLD) && (_LeftLowArm2!="green")) {
                                                         _LeftLowArm2 = "green";
@@ -739,7 +735,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (temp_EPC==p2.RightLowArm) {
-                                                    _RightLowArm2_T = DisplaySAV + "°";
+                                                    _RightLowArm2_T = DisplaySAV;
                                                     RaisePropertyChanged(() => RightLowArm2_T);
                                                     if ((SAV>THRESHOLD) && (_RightLowArm2!="green")) {
                                                         _RightLowArm2 = "green";
@@ -752,46 +748,17 @@ namespace BLE.Client.ViewModels {
                                                 }
                                             }
 
-                                            else if (p1.Beanie.Contains(temp_EPC)) {
-                                                _Beanie1_T = DisplaySAV + "°";
-                                                RaisePropertyChanged(() => Beanie1_T);
-                                                if ((SAV>THRESHOLD) && (_Beanie1!="green")) {
-                                                    _Beanie1 = "green";
-                                                    RaisePropertyChanged(() => Beanie1);
-                                                }
-                                                else if ((SAV<=THRESHOLD) && (_Beanie1!="red")) {
-                                                    _Beanie1 = "red";
-                                                    RaisePropertyChanged(() => Beanie1);
-                                                }
-                                                // double avg_SAV = (SAV + Convert.ToDouble(_Beanie1_T))/2.0; // Average w/ previous beanie temp
-                                                // string avgSAVstr = avg_SAV.ToString();
-                                                // _Beanie1_T = avgSAVstr + "°";
-                                                // RaisePropertyChanged(() => Beanie1_T);
-                                                // if ((avg_SAV>THRESHOLD) && (_Beanie1!="green")) {
-                                                //     _Beanie1 = "green";
-                                                //     RaisePropertyChanged(() => Beanie1);
-                                                // }
-                                                // else if ((avg_SAV<=THRESHOLD) && (_Beanie1!="red")) {
-                                                //     _Beanie1 = "red";
-                                                //     RaisePropertyChanged(() => Beanie1);
-                                                // }
-                                            }
-
                                             else if (p2.Beanie.Contains(temp_EPC)) {
-                                                _Beanie2_T = DisplaySAV + "°";
+                                                _Beanie2_T = DisplaySAV;
                                                 RaisePropertyChanged(() => Beanie2_T);
-                                                if ((SAV>THRESHOLD) && (_Beanie2!="green")) {
-                                                    _Beanie2 = "green";
-                                                    RaisePropertyChanged(() => Beanie2);
+                                                if ((SAV>THRESHOLD) && (_Beanie2!="green"))
+                                                {
+                                                    _Beanie2 = "green"; RaisePropertyChanged(() => Beanie2);
                                                 }
-                                                else if ((SAV<=THRESHOLD) && (_Beanie2!="red")) {
-                                                    _Beanie2 = "red";
-                                                    RaisePropertyChanged(() => Beanie2);
+                                                else if ((SAV<=THRESHOLD) && (_Beanie2!="red"))
+                                                {
+                                                    _Beanie2 = "red"; RaisePropertyChanged(() => Beanie2);
                                                 }
-                                                // double avg_SAV = (SAV + Convert.ToDouble(_Beanie2_T))/2.0; // Average w/ previous beanie temp
-                                                // string avgSAVstr = avg_SAV.ToString();
-                                                // _Beanie2_T = avgSAVstr + "°";
-                                                // RaisePropertyChanged(() => Beanie2_T);
                                             }
 
                                         }
@@ -811,29 +778,34 @@ namespace BLE.Client.ViewModels {
                         item.SensorAvgValue = "";
 
                         if (ocRSSI >= BleMvxApplication._rfMicro_minOCRSSI && ocRSSI <= BleMvxApplication._rfMicro_maxOCRSSI) {
-                            // BleMvxApplication._rfMicro_SensorType // 0 = Sensor code, 1 = Temp
-                            // BleMvxApplication._rfMicro_SensorUnit // 0 = code, 1 = f, 2 = c, 3 = %
-
                             if (temp >= 1300 && temp <= 3500) {
                                 UInt64 caldata = (UInt64)(((UInt64)info.Bank2Data[0] << 48) | ((UInt64)info.Bank2Data[1] << 32) | ((UInt64)info.Bank2Data[2] << 16) | ((UInt64)info.Bank2Data[3]));
 
                                 if (caldata==0) { item.SensorAvgValue = "NoCalData"; }
                                 else {
-                                    double SAV = Math.Round(getTempC(temp, caldata), 2);   
+                                    double SAV = Math.Round(getTempC(temp, caldata), 1);   
                                     item.SensorAvgValue = SAV.ToString();
                                     item.TimeString = DateTime.Now.ToString("HH:mm:ss");
 
-                                    // if (epcs.Contains(item.EPC)) {
-                                        List<string> t_time = new List<string>{ item.TimeString };
-                                        List<string> t_data = new List<string>{ item.SensorAvgValue };
+                                    List<string> t_time = new List<string>{ item.TimeString };
+                                    List<string> t_data = new List<string>{ item.SensorAvgValue };
 
-                                        try {
-                                            tag_Time.Add(item.EPC, t_time);
-                                            tag_Data.Add(item.EPC, t_data);
-                                            tag_List.Add(item.EPC);
-                                        }
-                                        finally {}
-                                    // }
+                                    try {
+                                        tag_Time.Add(item.EPC, t_time);
+                                        tag_Data.Add(item.EPC, t_data);
+                                        tag_List.Add(item.EPC);
+                                    }
+                                    finally {
+                                        // string temp_EPC = item.EPC.Substring(TagInfoList[cnt].EPC.Length - 4);
+                                        // Person p1 = people[Selected1];
+                                        // Person p2 = people[Selected2];
+                                        // if (p1.Beanie.Contains(temp_EPC))
+                                        // {
+                                        // }
+                                        // else if (p2.Beanie.Contains(temp_EPC))
+                                        // {
+                                        // }
+                                    }
                                 }
                             }
                         }
@@ -844,20 +816,6 @@ namespace BLE.Client.ViewModels {
                 }
             });
         }
-
-        // string GetNickName(string EPC) {
-        //     for (int index = 0; index < ViewModelRFMicroNickname._TagNicknameList.Count; index++)
-        //         if (ViewModelRFMicroNickname._TagNicknameList[index].EPC == EPC)
-        //             return ViewModelRFMicroNickname._TagNicknameList[index].Nickname;
-        //     return EPC;
-        // }
-
-        // string GetTagName(string EPC) {
-        //     for (int index = 0; index < ViewModelRFMicroNickname._TagNicknameList.Count; index++)
-        //         if (ViewModelRFMicroNickname._TagNicknameList[index].EPC == EPC)
-        //             return ViewModelRFMicroNickname._TagNicknameList[index].TagName;
-        //     return EPC;
-        // }
 
         void VoltageEvent(object sender, CSLibrary.Notification.VoltageEventArgs e) {}
 
@@ -879,24 +837,6 @@ namespace BLE.Client.ViewModels {
             });
         }
 
-        // async void Add_Nickname() {
-        //     string tn = await Application.Current.MainPage.DisplayPromptAsync( // Get tag name
-        //         title: "Step 1: Pick Tag", 
-        //         message: "Which tag to select?",
-        //         placeholder: "Example: Left Sock #1"
-        //     );
-            
-        //     string nn = await Application.Current.MainPage.DisplayPromptAsync( // Set tag name
-        //         title: "Step 2: Select Nickname", 
-        //         message: "What is the tag's new name?",
-        //         placeholder: "Example: Gabriel's Left Sock"
-        //     );
-
-        //     // for (int cnt = 0; cnt < TagInfoList.Count; cnt++) {
-        //     //     if (TagInfoList[cnt].TagName == tn) { TagInfoList[cnt].DisplayName = nn; }
-        //     // }
-        // }
-
         private async void ShareDataButtonClick()
         {
             string fileName = pick_result.FullPath;
@@ -916,20 +856,6 @@ namespace BLE.Client.ViewModels {
             }
         }
         #endregion
-
-        // async void ShowDialog(string Msg)
-        // {
-        //     var config = new ProgressDialogConfig() {
-        //         Title = Msg,
-        //         IsDeterministic = true,
-        //         MaskType = MaskType.Gradient,
-        //     };
-
-        //     using (var progress = _userDialogs.Progress(config)) {
-        //         progress.Show();
-        //         await System.Threading.Tasks.Task.Delay(1000);
-        //     }
-        // }
 
     }
 }

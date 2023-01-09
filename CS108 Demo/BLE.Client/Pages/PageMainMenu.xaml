@@ -253,11 +253,6 @@
 				RelativeLayout.HeightConstraint="{ConstraintExpression Type = RelativeToParent, Property=Height, Factor=0.04, Constant=-4}" 
 				RelativeLayout.WidthConstraint ="{ConstraintExpression Type = RelativeToParent, Property=Width, Factor=1.0, Constant=-4}" 	
 			/> -->
-            <!-- <Label
-				Text = "{Binding ConnectionDeviceName}" 
-                BackgroundColor="#fefefe"
-			/> -->
-            <!-- ############################################################# -->
 
         </RelativeLayout>
 

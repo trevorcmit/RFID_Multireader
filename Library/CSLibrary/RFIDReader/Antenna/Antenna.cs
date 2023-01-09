@@ -3,44 +3,30 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
-namespace CSLibrary
-{
+
+
+namespace CSLibrary {
     using CSLibrary.Constants;
     using CSLibrary.Structures;
 
-    /// <summary>
-    /// Antenna
-    /// </summary>
 #if NETCFDESIGNTIME
     [System.ComponentModel.TypeConverter(typeof(AntennaTypeConverter))]
 #endif
-    public class Antenna
-        :
-        Object
-    {
+    public class Antenna : Object { // Class for the Antenna object, usually used for CS468
 
         // According to MAC EDS ~ phy port number allocated 2 bits only
 
         //public static readonly UInt32 RX_PHY_MINIMUM = 0;
         //public static readonly UInt32 TX_PHY_MINIMUM = RX_PHY_MINIMUM;
-
         //public static readonly UInt32 RX_PHY_MAXIMUM = 3;
         //public static readonly UInt32 TX_PHY_MAXIMUM = RX_PHY_MAXIMUM;
 
         // According to MAC EDS ~ caveat RX logical must == TX logical
         // for the current version...
-        /// <summary>
-        /// RX_LOGICAL_MINIMUM
-        /// </summary>
-        public static readonly UInt32 RX_LOGICAL_MINIMUM = 0;
-        /// <summary>
-        /// TX_LOGICAL_MINIMUM
-        /// </summary>
-        public static readonly UInt32 TX_LOGICAL_MINIMUM = 0;
-        /// <summary>
-        /// RX_LOGICAL_MAXIMUM
-        /// </summary>
-        public static readonly UInt32 RX_LOGICAL_MAXIMUM = 15;
+
+        public static readonly UInt32 RX_LOGICAL_MINIMUM = 0;     // RX_LOGICAL_MINIMUM
+        public static readonly UInt32 TX_LOGICAL_MINIMUM = 0;     // TX_LOGICAL_MINIMUM
+        public static readonly UInt32 RX_LOGICAL_MAXIMUM = 15;    // RX_LOGICAL_MAXIMUM
         /// <summary>
         /// TX_LOGICAL_MAXIMUM
         /// </summary>
@@ -438,7 +424,7 @@ namespace CSLibrary
         /// antenna-sense resistor for the logical antenna port's 
         /// physical transmit antenna port.  The last measurement 
         /// taken occurred the last time that the carrier wave was 
-        /// turned on for this antenna port ¨C note that this means that 
+        /// turned on for this antenna port ï¿½C note that this means that 
         /// when retrieving the logical antenna port's status, this does 
         /// not Result in an active measurement of the antenna-sense 
         /// resistor.  This value is specified in ohms. 

@@ -3,5 +3,4 @@
         string GetVersion();
         int GetBuild();
     }
-
 }

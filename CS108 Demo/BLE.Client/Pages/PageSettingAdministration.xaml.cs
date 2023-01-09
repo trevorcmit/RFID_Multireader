@@ -55,7 +55,7 @@ namespace BLE.Client.Pages {
         protected override void OnAppearing() { base.OnAppearing(); }
 
         public async void btnOKClicked(object sender, EventArgs e) {
-            int cnt;
+            // int cnt;
             Xamarin.Forms.DependencyService.Get<ISystemSound>().SystemSound(1);
 
             switch (buttonBatteryLevelFormat.Text) {

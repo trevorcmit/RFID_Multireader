@@ -168,7 +168,6 @@
     <Content Include="Sounds\245952__kwahmah-02__1khz.wav" />
     <Content Include="Sounds\316854__kwahmah-02__2-pop.wav" />
     <Content Include="Sounds\beep-07.wav" />
-    <Content Include="Sounds\beep-09.mp3" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Media.xcassets\LaunchImages.launchimage\Contents.json">

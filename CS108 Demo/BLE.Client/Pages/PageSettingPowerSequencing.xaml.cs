@@ -61,7 +61,7 @@ namespace BLE.Client.Pages {
                 if (numberofPower > 16)     numberofPower = 16;
                 else if (numberofPower < 0) numberofPower = 0;
             }
-            catch (Exception ex) {numberofPower = 0;}
+            catch (Exception ex) { numberofPower = 0; }
 
             entryNumberofPower.Text = numberofPower.ToString();
 

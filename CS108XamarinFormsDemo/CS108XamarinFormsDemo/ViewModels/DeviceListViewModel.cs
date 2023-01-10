@@ -68,12 +68,13 @@ namespace CS108XamarinFormsDemo.ViewModels {
             _bluetoothLe = bluetoothLe;
             _userDialogs = userDialogs;
             _settings = settings;
-            // quick and dirty :>
+
             _bluetoothLe.StateChanged += OnStateChanged;
             Adapter.DeviceDiscovered += OnDeviceDiscovered;
             Adapter.ScanTimeoutElapsed += Adapter_ScanTimeoutElapsed;
             Adapter.DeviceDisconnected += OnDeviceDisconnected;
             Adapter.DeviceConnectionLost += OnDeviceConnectionLost;
+
             //Adapter.DeviceConnected += (sender, e) => Adapter.DisconnectDeviceAsync(e.Device);
 
             BleMvxApplication._reader.DisconnectAsync();
@@ -100,8 +101,6 @@ namespace CS108XamarinFormsDemo.ViewModels {
         private string GetStateText() {
             try {
                 switch (_bluetoothLe.State) {
-                    //case BluetoothState.Unknown:
-                    //return "Unknown BLE state.";
                     case BluetoothState.Unavailable:
                         return "BLE is not available on this device.";
                     case BluetoothState.Unauthorized:
@@ -142,8 +141,7 @@ namespace CS108XamarinFormsDemo.ViewModels {
                         break;
 
                     default:
-                        if (args.Device.AdvertisementRecords.Count < 1)
-                            return;
+                        if (args.Device.AdvertisementRecords.Count < 1) return;
 
                         foreach (AdvertisementRecord service in args.Device.AdvertisementRecords) {
                             if (service.Data.Length == 2) {
@@ -383,5 +381,6 @@ namespace CS108XamarinFormsDemo.ViewModels {
         public MvxCommand<DeviceListItemViewModel> CopyGuidCommand => new MvxCommand<DeviceListItemViewModel>(device => {
             PreviousGuid = device.Id;
         });
+
     }
 }

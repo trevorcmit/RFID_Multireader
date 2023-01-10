@@ -84,7 +84,6 @@ namespace BLE.Client.ViewModels {
 
 
         #region ------------- Person Selection ----------------
-
         private List<string> _pickerList1; public List<string> pickerList1 { get => _pickerList1; set { _pickerList1 = value; OnPropertyChanged("pickerList1"); } }
         private List<string> _pickerList2; public List<string> pickerList2 { get => _pickerList2; set { _pickerList2 = value; OnPropertyChanged("pickerList2"); } }
 
@@ -224,7 +223,7 @@ namespace BLE.Client.ViewModels {
             }
         }
 
-        Person person1  = new Person("7E1F", "ID6C", "458B", "3D03", "7B11", "0843", "4BA9", "56A4", "A268", "4E72", "5A88", "7342", "5481", "8839");
+        Person person1  = new Person("438F", "1D6C", "458B", "3D0D", "7B11", "0843", "4BA9", "56A4", "A268", "4E72", "5A88", "7342", "5481", "8839");
         Person person2  = new Person("333B", "289B", "2473", "231D", "9879", "4067", "5FB6", "169E", "8D50", "74C4", "73DC", "DC4A", "884D", "1BA4");
         Person person3  = new Person("886B", "47D0", "AE3E", "7645", "103F", "7E6F", "64C0", "2887", "8915", "6765", "A27E", "0C71", "7508", "A8BE");
         Person person4  = new Person("9854", "A3B0", "9EC6", "9A91", "343B", "87D4", "81D4", "8A53", "1397", "A467", "4191", "4F07", "2966", "7B7F");
@@ -254,8 +253,9 @@ namespace BLE.Client.ViewModels {
         Person person28 = new Person("8977", "4EB3", "AA5E", "6626", "9ABE", "6CD0", "AB8E", "14AA", "6E94", "895D", "571F", "2D68", "8121", "198C");
         Person person29 = new Person("1466", "75C7", "54C4", "A489", "814C", "155D", "5221", "4293", "5F0A", "703F", "9FBF", "8D33", "3416", "3DB7");
         Person person30 = new Person("8339", "6E37", "3546", "686E", "0D9F", "9E2A", "4131", "B647", "8A97", "B690", "A688", "9647", "44D6", "94CB");
+        Person person31 = new Person("1CAE", "7764", "8F24", "AD3E", "8898", "413F", "097A", "18A8", "4258", "7F4E", "801E", "8651", "AAB4", "6CB5");
+        Person person32 = new Person("2990", "1EC3", "51E2", "3783", "AE5E", "4575", "0688", "A0B0", "1BA6", "3C3E", "1989", "7C2C", "42D7", "6129");
         Dictionary<int, Person> people = new Dictionary<int, Person>();
-
         #endregion
 
 
@@ -281,18 +281,21 @@ namespace BLE.Client.ViewModels {
                 {15, person16}, {16, person17}, {17, person18}, {18, person19}, {19, person20},
                 {20, person21}, {21, person22}, {22, person23}, {23, person24}, {24, person25},
                 {25, person26}, {26, person27}, {27, person28}, {28, person29}, {29, person30},
+                {30, person31}, {31, person32},
             };
 
             // Setup Picker Lists on Initialization
             _pickerList1 = new List<string>{
                 "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
                 "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
-                "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"
+                "21", "22", "23", "24", "25", "26", "27", "28", "29", "30",
+                "31", "32"
             };
             _pickerList2 = new List<string>{
                 "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
                 "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
-                "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"
+                "21", "22", "23", "24", "25", "26", "27", "28", "29", "30",
+                "31", "32",
             };
             RaisePropertyChanged(() => pickerList1);
             RaisePropertyChanged(() => pickerList2);
@@ -436,7 +439,7 @@ namespace BLE.Client.ViewModels {
 
         void TagInventoryEvent(object sender, CSLibrary.Events.OnAsyncCallbackEventArgs e) {
             if (e.type != CSLibrary.Constants.CallbackType.TAG_RANGING) return;
-            if (e.info.Bank1Data == null || e.info.Bank2Data == null) return;
+            if (e.info.Bank1Data == null || e.info.Bank2Data == null)   return;
             InvokeOnMainThread(() => { AddOrUpdateTagData(e.info); });
         }
 

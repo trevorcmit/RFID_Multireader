@@ -4,17 +4,17 @@ using Xamarin.Forms;
 
 namespace BLE.Client.Pages {
     public partial class PageRFMicroSetting {
-        string[] _tagTypeOptions = {"Magnus S2", "Magnus S3"};
-        string[] _powerOptions = {"Low (16dBm)", "Mid (23dBm)", "High (30dBm)", "Cycle Power by Trigger Button", "Follow system Setting"};
-        string[] _targetOptions = {"A", "B", "Toggle A/B"};
-        string[] _indicatorsProfileOptions = {"Hot temperature", "Cold temperature", "Moisture detection"};
-        string[] _sensorTypeOptions = {"Humidity", "Temperature"};
-        string[] _sensorCodeUnitOptions = {"RAW Sensor Code", "Dry / Wet"};
-        string[] _temperatureUnitOptions = {"RAW Average", "ºF", "ºC"};
+        string[] _tagTypeOptions = { "Magnus S2", "Magnus S3" };
+        string[] _powerOptions = { "Low (16dBm)", "Mid (23dBm)", "High (30dBm)", "Cycle Power by Trigger Button", "Follow system Setting" };
+        string[] _targetOptions = { "A", "B", "Toggle A/B" };
+        string[] _indicatorsProfileOptions = { "Hot temperature", "Cold temperature", "Moisture detection" };
+        string[] _sensorTypeOptions = { "Humidity", "Temperature" };
+        string[] _sensorCodeUnitOptions = { "RAW Sensor Code", "Dry / Wet" };
+        string[] _temperatureUnitOptions = { "RAW Average", "ºF", "ºC" };
         int[] _minOCRSSIs = { 0, 0, 10, 10 };
         int[] _maxOCRSSIs = { 21, 30, 21, 21, 1000000 };
-        string[] _thresholdComparisonOptions = {">", "<"};
-        int[] _thresholdValueOptions = {100, -1, 58};
+        string[] _thresholdComparisonOptions = { ">", "<" };
+        int[] _thresholdValueOptions = { 100, -1, 58 };
         string [] _thresholdColorOptions = { "Red", "Blue" };
 
         public PageRFMicroSetting() {

@@ -15,7 +15,7 @@ namespace BLE.Client.Pages {
             InitializeComponent();
 
             labelViewCharLength.Text = "Totel Characters : " + BleMvxApplication._LargeContent.Length.ToString();
-            labelViewBitLength.Text = "Number of bits : " + (BleMvxApplication._LargeContent.Length * 4).ToString();
+            labelViewBitLength.Text  = "Number of bits : " + (BleMvxApplication._LargeContent.Length * 4).ToString();
             labelViewByteLength.Text = "Number of bytes : " + BleMvxApplication._LargeContent.Length.ToString();
             labelViewWordLength.Text = "Number of words : " + (BleMvxApplication._LargeContent.Length / 4).ToString();
 

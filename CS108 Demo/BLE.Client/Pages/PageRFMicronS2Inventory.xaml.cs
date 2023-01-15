@@ -10,5 +10,6 @@ namespace BLE.Client.Pages {
                 ((ListView)sender).SelectedItem = null; // de-select the row
             };
         }
+
     }
 }

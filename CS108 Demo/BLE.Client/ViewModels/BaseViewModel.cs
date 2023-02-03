@@ -7,10 +7,12 @@ using MvvmCross.Platform;
 using Plugin.BLE.Abstractions.Contracts;
 
 // New Imports for Bluetooth Autoconnect
+using Acr.UserDialogs;
+using Plugin.BLE.Abstractions;
+using Plugin.BLE.Abstractions.Extensions;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using Acr.UserDialogs;
-
+using System.Threading;
 
 
 namespace BLE.Client.ViewModels {
@@ -20,49 +22,7 @@ namespace BLE.Client.ViewModels {
         protected const string ServiceIdKey = "ServiceIdNavigationKey";
         protected const string CharacteristicIdKey = "CharacteristicIdNavigationKey";
         protected const string DescriptorIdKey = "DescriptorIdNavigationKey";
-
-        // New Private _userDialogs for Bluetooth Autoconnect
-        private readonly IUserDialogs _userDialogs;
-
-
-        /////////////////////////////////////////////////////////////////
-        ////////// Section for Marine Mountain Deployment 1/13 //////////
-        /////////////////////////////////////////////////////////////////
-        public string EPC_Prefix = "E282403E000207D6F977";  // Prefix for used S3 tag type
-
-
-        /////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////
-
-
-        // Moved from DeviceListViewModel to the BaseViewModel for all ViewModels to inherit
-        public ObservableCollection<DeviceListItemViewModel> Devices { get; set; } = new ObservableCollection<DeviceListItemViewModel>();
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName = null) {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        protected private Guid _ConnectionGuid;  // Global ConnectionGuid variable to reconnect in any window
-        public Guid ConnectionGuid {
-            get => _ConnectionGuid; 
-            set { _ConnectionGuid = value; OnPropertyChanged("ConnectionGuid"); }
-        }
-
-
-        // public DeviceListItemViewModel _ConnectionDevice; // Global ConnectionDevice variable to reconnect in any window
-
-        public IDevice ConnectionDevice { get; set; }
-        // public DeviceListItemViewModel ConnectionDevice { get; set; }
-
-        protected private string _ConnectionDeviceName;  // Global ConnectionGuid variable to reconnect in any window
-        public virtual string ConnectionDeviceName {
-            get => _ConnectionDeviceName; 
-            set { _ConnectionDeviceName = value; OnPropertyChanged("ConnectionDeviceName"); }
-        }
-
-
-
+        // private readonly IUserDialogs _userDialogs;  // New Private _userDialogs for Bluetooth Autoconnect
 
 
 
@@ -115,36 +75,56 @@ namespace BLE.Client.ViewModels {
 
 
 
+        ///////////////////////////////////////////////////////////////////////////////////
+        ///////////// New Global Variables/Functions from DeviceListViewModel /////////////
+        ///////////////////////////////////////////////////////////////////////////////////
 
+        public ObservableCollection<DeviceListItemViewModel> Devices { get; set; } = new ObservableCollection<DeviceListItemViewModel>();
 
-        //////////////////////////////////////////////
-        ///////////// NEW GLOBAL METHODS /////////////
-        //////////////////////////////////////////////
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName = null) {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
-        //<summary>
-        // This method is called from the DeviceListViewModel to connect to a device
-        //</summary>
+        protected private string _ConnectionDeviceName;  // Global ConnectionGuid variable to reconnect in any window
+        public virtual string ConnectionDeviceName {
+            get => _ConnectionDeviceName; 
+            set { _ConnectionDeviceName = value; OnPropertyChanged("ConnectionDeviceName"); }
+        }
+
         public async void Connect(IDevice _device)
         {
-            // Trace.Message("device name :" + _device.Name);
             string BLE_result = await BleMvxApplication._reader.ConnectAsync(Adapter, _device);
-            // Trace.Message("load config");
 
             bool LoadSuccess = await BleMvxApplication.LoadConfig(_device.Id.ToString());
             BleMvxApplication._config.readerID = _device.Id.ToString();
-
-            // ONLY FOR VISIBILITY
-            _ConnectionDeviceName = "Connection Complete, " + BLE_result + ", " + LoadSuccess.ToString();
-            RaisePropertyChanged(() => ConnectionDeviceName);
         }
 
-        //////////////////////////////////////////////
+        public async Task<bool> HandleSelectedDevice_1(IDevice d) {
+            CancellationTokenSource tokenSource = new CancellationTokenSource();
+            ConnectParameters connectParameters = new ConnectParameters(true, false);
+            await Adapter.ConnectToDeviceAsync(d, connectParameters, tokenSource.Token);
+            return true;
+        }
+
+        private Guid _previousGuid;
+        public Guid PreviousGuid {
+            get { return _previousGuid; }
+            set {
+                _previousGuid = value;
+                // _settings.AddOrUpdateValue("lastguid", _previousGuid.ToString()); // moved to ConnectDeviceAsync
+                RaisePropertyChanged();
+                // RaisePropertyChanged(() => ConnectToPreviousCommand);
+            }
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////////
 
 
 
-        /////////////////////////////////////////////////////////
-        // Moved from ViewModelRFMicroS3Inventory to declutter //
-        /////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////
+        ///// Moved from ViewModelRFMicroS3Inventory to declutter /////
+        ///////////////////////////////////////////////////////////////
         public async void InventorySetting() {
             switch (BleMvxApplication._config.RFID_FrequenceSwitch) {
                 case 0:
@@ -287,7 +267,7 @@ namespace BLE.Client.ViewModels {
             fTemperature /= 10;
             return fTemperature;
         }
-        /////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////
 
     }
 }

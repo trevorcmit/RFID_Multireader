@@ -24,39 +24,22 @@ namespace BLE.Client.ViewModels {
         private readonly IBluetoothLE _bluetoothLe;
         private readonly IUserDialogs _userDialogs;
         private readonly ISettings _settings;
-        private Guid _previousGuid;
         private CancellationTokenSource _cancellationTokenSource;
-
         public IList<IService> Services { get; private set; }
         public IDescriptor Descriptor { get; private set; }
-
         private string _version;
         public string version { get; set; }
 
-
-        ///////////////////////////////////////////////////
-        // Variable added to Debug Bluetooth Autoconnect //
-        protected private string _DebugVar;  // Global ConnectionGuid variable to reconnect in any window
-        public virtual string DebugVar {
-            get => _DebugVar; 
-            set { _DebugVar = value; OnPropertyChanged("DebugVar"); }
-        }
-        ///////////////////////////////////////////////////
-
-
-        public Guid PreviousGuid {
-            get { return _previousGuid; }
-            set {
-                _previousGuid = value;
-
-                // Added to make sure global variable is updated
-                ConnectionGuid = _previousGuid;
-
-                _settings.AddOrUpdateValue("lastguid", _previousGuid.ToString());
-                RaisePropertyChanged();
-                RaisePropertyChanged(() => ConnectToPreviousCommand);
-            }
-        }
+        // private Guid _previousGuid;
+        // public Guid PreviousGuid {
+        //     get { return _previousGuid; }
+        //     set {
+        //         _previousGuid = value;
+        //         // _settings.AddOrUpdateValue("lastguid", _previousGuid.ToString()); // moved to ConnectDeviceAsync
+        //         RaisePropertyChanged();
+        //         RaisePropertyChanged(() => ConnectToPreviousCommand);
+        //     }
+        // }
 
         public MvxCommand RefreshCommand => new MvxCommand(() => TryStartScanning(true));
         public MvxCommand<DeviceListItemViewModel> DisconnectCommand => new MvxCommand<DeviceListItemViewModel>(DisconnectDevice);
@@ -77,12 +60,6 @@ namespace BLE.Client.ViewModels {
             _bluetoothLe = bluetoothLe;
             _userDialogs = userDialogs;
             _settings = settings;
-
-            /////////////////////////////////////////////////////
-            // FOR DEBUGGING READERSTATE, CAN BE DELETED LATER //
-            _DebugVar = BleMvxApplication._reader.Get_ReaderState_String() + ", Constructor";
-            RaisePropertyChanged(() => DebugVar);
-            /////////////////////////////////////////////////////
 
             // Determines of Bluetooth is on and available, and contains Adapter
             _bluetoothLe.StateChanged += OnStateChanged;
@@ -174,18 +151,10 @@ namespace BLE.Client.ViewModels {
                 if (await ConnectDeviceAsync(devices, showPrompt)) {
                     var device = Adapter.ConnectedDevices.FirstOrDefault(d => d.Id.Equals(devices.Device.Id));
 
-                    if (device == null) 
-                        return;
+                    if (device == null) return;
 
                     Connect(device);
                     Close(this);     // Directive to return to ViewModelMainMenu
-
-
-                    /////////////////////////////////////////////////////
-                    // FOR DEBUGGING READERSTATE, CAN BE DELETED LATER //
-                    _DebugVar = BleMvxApplication._reader.Get_ReaderState_String() + ", End of HandleSelectedDevice";
-                    RaisePropertyChanged(() => DebugVar);
-                    /////////////////////////////////////////////////////
                 }
             }
             catch (Exception ex) {
@@ -199,13 +168,12 @@ namespace BLE.Client.ViewModels {
             }
 
             try {
-                CancellationTokenSource tokenSource = new CancellationTokenSource();
-                ConnectParameters connectParameters = new ConnectParameters(true, false);
-                await Adapter.ConnectToDeviceAsync(device.Device, connectParameters, tokenSource.Token);
+                await HandleSelectedDevice_1(device.Device);
 
-                _userDialogs.ShowSuccess($"Initializing Reader, Please Wait.", 8000);
-
+                // Move ISettings out of PreviousGuid constructor
                 PreviousGuid = device.Device.Id;
+                _settings.AddOrUpdateValue("lastguid", PreviousGuid.ToString());
+
                 return true;
             }
             catch (Exception ex) {
@@ -247,11 +215,6 @@ namespace BLE.Client.ViewModels {
             // ATTEMPTING TO SWITCH TO DISCONNECT CASE
             await BleMvxApplication._reader.DisconnectAsync();
 
-            //////////////////////////////////////////////////////////////////////////////////////////
-            _DebugVar = BleMvxApplication._reader.Get_ReaderState_String() + ", after DisconnectAsync";
-            RaisePropertyChanged(() => DebugVar);
-            //////////////////////////////////////////////////////////////////////////////////////////
-
             ConnectToPreviousDeviceAsync();
         }
 
@@ -291,7 +254,6 @@ namespace BLE.Client.ViewModels {
         }
 
         bool _scanAgain = true;
-
         private void Adapter_ScanTimeoutElapsed(object sender, EventArgs e) {
             RaisePropertyChanged(() => IsRefreshing);
 
@@ -431,9 +393,6 @@ namespace BLE.Client.ViewModels {
                 _userDialogs.ShowError(ex.Message, 5000);
                 return;
             }
-
-            _ConnectionDeviceName = "ConnectToPreviousDeviceAsync Finished.";
-            RaisePropertyChanged(() => ConnectionDeviceName);
         }
 
         private bool CanConnectToPrevious() {
@@ -455,9 +414,9 @@ namespace BLE.Client.ViewModels {
             }
         }
 
-        public MvxCommand<DeviceListItemViewModel> CopyGuidCommand => new MvxCommand<DeviceListItemViewModel>(device => {
-            PreviousGuid = device.Id;
-        });
+        // public MvxCommand<DeviceListItemViewModel> CopyGuidCommand => new MvxCommand<DeviceListItemViewModel>(device => {
+        //     PreviousGuid = device.Id;
+        // });
 
     }
 }

@@ -286,45 +286,22 @@ namespace BLE.Client.ViewModels {
 
             // Setup Picker Lists on Initialization
             _pickerList1 = new List<string>{
-                // "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
-                // "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
-                // "21", "22", "23", "24", "25", "26", "27", "28", "29", "30",
-                // "31", "32"
-
                 "1", "Dennis D.", "3", "4", "5", "6", "7", "8", "9", "10",
                 "11", "12", "William D.", "Joelle T.", "Jackson B.", "Matt C.", "Brent C.", "18", "Harold V.", "20",
                 "21", "22", "23", "24", "25", "Katherine L.", "27", "Garrett C.", "29", "30",
                 "31", "Sean R."
-
-                // "Kent L.", "Dennis D.", "Zachariah Y.W.", "Friese, R.", "Trevor L.",
-                // "6", "7", "8", "9", "10",
-                // "11", "12", "William D.", "Joelle, T.", "Jackson, B",
-                // "16", "Brent C.", "Brian B.", "Harold V.", "Matt S.",
-                // "21", "22", "23", "Jariah B.", "Penaflor, J.",
-                // "Katherine L.", "27", "Garrett C.", "29", "30", 
-                // "31", "Sean R."
             };
             _pickerList2 = new List<string>{
-                // "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
-                // "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
-                // "21", "22", "23", "24", "25", "26", "27", "28", "29", "30",
-                // "31", "32",
-
                 "1", "Dennis D.", "3", "4", "5", "6", "7", "8", "9", "10",
                 "11", "12", "William D.", "Joelle T.", "Jackson B.", "Matt C.", "Brent C.", "18", "Harold V.", "20",
                 "21", "22", "23", "24", "25", "Katherine L.", "27", "Garrett C.", "29", "30",
                 "31", "Sean R."
-
-                // "Kent L.", "Dennis D.", "Zachariah Y.W.", "Friese, R.", "Trevor L.",
-                // "6", "7", "8", "9", "10",
-                // "11", "12", "William D.", "Joelle, T.", "Jackson, B",
-                // "16", "Brent C.", "Brian B.", "Harold V.", "Matt S.",
-                // "21", "22", "23", "Jariah B.", "Penaflor, J.",
-                // "Katherine L.", "27", "Garrett C.", "29", "30", 
-                // "31", "Sean R."
             };
             RaisePropertyChanged(() => pickerList1);
             RaisePropertyChanged(() => pickerList2);
+
+            // Set disconnection event for reconnection
+            // Adapter.DeviceDisconnected += OnDeviceDisconnected;
 
             GetTimes();      // Get Duty Cycle Times
 

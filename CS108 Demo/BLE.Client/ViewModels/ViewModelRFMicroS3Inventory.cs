@@ -14,6 +14,7 @@ using System.Windows.Input;
 using Xamarin;
 using Xamarin.Forms;
 using Xamarin.Essentials;
+
 // using LiveChartsCore;
 // using LiveChartsCore.Defaults;
 // using LiveChartsCore.SkiaSharpView;
@@ -23,6 +24,10 @@ using Xamarin.Essentials;
 // using LiveChartsCore.Kernel.Drawing;
 // using LiveChartsCore.Kernel.Sketches;
 // using LiveChartsCore.Measure;
+
+// New Imports for Bluetooth Autoconnect
+using Plugin.BLE.Abstractions.Extensions;
+using System.Threading;
 
 
 
@@ -191,16 +196,16 @@ namespace BLE.Client.ViewModels {
 
         public int THRESHOLD = 15;
         class Person {
-            public string Back { get; set; }
-            public string BackNeck { get; set; }
-            public string Chest { get; set; }
-            public string LeftAb { get; set; }
-            public string RightAb { get; set; }
-            public string LeftUpArm { get; set; }
-            public string RightUpArm { get; set; }
-            public string LeftLowArm { get; set; }
-            public string RightLowArm { get; set; }
-            public List<string> Beanie { get; set; }
+            public string Back          { get; set; }
+            public string BackNeck      { get; set; }
+            public string Chest         { get; set; }
+            public string LeftAb        { get; set; }
+            public string RightAb       { get; set; }
+            public string LeftUpArm     { get; set; }
+            public string RightUpArm    { get; set; }
+            public string LeftLowArm    { get; set; }
+            public string RightLowArm   { get; set; }
+            public List<string> Beanie  { get; set; }
             public List<string> TagList { get; set; }
 
             public Person(
@@ -301,13 +306,62 @@ namespace BLE.Client.ViewModels {
             RaisePropertyChanged(() => pickerList2);
 
             // Set disconnection event for reconnection
-            // Adapter.DeviceDisconnected += OnDeviceDisconnected;
+            Adapter.DeviceDisconnected += OnDeviceDisconnected;
+            Adapter.DeviceConnectionLost += OnDeviceDisconnected; // connection or discconnect?
 
             GetTimes();      // Get Duty Cycle Times
 
             OnStartInventoryButtonCommand = new Command(StartInventoryClick);
             OnClearButtonCommand = new Command(ClearClick);
             OnShareDataCommand = new Command(ShareDataButtonClick);
+        }
+
+        // Event for Device Disconnection
+        private async void OnDeviceDisconnected(object sender, DeviceEventArgs e) {
+            Devices.FirstOrDefault(d => d.Id == e.Device.Id)?.Update();
+            _userDialogs.HideLoading();
+            _userDialogs.Toast($"Disconnected {e.Device.Name}");
+
+            ////////////////////////////////////////////////////////
+            ///////// ConnectToPreviousDeviceAsync Section /////////
+
+            IDevice device;
+            try {
+                CancellationTokenSource tokenSource = new CancellationTokenSource();
+                ConnectParameters connectParameters = new ConnectParameters(true, false);
+
+                var config = new ProgressDialogConfig() {
+                    Title = $"Searching for '{PreviousGuid}'",
+                    CancelText = "Cancel",
+                    IsDeterministic = false,
+                    OnCancel = tokenSource.Cancel
+                };
+
+                using (var progress = _userDialogs.Progress(config)) {
+                    progress.Show();
+                    device = await Adapter.ConnectToKnownDeviceAsync(PreviousGuid, connectParameters, tokenSource.Token);
+                }
+
+                var deviceItem = Devices.FirstOrDefault(d => d.Device.Id == device.Id);
+            }
+
+            catch (Exception ex) {
+
+                _Chest1 = "red";
+                RaisePropertyChanged(() => Chest1);
+
+                _Back1 = "red";
+                RaisePropertyChanged(() => Back1);
+
+                _Back2 = "red";
+                RaisePropertyChanged(() => Back2);
+
+                _userDialogs.ShowError(ex.Message, 5000);
+                return;
+            }
+
+            ////////////////////////////////////////////////////////
+
         }
 
         ~ViewModelRFMicroS3Inventory() {}

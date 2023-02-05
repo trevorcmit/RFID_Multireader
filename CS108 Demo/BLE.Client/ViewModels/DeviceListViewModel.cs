@@ -30,20 +30,9 @@ namespace BLE.Client.ViewModels {
         private string _version;
         public string version { get; set; }
 
-        // private Guid _previousGuid;
-        // public Guid PreviousGuid {
-        //     get { return _previousGuid; }
-        //     set {
-        //         _previousGuid = value;
-        //         // _settings.AddOrUpdateValue("lastguid", _previousGuid.ToString()); // moved to ConnectDeviceAsync
-        //         RaisePropertyChanged();
-        //         RaisePropertyChanged(() => ConnectToPreviousCommand);
-        //     }
-        // }
-
-        public MvxCommand RefreshCommand => new MvxCommand(() => TryStartScanning(true));
-        public MvxCommand<DeviceListItemViewModel> DisconnectCommand => new MvxCommand<DeviceListItemViewModel>(DisconnectDevice);
-        public MvxCommand<DeviceListItemViewModel> ConnectDisposeCommand => new MvxCommand<DeviceListItemViewModel>(ConnectAndDisposeDevice);
+        // public MvxCommand RefreshCommand => new MvxCommand(() => TryStartScanning(true));
+        // public MvxCommand<DeviceListItemViewModel> DisconnectCommand => new MvxCommand<DeviceListItemViewModel>(DisconnectDevice);
+        // public MvxCommand<DeviceListItemViewModel> ConnectDisposeCommand => new MvxCommand<DeviceListItemViewModel>(ConnectAndDisposeDevice);
 
         public bool IsRefreshing => Adapter.IsScanning;
         public bool IsStateOn => _bluetoothLe.IsOn;

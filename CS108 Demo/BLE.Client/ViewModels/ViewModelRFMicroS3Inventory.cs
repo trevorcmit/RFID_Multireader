@@ -322,6 +322,9 @@ namespace BLE.Client.ViewModels {
             _userDialogs.HideLoading();
             _userDialogs.Toast($"Disconnected {e.Device.Name}");
 
+            // ATTEMPTING TO SWITCH TO DISCONNECT CASE
+            await BleMvxApplication._reader.DisconnectAsync();
+
             ////////////////////////////////////////////////////////
             ///////// ConnectToPreviousDeviceAsync Section /////////
 
@@ -342,7 +345,7 @@ namespace BLE.Client.ViewModels {
                     device = await Adapter.ConnectToKnownDeviceAsync(PreviousGuid, connectParameters, tokenSource.Token);
                 }
 
-                var deviceItem = Devices.FirstOrDefault(d => d.Device.Id == device.Id);
+                // var deviceItem = Devices.FirstOrDefault(d => d.Device.Id == device.Id);
             }
 
             catch (Exception ex) {

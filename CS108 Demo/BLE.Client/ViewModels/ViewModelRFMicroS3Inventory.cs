@@ -51,7 +51,6 @@ namespace BLE.Client.ViewModels {
         public ICommand OnStartInventoryButtonCommand {protected set; get; }
         public ICommand OnClearButtonCommand { protected set; get; }
         public ICommand OnShareDataCommand { protected set; get; }
-        // public ICommand OnAddNicknameCommand { protected set; get; }
 
         private ObservableCollection<RFMicroTagInfoViewModel> _TagInfoList = new ObservableCollection<RFMicroTagInfoViewModel>();
         public ObservableCollection<RFMicroTagInfoViewModel> TagInfoList {get {return _TagInfoList;} set {SetProperty(ref _TagInfoList, value);}}
@@ -160,6 +159,8 @@ namespace BLE.Client.ViewModels {
         private string _RightUpArm1; public string RightUpArm1 { get => _RightUpArm1; set { _RightUpArm1 = value; OnPropertyChanged("RightUpArm1"); } }
         private string _LeftLowArm1; public string LeftLowArm1 { get => _LeftLowArm1; set { _LeftLowArm1 = value; OnPropertyChanged("LeftLowArm1"); } }
         private string _RightLowArm1; public string RightLowArm1 { get => _RightLowArm1; set { _RightLowArm1 = value; OnPropertyChanged("RightLowArm1"); } }
+        private string _LeftHand1; public string LeftHand1 { get => _LeftHand1; set { _LeftHand1 = value; OnPropertyChanged("LeftHand1"); } }
+        private string _RightHand1; public string RightHand1 { get => _RightHand1; set { _RightHand1 = value; OnPropertyChanged("RightHand1"); } }
 
         private string _Beanie1_T; public string Beanie1_T { get => _Beanie1_T; set { _Beanie1_T = value; OnPropertyChanged("Beanie1_T"); } }
         private string _Back1_T; public string Back1_T { get => _Back1_T; set { _Back1_T = value; OnPropertyChanged("Back1_T"); } }
@@ -171,6 +172,8 @@ namespace BLE.Client.ViewModels {
         private string _RightUpArm1_T; public string RightUpArm1_T { get => _RightUpArm1_T; set { _RightUpArm1_T = value; OnPropertyChanged("RightUpArm1_T"); } }
         private string _LeftLowArm1_T; public string LeftLowArm1_T { get => _LeftLowArm1_T; set { _LeftLowArm1_T = value; OnPropertyChanged("LeftLowArm1_T"); } }
         private string _RightLowArm1_T; public string RightLowArm1_T { get => _RightLowArm1_T; set { _RightLowArm1_T = value; OnPropertyChanged("RightLowArm1_T"); } }
+        private string _LeftHand1_T; public string LeftHand1_T { get => _LeftHand1_T; set { _LeftHand1_T = value; OnPropertyChanged("LeftHand1_T"); } }
+        private string _RightHand1_T; public string RightHand1_T { get => _RightHand1_T; set { _RightHand1_T = value; OnPropertyChanged("RightHand1_T"); } }
 
         private string _Beanie2; public string Beanie2 { get => _Beanie2; set { _Beanie2 = value; OnPropertyChanged("Beanie2"); } }
         private string _Back2; public string Back2 { get => _Back2; set { _Back2 = value; OnPropertyChanged("Back2"); } }
@@ -182,6 +185,8 @@ namespace BLE.Client.ViewModels {
         private string _RightUpArm2; public string RightUpArm2 { get => _RightUpArm2; set { _RightUpArm2 = value; OnPropertyChanged("RightUpArm2"); } }
         private string _LeftLowArm2; public string LeftLowArm2 { get => _LeftLowArm2; set { _LeftLowArm2 = value; OnPropertyChanged("LeftLowArm2"); } }
         private string _RightLowArm2; public string RightLowArm2 { get => _RightLowArm2; set { _RightLowArm2 = value; OnPropertyChanged("RightLowArm2"); } }
+        private string _LeftHand2; public string LeftHand2 { get => _LeftHand2; set { _LeftHand2 = value; OnPropertyChanged("LeftHand2"); } }
+        private string _RightHand2; public string RightHand2 { get => _RightHand2; set { _RightHand2 = value; OnPropertyChanged("RightHand2"); } }
 
         private string _Beanie2_T; public string Beanie2_T { get => _Beanie2_T; set { _Beanie2_T = value; OnPropertyChanged("Beanie2_T"); } }
         private string _Back2_T; public string Back2_T { get => _Back2_T; set { _Back2_T = value; OnPropertyChanged("Back2_T"); } }
@@ -193,6 +198,34 @@ namespace BLE.Client.ViewModels {
         private string _RightUpArm2_T; public string RightUpArm2_T { get => _RightUpArm2_T; set { _RightUpArm2_T = value; OnPropertyChanged("RightUpArm2_T"); } }
         private string _LeftLowArm2_T; public string LeftLowArm2_T { get => _LeftLowArm2_T; set { _LeftLowArm2_T = value; OnPropertyChanged("LeftLowArm2_T"); } }
         private string _RightLowArm2_T; public string RightLowArm2_T { get => _RightLowArm2_T; set { _RightLowArm2_T = value; OnPropertyChanged("RightLowArm2_T"); } }
+        private string _LeftHand2_T; public string LeftHand2_T { get => _LeftHand2_T; set { _LeftHand2_T = value; OnPropertyChanged("LeftHand2_T"); } }
+        private string _RightHand2_T; public string RightHand2_T { get => _RightHand2_T; set { _RightHand2_T = value; OnPropertyChanged("RightHand2_T"); } }
+
+        private string _Beanie3; public string Beanie3 { get => _Beanie3; set { _Beanie3 = value; OnPropertyChanged("Beanie3"); } }
+        private string _Back3; public string Back3 { get => _Back3; set { _Back3 = value; OnPropertyChanged("Back3"); } }
+        private string _BackNeck3; public string BackNeck3 { get => _BackNeck3; set { _BackNeck3 = value; OnPropertyChanged("BackNeck3"); } }
+        private string _Chest3; public string Chest3 { get => _Chest3; set { _Chest3 = value; OnPropertyChanged("Chest3"); } }
+        private string _LeftAb3; public string LeftAb3 { get => _LeftAb3; set { _LeftAb3 = value; OnPropertyChanged("LeftAb3"); } }
+        private string _RightAb3; public string RightAb3 { get => _RightAb3; set { _RightAb3 = value; OnPropertyChanged("RightAb3"); } }
+        private string _LeftUpArm3; public string LeftUpArm3 { get => _LeftUpArm3; set { _LeftUpArm3 = value; OnPropertyChanged("LeftUpArm3"); } }
+        private string _RightUpArm3; public string RightUpArm3 { get => _RightUpArm3; set { _RightUpArm3 = value; OnPropertyChanged("RightUpArm3"); } }
+        private string _LeftLowArm3; public string LeftLowArm3 { get => _LeftLowArm3; set { _LeftLowArm3 = value; OnPropertyChanged("LeftLowArm3"); } }
+        private string _RightLowArm3; public string RightLowArm3 { get => _RightLowArm3; set { _RightLowArm3 = value; OnPropertyChanged("RightLowArm3"); } }
+        private string _LeftHand3; public string LeftHand3 { get => _LeftHand3; set { _LeftHand3 = value; OnPropertyChanged("LeftHand3"); } }
+        private string _RightHand3; public string RightHand3 { get => _RightHand3; set { _RightHand3 = value; OnPropertyChanged("RightHand3"); } }
+
+        private string _Beanie3_T; public string Beanie3_T { get => _Beanie3_T; set { _Beanie3_T = value; OnPropertyChanged("Beanie3_T"); } }
+        private string _Back3_T; public string Back3_T { get => _Back3_T; set { _Back3_T = value; OnPropertyChanged("Back3_T"); } }
+        private string _BackNeck3_T; public string BackNeck3_T { get => _BackNeck3_T; set { _BackNeck3_T = value; OnPropertyChanged("BackNeck3_T"); } }
+        private string _Chest3_T; public string Chest3_T { get => _Chest3_T; set { _Chest3_T = value; OnPropertyChanged("Chest3_T"); } }
+        private string _LeftAb3_T; public string LeftAb3_T { get => _LeftAb3_T; set { _LeftAb3_T = value; OnPropertyChanged("LeftAb3_T"); } }
+        private string _RightAb3_T; public string RightAb3_T { get => _RightAb3_T; set { _RightAb3_T = value; OnPropertyChanged("RightAb3_T"); } }
+        private string _LeftUpArm3_T; public string LeftUpArm3_T { get => _LeftUpArm3_T; set { _LeftUpArm3_T = value; OnPropertyChanged("LeftUpArm3_T"); } }
+        private string _RightUpArm3_T; public string RightUpArm3_T { get => _RightUpArm3_T; set { _RightUpArm3_T = value; OnPropertyChanged("RightUpArm3_T"); } }
+        private string _LeftLowArm3_T; public string LeftLowArm3_T { get => _LeftLowArm3_T; set { _LeftLowArm3_T = value; OnPropertyChanged("LeftLowArm3_T"); } }
+        private string _RightLowArm3_T; public string RightLowArm3_T { get => _RightLowArm3_T; set { _RightLowArm3_T = value; OnPropertyChanged("RightLowArm3_T"); } }
+        private string _LeftHand3_T; public string LeftHand3_T { get => _LeftHand3_T; set { _LeftHand3_T = value; OnPropertyChanged("LeftHand3_T"); } }
+        private string _RightHand3_T; public string RightHand3_T { get => _RightHand3_T; set { _RightHand3_T = value; OnPropertyChanged("RightHand3_T"); } }
 
         public int THRESHOLD = 15;
         class Person {
@@ -268,16 +301,19 @@ namespace BLE.Client.ViewModels {
         public ViewModelRFMicroS3Inventory(IAdapter adapter, IUserDialogs userDialogs) : base(adapter) {
             _userDialogs = userDialogs;
 
-            Back1        = "gray"; Back2        = "gray"; Back1_T        = "--"; Back2_T        = "--";
-            BackNeck1    = "gray"; BackNeck2    = "gray"; BackNeck1_T    = "--"; BackNeck2_T    = "--";
-            Chest1       = "gray"; Chest2       = "gray"; Chest1_T       = "--"; Chest2_T       = "--";
-            LeftAb1      = "gray"; LeftAb2      = "gray"; LeftAb1_T      = "--"; LeftAb2_T      = "--";
-            RightAb1     = "gray"; RightAb2     = "gray"; RightAb1_T     = "--"; RightAb2_T     = "--";
-            LeftUpArm1   = "gray"; LeftUpArm2   = "gray"; LeftUpArm1_T   = "--"; LeftUpArm2_T   = "--";
-            RightUpArm1  = "gray"; RightUpArm2  = "gray"; RightUpArm1_T  = "--"; RightUpArm2_T  = "--";
-            LeftLowArm1  = "gray"; LeftLowArm2  = "gray"; LeftLowArm1_T  = "--"; LeftLowArm2_T  = "--";
-            RightLowArm1 = "gray"; RightLowArm2 = "gray"; RightLowArm1_T = "--"; RightLowArm2_T = "--";
-            Beanie1      = "gray"; Beanie2      = "gray"; Beanie1_T      = "--"; Beanie2_T      = "--";
+            Back1        = "gray"; Back2        = "gray"; Back3        = "gray"; Back1_T        = "--"; Back2_T        = "--"; Back3_T        = "--";
+            BackNeck1    = "gray"; BackNeck2    = "gray"; BackNeck3    = "gray"; BackNeck1_T    = "--"; BackNeck2_T    = "--"; BackNeck3_T    = "--";
+            Chest1       = "gray"; Chest2       = "gray"; Chest3       = "gray"; Chest1_T       = "--"; Chest2_T       = "--"; Chest3_T       = "--";
+            LeftAb1      = "gray"; LeftAb2      = "gray"; LeftAb3      = "gray"; LeftAb1_T      = "--"; LeftAb2_T      = "--"; LeftAb3_T      = "--";
+            RightAb1     = "gray"; RightAb2     = "gray"; RightAb3     = "gray"; RightAb1_T     = "--"; RightAb2_T     = "--"; RightAb3_T     = "--";
+            LeftUpArm1   = "gray"; LeftUpArm2   = "gray"; LeftUpArm3   = "gray"; LeftUpArm1_T   = "--"; LeftUpArm2_T   = "--"; LeftUpArm3_T   = "--";
+            RightUpArm1  = "gray"; RightUpArm2  = "gray"; RightUpArm3  = "gray"; RightUpArm1_T  = "--"; RightUpArm2_T  = "--"; RightUpArm3_T  = "--";
+            LeftLowArm1  = "gray"; LeftLowArm2  = "gray"; LeftLowArm3  = "gray"; LeftLowArm1_T  = "--"; LeftLowArm2_T  = "--"; LeftLowArm3_T  = "--";
+            RightLowArm1 = "gray"; RightLowArm2 = "gray"; RightLowArm3 = "gray"; RightLowArm1_T = "--"; RightLowArm2_T = "--"; RightLowArm3_T = "--";
+            Beanie1      = "gray"; Beanie2      = "gray"; Beanie3      = "gray"; Beanie1_T      = "--"; Beanie2_T      = "--"; Beanie3_T      = "--";
+
+            LeftHand1    = "gray"; LeftHand2    = "gray"; LeftHand3    = "gray"; LeftHand1_T    = "--"; LeftHand2_T    = "--"; LeftHand3_T    = "--";
+            RightHand1   = "gray"; RightHand2   = "gray"; RightHand3   = "gray"; RightHand1_T   = "--"; RightHand2_T   = "--"; RightHand3_T   = "--";
 
             people = new Dictionary<int, Person> {
                 {0, person1},   {1, person2},   {2, person3},   {3, person4},   {4, person5}, 
@@ -288,22 +324,6 @@ namespace BLE.Client.ViewModels {
                 {25, person26}, {26, person27}, {27, person28}, {28, person29}, {29, person30},
                 {30, person31}, {31, person32},
             };
-
-            // Setup Picker Lists on Initialization
-            _pickerList1 = new List<string>{
-                "1", "Dennis D.", "3", "4", "5", "6", "7", "8", "9", "10",
-                "11", "12", "William D.", "Joelle T.", "Jackson B.", "Matt C.", "Brent C.", "18", "Harold V.", "20",
-                "21", "22", "23", "24", "25", "Katherine L.", "27", "Garrett C.", "29", "30",
-                "31", "Sean R."
-            };
-            _pickerList2 = new List<string>{
-                "1", "Dennis D.", "3", "4", "5", "6", "7", "8", "9", "10",
-                "11", "12", "William D.", "Joelle T.", "Jackson B.", "Matt C.", "Brent C.", "18", "Harold V.", "20",
-                "21", "22", "23", "24", "25", "Katherine L.", "27", "Garrett C.", "29", "30",
-                "31", "Sean R."
-            };
-            RaisePropertyChanged(() => pickerList1);
-            RaisePropertyChanged(() => pickerList2);
 
             // Set disconnection event for reconnection
             Adapter.DeviceDisconnected += OnDeviceDisconnected;
@@ -349,15 +369,12 @@ namespace BLE.Client.ViewModels {
             }
 
             catch (Exception ex) {
-
-                _Chest1 = "red";
-                RaisePropertyChanged(() => Chest1);
-
-                _Back1 = "red";
-                RaisePropertyChanged(() => Back1);
-
-                _Back2 = "red";
-                RaisePropertyChanged(() => Back2);
+                // _Chest1 = "red";
+                // RaisePropertyChanged(() => Chest1);
+                // _Back1 = "red";
+                // RaisePropertyChanged(() => Back1);
+                // _Back2 = "red";
+                // RaisePropertyChanged(() => Back2);
 
                 _userDialogs.ShowError(ex.Message, 5000);
                 return;
@@ -862,7 +879,7 @@ namespace BLE.Client.ViewModels {
                                 }
                             }
                         }
-                        else {}
+                        else { }
                         TagInfoList.Insert(0, item);
                         // }
                     }

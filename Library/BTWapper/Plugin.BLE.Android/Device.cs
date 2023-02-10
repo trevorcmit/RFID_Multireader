@@ -14,22 +14,11 @@ using Plugin.BLE.Abstractions.Utils;
 using Plugin.BLE.Android.CallbackEventArgs;
 using Trace = Plugin.BLE.Abstractions.Trace;
 
-namespace Plugin.BLE.Android
-{
-    public class Device : DeviceBase
-    {
+
+namespace Plugin.BLE.Android {
+    public class Device : DeviceBase {
         public BluetoothDevice BluetoothDevice { get; private set; }
-
-        /// <summary>
-        /// we have to keep a reference to this because Android's api is weird and requires
-        /// the GattServer in order to do nearly anything, including enumerating services
-        /// </summary>
         internal BluetoothGatt _gatt;
-
-        /// <summary>
-        /// we also track this because of gogole's weird API. the gatt callback is where
-        /// we'll get notified when services are enumerated
-        /// </summary>
         private readonly GattCallback _gattCallback;
 
         public Device(Adapter adapter, BluetoothDevice nativeDevice, BluetoothGatt gatt, int rssi, byte[] advertisementData = null) : base(adapter)
@@ -40,11 +29,9 @@ namespace Plugin.BLE.Android
             _gattCallback = new GattCallback(adapter, this);
         }
 
-        public void Update(BluetoothDevice nativeDevice, BluetoothGatt gatt)
-        {
+        public void Update(BluetoothDevice nativeDevice, BluetoothGatt gatt) {
             BluetoothDevice = nativeDevice;
             _gatt = gatt;
-
 
             Id = ParseDeviceId();
             Name = BluetoothDevice.Name;
@@ -53,10 +40,8 @@ namespace Plugin.BLE.Android
         public override object NativeDevice => BluetoothDevice;
         internal bool IsOperationRequested { get; set; }
 
-        protected override async Task<IEnumerable<IService>> GetServicesNativeAsync()
-        {
-            if (_gattCallback == null || _gatt == null)
-            {
+        protected override async Task<IEnumerable<IService>> GetServicesNativeAsync() {
+            if (_gattCallback == null || _gatt == null) {
                 return Enumerable.Empty<IService>();
             }
 
@@ -76,37 +61,31 @@ namespace Plugin.BLE.Android
                 unsubscribeReject: handler => _gattCallback.ConnectionInterrupted -= handler);
         }
 
-        public void Connect(ConnectParameters connectParameters)
-        {
+        public void Connect(ConnectParameters connectParameters) {
             IsOperationRequested = true;
 
-            if (connectParameters.ForceBleTransport)
-            {
+            if (connectParameters.ForceBleTransport) {
                 ConnectToGattForceBleTransportAPI(connectParameters.AutoConnect);
             }
-            else
-            {
-                /*_gatt = */
+            else {
                 BluetoothDevice.ConnectGatt(Application.Context, connectParameters.AutoConnect, _gattCallback);
             }
         }
 
-        private void ConnectToGattForceBleTransportAPI(bool autoconnect)
-        {
-            //This parameter is present from API 18 but only public from API 23
-            //So reflection is used before API 23
+        private void ConnectToGattForceBleTransportAPI(bool autoconnect) {
+            // This parameter is present from API 18 but only public from API 23
+            // So reflection is used before API 23
             if (Build.VERSION.SdkInt < BuildVersionCodes.Lollipop)
             {
-                //no transport mode before lollipop, it will probably not work... gattCallBackError 133 again alas
                 BluetoothDevice.ConnectGatt(Application.Context, autoconnect, _gattCallback);
             }
             else if (Build.VERSION.SdkInt < BuildVersionCodes.M)
             {
                 var m = BluetoothDevice.Class.GetDeclaredMethod("connectGatt", new Java.Lang.Class[] {
-                                Java.Lang.Class.FromType(typeof(Context)),
-                                Java.Lang.Boolean.Type,
-                                Java.Lang.Class.FromType(typeof(BluetoothGattCallback)),
-                                Java.Lang.Integer.Type});
+                    Java.Lang.Class.FromType(typeof(Context)),
+                    Java.Lang.Boolean.Type,
+                    Java.Lang.Class.FromType(typeof(BluetoothGattCallback)),
+                    Java.Lang.Integer.Type});
 
                 var transport = BluetoothDevice.Class.GetDeclaredField("TRANSPORT_LE").GetInt(null); // LE = 2, BREDR = 1, AUTO = 0
                 m.Invoke(BluetoothDevice, Application.Context, false, _gattCallback, transport);
@@ -118,37 +97,20 @@ namespace Plugin.BLE.Android
 
         }
 
-        /// <summary>
-        /// This method is only called by a user triggered disconnect.
-        /// A user will first trigger _gatt.disconnect -> which in turn will trigger _gatt.Close() via the gattCallback
-        /// </summary>
-        public void Disconnect()
-        {
-            if (_gatt != null)
-            {
+        public void Disconnect() {
+            if (_gatt != null) {
                 IsOperationRequested = true;
-
                 ClearServices();
-
                 _gatt.Disconnect();
             }
-            else
-            {
+            else {
                 Trace.Message("[Warning]: Can't disconnect {0}. Gatt is null.", Name);
             }
         }
 
-        /// <summary>
-        /// CloseGatt is called by the gattCallback in case of user disconnect or a disconnect by signal loss or a connection error. 
-        /// Cleares all cached services.
-        /// </summary>
-        public void CloseGatt()
-        {
+        public void CloseGatt() {
             _gatt?.Close();
             _gatt = null;
-
-            // ClossGatt might will get called on signal loss without Disconnect being called we have to make sure we clear the services
-            // Clear services & characteristics otherwise we will get gatt operation return FALSE when connecting to the same IDevice instace at a later time
             ClearServices();
         }
 

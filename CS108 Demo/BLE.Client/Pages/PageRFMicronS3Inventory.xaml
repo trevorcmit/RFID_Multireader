@@ -8,8 +8,11 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 >
 
-    <StackLayout Orientation="Vertical" BackgroundColor="#FFFFFF">
+  <StackLayout Margin="2">
 
+    <ScrollView VerticalOptions="FillAndExpand">
+      <StackLayout>
+                
       <!-- Left Side Person -->
       <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
         <Grid>
@@ -33,13 +36,6 @@
               </OnPlatform>
             </Image.Source>
           </Image>
-
-          <Picker 
-            Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
-            Title="Person #1"
-            ItemsSource="{Binding pickerList1}"
-            SelectedIndex="{Binding Selected1, Mode=OneWayToSource}"
-          />
 
           <!-- Beanie -->
           <Image Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.6" Source="{Binding Beanie1, StringFormat='Assets/\{0\}.png'}"/>
@@ -78,7 +74,6 @@
         </Grid>
       </StackLayout>
 
-
       <!-- Right Side Person -->
       <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
         <Grid>
@@ -102,13 +97,6 @@
               </OnPlatform>
             </Image.Source>
           </Image>
-
-          <Picker 
-            Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
-            Title="Person #2"
-            ItemsSource="{Binding pickerList2}"
-            SelectedIndex="{Binding Selected2, Mode=OneWayToSource}"
-          />
 
           <!-- Beanie -->
           <Image Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.6" Source="{Binding Beanie2, StringFormat='Assets/\{0\}.png'}"/>
@@ -147,25 +135,26 @@
         </Grid>
       </StackLayout>
 
+      </StackLayout>
+    </ScrollView>
 
-      <StackLayout Orientation="Vertical" VerticalOptions="EndAndExpand"> <!-- Bottom Inventory/Clear/Share Section --> 
-        <Button Text="{Binding startInventoryButtonText}" Font="Large" Command="{Binding OnStartInventoryButtonCommand}"/>
-          <StackLayout Orientation="Horizontal">
-            <Button Text="Clear" Font="Large" TextColor="White"
-                    CornerRadius="11"
+
+    <StackLayout Orientation="Vertical" VerticalOptions="EndAndExpand"> <!-- Bottom Inventory/Clear/Share Section --> 
+      <Button Text="{Binding startInventoryButtonText}" Font="Large" Command="{Binding OnStartInventoryButtonCommand}"/>
+        <StackLayout Orientation="Horizontal">
+          <Button Text="Clear" Font="Large" TextColor="White"
                     Command="{Binding OnClearButtonCommand}" 
-                    HorizontalOptions="StartAndExpand"
-                    BackgroundColor="#01196C"
-            />
-            <Button Text="Share" Font="Large" TextColor="White"
-                    CornerRadius="11"
+                    HorizontalOptions="StartAndExpand" CornerRadius="11"
+                    BackgroundColor="#071D6E"
+          />
+          <Button Text="Share" Font="Large" TextColor="White"
                     Command="{Binding OnShareDataCommand}"   
-                    HorizontalOptions="EndAndExpand"
-                    BackgroundColor="#01196C"
-            />
-          </StackLayout>
-      </StackLayout>                                                      <!-- Bottom Inventory/Clear/Share Section -->
-
+                    HorizontalOptions="EndAndExpand" CornerRadius="11"
+                    BackgroundColor="#071D6E"
+          />
+        </StackLayout>
     </StackLayout>
+
+  </StackLayout>
 
 </pages:BasePage>

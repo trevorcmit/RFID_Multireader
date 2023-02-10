@@ -8,24 +8,21 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 >
 
-  <StackLayout Margin="2">
+  <StackLayout>
 
-    <ScrollView VerticalOptions="FillAndExpand">
-      <StackLayout>
-                
-      <!-- Left Side Person -->
-      <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
-        <Grid>
-          <Grid.ColumnDefinitions> <!-- Eight Columns -->
+    <ScrollView VerticalOptions="StartAndExpand">
+
+      <!-- Three Body Problem -->
+      <StackLayout Orientation="Vertical" HorizontalOptions="Fill">
+        <Grid HeightRequest="1275">
+          <Grid.ColumnDefinitions>
             <ColumnDefinition/><ColumnDefinition/><ColumnDefinition/><ColumnDefinition/>
             <ColumnDefinition/><ColumnDefinition/><ColumnDefinition/><ColumnDefinition/>
           </Grid.ColumnDefinitions>
           <Grid.RowDefinitions>
-            <RowDefinition Height="0.2*"/>    <!--  BODY #1  -->
-            <RowDefinition Height="0.2*"/>
-            <RowDefinition Height="0.2*"/>
-            <RowDefinition Height="0.2*"/>
-            <RowDefinition Height="0.2*"/>
+            <RowDefinition/><RowDefinition/><RowDefinition/><RowDefinition/><RowDefinition/>
+            <RowDefinition/><RowDefinition/><RowDefinition/><RowDefinition/><RowDefinition/>
+            <RowDefinition/><RowDefinition/><RowDefinition/><RowDefinition/><RowDefinition/>
           </Grid.RowDefinitions>
 
           <Image Grid.Row="0" Grid.RowSpan="5" Grid.Column="0" Grid.ColumnSpan="8" Aspect="AspectFit">
@@ -36,6 +33,25 @@
               </OnPlatform>
             </Image.Source>
           </Image>
+
+          <Image Grid.Row="5" Grid.RowSpan="5" Grid.Column="0" Grid.ColumnSpan="8" Aspect="AspectFit">
+            <Image.Source>
+              <OnPlatform x:TypeArguments="FileImageSource">
+                <On Platform="UWP"     Value="Assets/singletorso.jpg"/>
+                <On Platform="Android" Value="singletorso.jpg"/> 
+              </OnPlatform>
+            </Image.Source>
+          </Image>
+
+          <Image Grid.Row="10" Grid.RowSpan="5" Grid.Column="0" Grid.ColumnSpan="8" Aspect="AspectFit">
+            <Image.Source>
+              <OnPlatform x:TypeArguments="FileImageSource">
+                <On Platform="UWP"     Value="Assets/singletorso.jpg"/>
+                <On Platform="Android" Value="singletorso.jpg"/> 
+              </OnPlatform>
+            </Image.Source>
+          </Image>
+
 
           <!-- Beanie -->
           <Image Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.6" Source="{Binding Beanie1, StringFormat='Assets/\{0\}.png'}"/>
@@ -74,83 +90,26 @@
         </Grid>
       </StackLayout>
 
-      <!-- Right Side Person -->
-      <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
-        <Grid>
-          <Grid.ColumnDefinitions> <!-- Eight Columns -->
-            <ColumnDefinition/><ColumnDefinition/><ColumnDefinition/><ColumnDefinition/>
-            <ColumnDefinition/><ColumnDefinition/><ColumnDefinition/><ColumnDefinition/>
-          </Grid.ColumnDefinitions>
-          <Grid.RowDefinitions>
-            <RowDefinition Height="0.2*"/>    <!--  BODY #2  -->
-            <RowDefinition Height="0.2*"/>
-            <RowDefinition Height="0.2*"/>
-            <RowDefinition Height="0.2*"/>
-            <RowDefinition Height="0.2*"/>
-          </Grid.RowDefinitions>
+      <!-- </StackLayout> -->
 
-          <Image Grid.Row="0" Grid.RowSpan="5" Grid.Column="0" Grid.ColumnSpan="8" Aspect="AspectFit">
-            <Image.Source>
-              <OnPlatform x:TypeArguments="FileImageSource">
-                <On Platform="UWP"     Value="Assets/singletorso.jpg"/>
-                <On Platform="Android" Value="singletorso.jpg"/> 
-              </OnPlatform>
-            </Image.Source>
-          </Image>
-
-          <!-- Beanie -->
-          <Image Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.6" Source="{Binding Beanie2, StringFormat='Assets/\{0\}.png'}"/>
-          <Label Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Beanie2_T, StringFormat='{0:F0}°'}" FontAttributes="Bold"/>
-
-          <!-- Back Neck, Back -->
-          <Image Grid.Row="1" Grid.Column="6" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.6" Source="{Binding BackNeck2, StringFormat='Assets/\{0\}.png'}"/>
-          <Image Grid.Row="3" Grid.Column="6" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.6" Source="{Binding Back2, StringFormat='Assets/\{0\}.png'}"/>
-          <Label Grid.Row="1" Grid.Column="6" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding BackNeck2_T, StringFormat='{0:F0}°'}" FontAttributes="Bold"/>
-          <Label Grid.Row="3" Grid.Column="6" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Back2_T, StringFormat='{0:F0}°'}" FontAttributes="Bold"/>
-          <Label Grid.Row="2" Grid.Column="6" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Start" FontAttributes="Bold" Text="Back of Neck"/>
-          <Label Grid.Row="4" Grid.Column="6" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Start" FontAttributes="Bold" Text="Back"/>
-
-          <!-- Chest -->
-          <Image Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.6" Source="{Binding Chest2, StringFormat='Assets/\{0\}.png'}"/>
-          <Label Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Chest2_T, StringFormat='{0:F0}°'}" FontAttributes="Bold"/>
-
-          <!-- Left and Right Abs-->
-          <Image Grid.Row="4" Grid.Column="3" Aspect="AspectFit" Opacity="0.6" Source="{Binding RightAb2, StringFormat='Assets/\{0\}.png'}"/>
-          <Image Grid.Row="4" Grid.Column="4" Aspect="AspectFit" Opacity="0.6" Source="{Binding LeftAb2, StringFormat='Assets/\{0\}.png'}"/>
-          <Label Grid.Row="4" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding RightAb2_T, StringFormat='{0:F0}°'}" FontAttributes="Bold"/>
-          <Label Grid.Row="4" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding LeftAb2_T, StringFormat='{0:F0}°'}" FontAttributes="Bold"/>
-
-          <!-- Upper Arms -->
-          <Image Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="1" Aspect="AspectFit" Opacity="0.6" Source="{Binding RightUpArm2, StringFormat='Assets/\{0\}.png'}"/>
-          <Image Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="1" Aspect="AspectFit" Opacity="0.6" Source="{Binding LeftUpArm2, StringFormat='Assets/\{0\}.png'}"/>
-          <Label Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding RightUpArm2_T, StringFormat='{0:F0}°'}" FontAttributes="Bold"/>
-          <Label Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding LeftUpArm2_T, StringFormat='{0:F0}°'}" FontAttributes="Bold"/>
-
-          <!-- Lower Arms -->
-          <Image Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.6" Source="{Binding RightLowArm2, StringFormat='Assets/\{0\}.png'}"/>
-          <Image Grid.Row="4" Grid.Column="5" Grid.ColumnSpan="2" Aspect="AspectFit" Opacity="0.6" Source="{Binding LeftLowArm2, StringFormat='Assets/\{0\}.png'}"/>
-          <Label Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding RightLowArm2_T, StringFormat='{0:F0}°'}" FontAttributes="Bold"/>
-          <Label Grid.Row="4" Grid.Column="5" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding LeftLowArm2_T, StringFormat='{0:F0}°'}"  FontAttributes="Bold"/>
-
-        </Grid>
-      </StackLayout>
-
-      </StackLayout>
     </ScrollView>
 
 
-    <StackLayout Orientation="Vertical" VerticalOptions="EndAndExpand"> <!-- Bottom Inventory/Clear/Share Section --> 
+    <!-- Bottom Inventory/Clear/Share Section --> 
+    <StackLayout Orientation="Vertical" VerticalOptions="EndAndExpand">
       <Button Text="{Binding startInventoryButtonText}" Font="Large" Command="{Binding OnStartInventoryButtonCommand}"/>
         <StackLayout Orientation="Horizontal">
-          <Button Text="Clear" Font="Large" TextColor="White"
-                    Command="{Binding OnClearButtonCommand}" 
-                    HorizontalOptions="StartAndExpand" CornerRadius="11"
-                    BackgroundColor="#071D6E"
+          <Button 
+            Text="Clear" Font="Large" TextColor="White"
+            Command="{Binding OnClearButtonCommand}" 
+            HorizontalOptions="StartAndExpand" CornerRadius="11"
+            BackgroundColor="#071D6E"
           />
-          <Button Text="Share" Font="Large" TextColor="White"
-                    Command="{Binding OnShareDataCommand}"   
-                    HorizontalOptions="EndAndExpand" CornerRadius="11"
-                    BackgroundColor="#071D6E"
+          <Button 
+            Text="Share" Font="Large" TextColor="White"
+            Command="{Binding OnShareDataCommand}"   
+            HorizontalOptions="EndAndExpand" CornerRadius="11"
+            BackgroundColor="#071D6E"
           />
         </StackLayout>
     </StackLayout>

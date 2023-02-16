@@ -87,7 +87,7 @@ namespace BLE.Client.ViewModels {
         #endregion
 
 
-        #region ------------- Person Selection ----------------
+        #region ------------- Shirt Selection ----------------
         private List<string> _pickerList1; public List<string> pickerList1 { get => _pickerList1; set { _pickerList1 = value; OnPropertyChanged("pickerList1"); } }
         private List<string> _pickerList2; public List<string> pickerList2 { get => _pickerList2; set { _pickerList2 = value; OnPropertyChanged("pickerList2"); } }
 
@@ -228,7 +228,19 @@ namespace BLE.Client.ViewModels {
         private string _RightHand3_T; public string RightHand3_T { get => _RightHand3_T; set { _RightHand3_T = value; OnPropertyChanged("RightHand3_T"); } }
 
         public int THRESHOLD = 15;
-        class Person {
+        class Glove {
+            public string LeftHand  { get; set; }
+            public string RightHand { get; set; }
+            public List<string> TagList { get; set; }
+
+            public Glove(string l_EPC, string r_EPC) {
+                LeftHand  = l_EPC;
+                RightHand = r_EPC;
+                TagList = new List<string> { LeftHand, RightHand };
+            }
+        }
+
+        class Shirt {
             public string Back          { get; set; }
             public string BackNeck      { get; set; }
             public string Chest         { get; set; }
@@ -238,15 +250,13 @@ namespace BLE.Client.ViewModels {
             public string RightUpArm    { get; set; }
             public string LeftLowArm    { get; set; }
             public string RightLowArm   { get; set; }
-            public List<string> Beanie  { get; set; }
             public List<string> TagList { get; set; }
 
-            public Person(
-                string backneck, string back, string chest, 
-                string leftab, string rightab, 
-                string rightuparm, string rightlowarm, string leftuparm, string leftlowarm,
-                string beanie1, string beanie2, string beanie3, string beanieR, string beanieL
+            public Shirt(
+                string backneck, string back, string chest, string leftab, string rightab, 
+                string rightuparm, string rightlowarm, string leftuparm, string leftlowarm
             ) {
+                // Shirt Locations
                 BackNeck    = backneck;
                 Back        = back;
                 Chest       = chest;
@@ -256,44 +266,37 @@ namespace BLE.Client.ViewModels {
                 RightUpArm  = rightuparm;
                 LeftLowArm  = leftlowarm;
                 RightLowArm = rightlowarm;
-                Beanie  = new List<string> { beanie1, beanie2, beanie3, beanieL, beanieR };
                 TagList = new List<string> { Back, BackNeck, Chest, LeftAb, RightAb, LeftUpArm, RightUpArm, LeftLowArm, RightLowArm };
             }
         }
 
-        Person person1  = new Person("438F", "1D6C", "458B", "3D0D", "7B11", "0843", "4BA9", "56A4", "A268", "4E72", "5A88", "7342", "5481", "8839");
-        Person person2  = new Person("333B", "289B", "2473", "231D", "9879", "4067", "5FB6", "169E", "8D50", "74C4", "73DC", "DC4A", "884D", "1BA4");
-        Person person3  = new Person("886B", "47D0", "AE3E", "7645", "103F", "7E6F", "64C0", "2887", "8915", "6765", "A27E", "0C71", "7508", "A8BE");
-        Person person4  = new Person("9854", "A3B0", "9EC6", "9A91", "343B", "87D4", "81D4", "8A53", "1397", "A467", "4191", "4F07", "2966", "7B7F");
-        Person person5  = new Person("777F", "67DB", "184A", "885D", "71CF", "BA4C", "8FA9", "B6A1", "2C97", "91A6", "9B91", "6382", "79D1", "1748");
-        Person person6  = new Person("71BB", "7705", "B25E", "3247", "A9B5", "6C38", "7662", "A983", "098F", "B644", "7BCC", "B576", "70D1", "4D84");
-        Person person7  = new Person("6023", "4BAC", "8988", "668B", "B77F", "B0A7", "8062", "7648", "5189", "7033", "1B39", "9643", "9C6D", "A53C");
-        Person person8  = new Person("1B6A", "0D42", "7AD4", "20AF", "493F", "404A", "6878", "1A3B", "546F", "194B", "3133", "A847", "0D50", "7A61");
-        Person person9  = new Person("1A91", "463C", "5199", "0483", "6003", "9F30", "334C", "9877", "5734", "B384", "42A9", "149C", "3991", "5C23");
-        Person person10 = new Person("366C", "A08B", "AC42", "9AC9", "B53F", "76A4", "5E76", "68AE", "41D6", "803F", "5757", "9E54", "----", "----");
-        Person person11 = new Person("2A1B", "238C", "731F", "9591", "5C98", "5F06", "4526", "461C", "5253", "B078", "3AC7", "566B", "65D4", "432B");
-        Person person12 = new Person("87C3", "38D7", "A86F", "637A", "552E", "A34A", "9436", "7FAC", "0C90", "1168", "0F7A", "0068", "175B", "746D");
-        Person person13 = new Person("A033", "A0C0", "892F", "627F", "6BD9", "3DB0", "8C97", "4ECF", "A73C", "90AE", "78D3", "82D8", "312D", "2A29");
-        Person person14 = new Person("462C", "5B60", "7415", "6310", "1851", "616A", "5DAA", "6D28", "9991", "3B0E", "5374", "682C", "0A50", "1543");
-        Person person15 = new Person("9C54", "9968", "65E1", "5E23", "ACB3", "7AD3", "99A1", "B19D", "43C6", "7DCB", "9D35", "6FD0", "34CE", "62E3");
-        Person person16 = new Person("959E", "1C5F", "5A59", "077A", "902A", "3B60", "8199", "4469", "813A", "B7A4", "5163", "4DA5", "8995", "7972");
-        Person person17 = new Person("6CC7", "8FB7", "799D", "6F8D", "6332", "5A1E", "92A5", "4A3D", "3EC9", "16AB", "A66C", "6162", "A686", "7E1B");
-        Person person18 = new Person("B43E", "19B1", "AEA6", "9152", "59D6", "3060", "7491", "893F", "38C3", "1C81", "A49F", "137F", "AB34", "A82F");
-        Person person19 = new Person("697F", "78A5", "5D0E", "7EC6", "AE59", "8158", "4A9B", "1D44", "2122", "5C02", "2D90", "6DAB", "3374", "B1AB");
-        Person person20 = new Person("84B5", "A02C", "0A80", "787B", "83D5", "77DB", "9FA0", "6EC4", "AF3F", "963D", "A79C", "0E4D", "7A91", "460A");
-        Person person21 = new Person("8CB4", "4115", "4D74", "4883", "4C9F", "ABB7", "7938", "390F", "21A5", "A697", "7C7D", "B689", "114D", "047A");
-        Person person22 = new Person("4F0D", "90D5", "0874", "45CE", "6CAC", "3EB2", "A26F", "888C", "50C3", "3767", "664F", "36A4", "2759", "BB8B");
-        Person person23 = new Person("0C7F", "8A16", "57DF", "350F", "46BC", "0A89", "2D1F", "55D6", "7961", "2290", "798F", "B35B", "813B", "027B");
-        Person person24 = new Person("22A0", "746B", "8E41", "933B", "BB81", "39AF", "4436", "826D", "8DBC", "9272", "862E", "3276", "58D6", "2858");
-        Person person25 = new Person("205E", "9A88", "9F3D", "6F32", "1F74", "51B0", "AD80", "3277", "1E53", "894A", "A258", "3434", "82D3", "51DF");
-        Person person26 = new Person("4813", "2791", "1F7A", "6F4A", "2383", "2F66", "2E5C", "926A", "2E56", "158F", "5B06", "B28A", "73C6", "819C");
-        Person person27 = new Person("2FA1", "93BD", "913C", "3CD0", "2033", "A071", "3A3A", "7A7E", "9993", "5260", "3E8A", "B55B", "258F", "158E");
-        Person person28 = new Person("8977", "4EB3", "AA5E", "6626", "9ABE", "6CD0", "AB8E", "14AA", "6E94", "895D", "571F", "2D68", "8121", "198C");
-        Person person29 = new Person("1466", "75C7", "54C4", "A489", "814C", "155D", "5221", "4293", "5F0A", "703F", "9FBF", "8D33", "3416", "3DB7");
-        Person person30 = new Person("8339", "6E37", "3546", "686E", "0D9F", "9E2A", "4131", "B647", "8A97", "B690", "A688", "9647", "44D6", "94CB");
-        Person person31 = new Person("1CAE", "7764", "8F24", "AD3E", "8898", "413F", "097A", "18A8", "4258", "7F4E", "801E", "8651", "AAB4", "6CB5");
-        Person person32 = new Person("2990", "1EC3", "51E2", "3783", "AE5E", "4575", "0688", "A0B0", "1BA6", "3C3E", "1989", "7C2C", "42D7", "6129");
-        Dictionary<int, Person> people = new Dictionary<int, Person>();
+        Shirt shirt1  = new Shirt("7F57", "6082", "51BE", "0551", "5D88", "1EB8", "5CA6", "89BA", "5286");
+        Shirt shirt2  = new Shirt("3259", "846D", "0469", "8C94", "53C5", "3405", "36C1", "8534", "5866");
+        Shirt shirt3  = new Shirt("82BD", "A892", "7A48", "4D1E", "849B", "0D83", "5C9A", "78AE", "877F");
+        Shirt shirt4  = new Shirt("26CO", "3CA6", "3D5B", "1D8D", "7C8A", "4768", "843F", "2846", "4257");
+        Shirt shirt5  = new Shirt("4594", "1073", "3415", "56AE", "6809", "97A8", "9B3D", "917C", "6627");
+        Shirt shirt6  = new Shirt("89BE", "522F", "3D80", "3F51", "597F", "8599", "80DC", "026C", "B574");
+        Shirt shirt7  = new Shirt("7625", "5D20", "A8AB", "2BA9", "3D39", "4F7B", "B592", "90A8", "4FAB");
+        Shirt shirt8  = new Shirt("30CB", "3592", "3B18", "75D4", "54D3", "5F3A", "8A4C", "73A1", "4CA2");
+        Shirt shirt9  = new Shirt("859F", "A75A", "AF4F", "4946", "5AAA", "5FAF", "5C89", "A958", "B66D");
+        Shirt shirt10 = new Shirt("1772", "0385", "5487", "1A30", "482E", "4FDF", "5A34", "73CD", "92A1");
+        Shirt shirt11 = new Shirt("9D7A", "8913", "A587", "B894", "5988", "1C82", "0088", "AC59", "382A");
+        Shirt shirt12 = new Shirt("2124", "1C48", "8485", "9CAC", "8E70", "620E", "8133", "8571", "306B");
+
+        Glove glove1_L  = new Glove("7251", "577F"); Glove glove1_R  = new Glove("8DC7", "4DA7");
+        Glove glove2_L  = new Glove("5A93", "1342"); Glove glvoe2_R  = new Glove("69AF", "A074");
+        Glove glove3_L  = new Glove("92CB", "2B2C"); Glove glove3_R  = new Glove("4368", "55DF");
+        Glove glove4_L  = new Glove("5855", "B964"); Glove glove4_R  = new Glove("B786", "5378");
+        Glove glove5_L  = new Glove("3FCE", "39A0"); Glove glove5_R  = new Glove("5E18", "6423");
+        Glove glove6_L  = new Glove("6B69", "3BB8"); Glove glove6_R  = new Glove("1235", "422D");
+        Glove glove7_L  = new Glove("087D", "3D35"); Glove glove7_R  = new Glove("3B9A", "8582");
+        Glove glove8_L  = new Glove("59A9", "9742"); Glove glove8_R  = new Glove("5198", "49D5");
+        Glove glove9_L  = new Glove("0A70", "2CAB"); Glove glove9_R  = new Glove("2D5B", "4548");
+        Glove glove10_L = new Glove("2361", "BA61"); Glove glove10_R = new Glove("7A30", "2FAB");
+        Glove glove11_L = new Glove("0AA9", "6904"); Glove glove11_R = new Glove("7A40", "55D5");
+        Glove glove12_L = new Glove("3B21", "1E46"); Glove glove12_R = new Glove("794B", "3ACE");
+
+        Dictionary<int, Shirt> people = new Dictionary<int, Shirt>();
         #endregion
 
 
@@ -315,19 +318,23 @@ namespace BLE.Client.ViewModels {
             LeftHand1    = "gray"; LeftHand2    = "gray"; LeftHand3    = "gray"; LeftHand1_T    = "--"; LeftHand2_T    = "--"; LeftHand3_T    = "--";
             RightHand1   = "gray"; RightHand2   = "gray"; RightHand3   = "gray"; RightHand1_T   = "--"; RightHand2_T   = "--"; RightHand3_T   = "--";
 
-            people = new Dictionary<int, Person> {
-                {0, person1},   {1, person2},   {2, person3},   {3, person4},   {4, person5}, 
-                {5, person6},   {6, person7},   {7, person8},   {8, person9},   {9, person10},
-                {10, person11}, {11, person12}, {12, person13}, {13, person14}, {14, person15},
-                {15, person16}, {16, person17}, {17, person18}, {18, person19}, {19, person20},
-                {20, person21}, {21, person22}, {22, person23}, {23, person24}, {24, person25},
-                {25, person26}, {26, person27}, {27, person28}, {28, person29}, {29, person30},
-                {30, person31}, {31, person32},
+            people = new Dictionary<int, Shirt> {
+                {0, shirt1},  {1, shirt2},  {2, shirt3}, {3, shirt4},  {4, shirt5},   {5, shirt6},
+                {6, shirt7},  {7, shirt8},  {8, shirt9}, {9, shirt10}, {10, shirt11}, {11, shirt12}
             };
 
             // Set disconnection event for reconnection
             Adapter.DeviceDisconnected += OnDeviceDisconnected;
             Adapter.DeviceConnectionLost += OnDeviceDisconnected; // connection or discconnect?
+
+
+            // Setup Picker Lists on Initialization
+            _pickerList1 = new List<string>{
+                "Shirt 1", "Shirt 2", "Shirt 3", "Shirt 4",  "Shirt 5",  "Shirt 6",
+                "Shirt 7", "Shirt 8", "Shirt 9", "Shirt 10", "Shirt 11", "Shirt 12"
+            };
+            RaisePropertyChanged(() => pickerList1);
+
 
             GetTimes();      // Get Duty Cycle Times
 
@@ -478,8 +485,6 @@ namespace BLE.Client.ViewModels {
             _active_time   = 1000;
             _inactive_time = 1000;
 
-            // _active_time   = Convert.ToInt32(active_time_str);
-            // _inactive_time = Convert.ToInt32(inactive_time_str);
             RaisePropertyChanged(() => active_time);
             RaisePropertyChanged(() => inactive_time);
 
@@ -590,8 +595,8 @@ namespace BLE.Client.ViewModels {
                                             // Get Last Four Characters of EPC
                                             string temp_EPC = TagInfoList[cnt].EPC.Substring(TagInfoList[cnt].EPC.Length - 4);
 
-                                            Person p1 = people[Selected1];
-                                            Person p2 = people[Selected2];
+                                            Shirt p1 = people[Selected1];
+                                            Shirt p2 = people[Selected2];
 
                                             if (p1.TagList.Contains(temp_EPC)) {
                                                 if (temp_EPC==p1.Back) { 
@@ -701,19 +706,6 @@ namespace BLE.Client.ViewModels {
                                                         _RightLowArm1 = "red";
                                                         RaisePropertyChanged(() => RightLowArm1);
                                                     }
-                                                }
-                                            }
-
-                                            else if (p1.Beanie.Contains(temp_EPC)) {
-                                                _Beanie1_T = DisplaySAV;
-                                                RaisePropertyChanged(() => Beanie1_T);
-                                                if ((SAV>THRESHOLD) && (_Beanie1!="green"))
-                                                {
-                                                    _Beanie1 = "green"; RaisePropertyChanged(() => Beanie1);
-                                                }
-                                                else if ((SAV<=THRESHOLD) && (_Beanie1!="red"))
-                                                {
-                                                    _Beanie1 = "red"; RaisePropertyChanged(() => Beanie1);
                                                 }
                                             }
 
@@ -828,18 +820,18 @@ namespace BLE.Client.ViewModels {
                                                 }
                                             }
 
-                                            else if (p2.Beanie.Contains(temp_EPC)) {
-                                                _Beanie2_T = DisplaySAV;
-                                                RaisePropertyChanged(() => Beanie2_T);
-                                                if ((SAV>THRESHOLD) && (_Beanie2!="green"))
-                                                {
-                                                    _Beanie2 = "green"; RaisePropertyChanged(() => Beanie2);
-                                                }
-                                                else if ((SAV<=THRESHOLD) && (_Beanie2!="red"))
-                                                {
-                                                    _Beanie2 = "red"; RaisePropertyChanged(() => Beanie2);
-                                                }
-                                            }
+                                            // else if (p2.Beanie.Contains(temp_EPC)) {
+                                            //     _Beanie2_T = DisplaySAV;
+                                            //     RaisePropertyChanged(() => Beanie2_T);
+                                            //     if ((SAV>THRESHOLD) && (_Beanie2!="green"))
+                                            //     {
+                                            //         _Beanie2 = "green"; RaisePropertyChanged(() => Beanie2);
+                                            //     }
+                                            //     else if ((SAV<=THRESHOLD) && (_Beanie2!="red"))
+                                            //     {
+                                            //         _Beanie2 = "red"; RaisePropertyChanged(() => Beanie2);
+                                            //     }
+                                            // }
 
                                         }
                                     }

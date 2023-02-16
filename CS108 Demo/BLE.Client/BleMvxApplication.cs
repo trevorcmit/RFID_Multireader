@@ -64,7 +64,7 @@ namespace BLE.Client {
 
         public bool RFID_Vibration = false;
         public bool RFID_VibrationTag = false;      // false = New, true = All
-        public uint RFID_VibrationWindow = 2;      // 2 seconds
+        public uint RFID_VibrationWindow = 2;       // 2 seconds
         public uint RFID_VibrationTime = 300;       // 300 ms
 
         public bool[] RFID_AntennaEnable = new bool[16] {true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};

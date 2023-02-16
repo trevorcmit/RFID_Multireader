@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-// using System.Collections.Generic;
 using Acr.UserDialogs;
 using MvvmCross.Core.ViewModels;
-// using MvvmCross.Platform;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Plugin.BLE.Abstractions.Contracts;
 using Plugin.BLE.Abstractions;
-// using Plugin.BLE.Abstractions.Extensions;
 using Prism.Mvvm;
 using Plugin.Share;
-// using Plugin.Share.Abstractions;
 
 
 namespace BLE.Client.ViewModels {
@@ -60,24 +56,6 @@ namespace BLE.Client.ViewModels {
         private ObservableCollection<RFMicroTagInfoViewModel> _TagInfoList = new ObservableCollection<RFMicroTagInfoViewModel>();
         public ObservableCollection<RFMicroTagInfoViewModel> TagInfoList { get { return _TagInfoList; } set { SetProperty(ref _TagInfoList, value); } }
 
-        public string SensorValueTitle { get {
-                // 0 = Average value, 1 = RAW, 2 = Temperature F, 3 = Temperature C, 4 = Dry/Wet
-                switch (BleMvxApplication._rfMicro_SensorUnit) {
-                    case 0:
-                        return "RAW";
-                    case 1:
-                        return "RAW";
-                    case 2:
-                        return "ºF";
-                    case 3:
-                        return "ºC";
-                    case 4:
-                        return "D/W";
-                }
-                return "Value";
-            }
-        }
-
         private string _startInventoryButtonText = "Start Inventory";
         public string startInventoryButtonText { get { return _startInventoryButtonText; } }
 
@@ -119,7 +97,6 @@ namespace BLE.Client.ViewModels {
             OnStartInventoryButtonCommand = new Command(StartInventoryClick);
             OnClearButtonCommand = new Command(ClearClick);
             OnShareDataCommand = new Command(ShareDataButtonClick);
-            RaisePropertyChanged(() => SensorValueTitle);
             SetPowerString();
         }
 
@@ -198,9 +175,6 @@ namespace BLE.Client.ViewModels {
             }
 
             BleMvxApplication._reader.rfid.Options.TagRanging.flags = CSLibrary.Constants.SelectFlags.ZERO;
-
-            // Setting 1
-            SetPower(BleMvxApplication._rfMicro_Power);
 
             // Setting 3  // MUST SET for RFMicro
             BleMvxApplication._config.RFID_DynamicQParms.toggleTarget = (BleMvxApplication._rfMicro_Target == 2) ? 1U : 0U;
@@ -282,34 +256,9 @@ namespace BLE.Client.ViewModels {
             }
         }
 
-        void SetPower(int index) {
-            switch (index) {
-                case 0:
-                    BleMvxApplication._reader.rfid.SetPowerSequencing(0);
-                    BleMvxApplication._reader.rfid.SetPowerLevel(160);
-                    break;
-                case 1:
-                    BleMvxApplication._reader.rfid.SetPowerSequencing(0);
-                    BleMvxApplication._reader.rfid.SetPowerLevel(230);
-                    break;
-                case 2:
-                    BleMvxApplication._reader.rfid.SetPowerSequencing(0);
-                    BleMvxApplication._reader.rfid.SetPowerLevel(300);
-                    break;
-                case 3:
-                    SetPower(_powerRunning);
-                    break;
-                case 4:
-                    SetConfigPower();
-                    break;
-            }
-        }
-
         int _powerRunning = 0;
         void StartInventory() {
             if (_startInventory == false) return;
-
-            SetPower(BleMvxApplication._rfMicro_Power);
 
             StartTagCount();
             {
@@ -321,8 +270,6 @@ namespace BLE.Client.ViewModels {
             BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_EXERANGING);
             ClassBattery.SetBatteryMode(ClassBattery.BATTERYMODE.INVENTORY);
             _cancelVoltageValue = true;
-
-            RaisePropertyChanged(() => startInventoryButtonText);
         }
 
         void StopInventory() {
@@ -331,7 +278,6 @@ namespace BLE.Client.ViewModels {
 
             _tagCount = false;
             BleMvxApplication._reader.rfid.StopOperation();
-            RaisePropertyChanged(() => startInventoryButtonText);
 
             if (_powerRunning >= 2) _powerRunning = 0;
             else                    _powerRunning++;
@@ -353,21 +299,10 @@ namespace BLE.Client.ViewModels {
             // Create a timer that waits one second, then invokes every second.
             Xamarin.Forms.Device.StartTimer(TimeSpan.FromMilliseconds(60000), () => {
                 _InventoryTime = (DateTime.Now - InventoryStartTime).TotalSeconds;
-                RaisePropertyChanged(() => InventoryTime);
                 _tagCountForAlert = 0;
                 _numberOfTagsText = _TagInfoList.Count.ToString() + " tags";
-                RaisePropertyChanged(() => numberOfTagsText);
                 _tagPerSecondText = tagsCount.ToString() + " tags/s";
-                RaisePropertyChanged(() => tagPerSecondText);
-                tagsCount = 0;
-
-                if (_tagCount) return true;
-                return false;
             });
-        }
-
-        void StopInventoryClick() {
-            BleMvxApplication._reader.rfid.StopOperation();
         }
 
         void TagInventoryEvent(object sender, CSLibrary.Events.OnAsyncCallbackEventArgs e)
@@ -396,8 +331,6 @@ namespace BLE.Client.ViewModels {
 
         void StateChangedEvent(object sender, CSLibrary.Events.OnStateChangedEventArgs e)
         {
-            //InvokeOnMainThread(() =>
-            //{
             switch (e.state) {
                 case CSLibrary.Constants.RFState.IDLE:
                     ClassBattery.SetBatteryMode(ClassBattery.BATTERYMODE.IDLE);
@@ -572,16 +505,6 @@ namespace BLE.Client.ViewModels {
             return "";
         }
 
-        double getTempF(UInt16 temp, UInt64 CalCode)
-        {
-            return (getTemperatue(temp, CalCode) * 1.8 + 32.0);
-        }
-
-        double getTempC(UInt16 temp, UInt64 CalCode)
-        {
-            return getTemperatue(temp, CalCode);
-        }
-
         double getTemperatue(UInt16 temp, UInt64 CalCode)
         {
             int crc = (int)(CalCode >> 48) & 0xffff;
@@ -597,7 +520,6 @@ namespace BLE.Client.ViewModels {
             fTemperature += (double)calTemp1;
             fTemperature -= 800;
             fTemperature /= 10;
-            //textViewTemperatureCode.setText(accessResult.substring(0, 4) + (calVer != -1 ? ("(" + String.format("%.1f", fTemperature) + (char)0x00B0 + "C" + ")") : ""));
 
             return fTemperature;
         }
@@ -628,8 +550,6 @@ namespace BLE.Client.ViewModels {
                         break;
                 }
             }
-
-			RaisePropertyChanged(() => labelVoltage);
 		}
 
         private void ShareDataButtonClick()
@@ -647,21 +567,6 @@ namespace BLE.Client.ViewModels {
                                     "\"" + ((BleMvxApplication._rfMicro_SensorType == 0) ? "Sensor code" : "Temperature") + "\"," +
                                     TagInfoList[index].SensorAvgValue + "," +
                                     "\"";
-                        switch (BleMvxApplication._rfMicro_SensorUnit)
-                        {
-                            case 0:
-                                dataBase += "code";
-                                break;
-                            case 1:
-                                dataBase += "F";
-                                break;
-                            case 2:
-                                dataBase += "C";
-                                break;
-                            case 3:
-                                dataBase += "%";
-                                break;
-                        }
                         dataBase += "\"";
                         ;
                     }
@@ -710,5 +615,6 @@ namespace BLE.Client.ViewModels {
                 await System.Threading.Tasks.Task.Delay(1000);
             }
         }
+
     }
 }

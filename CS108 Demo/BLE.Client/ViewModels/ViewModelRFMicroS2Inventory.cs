@@ -295,14 +295,6 @@ namespace BLE.Client.ViewModels {
         void StartTagCount() {
             tagsCount = 0;
             _tagCount = true;
-
-            // Create a timer that waits one second, then invokes every second.
-            Xamarin.Forms.Device.StartTimer(TimeSpan.FromMilliseconds(60000), () => {
-                _InventoryTime = (DateTime.Now - InventoryStartTime).TotalSeconds;
-                _tagCountForAlert = 0;
-                _numberOfTagsText = _TagInfoList.Count.ToString() + " tags";
-                _tagPerSecondText = tagsCount.ToString() + " tags/s";
-            });
         }
 
         void TagInventoryEvent(object sender, CSLibrary.Events.OnAsyncCallbackEventArgs e)

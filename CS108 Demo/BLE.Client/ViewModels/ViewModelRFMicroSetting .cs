@@ -38,16 +38,10 @@ namespace BLE.Client.ViewModels {
         }
 
         void OnOKButtonClicked(object ind) {
-            //////////////////////////////////////////////////
-            // ConnectionDeviceName = "Microsetting reached";
-            // RaisePropertyChanged(() => ConnectionDeviceName);
-            //////////////////////////////////////////////////
-
             if (ind != null)
                 if ((int)ind == 1)
                     switch (BleMvxApplication._rfMicro_TagType) {
                         case 0: // S2
-                            ShowViewModel<ViewModelRFMicroS2Inventory>(new MvxBundle());
                             break;
                         case 1: // S3
                             ShowViewModel<ViewModelRFMicroS3Inventory>(new MvxBundle());

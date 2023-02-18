@@ -224,49 +224,31 @@ namespace BLE.Client.ViewModels {
         Shirt shirt4  = new Shirt("26CO", "3CA6", "3D5B", "1D8D", "7C8A", "4768", "843F", "2846", "4257");
         Shirt shirt5  = new Shirt("4594", "1073", "3415", "56AE", "6809", "97A8", "9B3D", "917C", "6627");
         Shirt shirt6  = new Shirt("89BE", "522F", "3D80", "3F51", "597F", "8599", "80DC", "026C", "B574");
-        // Shirt shirt7  = new Shirt("7625", "5D20", "A8AB", "2BA9", "3D39", "4F7B", "B592", "90A8", "4FAB");
         Shirt shirt8  = new Shirt("30CB", "3592", "3B18", "75D4", "54D3", "5F3A", "8A4C", "73A1", "4CA2");
         Shirt shirt9  = new Shirt("859F", "A75A", "AF4F", "4946", "5AAA", "5FAF", "5C89", "A958", "B66D");
         Shirt shirt10 = new Shirt("1772", "0385", "5487", "1A30", "482E", "4FDF", "5A34", "73CD", "92A1");
         Shirt shirt11 = new Shirt("9D7A", "8913", "A587", "B894", "5988", "1C82", "0088", "AC59", "382A");
-        // Shirt shirt12 = new Shirt("2124", "1C48", "8485", "9CAC", "8E70", "620E", "8133", "8571", "306B");
 
         // Hefner, Glove   - 1, 2, 5
         // Gelinas, Glove  - 7, 8, 9
         // Person 3, Glove - 6, 11, 12
         Glove glove1_L  = new Glove( "7251", "577F" ); Glove glove1_R  = new Glove( "8DC7", "4DA7" );
         Glove glove2_L  = new Glove( "5A93", "1342" ); Glove glove2_R  = new Glove( "69AF", "A074" );
-        // Glove glove3_L  = new Glove( "92CB", "2B2C" ); Glove glove3_R  = new Glove( "4368", "55DF" );
-        // Glove glove4_L  = new Glove( "5855", "B964" ); Glove glove4_R  = new Glove( "B786", "5378" );
         Glove glove5_L  = new Glove( "3FCE", "39A0" ); Glove glove5_R  = new Glove( "5E18", "6423" );
         Glove glove6_L  = new Glove( "6B69", "3BB8" ); Glove glove6_R  = new Glove( "1235", "422D" );
         Glove glove7_L  = new Glove( "087D", "3D35" ); Glove glove7_R  = new Glove( "3B9A", "8582" );
         Glove glove8_L  = new Glove( "59A9", "9742" ); Glove glove8_R  = new Glove( "5198", "49D5" );
         Glove glove9_L  = new Glove( "0A70", "2CAB" ); Glove glove9_R  = new Glove( "2D5B", "4548" );
-        // Glove glove10_L = new Glove( "2361", "BA61" ); Glove glove10_R = new Glove( "7A30", "2FAB" );
         Glove glove11_L = new Glove( "0AA9", "6904" ); Glove glove11_R = new Glove( "7A40", "55D5" );
         Glove glove12_L = new Glove( "3B21", "1E46" ); Glove glove12_R = new Glove( "794B", "3ACE" );
 
-        // Beanie beanie1 = new Beanie( "639A", "7971" );
-        // Beanie beanie2 = new Beanie( "B878", "7819" );
-        // Beanie beanie3 = new Beanie( "B365", "348A" );
-        // Beanie beanie4 = new Beanie( "7166", "398F" );
-        // Beanie beanie5 = new Beanie( "77B2", "3E64" );
-        // Beanie beanie6 = new Beanie( "4C2D", "3848" );
-        List<string> Hefner_Beanie  = new List<string>{ "639A", "7971", "B878", "7819" };
-        List<string> Gelinas_Beanie = new List<string>{ "B365", "348A", "7166", "398F" };
-        List<string> Person3_Beanie = new List<string>{ "77B2", "3E64", "4C2D", "3848" };
+        List<string> Hefner_Beanie  = new List<string>{ "639A", "7971", "B878", "7819", "6D60", "19BF", "6221", "5EB7" };
+        List<string> Gelinas_Beanie = new List<string>{ "B365", "348A", "7166", "398F", "6818", "4D9D", "9B90", "9D39" };
+        List<string> Person3_Beanie = new List<string>{ "77B2", "3E64", "4C2D", "3848", "2CA4", "5FDB", "564E", "62D2" };
 
-        // Balaclava bala1 = new Balaclava( "5410", "6D60", "19BF", "47D4" );
-        // Balaclava bala2 = new Balaclava( "928A", "6221", "5EB7", "----" );
-        // Balaclava bala3 = new Balaclava( "8A77", "6818", "4D9D", "A45B" );
-        // Balaclava bala4 = new Balaclava( "96C0", "9B90", "9D39", "9DA6" );
-        // Balaclava bala5 = new Balaclava( "2F77", "2CA4", "5FDB", "A382" );
-        // Balaclava bala6 = new Balaclava( "304D", "564E", "62D2", "7E48" );
-
-        List<string> Hefner_Bala  = new List<string>{ "5410", "6D60", "19BF", "47D4", "928A", "6221", "5EB7", "----" };
-        List<string> Gelinas_Bala = new List<string>{ "8A77", "6818", "4D9D", "A45B", "96C0", "9B90", "9D39", "9DA6" };
-        List<string> Person3_Bala = new List<string>{ "2F77", "2CA4", "5FDB", "A382", "304D", "564E", "62D2", "7E48" };
+        List<string> Hefner_Bala  = new List<string>{ "5410", "47D4", "928A", "59CF" };
+        List<string> Gelinas_Bala = new List<string>{ "8A77", "A45B", "96C0", "9DA6" };
+        List<string> Person3_Bala = new List<string>{ "2F77", "A382", "304D", "7E48" };
 
         List<string> Hefner_Back; List<string> Hefner_BackNeck; List<string> Hefner_Chest;
         List<string> Hefner_LeftAb; List<string> Hefner_RightAb;
@@ -283,6 +265,17 @@ namespace BLE.Client.ViewModels {
         List<string> Hefner_Rglove; List<string> Hefner_Lglove;
         List<string> Gelinas_Rglove; List<string> Gelinas_Lglove;
         List<string> Person3_Rglove; List<string> Person3_Lglove;
+
+        // public float Back1max = Back2max = Back3max = 0.0f;
+        // public float BackNeck1max = BackNeck2max = BackNeck3max = 0.0f;
+        // public float Chest1max = Chest2max = Chest3max = 0.0f;
+        // public float LeftAb1max = LeftAb2max = LeftAb3max = 0.0f;
+        // public float RightAb1max = RightAb2max = RightAb3max = 0.0f;
+        // public float LeftUpArm1max = LeftUpArm2max = LeftUpArm3max = 0.0f;
+        // public float RightUpArm1max = RightUpArm2max = RightUpArm3max = 0.0f;
+        // public float LeftLowArm1max = LeftLowArm2max = LeftLowArm3max = 0.0f;
+        // public float RightLowArm1max = RightLowArm2max = RightLowArm3max = 0.0f;
+
         #endregion
 
 

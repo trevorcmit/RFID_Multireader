@@ -3,6 +3,7 @@
         public PageMainMenu() {
             InitializeComponent();
             this.Title = "IFM fID-T";
+            // this.Title = "Reader App";
             // Task.Run(AnimateBackground);
         }
 

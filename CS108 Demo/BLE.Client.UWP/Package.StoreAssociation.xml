@@ -363,7 +363,8 @@
   <ProductReservedInfo>
     <MainPackageIdentityName>45592InternationalFabricM.fID-T</MainPackageIdentityName>
     <ReservedNames>
-      <ReservedName>fID-T</ReservedName>
+      <!-- <ReservedName>fID-T</ReservedName> -->
+      <ReservedName>Reader App</ReservedName> 
     </ReservedNames>
   </ProductReservedInfo>
   <AccountPackageIdentityNames />

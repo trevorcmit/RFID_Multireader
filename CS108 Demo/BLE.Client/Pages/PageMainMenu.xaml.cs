@@ -2,8 +2,8 @@
     public partial class PageMainMenu {
         public PageMainMenu() {
             InitializeComponent();
-            this.Title = "IFM fID-T";
-            // this.Title = "Reader App";
+            // this.Title = "IFM fID-T";
+            this.Title = "Reader App";
             // Task.Run(AnimateBackground);
         }
 

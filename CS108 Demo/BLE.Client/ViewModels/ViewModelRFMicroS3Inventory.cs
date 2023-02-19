@@ -40,7 +40,7 @@ namespace BLE.Client.ViewModels {
             public string TimeString { get { return this._TimeString; } set { this.SetProperty(ref this._TimeString, value); } }
             /////////////////////////////////////////////////////////////////////////////////////////////////////////
             private string _EPC;            public string EPC { get { return this._EPC; } set { this.SetProperty(ref this._EPC, value); } }
-            private string _sensorAvgValue; public string SensorAvgValue {get { return this._sensorAvgValue; } set { this.SetProperty(ref this._sensorAvgValue, value); } }
+            private string _sensorAvgValue; public string SensorAvgValue { get { return this._sensorAvgValue; } set { this.SetProperty(ref this._sensorAvgValue, value); } }
             public RFMicroTagInfoViewModel() {}    // Class constructor (constructs nothing)
         }
 
@@ -48,7 +48,7 @@ namespace BLE.Client.ViewModels {
 
         #region -------------- RFID inventory -----------------
 
-        public ICommand OnStartInventoryButtonCommand {protected set; get; }
+        public ICommand OnStartInventoryButtonCommand { protected set; get; }
         public ICommand OnClearButtonCommand { protected set; get; }
         public ICommand OnShareDataCommand { protected set; get; }
 
@@ -296,35 +296,23 @@ namespace BLE.Client.ViewModels {
         List<string> Gelinas_Rglove; List<string> Gelinas_Lglove;
         List<string> Person3_Rglove; List<string> Person3_Lglove;
 
-        public double Back1max = 0.0f;
-        public double BackNeck1max = 0.0f;
+        public double Back1max = 0.0f; public double BackNeck1max = 0.0f;
         public double Chest1max = 0.0f;
-        public double LeftAb1max = 0.0f;
-        public double RightAb1max = 0.0f;
-        public double LeftUpArm1max = 0.0f;
-        public double RightUpArm1max = 0.0f;
-        public double LeftLowArm1max = 0.0f;
-        public double RightLowArm1max = 0.0f;
+        public double LeftAb1max = 0.0f; public double RightAb1max = 0.0f;
+        public double LeftUpArm1max = 0.0f; public double LeftLowArm1max = 0.0f;
+        public double RightUpArm1max = 0.0f; public double RightLowArm1max = 0.0f;
 
-        public double Back2max = 0.0f;
-        public double BackNeck2max = 0.0f;
+        public double Back2max = 0.0f; public double BackNeck2max = 0.0f;
         public double Chest2max = 0.0f;
-        public double LeftAb2max = 0.0f;
-        public double RightAb2max = 0.0f;
-        public double LeftUpArm2max = 0.0f;
-        public double RightUpArm2max = 0.0f;
-        public double LeftLowArm2max = 0.0f;
-        public double RightLowArm2max = 0.0f;
+        public double LeftAb2max = 0.0f; public double RightAb2max = 0.0f;
+        public double LeftUpArm2max = 0.0f; public double LeftLowArm2max = 0.0f;
+        public double RightUpArm2max = 0.0f; public double RightLowArm2max = 0.0f;
         
-        public double Back3max = 0.0f;
-        public double BackNeck3max = 0.0f;
+        public double Back3max = 0.0f; public double BackNeck3max = 0.0f;
         public double Chest3max = 0.0f;
-        public double LeftAb3max = 0.0f;
-        public double RightAb3max = 0.0f;
-        public double LeftUpArm3max = 0.0f;
-        public double RightUpArm3max = 0.0f;
-        public double LeftLowArm3max = 0.0f;
-        public double RightLowArm3max = 0.0f;
+        public double LeftAb3max = 0.0f; public double RightAb3max = 0.0f;
+        public double LeftUpArm3max = 0.0f; public double LeftLowArm3max = 0.0f;
+        public double RightUpArm3max = 0.0f; public double RightLowArm3max = 0.0f;
 
         #endregion
 
@@ -357,38 +345,38 @@ namespace BLE.Client.ViewModels {
             LeftLowArm1_TL = "--"; LeftLowArm2_TL = "--"; LeftLowArm3_TL = "--";
             RightLowArm1_TL= "--"; RightLowArm2_TL= "--"; RightLowArm3_TL= "--";
 
-            Hefner_Back = new List<string> { shirt1.Back, shirt4.Back, shirt8.Back, shirt9.Back };
-            Hefner_BackNeck = new List<string> { shirt1.BackNeck, shirt4.BackNeck, shirt8.BackNeck, shirt9.BackNeck };
-            Hefner_Chest = new List<string> { shirt1.Chest, shirt4.Chest, shirt8.Chest, shirt9.Chest };
-            Hefner_LeftAb = new List<string> { shirt1.LeftAb, shirt4.LeftAb, shirt8.LeftAb, shirt9.LeftAb };
-            Hefner_RightAb = new List<string> { shirt1.RightAb, shirt4.RightAb, shirt8.RightAb, shirt9.RightAb };
-            Hefner_LeftUpArm = new List<string> { shirt1.LeftUpArm, shirt4.LeftUpArm, shirt8.LeftUpArm, shirt9.LeftUpArm };
-            Hefner_RightUpArm = new List<string> { shirt1.RightUpArm, shirt4.RightUpArm, shirt8.RightUpArm, shirt9.RightUpArm };
-            Hefner_LeftLowArm = new List<string> { shirt1.LeftLowArm, shirt4.LeftLowArm, shirt8.LeftLowArm, shirt9.LeftLowArm };
+            Hefner_Back        = new List<string> { shirt1.Back, shirt4.Back, shirt8.Back, shirt9.Back };
+            Hefner_BackNeck    = new List<string> { shirt1.BackNeck, shirt4.BackNeck, shirt8.BackNeck, shirt9.BackNeck };
+            Hefner_Chest       = new List<string> { shirt1.Chest, shirt4.Chest, shirt8.Chest, shirt9.Chest };
+            Hefner_LeftAb      = new List<string> { shirt1.LeftAb, shirt4.LeftAb, shirt8.LeftAb, shirt9.LeftAb };
+            Hefner_RightAb     = new List<string> { shirt1.RightAb, shirt4.RightAb, shirt8.RightAb, shirt9.RightAb };
+            Hefner_LeftUpArm   = new List<string> { shirt1.LeftUpArm, shirt4.LeftUpArm, shirt8.LeftUpArm, shirt9.LeftUpArm };
+            Hefner_RightUpArm  = new List<string> { shirt1.RightUpArm, shirt4.RightUpArm, shirt8.RightUpArm, shirt9.RightUpArm };
+            Hefner_LeftLowArm  = new List<string> { shirt1.LeftLowArm, shirt4.LeftLowArm, shirt8.LeftLowArm, shirt9.LeftLowArm };
             Hefner_RightLowArm = new List<string> { shirt1.RightLowArm, shirt4.RightLowArm, shirt8.RightLowArm, shirt9.RightLowArm };
 
-            Gelinas_Back = new List<string> { shirt2.Back, shirt3.Back, shirt11.Back };
-            Gelinas_BackNeck = new List<string> { shirt2.BackNeck, shirt3.BackNeck, shirt11.BackNeck };
-            Gelinas_Chest = new List<string> { shirt2.Chest, shirt3.Chest, shirt11.Chest };
-            Gelinas_LeftAb = new List<string> { shirt2.LeftAb, shirt3.LeftAb, shirt11.LeftAb };
-            Gelinas_RightAb = new List<string> { shirt2.RightAb, shirt3.RightAb, shirt11.RightAb };
-            Gelinas_LeftUpArm = new List<string> { shirt2.LeftUpArm, shirt3.LeftUpArm, shirt11.LeftUpArm };
-            Gelinas_RightUpArm = new List<string> { shirt2.RightUpArm, shirt3.RightUpArm, shirt11.RightUpArm };
-            Gelinas_LeftLowArm = new List<string> { shirt2.LeftLowArm, shirt3.LeftLowArm, shirt11.LeftLowArm };
+            Gelinas_Back        = new List<string> { shirt2.Back, shirt3.Back, shirt11.Back };
+            Gelinas_BackNeck    = new List<string> { shirt2.BackNeck, shirt3.BackNeck, shirt11.BackNeck };
+            Gelinas_Chest       = new List<string> { shirt2.Chest, shirt3.Chest, shirt11.Chest };
+            Gelinas_LeftAb      = new List<string> { shirt2.LeftAb, shirt3.LeftAb, shirt11.LeftAb };
+            Gelinas_RightAb     = new List<string> { shirt2.RightAb, shirt3.RightAb, shirt11.RightAb };
+            Gelinas_LeftUpArm   = new List<string> { shirt2.LeftUpArm, shirt3.LeftUpArm, shirt11.LeftUpArm };
+            Gelinas_RightUpArm  = new List<string> { shirt2.RightUpArm, shirt3.RightUpArm, shirt11.RightUpArm };
+            Gelinas_LeftLowArm  = new List<string> { shirt2.LeftLowArm, shirt3.LeftLowArm, shirt11.LeftLowArm };
             Gelinas_RightLowArm = new List<string> { shirt2.RightLowArm, shirt3.RightLowArm, shirt11.RightLowArm };
 
-            Person3_Back = new List<string> { shirt5.Back, shirt6.Back, shirt10.Back };
-            Person3_BackNeck = new List<string> { shirt5.BackNeck, shirt6.BackNeck, shirt10.BackNeck };
-            Person3_Chest = new List<string> { shirt5.Chest, shirt6.Chest, shirt10.Chest };
-            Person3_LeftAb = new List<string> { shirt5.LeftAb, shirt6.LeftAb, shirt10.LeftAb };
-            Person3_RightAb = new List<string> { shirt5.RightAb, shirt6.RightAb, shirt10.RightAb };
-            Person3_LeftUpArm = new List<string> { shirt5.LeftUpArm, shirt6.LeftUpArm, shirt10.LeftUpArm };
-            Person3_RightUpArm = new List<string> { shirt5.RightUpArm, shirt6.RightUpArm, shirt10.RightUpArm };
-            Person3_LeftLowArm = new List<string> { shirt5.LeftLowArm, shirt6.LeftLowArm, shirt10.LeftLowArm };
+            Person3_Back        = new List<string> { shirt5.Back, shirt6.Back, shirt10.Back };
+            Person3_BackNeck    = new List<string> { shirt5.BackNeck, shirt6.BackNeck, shirt10.BackNeck };
+            Person3_Chest       = new List<string> { shirt5.Chest, shirt6.Chest, shirt10.Chest };
+            Person3_LeftAb      = new List<string> { shirt5.LeftAb, shirt6.LeftAb, shirt10.LeftAb };
+            Person3_RightAb     = new List<string> { shirt5.RightAb, shirt6.RightAb, shirt10.RightAb };
+            Person3_LeftUpArm   = new List<string> { shirt5.LeftUpArm, shirt6.LeftUpArm, shirt10.LeftUpArm };
+            Person3_RightUpArm  = new List<string> { shirt5.RightUpArm, shirt6.RightUpArm, shirt10.RightUpArm };
+            Person3_LeftLowArm  = new List<string> { shirt5.LeftLowArm, shirt6.LeftLowArm, shirt10.LeftLowArm };
             Person3_RightLowArm = new List<string> { shirt5.RightLowArm, shirt6.RightLowArm, shirt10.RightLowArm };
 
-            Hefner_Lglove = new List<string> { glove1_L.Forefinger, glove1_L.Pinkie, glove2_L.Forefinger, glove2_L.Pinkie, glove5_L.Forefinger, glove5_L.Pinkie };
-            Hefner_Rglove = new List<string> { glove1_R.Forefinger, glove1_R.Pinkie, glove2_R.Forefinger, glove2_R.Pinkie, glove5_R.Forefinger, glove5_R.Pinkie };
+            Hefner_Lglove  = new List<string> { glove1_L.Forefinger, glove1_L.Pinkie, glove2_L.Forefinger, glove2_L.Pinkie, glove5_L.Forefinger, glove5_L.Pinkie };
+            Hefner_Rglove  = new List<string> { glove1_R.Forefinger, glove1_R.Pinkie, glove2_R.Forefinger, glove2_R.Pinkie, glove5_R.Forefinger, glove5_R.Pinkie };
             Gelinas_Lglove = new List<string> { glove7_L.Forefinger, glove7_L.Pinkie, glove8_L.Forefinger, glove8_L.Pinkie, glove9_L.Forefinger, glove9_L.Pinkie };
             Gelinas_Rglove = new List<string> { glove7_R.Forefinger, glove7_R.Pinkie, glove8_R.Forefinger, glove8_R.Pinkie, glove9_R.Forefinger, glove9_R.Pinkie };
             Person3_Lglove = new List<string> { glove6_L.Forefinger, glove6_L.Pinkie, glove11_L.Forefinger, glove11_L.Pinkie, glove12_L.Forefinger, glove12_L.Pinkie };
@@ -554,7 +542,7 @@ namespace BLE.Client.ViewModels {
         }
 
         private void DownTimer() {
-            downtimer.Interval = active_time;          // READER IS ACTIVE FOR THIS LONG
+            downtimer.Interval = active_time;           // READER IS ACTIVE FOR THIS LONG
             downtimer.Elapsed += DownEvent;
             downtimer.Enabled = false;
         }
@@ -562,9 +550,11 @@ namespace BLE.Client.ViewModels {
         private void ActiveEvent(object sender, System.Timers.ElapsedEventArgs e) {  
             activetimer.Enabled = false;
             downtimer.Enabled = true;
+            // StartInventory();
         }
 
         private void DownEvent(object sender, System.Timers.ElapsedEventArgs e) {
+            // StopInventory();
             AutoSaveData();    // Autosave while Down is occurring
             activetimer.Enabled = true;
             downtimer.Enabled = false;
@@ -812,7 +802,7 @@ namespace BLE.Client.ViewModels {
                                                 (shirt9.TagList.Contains(temp_EPC))
                                             ) {
                                                 if (Hefner_Back.Contains(temp_EPC)) { 
-                                                    if (SAV > Back1max) {
+                                                    if (SAV > -1.0f + Back1max) {
                                                         Back1max = SAV;
                                                         _Back1_T = DisplaySAV;
                                                         RaisePropertyChanged(() => Back1_T);
@@ -831,7 +821,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (Hefner_Chest.Contains(temp_EPC)) { 
-                                                    if (SAV > Chest1max) {
+                                                    if (SAV > -1.0f + Chest1max) {
                                                         Chest1max = SAV;
                                                         _Chest1_T = DisplaySAV;
                                                         RaisePropertyChanged(() => Chest1_T);
@@ -850,7 +840,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (Hefner_BackNeck.Contains(temp_EPC)) {
-                                                    if (SAV > BackNeck1max) {
+                                                    if (SAV > -1.0f + BackNeck1max) {
                                                         BackNeck1max = SAV;
                                                         _BackNeck1_T = DisplaySAV;
                                                         RaisePropertyChanged(() => BackNeck1_T);
@@ -869,7 +859,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (Hefner_LeftAb.Contains(temp_EPC)) {
-                                                    if (SAV > LeftAb1max) {
+                                                    if (SAV > -1.0f + LeftAb1max) {
                                                         LeftAb1max = SAV;
                                                         _LeftAb1_T = DisplaySAV;
                                                         RaisePropertyChanged(() => LeftAb1_T);
@@ -888,7 +878,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (Hefner_RightAb.Contains(temp_EPC)) {
-                                                    if (SAV > RightAb1max) {
+                                                    if (SAV > -1.0f + RightAb1max) {
                                                         RightAb1max = SAV;
                                                         _RightAb1_T = DisplaySAV;
                                                         RaisePropertyChanged(() => RightAb1_T);
@@ -907,7 +897,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (Hefner_LeftUpArm.Contains(temp_EPC)) {
-                                                    if (SAV > LeftUpArm1max) {
+                                                    if (SAV > -1.0f + LeftUpArm1max) {
                                                         LeftUpArm1max = SAV;
                                                         _LeftUpArm1_T = DisplaySAV;
                                                         RaisePropertyChanged(() => LeftUpArm1_T);
@@ -926,7 +916,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (Hefner_RightUpArm.Contains(temp_EPC)) {
-                                                    if (SAV > RightUpArm1max) {
+                                                    if (SAV > -1.0f + RightUpArm1max) {
                                                         RightUpArm1max = SAV;
                                                         _RightUpArm1_T = DisplaySAV;
                                                         RaisePropertyChanged(() => RightUpArm1_T);
@@ -945,7 +935,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (Hefner_LeftLowArm.Contains(temp_EPC)) {
-                                                    if (SAV > LeftLowArm1max) {
+                                                    if (SAV > -1.0f + LeftLowArm1max) {
                                                         LeftLowArm1max = SAV;
                                                         _LeftLowArm1_T = DisplaySAV;
                                                         RaisePropertyChanged(() => LeftLowArm1_T);
@@ -964,7 +954,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (Hefner_RightLowArm.Contains(temp_EPC)) {
-                                                    if (SAV > RightLowArm1max) {
+                                                    if (SAV > -1.0f + RightLowArm1max) {
                                                         RightLowArm1max = SAV;
                                                         _RightLowArm1_T = DisplaySAV;
                                                         RaisePropertyChanged(() => RightLowArm1_T);
@@ -990,7 +980,7 @@ namespace BLE.Client.ViewModels {
                                                 (shirt11.TagList.Contains(temp_EPC))
                                             ) {
                                                 if (Gelinas_Back.Contains(temp_EPC)) {
-                                                    if (SAV > Back2max) {
+                                                    if (SAV > -1.0f + Back2max) {
                                                         Back2max = SAV;
                                                         _Back2_T = DisplaySAV;
                                                         RaisePropertyChanged(() => Back2_T);
@@ -1009,7 +999,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (Gelinas_Chest.Contains(temp_EPC)) {
-                                                    if (SAV > Chest2max) {
+                                                    if (SAV > -1.0f + Chest2max) {
                                                         Chest2max = SAV;
                                                         _Chest2_T = DisplaySAV;
                                                         RaisePropertyChanged(() => Chest2_T);
@@ -1028,7 +1018,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (Gelinas_BackNeck.Contains(temp_EPC)) {
-                                                    if (SAV > BackNeck2max) {
+                                                    if (SAV > -1.0f + BackNeck2max) {
                                                         BackNeck2max = SAV;
                                                         _BackNeck2_T = DisplaySAV;
                                                         RaisePropertyChanged(() => BackNeck2_T);
@@ -1047,7 +1037,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (Gelinas_LeftAb.Contains(temp_EPC)) {
-                                                    if (SAV > LeftAb2max) {
+                                                    if (SAV > -1.0f + LeftAb2max) {
                                                         LeftAb2max = SAV;
                                                         _LeftAb2_T = DisplaySAV;
                                                         RaisePropertyChanged(() => LeftAb2_T);
@@ -1066,7 +1056,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (Gelinas_RightAb.Contains(temp_EPC)) {
-                                                    if (SAV > RightAb2max) {
+                                                    if (SAV > -1.0f + RightAb2max) {
                                                         RightAb2max = SAV;
                                                         _RightAb2_T = DisplaySAV;
                                                         RaisePropertyChanged(() => RightAb2_T);
@@ -1085,7 +1075,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (Gelinas_LeftUpArm.Contains(temp_EPC)) {
-                                                    if (SAV > LeftUpArm2max) {
+                                                    if (SAV > -1.0f + LeftUpArm2max) {
                                                         LeftUpArm2max = SAV;
                                                         _LeftUpArm2_T = DisplaySAV;
                                                         RaisePropertyChanged(() => LeftUpArm2_T);
@@ -1104,7 +1094,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (Gelinas_RightUpArm.Contains(temp_EPC)) {
-                                                    if (SAV > RightUpArm2max) {
+                                                    if (SAV > -1.0f + RightUpArm2max) {
                                                         RightUpArm2max = SAV;
                                                         _RightUpArm2_T = DisplaySAV;
                                                         RaisePropertyChanged(() => RightUpArm2_T);
@@ -1123,7 +1113,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (Gelinas_LeftLowArm.Contains(temp_EPC)) {
-                                                    if (SAV > LeftLowArm2max) {
+                                                    if (SAV > -1.0f + LeftLowArm2max) {
                                                         LeftLowArm2max = SAV;
                                                         _LeftLowArm2_T = DisplaySAV;
                                                         RaisePropertyChanged(() => LeftLowArm2_T);
@@ -1142,7 +1132,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (Gelinas_RightLowArm.Contains(temp_EPC)) {
-                                                    if (SAV > RightLowArm2max) {
+                                                    if (SAV > -1.0f + RightLowArm2max) {
                                                         RightLowArm2max = SAV;
                                                         _RightLowArm2_T = DisplaySAV;
                                                         RaisePropertyChanged(() => RightLowArm2_T);
@@ -1168,7 +1158,7 @@ namespace BLE.Client.ViewModels {
                                                 (shirt10.TagList.Contains(temp_EPC))
                                             ) {
                                                 if (Person3_Back.Contains(temp_EPC)) {
-                                                    if (SAV > Back3max) {
+                                                    if (SAV > -1.0f + Back3max) {
                                                         Back3max = SAV;
                                                         _Back3_T = DisplaySAV;
                                                         RaisePropertyChanged(() => Back3_T);
@@ -1187,7 +1177,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (Person3_Chest.Contains(temp_EPC)) {
-                                                    if (SAV > Chest3max) {
+                                                    if (SAV > -1.0f + Chest3max) {
                                                         Chest3max = SAV;
                                                         _Chest3_T = DisplaySAV;
                                                         RaisePropertyChanged(() => Chest3_T);
@@ -1206,7 +1196,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (Person3_BackNeck.Contains(temp_EPC)) {
-                                                    if (SAV > BackNeck3max) {
+                                                    if (SAV > -1.0f + BackNeck3max) {
                                                         BackNeck3max = SAV;
                                                         _BackNeck3_T = DisplaySAV;
                                                         RaisePropertyChanged(() => BackNeck3_T);
@@ -1225,7 +1215,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (Person3_LeftAb.Contains(temp_EPC)) {
-                                                    if (SAV > LeftAb3max) {
+                                                    if (SAV > -1.0f + LeftAb3max) {
                                                         LeftAb3max = SAV;
                                                         _LeftAb3_T = DisplaySAV;
                                                         RaisePropertyChanged(() => LeftAb3_T);
@@ -1244,7 +1234,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (Person3_RightAb.Contains(temp_EPC)) {
-                                                    if (SAV > RightAb3max) {
+                                                    if (SAV > -1.0f + RightAb3max) {
                                                         RightAb3max = SAV;
                                                         _RightAb3_T = DisplaySAV;
                                                         RaisePropertyChanged(() => RightAb3_T);
@@ -1263,7 +1253,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (Person3_LeftUpArm.Contains(temp_EPC)) {
-                                                    if (SAV > LeftUpArm3max) {
+                                                    if (SAV > -1.0f + LeftUpArm3max) {
                                                         LeftUpArm3max = SAV;
                                                         _LeftUpArm3_T = DisplaySAV;
                                                         RaisePropertyChanged(() => LeftUpArm3_T);
@@ -1282,7 +1272,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (Person3_RightUpArm.Contains(temp_EPC)) {
-                                                    if (SAV > RightUpArm3max) {
+                                                    if (SAV > -1.0f + RightUpArm3max) {
                                                         RightUpArm3max = SAV;
                                                         _RightUpArm3_T = DisplaySAV;
                                                         RaisePropertyChanged(() => RightUpArm3_T);
@@ -1301,7 +1291,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (Person3_LeftLowArm.Contains(temp_EPC)) {
-                                                    if (SAV > LeftLowArm3max) {
+                                                    if (SAV > -1.0f + LeftLowArm3max) {
                                                         LeftLowArm3max = SAV;
                                                         _LeftLowArm3_T = DisplaySAV;
                                                         RaisePropertyChanged(() => LeftLowArm3_T);
@@ -1320,7 +1310,7 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (Person3_RightLowArm.Contains(temp_EPC)) {
-                                                    if (SAV > RightLowArm3max) {
+                                                    if (SAV > -1.0f + RightLowArm3max) {
                                                         RightLowArm3max = SAV;
                                                         _RightLowArm3_T = DisplaySAV;
                                                         RaisePropertyChanged(() => RightLowArm3_T);
@@ -1351,7 +1341,6 @@ namespace BLE.Client.ViewModels {
                     }
 
                     if (!found) {
-                        // if (epcs.Contains(info.epc.ToString())) {
                         RFMicroTagInfoViewModel item = new RFMicroTagInfoViewModel();
                         item.EPC = info.epc.ToString();
                         item.SensorAvgValue = "";
@@ -1380,7 +1369,6 @@ namespace BLE.Client.ViewModels {
                         }
                         else { }
                         TagInfoList.Insert(0, item);
-                        // }
                     }
                 }
             });

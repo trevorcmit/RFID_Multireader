@@ -21,7 +21,7 @@
 	<!-- android:label="IFM fID-T"  -->
 
 	<application 
-		android:label="IFM fID-T" 
+		android:label="Reader App" 
 		android:icon="@drawable/icon" 
 		android:theme="@style/MyTheme"
 		android:requestLegacyExternalStorage="true"

@@ -248,16 +248,16 @@ namespace BLE.Client.ViewModels {
         // Hefner, L   - 1, 4, 8, 9
         // Gelinas, M  - 2, 3, 11
         // Person 3, L - 5, 6, 10
-        Shirt shirt1  = new Shirt("7F57", "6082", "51BE", "0551", "5D88", "1EB8", "5CA6", "89BA", "5286");
-        Shirt shirt2  = new Shirt("3259", "846D", "0469", "8C94", "53C5", "3405", "36C1", "8534", "5866");
-        Shirt shirt3  = new Shirt("82BD", "A892", "7A48", "4D1E", "849B", "0D83", "5C9A", "78AE", "877F");
-        Shirt shirt4  = new Shirt("26CO", "3CA6", "3D5B", "1D8D", "7C8A", "4768", "843F", "2846", "4257");
-        Shirt shirt5  = new Shirt("4594", "1073", "3415", "56AE", "6809", "97A8", "9B3D", "917C", "6627");
-        Shirt shirt6  = new Shirt("89BE", "522F", "3D80", "3F51", "597F", "8599", "80DC", "026C", "B574");
-        Shirt shirt8  = new Shirt("30CB", "3592", "3B18", "75D4", "54D3", "5F3A", "8A4C", "73A1", "4CA2");
-        Shirt shirt9  = new Shirt("859F", "A75A", "AF4F", "4946", "5AAA", "5FAF", "5C89", "A958", "B66D");
-        Shirt shirt10 = new Shirt("1772", "0385", "5487", "1A30", "482E", "4FDF", "5A34", "73CD", "92A1");
-        Shirt shirt11 = new Shirt("9D7A", "8913", "A587", "B894", "5988", "1C82", "0088", "AC59", "382A");
+        Shirt shirt1  = new Shirt( "7F57", "6082", "51BE", "0551", "5D88", "1EB8", "5CA6", "89BA", "5286" );
+        Shirt shirt2  = new Shirt( "3259", "846D", "0469", "8C94", "53C5", "34D5", "36C1", "8534", "0587" );
+        Shirt shirt3  = new Shirt( "82BD", "A892", "7A48", "4D1E", "849B", "0D83", "5C9A", "78AE", "877F" );
+        Shirt shirt4  = new Shirt( "26C0", "3CA6", "3D5B", "1D8D", "7C8A", "4768", "843F", "2846", "4257" );
+        Shirt shirt5  = new Shirt( "4594", "1073", "3415", "56AE", "6809", "97A8", "9B3D", "917C", "6627" );
+        Shirt shirt6  = new Shirt( "89BE", "522F", "3D80", "3F51", "597F", "8599", "80DC", "026C", "B574" );
+        Shirt shirt8  = new Shirt( "30CB", "3592", "3B18", "75D4", "54D3", "5F3A", "8A4C", "73A1", "4CA2" );
+        Shirt shirt9  = new Shirt( "859F", "A75A", "AF4F", "4946", "5AAA", "5FAF", "5C89", "A958", "B66D" );
+        Shirt shirt10 = new Shirt( "1772", "0385", "5487", "1A30", "482E", "4FDF", "5A34", "73CD", "92A1" );
+        Shirt shirt11 = new Shirt( "9D7A", "8913", "A587", "B894", "5988", "1C82", "0088", "AC59", "382A" );
 
         // Hefner, Glove   - 1, 2, 5
         // Gelinas, Glove  - 7, 8, 9
@@ -296,20 +296,17 @@ namespace BLE.Client.ViewModels {
         List<string> Gelinas_Rglove; List<string> Gelinas_Lglove;
         List<string> Person3_Rglove; List<string> Person3_Lglove;
 
-        public double Back1max = 0.0f; public double BackNeck1max = 0.0f;
-        public double Chest1max = 0.0f;
+        public double Back1max = 0.0f; public double BackNeck1max = 0.0f; public double Chest1max = 0.0f;
         public double LeftAb1max = 0.0f; public double RightAb1max = 0.0f;
         public double LeftUpArm1max = 0.0f; public double LeftLowArm1max = 0.0f;
         public double RightUpArm1max = 0.0f; public double RightLowArm1max = 0.0f;
 
-        public double Back2max = 0.0f; public double BackNeck2max = 0.0f;
-        public double Chest2max = 0.0f;
+        public double Back2max = 0.0f; public double BackNeck2max = 0.0f; public double Chest2max = 0.0f;
         public double LeftAb2max = 0.0f; public double RightAb2max = 0.0f;
         public double LeftUpArm2max = 0.0f; public double LeftLowArm2max = 0.0f;
         public double RightUpArm2max = 0.0f; public double RightLowArm2max = 0.0f;
         
-        public double Back3max = 0.0f; public double BackNeck3max = 0.0f;
-        public double Chest3max = 0.0f;
+        public double Back3max = 0.0f; public double BackNeck3max = 0.0f; public double Chest3max = 0.0f;
         public double LeftAb3max = 0.0f; public double RightAb3max = 0.0f;
         public double LeftUpArm3max = 0.0f; public double LeftLowArm3max = 0.0f;
         public double RightUpArm3max = 0.0f; public double RightLowArm3max = 0.0f;
@@ -485,7 +482,7 @@ namespace BLE.Client.ViewModels {
             SetPower(BleMvxApplication._rfMicro_Power);
             {
                 _startInventory = false;
-                _startInventoryButtonText = "Stop Inventory";
+                _startInventoryButtonText = "Refresh Inventory";
             }
 
             BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_EXERANGING);

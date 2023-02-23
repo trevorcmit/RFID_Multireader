@@ -172,144 +172,91 @@ namespace BLE.Client.ViewModels {
         private string _RightHand3_T; public string RightHand3_T { get => _RightHand3_T; set { _RightHand3_T = value; OnPropertyChanged("RightHand3_T"); } }
         private string _Bala3_T; public string Bala3_T { get => _Bala3_T; set { _Bala3_T = value; OnPropertyChanged("Bala3_T"); } }
 
-        private string _Back1_TL; public string Back1_TL               { get => _Back1_TL;        set { _Back1_TL = value; OnPropertyChanged("Back1_TL"); } }
-        private string _BackNeck1_TL; public string BackNeck1_TL       { get => _BackNeck1_TL;    set { _BackNeck1_TL = value; OnPropertyChanged("BackNeck1_TL"); } }
-        private string _Chest1_TL; public string Chest1_TL             { get => _Chest1_TL;       set { _Chest1_TL = value; OnPropertyChanged("Chest1_TL"); } }
-        private string _LeftAb1_TL; public string LeftAb1_TL           { get => _LeftAb1_TL;      set { _LeftAb1_TL = value; OnPropertyChanged("LeftAb1_TL"); } }
-        private string _RightAb1_TL; public string RightAb1_TL         { get => _RightAb1_TL;     set { _RightAb1_TL = value; OnPropertyChanged("RightAb1_TL"); } }
-        private string _LeftUpArm1_TL; public string LeftUpArm1_TL     { get => _LeftUpArm1_TL;   set { _LeftUpArm1_TL = value; OnPropertyChanged("LeftUpArm1_TL"); } }
-        private string _RightUpArm1_TL; public string RightUpArm1_TL   { get => _RightUpArm1_TL;  set { _RightUpArm1_TL = value; OnPropertyChanged("RightUpArm1_TL"); } }
-        private string _LeftLowArm1_TL; public string LeftLowArm1_TL   { get => _LeftLowArm1_TL;  set { _LeftLowArm1_TL = value; OnPropertyChanged("LeftLowArm1_TL"); } }
-        private string _RightLowArm1_TL; public string RightLowArm1_TL { get => _RightLowArm1_TL; set { _RightLowArm1_TL = value; OnPropertyChanged("RightLowArm1_TL"); } }
-
-        private string _Back2_TL; public string Back2_TL               { get => _Back2_TL;        set { _Back2_TL = value; OnPropertyChanged("Back2_TL"); } }
-        private string _BackNeck2_TL; public string BackNeck2_TL       { get => _BackNeck2_TL;    set { _BackNeck2_TL = value; OnPropertyChanged("BackNeck2_TL"); } }
-        private string _Chest2_TL; public string Chest2_TL             { get => _Chest2_TL;       set { _Chest2_TL = value; OnPropertyChanged("Chest2_TL"); } }
-        private string _LeftAb2_TL; public string LeftAb2_TL           { get => _LeftAb2_TL;      set { _LeftAb2_TL = value; OnPropertyChanged("LeftAb2_TL"); } }
-        private string _RightAb2_TL; public string RightAb2_TL         { get => _RightAb2_TL;     set { _RightAb2_TL = value; OnPropertyChanged("RightAb2_TL"); } }
-        private string _LeftUpArm2_TL; public string LeftUpArm2_TL     { get => _LeftUpArm2_TL;   set { _LeftUpArm2_TL = value; OnPropertyChanged("LeftUpArm2_TL"); } }
-        private string _RightUpArm2_TL; public string RightUpArm2_TL   { get => _RightUpArm2_TL;  set { _RightUpArm2_TL = value; OnPropertyChanged("RightUpArm2_TL"); } }
-        private string _LeftLowArm2_TL; public string LeftLowArm2_TL   { get => _LeftLowArm2_TL;  set { _LeftLowArm2_TL = value; OnPropertyChanged("LeftLowArm2_TL"); } }
-        private string _RightLowArm2_TL; public string RightLowArm2_TL { get => _RightLowArm2_TL; set { _RightLowArm2_TL = value; OnPropertyChanged("RightLowArm2_TL"); } }
-
-        private string _Back3_TL; public string Back3_TL               { get => _Back3_TL;        set { _Back3_TL = value; OnPropertyChanged("Back3_TL"); } }
-        private string _BackNeck3_TL; public string BackNeck3_TL       { get => _BackNeck3_TL;    set { _BackNeck3_TL = value; OnPropertyChanged("BackNeck3_TL"); } }
-        private string _Chest3_TL; public string Chest3_TL             { get => _Chest3_TL;       set { _Chest3_TL = value; OnPropertyChanged("Chest3_TL"); } }
-        private string _LeftAb3_TL; public string LeftAb3_TL           { get => _LeftAb3_TL;      set { _LeftAb3_TL = value; OnPropertyChanged("LeftAb3_TL"); } }
-        private string _RightAb3_TL; public string RightAb3_TL         { get => _RightAb3_TL;     set { _RightAb3_TL = value; OnPropertyChanged("RightAb3_TL"); } }
-        private string _LeftUpArm3_TL; public string LeftUpArm3_TL     { get => _LeftUpArm3_TL;   set { _LeftUpArm3_TL = value; OnPropertyChanged("LeftUpArm3_TL"); } }
-        private string _RightUpArm3_TL; public string RightUpArm3_TL   { get => _RightUpArm3_TL;  set { _RightUpArm3_TL = value; OnPropertyChanged("RightUpArm3_TL"); } }
-        private string _LeftLowArm3_TL; public string LeftLowArm3_TL   { get => _LeftLowArm3_TL;  set { _LeftLowArm3_TL = value; OnPropertyChanged("LeftLowArm3_TL"); } }
-        private string _RightLowArm3_TL; public string RightLowArm3_TL { get => _RightLowArm3_TL; set { _RightLowArm3_TL = value; OnPropertyChanged("RightLowArm3_TL"); } }
-
         public int THRESHOLD = 15;
-        class Glove {
-            public string Forefinger  { get; set; }
-            public string Pinkie { get; set; }
-            public List<string> TagList { get; set; }
-
-            public Glove(string f, string p) {
-                Forefinger = f;
-                Pinkie = p;
-                TagList = new List<string> { Forefinger, Pinkie };
-            }
-        }
-
-        class Shirt {
-            public string Back          { get; set; }
-            public string BackNeck      { get; set; }
-            public string Chest         { get; set; }
-            public string LeftAb        { get; set; }
-            public string RightAb       { get; set; }
-            public string LeftUpArm     { get; set; }
-            public string RightUpArm    { get; set; }
-            public string LeftLowArm    { get; set; }
-            public string RightLowArm   { get; set; }
-            public List<string> TagList { get; set; }
-
-            public Shirt(
-                string backneck, string back, string chest, string leftab, string rightab, 
-                string rightuparm, string rightlowarm, string leftuparm, string leftlowarm
-            ) {
-                // Shirt Locations
-                BackNeck    = backneck;
-                Back        = back;
-                Chest       = chest;
-                LeftAb      = leftab;
-                RightAb     = rightab;
-                LeftUpArm   = leftuparm;
-                RightUpArm  = rightuparm;
-                LeftLowArm  = leftlowarm;
-                RightLowArm = rightlowarm;
-                TagList = new List<string> { Back, BackNeck, Chest, LeftAb, RightAb, LeftUpArm, RightUpArm, LeftLowArm, RightLowArm };
-            }
-        }
-
-        // Hefner, L   - 1, 4, 8, 9
-        // Gelinas, M  - 2, 3, 11
-        // Person 3, L - 5, 6, 10
-        Shirt shirt1  = new Shirt( "7F57", "6082", "51BE", "0551", "5D88", "1EB8", "5CA6", "89BA", "5286" );
-        Shirt shirt2  = new Shirt( "3259", "846D", "0469", "8C94", "53C5", "34D5", "36C1", "8534", "0587" );
-        Shirt shirt3  = new Shirt( "82BD", "A892", "7A48", "4D1E", "849B", "0D83", "5C9A", "78AE", "877F" );
-        Shirt shirt4  = new Shirt( "26C0", "3CA6", "3D5B", "1D8D", "7C8A", "4768", "843F", "2846", "4257" );
-        Shirt shirt5  = new Shirt( "4594", "1073", "3415", "56AE", "6809", "97A8", "9B3D", "917C", "6627" );
-        Shirt shirt6  = new Shirt( "89BE", "522F", "3D80", "3F51", "597F", "8599", "80DC", "026C", "B574" );
-        Shirt shirt8  = new Shirt( "30CB", "3592", "3B18", "75D4", "54D3", "5F3A", "8A4C", "73A1", "4CA2" );
-        Shirt shirt9  = new Shirt( "859F", "A75A", "AF4F", "4946", "5AAA", "5FAF", "5C89", "A958", "B66D" );
-        Shirt shirt10 = new Shirt( "1772", "0385", "5487", "1A30", "482E", "4FDF", "5A34", "73CD", "92A1" );
-        Shirt shirt11 = new Shirt( "9D7A", "8913", "A587", "B894", "5988", "1C82", "0088", "AC59", "382A" );
-
-        // Hefner, Glove   - 1, 2, 5
-        // Gelinas, Glove  - 7, 8, 9
-        // Person 3, Glove - 6, 11, 12
-        Glove glove1_L  = new Glove( "7251", "577F" ); Glove glove1_R  = new Glove( "8DC7", "4DA7" );
-        Glove glove2_L  = new Glove( "5A93", "1342" ); Glove glove2_R  = new Glove( "69AF", "A074" );
-        Glove glove5_L  = new Glove( "3FCE", "39A0" ); Glove glove5_R  = new Glove( "5E18", "6423" );
-        Glove glove6_L  = new Glove( "6B69", "3BB8" ); Glove glove6_R  = new Glove( "1235", "422D" );
-        Glove glove7_L  = new Glove( "087D", "3D35" ); Glove glove7_R  = new Glove( "3B9A", "8582" );
-        Glove glove8_L  = new Glove( "59A9", "9742" ); Glove glove8_R  = new Glove( "5198", "49D5" );
-        Glove glove9_L  = new Glove( "0A70", "2CAB" ); Glove glove9_R  = new Glove( "2D5B", "4548" );
-        Glove glove11_L = new Glove( "0AA9", "6904" ); Glove glove11_R = new Glove( "7A40", "55D5" );
-        Glove glove12_L = new Glove( "3B21", "1E46" ); Glove glove12_R = new Glove( "794B", "3ACE" );
-
-        List<string> Hefner_Beanie  = new List<string>{ "639A", "7971", "B878", "7819", "6D60", "19BF", "6221", "5EB7" };
-        List<string> Gelinas_Beanie = new List<string>{ "B365", "348A", "7166", "398F", "6818", "4D9D", "9B90", "9D39" };
-        List<string> Person3_Beanie = new List<string>{ "77B2", "3E64", "4C2D", "3848", "2CA4", "5FDB", "564E", "62D2" };
-
-        List<string> Hefner_Bala  = new List<string>{ "5410", "47D4", "928A", "59CF" };
-        List<string> Gelinas_Bala = new List<string>{ "8A77", "A45B", "96C0", "9DA6" };
-        List<string> Person3_Bala = new List<string>{ "2F77", "A382", "304D", "7E48" };
-
-        List<string> Hefner_Back; List<string> Hefner_BackNeck; List<string> Hefner_Chest;
-        List<string> Hefner_LeftAb; List<string> Hefner_RightAb;
-        List<string> Hefner_LeftUpArm; List<string> Hefner_RightUpArm; List<string> Hefner_LeftLowArm; List<string> Hefner_RightLowArm;
-
-        List<string> Gelinas_Back; List<string> Gelinas_BackNeck; List<string> Gelinas_Chest;
-        List<string> Gelinas_LeftAb; List<string> Gelinas_RightAb;
-        List<string> Gelinas_LeftUpArm; List<string> Gelinas_RightUpArm; List<string> Gelinas_LeftLowArm; List<string> Gelinas_RightLowArm;
-
-        List<string> Person3_Back; List<string> Person3_BackNeck; List<string> Person3_Chest;
-        List<string> Person3_LeftAb; List<string> Person3_RightAb;
-        List<string> Person3_LeftUpArm; List<string> Person3_RightUpArm; List<string> Person3_LeftLowArm; List<string> Person3_RightLowArm;
-
-        List<string> Hefner_Rglove; List<string> Hefner_Lglove;
-        List<string> Gelinas_Rglove; List<string> Gelinas_Lglove;
-        List<string> Person3_Rglove; List<string> Person3_Lglove;
-
-        public double Back1max = 0.0f; public double BackNeck1max = 0.0f; public double Chest1max = 0.0f;
-        public double LeftAb1max = 0.0f; public double RightAb1max = 0.0f;
-        public double LeftUpArm1max = 0.0f; public double LeftLowArm1max = 0.0f;
-        public double RightUpArm1max = 0.0f; public double RightLowArm1max = 0.0f;
-
-        public double Back2max = 0.0f; public double BackNeck2max = 0.0f; public double Chest2max = 0.0f;
-        public double LeftAb2max = 0.0f; public double RightAb2max = 0.0f;
-        public double LeftUpArm2max = 0.0f; public double LeftLowArm2max = 0.0f;
-        public double RightUpArm2max = 0.0f; public double RightLowArm2max = 0.0f;
         
-        public double Back3max = 0.0f; public double BackNeck3max = 0.0f; public double Chest3max = 0.0f;
-        public double LeftAb3max = 0.0f; public double RightAb3max = 0.0f;
-        public double LeftUpArm3max = 0.0f; public double LeftLowArm3max = 0.0f;
-        public double RightUpArm3max = 0.0f; public double RightLowArm3max = 0.0f;
+        // class Shirt {
+        //     public string Back          { get; set; }
+        //     public string BackNeck      { get; set; }
+        //     public string Chest         { get; set; }
+        //     public string LeftAb        { get; set; }
+        //     public string RightAb       { get; set; }
+        //     public string LeftUpArm     { get; set; }
+        //     public string RightUpArm    { get; set; }
+        //     public string LeftLowArm    { get; set; }
+        //     public string RightLowArm   { get; set; }
+        //     public List<string> TagList { get; set; }
+
+        //     public Shirt(
+        //         string backneck, string back, string chest, string leftab, string rightab, 
+        //         string rightuparm, string rightlowarm, string leftuparm, string leftlowarm
+        //     ) {
+        //         // Shirt Locations
+        //         BackNeck    = backneck;
+        //         Back        = back;
+        //         Chest       = chest;
+        //         LeftAb      = leftab;
+        //         RightAb     = rightab;
+        //         LeftUpArm   = leftuparm;
+        //         RightUpArm  = rightuparm;
+        //         LeftLowArm  = leftlowarm;
+        //         RightLowArm = rightlowarm;
+        //         TagList = new List<string> { Back, BackNeck, Chest, LeftAb, RightAb, LeftUpArm, RightUpArm, LeftLowArm, RightLowArm };
+        //     }
+        // }
+
+        class Person {
+            public KeyValuePair< string, double? > BackInner { get; set; }
+            public KeyValuePair< string, double? > BackOuter { get; set; }
+            public KeyValuePair< string, double? > BackNeckInner { get; set; }
+            public KeyValuePair< string, double? > BackNeckOuter { get; set; }
+            public KeyValuePair< string, double? > ChestInner { get; set; }
+            public KeyValuePair< string, double? > ChestOuter { get; set; }
+            public KeyValuePair< string, double? > LeftAbInner { get; set; }
+            public KeyValuePair< string, double? > LeftAbOuter { get; set; }
+            public KeyValuePair< string, double? > RightAbInner { get; set; }
+            public KeyValuePair< string, double? > RightAbOuter { get; set; }
+            public KeyValuePair< string, double? > LeftUpArmInner { get; set; }
+            public KeyValuePair< string, double? > LeftUpArmOuter { get; set; }
+            public KeyValuePair< string, double? > RightUpArmInner { get; set; }
+            public KeyValuePair< string, double? > RightUpArmOuter { get; set; }
+            public KeyValuePair< string, double? > LeftLowArmInner { get; set; }
+            public KeyValuePair< string, double? > LeftLowArmOuter { get; set; }
+            public KeyValuePair< string, double? > RightLowArmInner { get; set; }
+            public KeyValuePair< string, double? > RightLowArmOuter { get; set; }
+
+            public Person (
+                string bn1, string b1, string c1, string lab1, string rab1,
+                string rua1, string rla1, string lua1, string lla1,
+                string bn2, string b2, string c2, string lab2, string rab2,
+                string rua2, string rla2, string lua2, string lla2
+            ) {
+                
+                BackInner = new KeyValuePair<string, double?>(b1, null);
+                BackOuter = new KeyValuePair<string, double?>(b2, null);
+                BackNeckInner = new KeyValuePair<string, double?>(bn1, null);
+                BackNeckOuter = new KeyValuePair<string, double?>(bn2, null);
+                ChestInner = new KeyValuePair<string, double?>(c1, null);
+                ChestOuter = new KeyValuePair<string, double?>(c2, null);
+                LeftAbInner = new KeyValuePair<string, double?>(lab1, null);
+                LeftAbOuter = new KeyValuePair<string, double?>(lab2, null);
+                RightAbInner = new KeyValuePair<string, double?>(rab1, null);
+                RightAbOuter = new KeyValuePair<string, double?>(rab2, null);
+                LeftUpArmInner = new KeyValuePair<string, double?>(lua1, null);
+                LeftUpArmOuter = new KeyValuePair<string, double?>(lua2, null);
+                RightUpArmInner = new KeyValuePair<string, double?>(rua1, null);
+                RightUpArmOuter = new KeyValuePair<string, double?>(rua2, null);
+                LeftLowArmInner = new KeyValuePair<string, double?>(lla1, null);
+                LeftLowArmOuter = new KeyValuePair<string, double?>(lla2, null);
+                RightLowArmInner = new KeyValuePair<string, double?>(rla1, null);
+                RightLowArmOuter = new KeyValuePair<string, double?>(rla2, null);
+
+            }
+        }
+
+        Person p = new Person(
+            "777F", "67DB", "184A", "885D", "71CF", "BA4C", "8FA9", "B6A1", "2C97",
+            "9854", "A3B0", "9EC6", "9A91", "343B", "87D4", "81D4", "8A53", "1397"
+        );
 
         #endregion
 
@@ -331,53 +278,6 @@ namespace BLE.Client.ViewModels {
             LeftHand1    = "gray"; LeftHand2    = "gray"; LeftHand3    = "gray"; LeftHand1_T    = "--"; LeftHand2_T    = "--"; LeftHand3_T    = "--";
             RightHand1   = "gray"; RightHand2   = "gray"; RightHand3   = "gray"; RightHand1_T   = "--"; RightHand2_T   = "--"; RightHand3_T   = "--";
             Bala1        = "gray"; Bala2        = "gray"; Bala3        = "gray"; Bala1_T        = "--"; Bala2_T        = "--"; Bala3_T        = "--";
-
-            Back1_TL       = "--"; Back2_TL       = "--"; Back3_TL       = "--";
-            BackNeck1_TL   = "--"; BackNeck2_TL   = "--"; BackNeck3_TL   = "--";
-            Chest1_TL      = "--"; Chest2_TL      = "--"; Chest3_TL      = "--";
-            LeftAb1_TL     = "--"; LeftAb2_TL     = "--"; LeftAb3_TL     = "--";
-            RightAb1_TL    = "--"; RightAb2_TL    = "--"; RightAb3_TL    = "--";
-            LeftUpArm1_TL  = "--"; LeftUpArm2_TL  = "--"; LeftUpArm3_TL  = "--";
-            RightUpArm1_TL = "--"; RightUpArm2_TL = "--"; RightUpArm3_TL = "--";
-            LeftLowArm1_TL = "--"; LeftLowArm2_TL = "--"; LeftLowArm3_TL = "--";
-            RightLowArm1_TL= "--"; RightLowArm2_TL= "--"; RightLowArm3_TL= "--";
-
-            Hefner_Back        = new List<string> { shirt1.Back, shirt4.Back, shirt8.Back, shirt9.Back };
-            Hefner_BackNeck    = new List<string> { shirt1.BackNeck, shirt4.BackNeck, shirt8.BackNeck, shirt9.BackNeck };
-            Hefner_Chest       = new List<string> { shirt1.Chest, shirt4.Chest, shirt8.Chest, shirt9.Chest };
-            Hefner_LeftAb      = new List<string> { shirt1.LeftAb, shirt4.LeftAb, shirt8.LeftAb, shirt9.LeftAb };
-            Hefner_RightAb     = new List<string> { shirt1.RightAb, shirt4.RightAb, shirt8.RightAb, shirt9.RightAb };
-            Hefner_LeftUpArm   = new List<string> { shirt1.LeftUpArm, shirt4.LeftUpArm, shirt8.LeftUpArm, shirt9.LeftUpArm };
-            Hefner_RightUpArm  = new List<string> { shirt1.RightUpArm, shirt4.RightUpArm, shirt8.RightUpArm, shirt9.RightUpArm };
-            Hefner_LeftLowArm  = new List<string> { shirt1.LeftLowArm, shirt4.LeftLowArm, shirt8.LeftLowArm, shirt9.LeftLowArm };
-            Hefner_RightLowArm = new List<string> { shirt1.RightLowArm, shirt4.RightLowArm, shirt8.RightLowArm, shirt9.RightLowArm };
-
-            Gelinas_Back        = new List<string> { shirt2.Back, shirt3.Back, shirt11.Back };
-            Gelinas_BackNeck    = new List<string> { shirt2.BackNeck, shirt3.BackNeck, shirt11.BackNeck };
-            Gelinas_Chest       = new List<string> { shirt2.Chest, shirt3.Chest, shirt11.Chest };
-            Gelinas_LeftAb      = new List<string> { shirt2.LeftAb, shirt3.LeftAb, shirt11.LeftAb };
-            Gelinas_RightAb     = new List<string> { shirt2.RightAb, shirt3.RightAb, shirt11.RightAb };
-            Gelinas_LeftUpArm   = new List<string> { shirt2.LeftUpArm, shirt3.LeftUpArm, shirt11.LeftUpArm };
-            Gelinas_RightUpArm  = new List<string> { shirt2.RightUpArm, shirt3.RightUpArm, shirt11.RightUpArm };
-            Gelinas_LeftLowArm  = new List<string> { shirt2.LeftLowArm, shirt3.LeftLowArm, shirt11.LeftLowArm };
-            Gelinas_RightLowArm = new List<string> { shirt2.RightLowArm, shirt3.RightLowArm, shirt11.RightLowArm };
-
-            Person3_Back        = new List<string> { shirt5.Back, shirt6.Back, shirt10.Back };
-            Person3_BackNeck    = new List<string> { shirt5.BackNeck, shirt6.BackNeck, shirt10.BackNeck };
-            Person3_Chest       = new List<string> { shirt5.Chest, shirt6.Chest, shirt10.Chest };
-            Person3_LeftAb      = new List<string> { shirt5.LeftAb, shirt6.LeftAb, shirt10.LeftAb };
-            Person3_RightAb     = new List<string> { shirt5.RightAb, shirt6.RightAb, shirt10.RightAb };
-            Person3_LeftUpArm   = new List<string> { shirt5.LeftUpArm, shirt6.LeftUpArm, shirt10.LeftUpArm };
-            Person3_RightUpArm  = new List<string> { shirt5.RightUpArm, shirt6.RightUpArm, shirt10.RightUpArm };
-            Person3_LeftLowArm  = new List<string> { shirt5.LeftLowArm, shirt6.LeftLowArm, shirt10.LeftLowArm };
-            Person3_RightLowArm = new List<string> { shirt5.RightLowArm, shirt6.RightLowArm, shirt10.RightLowArm };
-
-            Hefner_Lglove  = new List<string> { glove1_L.Forefinger, glove1_L.Pinkie, glove2_L.Forefinger, glove2_L.Pinkie, glove5_L.Forefinger, glove5_L.Pinkie };
-            Hefner_Rglove  = new List<string> { glove1_R.Forefinger, glove1_R.Pinkie, glove2_R.Forefinger, glove2_R.Pinkie, glove5_R.Forefinger, glove5_R.Pinkie };
-            Gelinas_Lglove = new List<string> { glove7_L.Forefinger, glove7_L.Pinkie, glove8_L.Forefinger, glove8_L.Pinkie, glove9_L.Forefinger, glove9_L.Pinkie };
-            Gelinas_Rglove = new List<string> { glove7_R.Forefinger, glove7_R.Pinkie, glove8_R.Forefinger, glove8_R.Pinkie, glove9_R.Forefinger, glove9_R.Pinkie };
-            Person3_Lglove = new List<string> { glove6_L.Forefinger, glove6_L.Pinkie, glove11_L.Forefinger, glove11_L.Pinkie, glove12_L.Forefinger, glove12_L.Pinkie };
-            Person3_Rglove = new List<string> { glove6_R.Forefinger, glove6_R.Pinkie, glove11_R.Forefinger, glove11_R.Pinkie, glove12_R.Forefinger, glove12_R.Pinkie };
 
             // Set disconnection event for reconnection
             Adapter.DeviceDisconnected += OnDeviceDisconnected;
@@ -632,706 +532,142 @@ namespace BLE.Client.ViewModels {
 
                                         finally {
                                             // Get Last Four Characters of EPC
-                                            string temp_EPC = TagInfoList[cnt].EPC.Substring(TagInfoList[cnt].EPC.Length - 4);
+                                            string tEPC = TagInfoList[cnt].EPC.Substring(TagInfoList[cnt].EPC.Length - 4);
 
-                                            // Glove Section
-                                            // Hefner   - 1, 2, 5
-                                            // Gelinas  - 7, 8, 9
-                                            // Person 3 - 6, 11, 12
-                                            if (Hefner_Lglove.Contains(temp_EPC)) {
-                                                _LeftHand1_T = DisplaySAV;
-                                                RaisePropertyChanged(() => LeftHand1_T);
-                                                if ((SAV>THRESHOLD) && (_LeftHand1!="green")) {
-                                                    _LeftHand1 = "green";
-                                                    RaisePropertyChanged(() => LeftHand1);
-                                                }
-                                                else if ((SAV<=THRESHOLD) && (_LeftHand1!="red")) {
-                                                    _LeftHand1 = "red";
-                                                    RaisePropertyChanged(() => LeftHand1);
-                                                } 
-                                            }
-                                            else if (Hefner_Rglove.Contains(temp_EPC)) {
-                                                _RightHand1_T = DisplaySAV;
-                                                RaisePropertyChanged(() => RightHand1_T);
-                                                if ((SAV>THRESHOLD) && (_RightHand1!="green")) {
-                                                    _RightHand1 = "green";
-                                                    RaisePropertyChanged(() => RightHand1);
-                                                }
-                                                else if ((SAV<=THRESHOLD) && (_RightHand1!="red")) {
-                                                    _RightHand1 = "red";
-                                                    RaisePropertyChanged(() => RightHand1);
-                                                } 
-                                            }
-                                            else if (Gelinas_Lglove.Contains(temp_EPC)) {
-                                                _LeftHand2_T = DisplaySAV;
-                                                RaisePropertyChanged(() => LeftHand2_T);
-                                                if ((SAV>THRESHOLD) && (_LeftHand2!="green")) {
-                                                    _LeftHand2 = "green";
-                                                    RaisePropertyChanged(() => LeftHand2);
-                                                }
-                                                else if ((SAV<=THRESHOLD) && (_LeftHand2!="red")) {
-                                                    _LeftHand2 = "red";
-                                                    RaisePropertyChanged(() => LeftHand2);
-                                                } 
-                                            }
-                                            else if (Gelinas_Rglove.Contains(temp_EPC)) {
-                                                _RightHand2_T = DisplaySAV;
-                                                RaisePropertyChanged(() => RightHand2_T);
-                                                if ((SAV>THRESHOLD) && (_RightHand2!="green")) {
-                                                    _RightHand2 = "green";
-                                                    RaisePropertyChanged(() => RightHand2);
-                                                }
-                                                else if ((SAV<=THRESHOLD) && (_RightHand2!="red")) {
-                                                    _RightHand2 = "red";
-                                                    RaisePropertyChanged(() => RightHand2);
-                                                } 
-                                            }
-                                            else if (Person3_Lglove.Contains(temp_EPC)) {
-                                                _LeftHand3_T = DisplaySAV;
-                                                RaisePropertyChanged(() => LeftHand3_T);
-                                                if ((SAV>THRESHOLD) && (_LeftHand3!="green")) {
-                                                    _LeftHand3 = "green";
-                                                    RaisePropertyChanged(() => LeftHand3);
-                                                }
-                                                else if ((SAV<=THRESHOLD) && (_LeftHand3!="red")) {
-                                                    _LeftHand3 = "red";
-                                                    RaisePropertyChanged(() => LeftHand3);
-                                                } 
-                                            }
-                                            else if (Person3_Rglove.Contains(temp_EPC)) {
-                                                _RightHand3_T = DisplaySAV;
-                                                RaisePropertyChanged(() => RightHand3_T);
-                                                if ((SAV>THRESHOLD) && (_RightHand3!="green")) {
-                                                    _RightHand3 = "green";
-                                                    RaisePropertyChanged(() => RightHand3);
-                                                }
-                                                else if ((SAV<=THRESHOLD) && (_RightHand3!="red")) {
-                                                    _RightHand3 = "red";
-                                                    RaisePropertyChanged(() => RightHand3);
-                                                } 
-                                            }
+                                            KeyValuePair<string, double?> newkvp = new KeyValuePair<string, double?>(tEPC, SAV);
 
-                                            // Beanie and Balaclava Section
-                                            // Hefner   - 1, 2
-                                            // Gelinas  - 3, 4
-                                            // Person 3 - 5, 6
-                                            else if (Hefner_Beanie.Contains(temp_EPC)) {
-                                                _Beanie1_T = DisplaySAV;
-                                                RaisePropertyChanged(() => Beanie1_T);
-                                                if ((SAV>THRESHOLD) && (_Beanie1!="green")) {
-                                                    _Beanie1 = "green";
-                                                    RaisePropertyChanged(() => Beanie1);
-                                                }
-                                                else if ((SAV<=THRESHOLD) && (_Beanie1!="red")) {
-                                                    _Beanie1 = "red";
-                                                    RaisePropertyChanged(() => Beanie1);
-                                                } 
-                                            }
-                                            else if (Gelinas_Beanie.Contains(temp_EPC)) {
-                                                _Beanie2_T = DisplaySAV;
-                                                RaisePropertyChanged(() => Beanie2_T);
-                                                if ((SAV>THRESHOLD) && (_Beanie2!="green")) {
-                                                    _Beanie2 = "green";
-                                                    RaisePropertyChanged(() => Beanie2);
-                                                }
-                                                else if ((SAV<=THRESHOLD) && (_Beanie2!="red")) {
-                                                    _Beanie2 = "red";
-                                                    RaisePropertyChanged(() => Beanie2);
-                                                } 
-                                            }
-                                            else if (Person3_Beanie.Contains(temp_EPC)) {
-                                                _Beanie3_T = DisplaySAV;
-                                                RaisePropertyChanged(() => Beanie3_T);
-                                                if ((SAV>THRESHOLD) && (_Beanie3!="green")) {
-                                                    _Beanie3 = "green";
-                                                    RaisePropertyChanged(() => Beanie3);
-                                                }
-                                                else if ((SAV<=THRESHOLD) && (_Beanie3!="red")) {
-                                                    _Beanie3 = "red";
-                                                    RaisePropertyChanged(() => Beanie3);
-                                                } 
-                                            }
-                                            else if (Hefner_Bala.Contains(temp_EPC)) {
-                                                _Bala1_T = DisplaySAV;
-                                                RaisePropertyChanged(() => Bala1_T);
-                                                if ((SAV>THRESHOLD) && (_Bala1!="green")) {
-                                                    _Bala1 = "green";
-                                                    RaisePropertyChanged(() => Bala1);
-                                                }
-                                                else if ((SAV<=THRESHOLD) && (_Bala1!="red")) {
-                                                    _Bala1 = "red";
-                                                    RaisePropertyChanged(() => Bala1);
-                                                } 
-                                            }
-                                            else if (Gelinas_Bala.Contains(temp_EPC)) {
-                                                _Bala2_T = DisplaySAV;
-                                                RaisePropertyChanged(() => Bala2_T);
-                                                if ((SAV>THRESHOLD) && (_Bala2!="green")) {
-                                                    _Bala2 = "green";
-                                                    RaisePropertyChanged(() => Bala2);
-                                                }
-                                                else if ((SAV<=THRESHOLD) && (_Bala2!="red")) {
-                                                    _Bala2 = "red";
-                                                    RaisePropertyChanged(() => Bala2);
-                                                } 
-                                            }
-                                            else if (Person3_Bala.Contains(temp_EPC)) {
-                                                _Bala3_T = DisplaySAV;
-                                                RaisePropertyChanged(() => Bala3_T);
-                                                if ((SAV>THRESHOLD) && (_Bala3!="green")) {
-                                                    _Bala3 = "green";
-                                                    RaisePropertyChanged(() => Bala3);
-                                                }
-                                                else if ((SAV<=THRESHOLD) && (_Bala3!="red")) {
-                                                    _Bala3 = "red";
-                                                    RaisePropertyChanged(() => Bala3);
-                                                } 
-                                            }
-
-                                            // Shirt Section
-                                            // Hefner, L   - 1, 4, 8, 9
-                                            // Gelinas, M  - 2, 3, 11
-                                            // Person 3, L - 5, 6, 10
-                                            else if ( // Hefner Shirt
-                                                (shirt1.TagList.Contains(temp_EPC))||
-                                                (shirt4.TagList.Contains(temp_EPC))||
-                                                (shirt8.TagList.Contains(temp_EPC))||
-                                                (shirt9.TagList.Contains(temp_EPC))
-                                            ) {
-                                                if (Hefner_Back.Contains(temp_EPC)) { 
-                                                    if (SAV > -1.0f + Back1max) {
-                                                        Back1max = SAV;
-                                                        _Back1_T = DisplaySAV;
-                                                        RaisePropertyChanged(() => Back1_T);
-                                                        if ((SAV>THRESHOLD) && (_Back1!="green")) {
-                                                            _Back1 = "green";
-                                                            RaisePropertyChanged(() => Back1);
-                                                        }
-                                                        else if ((SAV<=THRESHOLD) && (_Back1!="red")) {
-                                                            _Back1 = "red";
-                                                            RaisePropertyChanged(() => Back1);
-                                                        } 
-                                                    }
-                                                    else {
-                                                        _Back1_TL = DisplaySAV;
-                                                        RaisePropertyChanged(() => Back1_TL);
-                                                    }
-                                                }
-                                                else if (Hefner_Chest.Contains(temp_EPC)) { 
-                                                    if (SAV > -1.0f + Chest1max) {
-                                                        Chest1max = SAV;
-                                                        _Chest1_T = DisplaySAV;
-                                                        RaisePropertyChanged(() => Chest1_T);
-                                                        if ((SAV>THRESHOLD) && (_Chest1!="green")) {
-                                                            _Chest1 = "green";
-                                                            RaisePropertyChanged(() => Chest1);
-                                                        }
-                                                        else if ((SAV<=THRESHOLD) && (_Chest1!="red")) {
-                                                            _Chest1 = "red";
-                                                            RaisePropertyChanged(() => Chest1);
-                                                        }
-                                                    }
-                                                    else {
-                                                        _Chest1_TL = DisplaySAV;
-                                                        RaisePropertyChanged(() => Chest1_TL);
-                                                    }
-                                                }
-                                                else if (Hefner_BackNeck.Contains(temp_EPC)) {
-                                                    if (SAV > -1.0f + BackNeck1max) {
-                                                        BackNeck1max = SAV;
-                                                        _BackNeck1_T = DisplaySAV;
-                                                        RaisePropertyChanged(() => BackNeck1_T);
-                                                        if ((SAV>THRESHOLD) && (_BackNeck1!="green")) {
-                                                            _BackNeck1 = "green";
-                                                            RaisePropertyChanged(() => BackNeck1);
-                                                        }
-                                                        else if ((SAV<=THRESHOLD) && (_BackNeck1!="red")) {
-                                                            _BackNeck1 = "red";
-                                                            RaisePropertyChanged(() => BackNeck1);
-                                                        }
-                                                    }
-                                                    else {
-                                                        _BackNeck1_TL = DisplaySAV;
-                                                        RaisePropertyChanged(() => BackNeck1_TL);
-                                                    }
-                                                }
-                                                else if (Hefner_LeftAb.Contains(temp_EPC)) {
-                                                    if (SAV > -1.0f + LeftAb1max) {
-                                                        LeftAb1max = SAV;
-                                                        _LeftAb1_T = DisplaySAV;
-                                                        RaisePropertyChanged(() => LeftAb1_T);
-                                                        if ((SAV>THRESHOLD) && (_LeftAb1!="green")) {
-                                                            _LeftAb1 = "green";
-                                                            RaisePropertyChanged(() => LeftAb1);
-                                                        }
-                                                        else if ((SAV<=THRESHOLD) && (_LeftAb1!="red")) {
-                                                            _LeftAb1 = "red";
-                                                            RaisePropertyChanged(() => LeftAb1);
-                                                        }
-                                                    }
-                                                    else {
-                                                        _LeftAb1_TL = DisplaySAV;
-                                                        RaisePropertyChanged(() => LeftAb1_TL);
-                                                    }
-                                                }
-                                                else if (Hefner_RightAb.Contains(temp_EPC)) {
-                                                    if (SAV > -1.0f + RightAb1max) {
-                                                        RightAb1max = SAV;
-                                                        _RightAb1_T = DisplaySAV;
-                                                        RaisePropertyChanged(() => RightAb1_T);
-                                                        if ((SAV>THRESHOLD) && (_RightAb1!="green")) {
-                                                            _RightAb1 = "green";
-                                                            RaisePropertyChanged(() => RightAb1);
-                                                        }
-                                                        else if ((SAV<=THRESHOLD) && (_RightAb1!="red")) {
-                                                            _RightAb1 = "red";
-                                                            RaisePropertyChanged(() => RightAb1);
-                                                        }
-                                                    }
-                                                    else {
-                                                        _RightAb1_TL = DisplaySAV;
-                                                        RaisePropertyChanged(() => RightAb1_TL);
-                                                    }
-                                                }
-                                                else if (Hefner_LeftUpArm.Contains(temp_EPC)) {
-                                                    if (SAV > -1.0f + LeftUpArm1max) {
-                                                        LeftUpArm1max = SAV;
-                                                        _LeftUpArm1_T = DisplaySAV;
-                                                        RaisePropertyChanged(() => LeftUpArm1_T);
-                                                        if ((SAV>THRESHOLD) && (_LeftUpArm1!="green")) {
-                                                            _LeftUpArm1 = "green";
-                                                            RaisePropertyChanged(() => LeftUpArm1);
-                                                        }
-                                                        else if ((SAV<=THRESHOLD) && (_LeftUpArm1!="red")) {
-                                                            _LeftUpArm1 = "red";
-                                                            RaisePropertyChanged(() => LeftUpArm1);
-                                                        }
-                                                    }
-                                                    else {
-                                                        _LeftUpArm1_TL = DisplaySAV;
-                                                        RaisePropertyChanged(() => LeftUpArm1_TL);
-                                                    }
-                                                }
-                                                else if (Hefner_RightUpArm.Contains(temp_EPC)) {
-                                                    if (SAV > -1.0f + RightUpArm1max) {
-                                                        RightUpArm1max = SAV;
-                                                        _RightUpArm1_T = DisplaySAV;
-                                                        RaisePropertyChanged(() => RightUpArm1_T);
-                                                        if ((SAV>THRESHOLD) && (_RightUpArm1!="green")) {
-                                                            _RightUpArm1 = "green";
-                                                            RaisePropertyChanged(() => RightUpArm1);
-                                                        }
-                                                        else if ((SAV<=THRESHOLD) && (_RightUpArm1!="red")) {
-                                                            _RightUpArm1 = "red";
-                                                            RaisePropertyChanged(() => RightUpArm1);
-                                                        }
-                                                    }
-                                                    else {
-                                                        _RightUpArm1_TL = DisplaySAV;
-                                                        RaisePropertyChanged(() => RightUpArm1_TL);
-                                                    }
-                                                }
-                                                else if (Hefner_LeftLowArm.Contains(temp_EPC)) {
-                                                    if (SAV > -1.0f + LeftLowArm1max) {
-                                                        LeftLowArm1max = SAV;
-                                                        _LeftLowArm1_T = DisplaySAV;
-                                                        RaisePropertyChanged(() => LeftLowArm1_T);
-                                                        if ((SAV>THRESHOLD) && (_LeftLowArm1!="green")) {
-                                                            _LeftLowArm1 = "green";
-                                                            RaisePropertyChanged(() => LeftLowArm1);
-                                                        }
-                                                        else if ((SAV<=THRESHOLD) && (_LeftLowArm1!="red")) {
-                                                            _LeftLowArm1 = "red";
-                                                            RaisePropertyChanged(() => LeftLowArm1);
-                                                        }
-                                                    }
-                                                    else {
-                                                        _LeftLowArm1_TL = DisplaySAV;
-                                                        RaisePropertyChanged(() => LeftLowArm1_TL);
-                                                    }
-                                                }
-                                                else if (Hefner_RightLowArm.Contains(temp_EPC)) {
-                                                    if (SAV > -1.0f + RightLowArm1max) {
-                                                        RightLowArm1max = SAV;
-                                                        _RightLowArm1_T = DisplaySAV;
-                                                        RaisePropertyChanged(() => RightLowArm1_T);
-                                                        if ((SAV>THRESHOLD) && (_RightLowArm1!="green")) {
-                                                            _RightLowArm1 = "green";
-                                                            RaisePropertyChanged(() => RightLowArm1);
-                                                        }
-                                                        else if ((SAV<=THRESHOLD) && (_RightLowArm1!="red")) {
-                                                            _RightLowArm1 = "red";
-                                                            RaisePropertyChanged(() => RightLowArm1);
-                                                        }
-                                                    }
-                                                    else {
-                                                        _RightLowArm1_TL = DisplaySAV;
-                                                        RaisePropertyChanged(() => RightLowArm1_TL);
-                                                    }
+                                            if (tEPC==p.BackInner.Key) {
+                                                p.BackInner = newkvp;
+                                                if (!(p.BackInner.Value is null) && !(p.BackOuter.Value is null)) {
+                                                    _Back1_T = (p.BackInner.Value - p.BackOuter.Value).ToString();
+                                                    RaisePropertyChanged(() => Back1_T);
                                                 }
                                             }
-
-                                            else if ( // Gelinas Shirt
-                                                (shirt2.TagList.Contains(temp_EPC))||
-                                                (shirt3.TagList.Contains(temp_EPC))||
-                                                (shirt11.TagList.Contains(temp_EPC))
-                                            ) {
-                                                if (Gelinas_Back.Contains(temp_EPC)) {
-                                                    if (SAV > -1.0f + Back2max) {
-                                                        Back2max = SAV;
-                                                        _Back2_T = DisplaySAV;
-                                                        RaisePropertyChanged(() => Back2_T);
-                                                        if ((SAV>THRESHOLD) && (_Back2!="green")) {
-                                                            _Back2 = "green";
-                                                            RaisePropertyChanged(() => Back2);
-                                                        }
-                                                        else if ((SAV<=THRESHOLD) && (_Back2!="red")) {
-                                                            _Back2 = "red";
-                                                            RaisePropertyChanged(() => Back2);
-                                                        }
-                                                    }
-                                                    else {
-                                                        _Back2_TL = DisplaySAV;
-                                                        RaisePropertyChanged(() => Back2_TL);
-                                                    }
-                                                }
-                                                else if (Gelinas_Chest.Contains(temp_EPC)) {
-                                                    if (SAV > -1.0f + Chest2max) {
-                                                        Chest2max = SAV;
-                                                        _Chest2_T = DisplaySAV;
-                                                        RaisePropertyChanged(() => Chest2_T);
-                                                        if ((SAV>THRESHOLD) && (_Chest2!="green")) {
-                                                            _Chest2 = "green";
-                                                            RaisePropertyChanged(() => Chest2);
-                                                        }
-                                                        else if ((SAV<=THRESHOLD) && (_Chest2!="red")) {
-                                                            _Chest2 = "red";
-                                                            RaisePropertyChanged(() => Chest2);
-                                                        }
-                                                    }
-                                                    else {
-                                                        _Chest2_TL = DisplaySAV;
-                                                        RaisePropertyChanged(() => Chest2_TL);
-                                                    }
-                                                }
-                                                else if (Gelinas_BackNeck.Contains(temp_EPC)) {
-                                                    if (SAV > -1.0f + BackNeck2max) {
-                                                        BackNeck2max = SAV;
-                                                        _BackNeck2_T = DisplaySAV;
-                                                        RaisePropertyChanged(() => BackNeck2_T);
-                                                        if ((SAV>THRESHOLD) && (_BackNeck2!="green")) {
-                                                            _BackNeck2 = "green";
-                                                            RaisePropertyChanged(() => BackNeck2);
-                                                        }
-                                                        else if ((SAV<=THRESHOLD) && (_BackNeck2!="red")) {
-                                                            _BackNeck2 = "red";
-                                                            RaisePropertyChanged(() => BackNeck2);
-                                                        }
-                                                    }
-                                                    else {
-                                                        _BackNeck2_TL = DisplaySAV;
-                                                        RaisePropertyChanged(() => BackNeck2_TL);
-                                                    }
-                                                }
-                                                else if (Gelinas_LeftAb.Contains(temp_EPC)) {
-                                                    if (SAV > -1.0f + LeftAb2max) {
-                                                        LeftAb2max = SAV;
-                                                        _LeftAb2_T = DisplaySAV;
-                                                        RaisePropertyChanged(() => LeftAb2_T);
-                                                        if ((SAV>THRESHOLD) && (_LeftAb2!="green")) {
-                                                            _LeftAb2 = "green";
-                                                            RaisePropertyChanged(() => LeftAb2);
-                                                        }
-                                                        else if ((SAV<=THRESHOLD) && (_LeftAb2!="red")) {
-                                                            _LeftAb2 = "red";
-                                                            RaisePropertyChanged(() => LeftAb2);
-                                                        }
-                                                    }
-                                                    else {
-                                                        _LeftAb2_TL = DisplaySAV;
-                                                        RaisePropertyChanged(() => LeftAb2_TL);
-                                                    }
-                                                }
-                                                else if (Gelinas_RightAb.Contains(temp_EPC)) {
-                                                    if (SAV > -1.0f + RightAb2max) {
-                                                        RightAb2max = SAV;
-                                                        _RightAb2_T = DisplaySAV;
-                                                        RaisePropertyChanged(() => RightAb2_T);
-                                                        if ((SAV>THRESHOLD) && (_RightAb2!="green")) {
-                                                            _RightAb2 = "green";
-                                                            RaisePropertyChanged(() => RightAb2);
-                                                        }
-                                                        else if ((SAV<=THRESHOLD) && (_RightAb2!="red")) {
-                                                            _RightAb2 = "red";
-                                                            RaisePropertyChanged(() => RightAb2);
-                                                        }
-                                                    }
-                                                    else {
-                                                        _RightAb2_TL = DisplaySAV;
-                                                        RaisePropertyChanged(() => RightAb2_TL);
-                                                    }
-                                                }
-                                                else if (Gelinas_LeftUpArm.Contains(temp_EPC)) {
-                                                    if (SAV > -1.0f + LeftUpArm2max) {
-                                                        LeftUpArm2max = SAV;
-                                                        _LeftUpArm2_T = DisplaySAV;
-                                                        RaisePropertyChanged(() => LeftUpArm2_T);
-                                                        if ((SAV>THRESHOLD) && (_LeftUpArm2!="green")) {
-                                                            _LeftUpArm2 = "green";
-                                                            RaisePropertyChanged(() => LeftUpArm2);
-                                                        }
-                                                        else if ((SAV<=THRESHOLD) && (_LeftUpArm2!="red")) {
-                                                            _LeftUpArm2 = "red";
-                                                            RaisePropertyChanged(() => LeftUpArm2);
-                                                        }
-                                                    }
-                                                    else {
-                                                        _LeftUpArm2_TL = DisplaySAV;
-                                                        RaisePropertyChanged(() => LeftUpArm2_TL);
-                                                    }
-                                                }
-                                                else if (Gelinas_RightUpArm.Contains(temp_EPC)) {
-                                                    if (SAV > -1.0f + RightUpArm2max) {
-                                                        RightUpArm2max = SAV;
-                                                        _RightUpArm2_T = DisplaySAV;
-                                                        RaisePropertyChanged(() => RightUpArm2_T);
-                                                        if ((SAV>THRESHOLD) && (_RightUpArm2!="green")) {
-                                                            _RightUpArm2 = "green";
-                                                            RaisePropertyChanged(() => RightUpArm2);
-                                                        }
-                                                        else if ((SAV<=THRESHOLD) && (_RightUpArm2!="red")) {
-                                                            _RightUpArm2 = "red";
-                                                            RaisePropertyChanged(() => RightUpArm2);
-                                                        }
-                                                    }
-                                                    else {
-                                                        _RightUpArm2_TL = DisplaySAV;
-                                                        RaisePropertyChanged(() => RightUpArm2_TL);
-                                                    }
-                                                }
-                                                else if (Gelinas_LeftLowArm.Contains(temp_EPC)) {
-                                                    if (SAV > -1.0f + LeftLowArm2max) {
-                                                        LeftLowArm2max = SAV;
-                                                        _LeftLowArm2_T = DisplaySAV;
-                                                        RaisePropertyChanged(() => LeftLowArm2_T);
-                                                        if ((SAV>THRESHOLD) && (_LeftLowArm2!="green")) {
-                                                            _LeftLowArm2 = "green";
-                                                            RaisePropertyChanged(() => LeftLowArm2);
-                                                        }
-                                                        else if ((SAV<=THRESHOLD) && (_LeftLowArm2!="red")) {
-                                                            _LeftLowArm2 = "red";
-                                                            RaisePropertyChanged(() => LeftLowArm2);
-                                                        }
-                                                    }
-                                                    else {
-                                                        _LeftLowArm2_TL = DisplaySAV;
-                                                        RaisePropertyChanged(() => LeftLowArm2_TL);
-                                                    }
-                                                }
-                                                else if (Gelinas_RightLowArm.Contains(temp_EPC)) {
-                                                    if (SAV > -1.0f + RightLowArm2max) {
-                                                        RightLowArm2max = SAV;
-                                                        _RightLowArm2_T = DisplaySAV;
-                                                        RaisePropertyChanged(() => RightLowArm2_T);
-                                                        if ((SAV>THRESHOLD) && (_RightLowArm2!="green")) {
-                                                            _RightLowArm2 = "green";
-                                                            RaisePropertyChanged(() => RightLowArm2);
-                                                        }
-                                                        else if ((SAV<=THRESHOLD) && (_RightLowArm2!="red")) {
-                                                            _RightLowArm2 = "red";
-                                                            RaisePropertyChanged(() => RightLowArm2);
-                                                        }
-                                                    }
-                                                    else {
-                                                        _RightLowArm2_TL = DisplaySAV;
-                                                        RaisePropertyChanged(() => RightLowArm2_TL);
-                                                    }
+                                            else if (tEPC==p.BackOuter.Key) {
+                                                p.BackOuter = newkvp;
+                                                if (!(p.BackInner.Value is null) && !(p.BackOuter.Value is null)) {
+                                                    _Back1_T = (p.BackInner.Value - p.BackOuter.Value).ToString();
+                                                    RaisePropertyChanged(() => Back1_T);
                                                 }
                                             }
-
-                                            else if ( // Person 3 Shirt
-                                                (shirt5.TagList.Contains(temp_EPC))||
-                                                (shirt6.TagList.Contains(temp_EPC))||
-                                                (shirt10.TagList.Contains(temp_EPC))
-                                            ) {
-                                                if (Person3_Back.Contains(temp_EPC)) {
-                                                    if (SAV > -1.0f + Back3max) {
-                                                        Back3max = SAV;
-                                                        _Back3_T = DisplaySAV;
-                                                        RaisePropertyChanged(() => Back3_T);
-                                                        if ((SAV>THRESHOLD) && (_Back3!="green")) {
-                                                            _Back3 = "green";
-                                                            RaisePropertyChanged(() => Back3);
-                                                        }
-                                                        else if ((SAV<=THRESHOLD) && (_Back3!="red")) {
-                                                            _Back3 = "red";
-                                                            RaisePropertyChanged(() => Back3);
-                                                        }
-                                                    }
-                                                    else {
-                                                        _Back3_TL = DisplaySAV;
-                                                        RaisePropertyChanged(() => Back3_TL);
-                                                    }
-                                                }
-                                                else if (Person3_Chest.Contains(temp_EPC)) {
-                                                    if (SAV > -1.0f + Chest3max) {
-                                                        Chest3max = SAV;
-                                                        _Chest3_T = DisplaySAV;
-                                                        RaisePropertyChanged(() => Chest3_T);
-                                                        if ((SAV>THRESHOLD) && (_Chest3!="green")) {
-                                                            _Chest3 = "green";
-                                                            RaisePropertyChanged(() => Chest3);
-                                                        }
-                                                        else if ((SAV<=THRESHOLD) && (_Chest3!="red")) {
-                                                            _Chest3 = "red";
-                                                            RaisePropertyChanged(() => Chest3);
-                                                        }
-                                                    }
-                                                    else {
-                                                        _Chest3_TL = DisplaySAV;
-                                                        RaisePropertyChanged(() => Chest3_TL);
-                                                    }
-                                                }
-                                                else if (Person3_BackNeck.Contains(temp_EPC)) {
-                                                    if (SAV > -1.0f + BackNeck3max) {
-                                                        BackNeck3max = SAV;
-                                                        _BackNeck3_T = DisplaySAV;
-                                                        RaisePropertyChanged(() => BackNeck3_T);
-                                                        if ((SAV>THRESHOLD) && (_BackNeck3!="green")) {
-                                                            _BackNeck3 = "green";
-                                                            RaisePropertyChanged(() => BackNeck3);
-                                                        }
-                                                        else if ((SAV<=THRESHOLD) && (_BackNeck3!="red")) {
-                                                            _BackNeck3 = "red";
-                                                            RaisePropertyChanged(() => BackNeck3);
-                                                        }
-                                                    }
-                                                    else {
-                                                        _BackNeck3_TL = DisplaySAV;
-                                                        RaisePropertyChanged(() => BackNeck3_TL);
-                                                    }
-                                                }
-                                                else if (Person3_LeftAb.Contains(temp_EPC)) {
-                                                    if (SAV > -1.0f + LeftAb3max) {
-                                                        LeftAb3max = SAV;
-                                                        _LeftAb3_T = DisplaySAV;
-                                                        RaisePropertyChanged(() => LeftAb3_T);
-                                                        if ((SAV>THRESHOLD) && (_LeftAb3!="green")) {
-                                                            _LeftAb3 = "green";
-                                                            RaisePropertyChanged(() => LeftAb3);
-                                                        }
-                                                        else if ((SAV<=THRESHOLD) && (_LeftAb3!="red")) {
-                                                            _LeftAb3 = "red";
-                                                            RaisePropertyChanged(() => LeftAb3);
-                                                        }
-                                                    }
-                                                    else {
-                                                        _LeftAb3_TL = DisplaySAV;
-                                                        RaisePropertyChanged(() => LeftAb3_TL);
-                                                    }
-                                                }
-                                                else if (Person3_RightAb.Contains(temp_EPC)) {
-                                                    if (SAV > -1.0f + RightAb3max) {
-                                                        RightAb3max = SAV;
-                                                        _RightAb3_T = DisplaySAV;
-                                                        RaisePropertyChanged(() => RightAb3_T);
-                                                        if ((SAV>THRESHOLD) && (_RightAb3!="green")) {
-                                                            _RightAb3 = "green";
-                                                            RaisePropertyChanged(() => RightAb3);
-                                                        }
-                                                        else if ((SAV<=THRESHOLD) && (_RightAb3!="red")) {
-                                                            _RightAb3 = "red";
-                                                            RaisePropertyChanged(() => RightAb3);
-                                                        }
-                                                    }
-                                                    else {
-                                                        _RightAb3_TL = DisplaySAV;
-                                                        RaisePropertyChanged(() => RightAb3_TL);
-                                                    }
-                                                }
-                                                else if (Person3_LeftUpArm.Contains(temp_EPC)) {
-                                                    if (SAV > -1.0f + LeftUpArm3max) {
-                                                        LeftUpArm3max = SAV;
-                                                        _LeftUpArm3_T = DisplaySAV;
-                                                        RaisePropertyChanged(() => LeftUpArm3_T);
-                                                        if ((SAV>THRESHOLD) && (_LeftUpArm3!="green")) {
-                                                            _LeftUpArm3 = "green";
-                                                            RaisePropertyChanged(() => LeftUpArm3);
-                                                        }
-                                                        else if ((SAV<=THRESHOLD) && (_LeftUpArm3!="red")) {
-                                                            _LeftUpArm3 = "red";
-                                                            RaisePropertyChanged(() => LeftUpArm3);
-                                                        }
-                                                    }
-                                                    else {
-                                                        _LeftUpArm3_TL = DisplaySAV;
-                                                        RaisePropertyChanged(() => LeftUpArm3_TL);
-                                                    }
-                                                }
-                                                else if (Person3_RightUpArm.Contains(temp_EPC)) {
-                                                    if (SAV > -1.0f + RightUpArm3max) {
-                                                        RightUpArm3max = SAV;
-                                                        _RightUpArm3_T = DisplaySAV;
-                                                        RaisePropertyChanged(() => RightUpArm3_T);
-                                                        if ((SAV>THRESHOLD) && (_RightUpArm3!="green")) {
-                                                            _RightUpArm3 = "green";
-                                                            RaisePropertyChanged(() => RightUpArm3);
-                                                        }
-                                                        else if ((SAV<=THRESHOLD) && (_RightUpArm3!="red")) {
-                                                            _RightUpArm3 = "red";
-                                                            RaisePropertyChanged(() => RightUpArm3);
-                                                        }
-                                                    }
-                                                    else {
-                                                        _RightUpArm3_TL = DisplaySAV;
-                                                        RaisePropertyChanged(() => RightUpArm3_TL);
-                                                    }
-                                                }
-                                                else if (Person3_LeftLowArm.Contains(temp_EPC)) {
-                                                    if (SAV > -1.0f + LeftLowArm3max) {
-                                                        LeftLowArm3max = SAV;
-                                                        _LeftLowArm3_T = DisplaySAV;
-                                                        RaisePropertyChanged(() => LeftLowArm3_T);
-                                                        if ((SAV>THRESHOLD) && (_LeftLowArm3!="green")) {
-                                                            _LeftLowArm3 = "green";
-                                                            RaisePropertyChanged(() => LeftLowArm3);
-                                                        }
-                                                        else if ((SAV<=THRESHOLD) && (_LeftLowArm3!="red")) {
-                                                            _LeftLowArm3 = "red";
-                                                            RaisePropertyChanged(() => LeftLowArm3);
-                                                        }
-                                                    }
-                                                    else {
-                                                        _LeftLowArm3_TL = DisplaySAV;
-                                                        RaisePropertyChanged(() => LeftLowArm3_TL);
-                                                    }
-                                                }
-                                                else if (Person3_RightLowArm.Contains(temp_EPC)) {
-                                                    if (SAV > -1.0f + RightLowArm3max) {
-                                                        RightLowArm3max = SAV;
-                                                        _RightLowArm3_T = DisplaySAV;
-                                                        RaisePropertyChanged(() => RightLowArm3_T);
-                                                        if ((SAV>THRESHOLD) && (_RightLowArm3!="green")) {
-                                                            _RightLowArm3 = "green";
-                                                            RaisePropertyChanged(() => RightLowArm3);
-                                                        }
-                                                        else if ((SAV<=THRESHOLD) && (_RightLowArm3!="red")) {
-                                                            _RightLowArm3 = "red";
-                                                            RaisePropertyChanged(() => RightLowArm3);
-                                                        }
-                                                    }
-                                                    else {
-                                                        _RightLowArm3_TL = DisplaySAV;
-                                                        RaisePropertyChanged(() => RightLowArm3_TL);
-                                                    }
+                                            else if (tEPC==p.BackNeckInner.Key) {
+                                                p.BackNeckInner = newkvp;
+                                                if (!(p.BackNeckInner.Value is null) && !(p.BackNeckOuter.Value is null)) {
+                                                    _BackNeck1_T = (p.BackNeckInner.Value - p.BackNeckOuter.Value).ToString();
+                                                    RaisePropertyChanged(() => BackNeck1_T);
                                                 }
                                             }
-
+                                            else if (tEPC==p.BackNeckOuter.Key) {
+                                                p.BackNeckOuter = newkvp;
+                                                if (!(p.BackNeckInner.Value is null) && !(p.BackNeckOuter.Value is null)) {
+                                                    _BackNeck1_T = (p.BackNeckInner.Value - p.BackNeckOuter.Value).ToString();
+                                                    RaisePropertyChanged(() => BackNeck1_T);
+                                                }
+                                            }
+                                            else if (tEPC==p.ChestInner.Key) {
+                                                p.ChestInner = newkvp;
+                                                if (!(p.ChestInner.Value is null) && !(p.ChestOuter.Value is null)) {
+                                                    _Chest1_T = (p.ChestInner.Value - p.ChestOuter.Value).ToString();
+                                                    RaisePropertyChanged(() => Chest1_T);
+                                                }
+                                            }
+                                            else if (tEPC==p.ChestOuter.Key) {
+                                                p.ChestOuter = newkvp;
+                                                if (!(p.ChestInner.Value is null) && !(p.ChestOuter.Value is null)) {
+                                                    _Chest1_T = (p.ChestInner.Value - p.ChestOuter.Value).ToString();
+                                                    RaisePropertyChanged(() => Chest1_T);
+                                                }
+                                            }
+                                            else if (tEPC==p.LeftAbInner.Key) {
+                                                p.LeftAbInner = newkvp;
+                                                if (!(p.LeftAbInner.Value is null) && !(p.LeftAbOuter.Value is null)) {
+                                                    _LeftAb1_T = (p.LeftAbInner.Value - p.LeftAbOuter.Value).ToString();
+                                                    RaisePropertyChanged(() => LeftAb1_T);
+                                                }
+                                            }
+                                            else if (tEPC==p.LeftAbOuter.Key) {
+                                                p.LeftAbOuter = newkvp;
+                                                if (!(p.LeftAbInner.Value is null) && !(p.LeftAbOuter.Value is null)) {
+                                                    _LeftAb1_T = (p.LeftAbInner.Value - p.LeftAbOuter.Value).ToString();
+                                                    RaisePropertyChanged(() => LeftAb1_T);
+                                                }
+                                            }
+                                            else if (tEPC==p.RightAbInner.Key) {
+                                                p.RightAbInner = newkvp;
+                                                if (!(p.RightAbInner.Value is null) && !(p.RightAbOuter.Value is null)) {
+                                                    _RightAb1_T = (p.RightAbInner.Value - p.RightAbOuter.Value).ToString();
+                                                    RaisePropertyChanged(() => RightAb1_T);
+                                                }
+                                            }
+                                            else if (tEPC==p.RightAbOuter.Key) {
+                                                p.RightAbOuter = newkvp;
+                                                if (!(p.RightAbInner.Value is null) && !(p.RightAbOuter.Value is null)) {
+                                                    _RightAb1_T = (p.RightAbInner.Value - p.RightAbOuter.Value).ToString();
+                                                    RaisePropertyChanged(() => RightAb1_T);
+                                                }
+                                            }
+                                            else if (tEPC==p.LeftUpArmInner.Key) {
+                                                p.LeftUpArmInner = newkvp;
+                                                if (!(p.LeftUpArmInner.Value is null) && !(p.LeftUpArmOuter.Value is null)) {
+                                                    _LeftUpArm1_T = (p.LeftUpArmInner.Value - p.LeftUpArmOuter.Value).ToString();
+                                                    RaisePropertyChanged(() => LeftUpArm1_T);
+                                                }
+                                            }
+                                            else if (tEPC==p.LeftUpArmOuter.Key) {
+                                                p.LeftUpArmOuter = newkvp;
+                                                if (!(p.LeftUpArmInner.Value is null) && !(p.LeftUpArmOuter.Value is null)) {
+                                                    _LeftUpArm1_T = (p.LeftUpArmInner.Value - p.LeftUpArmOuter.Value).ToString();
+                                                    RaisePropertyChanged(() => LeftUpArm1_T);
+                                                }
+                                            }
+                                            else if (tEPC==p.RightUpArmInner.Key) {
+                                                p.RightUpArmInner = newkvp;
+                                                if (!(p.RightUpArmInner.Value is null) && !(p.RightUpArmOuter.Value is null)) {
+                                                    _RightUpArm1_T = (p.RightUpArmInner.Value - p.RightUpArmOuter.Value).ToString();
+                                                    RaisePropertyChanged(() => RightUpArm1_T);
+                                                }
+                                            }
+                                            else if (tEPC==p.RightUpArmOuter.Key) {
+                                                p.RightUpArmOuter = newkvp;
+                                                if (!(p.RightUpArmInner.Value is null) && !(p.RightUpArmOuter.Value is null)) {
+                                                    _RightUpArm1_T = (p.RightUpArmInner.Value - p.RightUpArmOuter.Value).ToString();
+                                                    RaisePropertyChanged(() => RightUpArm1_T);
+                                                }
+                                            }
+                                            else if (tEPC==p.LeftLowArmInner.Key) {
+                                                p.LeftLowArmInner = newkvp;
+                                                if (!(p.LeftLowArmInner.Value is null) && !(p.LeftLowArmOuter.Value is null)) {
+                                                    _LeftLowArm1_T = (p.LeftLowArmInner.Value - p.LeftLowArmOuter.Value).ToString();
+                                                    RaisePropertyChanged(() => LeftLowArm1_T);
+                                                }
+                                            }
+                                            else if (tEPC==p.LeftLowArmOuter.Key) {
+                                                p.LeftLowArmOuter = newkvp;
+                                                if (!(p.LeftLowArmInner.Value is null) && !(p.LeftLowArmOuter.Value is null)) {
+                                                    _LeftLowArm1_T = (p.LeftLowArmInner.Value - p.LeftLowArmOuter.Value).ToString();
+                                                    RaisePropertyChanged(() => LeftLowArm1_T);
+                                                }
+                                            }
+                                            else if (tEPC==p.RightLowArmInner.Key) {
+                                                p.RightLowArmInner = newkvp;
+                                                if (!(p.RightLowArmInner.Value is null) && !(p.RightLowArmOuter.Value is null)) {
+                                                    _RightLowArm1_T = (p.RightLowArmInner.Value - p.RightLowArmOuter.Value).ToString();
+                                                    RaisePropertyChanged(() => RightLowArm1_T);
+                                                }
+                                            }
+                                            else if (tEPC==p.RightLowArmOuter.Key) {
+                                                p.RightLowArmOuter = newkvp;
+                                                if (!(p.RightLowArmInner.Value is null) && !(p.RightLowArmOuter.Value is null)) {
+                                                    _RightLowArm1_T = (p.RightLowArmInner.Value - p.RightLowArmOuter.Value).ToString();
+                                                    RaisePropertyChanged(() => RightLowArm1_T);
+                                                }
+                                            }
                                         }
+
                                     } // if caldata is nonzero
                                 }     // if temp within range
                             }
-                            else { }
+                            else {}
                             found = true;
                             break;
                         }
@@ -1343,7 +679,7 @@ namespace BLE.Client.ViewModels {
                         item.SensorAvgValue = "";
 
                         if (ocRSSI >= BleMvxApplication._rfMicro_minOCRSSI && ocRSSI <= BleMvxApplication._rfMicro_maxOCRSSI) {
-                            if (temp >= 1300 && temp <= 3500) {
+                            if (temp>=1300 && temp<=3500) {
                                 UInt64 caldata = (UInt64)(((UInt64)info.Bank2Data[0] << 48) | ((UInt64)info.Bank2Data[1] << 32) | ((UInt64)info.Bank2Data[2] << 16) | ((UInt64)info.Bank2Data[3]));
 
                                 if (caldata==0) { item.SensorAvgValue = "NoCalData"; }

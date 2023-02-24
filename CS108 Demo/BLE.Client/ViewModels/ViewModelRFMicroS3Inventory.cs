@@ -258,6 +258,11 @@ namespace BLE.Client.ViewModels {
             "9854", "A3B0", "9EC6", "9A91", "343B", "87D4", "81D4", "8A53", "1397"
         );
 
+        List<string> epcs = new List<string>{
+            "777F", "67DB", "184A", "885D", "71CF", "BA4C", "8FA9", "B6A1", "2C97",
+            "9854", "A3B0", "9EC6", "9A91", "343B", "87D4", "81D4", "8A53", "1397"
+        };
+
         #endregion
 
 
@@ -496,7 +501,10 @@ namespace BLE.Client.ViewModels {
                     UInt16 temp       = info.Bank1Data[2];                     // Address e
 
                     for (cnt=0; cnt<TagInfoList.Count; cnt++) {
+
                         if (TagInfoList[cnt].EPC==info.epc.ToString()) {
+                        // if (epcs.Contains(info.epc.ToString()) && (TagInfoList[cnt].EPC == info.epc.ToString())) {
+
                             if (ocRSSI >= BleMvxApplication._rfMicro_minOCRSSI && ocRSSI <= BleMvxApplication._rfMicro_maxOCRSSI) {
                                 if (temp >= 1300 && temp <= 3500) {
                                     UInt64 caldata = (UInt64)(((UInt64)info.Bank2Data[0]<<48) | ((UInt64)info.Bank2Data[1]<<32) | ((UInt64)info.Bank2Data[2]<<16) | ((UInt64)info.Bank2Data[3]));
@@ -674,6 +682,9 @@ namespace BLE.Client.ViewModels {
                     }
 
                     if (!found) {
+
+                        // if (epcs.Contains(info.epc.ToString())) {
+
                         RFMicroTagInfoViewModel item = new RFMicroTagInfoViewModel();
                         item.EPC = info.epc.ToString();
                         item.SensorAvgValue = "";
@@ -702,6 +713,9 @@ namespace BLE.Client.ViewModels {
                         }
                         else { }
                         TagInfoList.Insert(0, item);
+
+                        //} // added to filter EPCs to savedata
+
                     }
                 }
             });

@@ -512,7 +512,7 @@ namespace BLE.Client.ViewModels {
                                     if (caldata == 0) { TagInfoList[cnt].SensorAvgValue = "NoCalData"; }
                                     else {
                                         double SAV = Math.Round(getTempC(temp, caldata), 2);   
-                                        string DisplaySAV = Math.Round(SAV, 1).ToString();
+                                        string DisplaySAV = Math.Round(SAV, 2).ToString();
                                         TagInfoList[cnt].SensorAvgValue = SAV.ToString();
                                         TagInfoList[cnt].TimeString = DateTime.Now.ToString("HH:mm:ss");
 
@@ -542,134 +542,59 @@ namespace BLE.Client.ViewModels {
                                             // Get Last Four Characters of EPC
                                             string tEPC = TagInfoList[cnt].EPC.Substring(TagInfoList[cnt].EPC.Length - 4);
 
-                                            KeyValuePair<string, double?> newkvp = new KeyValuePair<string, double?>(tEPC, SAV);
+                                            switch (tEPC) {
+                                                case "1FC1":
+                                                    _Beanie1_T = DisplaySAV;
+                                                    RaisePropertyChanged(() => Beanie1_T);
+                                                    break;
+                                                case "96A1":
+                                                    _Beanie2_T = DisplaySAV;
+                                                    RaisePropertyChanged(() => Beanie2_T);
+                                                    break;
+                                                case "5448":
+                                                    _Bala1_T = DisplaySAV;
+                                                    RaisePropertyChanged(() => Bala1_T);
+                                                    break;
+                                                case "7561":
+                                                    _BackNeck1_T = DisplaySAV;
+                                                    RaisePropertyChanged(() => BackNeck1_T);
+                                                    break;
+                                                case "5E01":
+                                                    _Back1_T = DisplaySAV;
+                                                    RaisePropertyChanged(() => Back1_T);
+                                                    break;
+                                                case "30CE":
+                                                    _Chest1_T = DisplaySAV;
+                                                    RaisePropertyChanged(() => Chest1_T);
+                                                    break;
+                                                case "67CC":
+                                                    _RightAb1_T = DisplaySAV;
+                                                    RaisePropertyChanged(() => RightAb1_T);
+                                                    break;
+                                                case "7D24":
+                                                    _LeftAb1_T = DisplaySAV;
+                                                    RaisePropertyChanged(() => LeftAb1_T);
+                                                    break;
+                                                case "9859":
+                                                    _RightUpArm1_T = DisplaySAV;
+                                                    RaisePropertyChanged(() => RightUpArm1_T);
+                                                    break;
+                                                case "7D79":
+                                                    _LeftUpArm1_T = DisplaySAV;
+                                                    RaisePropertyChanged(() => LeftUpArm1_T);
+                                                    break;
+                                                case "7263":
+                                                    _RightLowArm1_T = DisplaySAV;
+                                                    RaisePropertyChanged(() => RightLowArm1_T);
+                                                    break;
+                                                case "34D7":
+                                                    _LeftLowArm1_T = DisplaySAV;
+                                                    RaisePropertyChanged(() => LeftLowArm1_T);
+                                                    break;
+                                                default:
+                                                    break;
+                                            }
 
-                                            if (tEPC==p.BackInner.Key) {
-                                                p.BackInner = newkvp;
-                                                if (!(p.BackInner.Value is null) && !(p.BackOuter.Value is null)) {
-                                                    _Back1_T = (p.BackInner.Value - p.BackOuter.Value).ToString();
-                                                    RaisePropertyChanged(() => Back1_T);
-                                                }
-                                            }
-                                            else if (tEPC==p.BackOuter.Key) {
-                                                p.BackOuter = newkvp;
-                                                if (!(p.BackInner.Value is null) && !(p.BackOuter.Value is null)) {
-                                                    _Back1_T = (p.BackInner.Value - p.BackOuter.Value).ToString();
-                                                    RaisePropertyChanged(() => Back1_T);
-                                                }
-                                            }
-                                            else if (tEPC==p.BackNeckInner.Key) {
-                                                p.BackNeckInner = newkvp;
-                                                if (!(p.BackNeckInner.Value is null) && !(p.BackNeckOuter.Value is null)) {
-                                                    _BackNeck1_T = (p.BackNeckInner.Value - p.BackNeckOuter.Value).ToString();
-                                                    RaisePropertyChanged(() => BackNeck1_T);
-                                                }
-                                            }
-                                            else if (tEPC==p.BackNeckOuter.Key) {
-                                                p.BackNeckOuter = newkvp;
-                                                if (!(p.BackNeckInner.Value is null) && !(p.BackNeckOuter.Value is null)) {
-                                                    _BackNeck1_T = (p.BackNeckInner.Value - p.BackNeckOuter.Value).ToString();
-                                                    RaisePropertyChanged(() => BackNeck1_T);
-                                                }
-                                            }
-                                            else if (tEPC==p.ChestInner.Key) {
-                                                p.ChestInner = newkvp;
-                                                if (!(p.ChestInner.Value is null) && !(p.ChestOuter.Value is null)) {
-                                                    _Chest1_T = (p.ChestInner.Value - p.ChestOuter.Value).ToString();
-                                                    RaisePropertyChanged(() => Chest1_T);
-                                                }
-                                            }
-                                            else if (tEPC==p.ChestOuter.Key) {
-                                                p.ChestOuter = newkvp;
-                                                if (!(p.ChestInner.Value is null) && !(p.ChestOuter.Value is null)) {
-                                                    _Chest1_T = (p.ChestInner.Value - p.ChestOuter.Value).ToString();
-                                                    RaisePropertyChanged(() => Chest1_T);
-                                                }
-                                            }
-                                            else if (tEPC==p.LeftAbInner.Key) {
-                                                p.LeftAbInner = newkvp;
-                                                if (!(p.LeftAbInner.Value is null) && !(p.LeftAbOuter.Value is null)) {
-                                                    _LeftAb1_T = (p.LeftAbInner.Value - p.LeftAbOuter.Value).ToString();
-                                                    RaisePropertyChanged(() => LeftAb1_T);
-                                                }
-                                            }
-                                            else if (tEPC==p.LeftAbOuter.Key) {
-                                                p.LeftAbOuter = newkvp;
-                                                if (!(p.LeftAbInner.Value is null) && !(p.LeftAbOuter.Value is null)) {
-                                                    _LeftAb1_T = (p.LeftAbInner.Value - p.LeftAbOuter.Value).ToString();
-                                                    RaisePropertyChanged(() => LeftAb1_T);
-                                                }
-                                            }
-                                            else if (tEPC==p.RightAbInner.Key) {
-                                                p.RightAbInner = newkvp;
-                                                if (!(p.RightAbInner.Value is null) && !(p.RightAbOuter.Value is null)) {
-                                                    _RightAb1_T = (p.RightAbInner.Value - p.RightAbOuter.Value).ToString();
-                                                    RaisePropertyChanged(() => RightAb1_T);
-                                                }
-                                            }
-                                            else if (tEPC==p.RightAbOuter.Key) {
-                                                p.RightAbOuter = newkvp;
-                                                if (!(p.RightAbInner.Value is null) && !(p.RightAbOuter.Value is null)) {
-                                                    _RightAb1_T = (p.RightAbInner.Value - p.RightAbOuter.Value).ToString();
-                                                    RaisePropertyChanged(() => RightAb1_T);
-                                                }
-                                            }
-                                            else if (tEPC==p.LeftUpArmInner.Key) {
-                                                p.LeftUpArmInner = newkvp;
-                                                if (!(p.LeftUpArmInner.Value is null) && !(p.LeftUpArmOuter.Value is null)) {
-                                                    _LeftUpArm1_T = (p.LeftUpArmInner.Value - p.LeftUpArmOuter.Value).ToString();
-                                                    RaisePropertyChanged(() => LeftUpArm1_T);
-                                                }
-                                            }
-                                            else if (tEPC==p.LeftUpArmOuter.Key) {
-                                                p.LeftUpArmOuter = newkvp;
-                                                if (!(p.LeftUpArmInner.Value is null) && !(p.LeftUpArmOuter.Value is null)) {
-                                                    _LeftUpArm1_T = (p.LeftUpArmInner.Value - p.LeftUpArmOuter.Value).ToString();
-                                                    RaisePropertyChanged(() => LeftUpArm1_T);
-                                                }
-                                            }
-                                            else if (tEPC==p.RightUpArmInner.Key) {
-                                                p.RightUpArmInner = newkvp;
-                                                if (!(p.RightUpArmInner.Value is null) && !(p.RightUpArmOuter.Value is null)) {
-                                                    _RightUpArm1_T = (p.RightUpArmInner.Value - p.RightUpArmOuter.Value).ToString();
-                                                    RaisePropertyChanged(() => RightUpArm1_T);
-                                                }
-                                            }
-                                            else if (tEPC==p.RightUpArmOuter.Key) {
-                                                p.RightUpArmOuter = newkvp;
-                                                if (!(p.RightUpArmInner.Value is null) && !(p.RightUpArmOuter.Value is null)) {
-                                                    _RightUpArm1_T = (p.RightUpArmInner.Value - p.RightUpArmOuter.Value).ToString();
-                                                    RaisePropertyChanged(() => RightUpArm1_T);
-                                                }
-                                            }
-                                            else if (tEPC==p.LeftLowArmInner.Key) {
-                                                p.LeftLowArmInner = newkvp;
-                                                if (!(p.LeftLowArmInner.Value is null) && !(p.LeftLowArmOuter.Value is null)) {
-                                                    _LeftLowArm1_T = (p.LeftLowArmInner.Value - p.LeftLowArmOuter.Value).ToString();
-                                                    RaisePropertyChanged(() => LeftLowArm1_T);
-                                                }
-                                            }
-                                            else if (tEPC==p.LeftLowArmOuter.Key) {
-                                                p.LeftLowArmOuter = newkvp;
-                                                if (!(p.LeftLowArmInner.Value is null) && !(p.LeftLowArmOuter.Value is null)) {
-                                                    _LeftLowArm1_T = (p.LeftLowArmInner.Value - p.LeftLowArmOuter.Value).ToString();
-                                                    RaisePropertyChanged(() => LeftLowArm1_T);
-                                                }
-                                            }
-                                            else if (tEPC==p.RightLowArmInner.Key) {
-                                                p.RightLowArmInner = newkvp;
-                                                if (!(p.RightLowArmInner.Value is null) && !(p.RightLowArmOuter.Value is null)) {
-                                                    _RightLowArm1_T = (p.RightLowArmInner.Value - p.RightLowArmOuter.Value).ToString();
-                                                    RaisePropertyChanged(() => RightLowArm1_T);
-                                                }
-                                            }
-                                            else if (tEPC==p.RightLowArmOuter.Key) {
-                                                p.RightLowArmOuter = newkvp;
-                                                if (!(p.RightLowArmInner.Value is null) && !(p.RightLowArmOuter.Value is null)) {
-                                                    _RightLowArm1_T = (p.RightLowArmInner.Value - p.RightLowArmOuter.Value).ToString();
-                                                    RaisePropertyChanged(() => RightLowArm1_T);
-                                                }
-                                            }
                                         }
 
                                     } // if caldata is nonzero

@@ -6,66 +6,52 @@
   Title="Temperature Inventory"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Xamarin.Forms;assembly=LiveChartsCore.SkiaSharpView.XamarinForms">
 >
 
   <StackLayout>
 
-    <ScrollView VerticalOptions="StartAndExpand">
+    <ListView x:Name="liewViewTagData" ItemsSource="{Binding TagInfoList}" SelectedItem="{Binding objItemSelected, Mode=TwoWay}" >
+        <ListView.Header>
+          <!-- <StackLayout BackgroundColor="#DADADA"> -->
+          <StackLayout>
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.6*" />
+                <ColumnDefinition Width="0.2*" />
+                <ColumnDefinition Width="0.2*" />
+              </Grid.ColumnDefinitions>
 
-      <!-- Three Body Problem -->
-      <StackLayout Orientation="Vertical" HorizontalOptions="Fill">
-        <Grid RowSpacing="1" ColumnSpacing="1">
-          <Grid.ColumnDefinitions>
-            <ColumnDefinition/><ColumnDefinition/>
-          </Grid.ColumnDefinitions>
-          <Grid.RowDefinitions>
-            <RowDefinition />   <!-- Row 0  -->
-            <RowDefinition />   <!-- Row 1  -->
-            <RowDefinition />   <!-- Row 2  -->
-            <RowDefinition />   <!-- Row 3  -->
-            <RowDefinition />   <!-- Row 4  -->
-            <RowDefinition />   <!-- Row 5  -->
-            <RowDefinition />   <!-- Row 6  -->
-            <RowDefinition />   <!-- Row 7  -->
-            <RowDefinition />   <!-- Row 8  -->
-            <RowDefinition />   <!-- Row 9  -->
-            <RowDefinition />   <!-- Row 10 -->
-            <RowDefinition />   <!-- Row 11 -->
-            <RowDefinition />   <!-- Row 12 -->
-            <RowDefinition />   <!-- Row 13 -->
-          </Grid.RowDefinitions>
+              <BoxView Grid.Column="0" BackgroundColor="#C7C7C7"/>
+              <BoxView Grid.Column="1" BackgroundColor="#BCBCBC"/>
+              <BoxView Grid.Column="2" BackgroundColor="#C7C7C7"/>
 
-          <Label Grid.Row="1"  Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Font="Large" Text="{Binding DebugVar}" FontAttributes="Bold"/>
+              <Label Text="EPC" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Small" VerticalOptions="CenterAndExpand" />
+              <Label Grid.Column="1" Text="ºC" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Small" VerticalOptions="CenterAndExpand" />
+              <Label Grid.Column="2" Text="#"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Small" VerticalOptions="CenterAndExpand" />
+            </Grid>
+          </StackLayout>
+        </ListView.Header>
 
-          <Label Grid.Row="1"  Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="Inside Horiz. Top Left"      FontAttributes="Bold"/>
-          <Label Grid.Row="2"  Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="Inside Horiz. Top Middle"    FontAttributes="Bold"/>
-          <Label Grid.Row="3"  Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="Inside Horiz. Top Right"     FontAttributes="Bold"/>
-          <Label Grid.Row="4"  Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="Inside Horiz. Bottom Left"   FontAttributes="Bold"/>
-          <Label Grid.Row="5"  Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="Inside Horiz. Bottom Middle" FontAttributes="Bold"/>
-          <Label Grid.Row="6"  Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="Inside Horiz. Bottom Right"  FontAttributes="Bold"/>
-          <Label Grid.Row="7"  Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="Outside Vert. Top Left"      FontAttributes="Bold"/>
-          <Label Grid.Row="8"  Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="Outside Vert. Top Middle"    FontAttributes="Bold"/>
-          <Label Grid.Row="9"  Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="Outside Vert. Top Right"     FontAttributes="Bold"/>
-          <Label Grid.Row="10" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="Outside Vert. Bottom Left"   FontAttributes="Bold"/>
-          <Label Grid.Row="11" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="Outside Vert. Bottom Middle" FontAttributes="Bold"/>
-          <Label Grid.Row="12" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="Outside Vert. Bottom Right"  FontAttributes="Bold"/>
-
-          <Label Grid.Row="1"  Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Beanie1_T}"      FontAttributes="Bold"/>
-          <Label Grid.Row="2"  Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Beanie2_T}"      FontAttributes="Bold"/>
-          <Label Grid.Row="3"  Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Beanie3_T}"      FontAttributes="Bold"/>
-          <Label Grid.Row="4"  Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding BackNeck1_T}"    FontAttributes="Bold"/>
-          <Label Grid.Row="5"  Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Back1_T}"        FontAttributes="Bold"/>
-          <Label Grid.Row="6"  Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Chest1_T}"       FontAttributes="Bold"/>
-          <Label Grid.Row="7"  Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding RightAb1_T}"     FontAttributes="Bold"/>
-          <Label Grid.Row="8"  Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding LeftAb1_T}"      FontAttributes="Bold"/>
-          <Label Grid.Row="9"  Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding RightUpArm1_T}"  FontAttributes="Bold"/>
-          <Label Grid.Row="10" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding LeftUpArm1_T}"   FontAttributes="Bold"/>
-          <Label Grid.Row="11" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding RightLowArm1_T}" FontAttributes="Bold"/>
-          <Label Grid.Row="12" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding LeftLowArm1_T}"  FontAttributes="Bold"/>
-
-        </Grid>
-      </StackLayout>
-    </ScrollView>
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Orientation="Vertical">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                              <ColumnDefinition Width="0.6*" />
+                              <ColumnDefinition Width="0.2*" />
+                              <ColumnDefinition Width="0.2*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="{Binding DisplayName}" VerticalTextAlignment="Start" FontSize="Small" />
+                            <Label Grid.Column="1" Text="{Binding SensorAvgValue}" VerticalTextAlignment="Start" HorizontalTextAlignment="Start" TextColor="{Binding valueColor}"/>
+                            <Label Grid.Column="2" Text="{Binding SucessCount}" VerticalTextAlignment="Start" HorizontalTextAlignment="Center" />
+                        </Grid>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 
 
     <!-- Bottom Inventory/Clear/Share Section --> 

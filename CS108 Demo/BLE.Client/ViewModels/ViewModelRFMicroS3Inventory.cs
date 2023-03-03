@@ -17,6 +17,8 @@ using Xamarin.Essentials;
 
 // For Live Plotting
 // using LiveChartsCore;
+// using LiveChartsCore.SkiaSharpView.XamarinForms;
+
 // using LiveChartsCore.Defaults;
 // using LiveChartsCore.SkiaSharpView;
 // using LiveChartsCore.SkiaSharpView.Painting;
@@ -42,6 +44,8 @@ namespace BLE.Client.ViewModels {
             /////////////////////////////////////////////////////////////////////////////////////////////////////////
             private string _EPC;            public string EPC { get { return this._EPC; } set { this.SetProperty(ref this._EPC, value); } }
             private string _sensorAvgValue; public string SensorAvgValue { get { return this._sensorAvgValue; } set { this.SetProperty(ref this._sensorAvgValue, value); } }
+            private uint _sucessCount;      public uint SucessCount { get { return this._sucessCount; } set { this.SetProperty(ref this._sucessCount, value); } }
+            private string _DisplayName;    public string DisplayName { get { return this._DisplayName; } set { this.SetProperty(ref this._DisplayName, value); } }
             public RFMicroTagInfoViewModel() {}    // Class constructor (constructs nothing)
         }
 
@@ -54,9 +58,9 @@ namespace BLE.Client.ViewModels {
         public ICommand OnShareDataCommand { protected set; get; }
 
         private ObservableCollection<RFMicroTagInfoViewModel> _TagInfoList = new ObservableCollection<RFMicroTagInfoViewModel>();
-        public ObservableCollection<RFMicroTagInfoViewModel> TagInfoList {get {return _TagInfoList;} set {SetProperty(ref _TagInfoList, value);}}
+        public ObservableCollection<RFMicroTagInfoViewModel> TagInfoList { get { return _TagInfoList; } set { SetProperty(ref _TagInfoList, value); } }
 
-        private string _startInventoryButtonText = "Start Inventory"; public string startInventoryButtonText {get {return _startInventoryButtonText;}}
+        private string _startInventoryButtonText = "Start Inventory"; public string startInventoryButtonText { get { return _startInventoryButtonText; } }
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////// For Saving Data / CSV exporting ///////////////////////////////////
@@ -64,7 +68,6 @@ namespace BLE.Client.ViewModels {
         List<string> tag_List = new List<string>();
         Dictionary<string, List<string>> tag_Time = new Dictionary<string, List<string>>();
         Dictionary<string, List<string>> tag_Data = new Dictionary<string, List<string>>();
-        // private List<string> _epcs; public List<string> epcs { get => _epcs; set { _epcs = value; OnPropertyChanged("epcs"); } }
         ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -224,8 +227,7 @@ namespace BLE.Client.ViewModels {
                 string rua1, string rla1, string lua1, string lla1,
                 string bn2, string b2, string c2, string lab2, string rab2,
                 string rua2, string rla2, string lua2, string lla2
-            ) {
-                
+            ) {  
                 BackInner = new KeyValuePair<string, double?>(b1, null);
                 BackOuter = new KeyValuePair<string, double?>(b2, null);
                 BackNeckInner = new KeyValuePair<string, double?>(bn1, null);
@@ -423,7 +425,7 @@ namespace BLE.Client.ViewModels {
 
         async void GetTimes() {
             // Necessary part for picking autosave location
-            pick_result = await FilePicker.PickAsync();
+            // pick_result = await FilePicker.PickAsync();
 
             // Save every second and we cycle by half seconds
             _active_time   = 1000;
@@ -510,6 +512,10 @@ namespace BLE.Client.ViewModels {
 
                                     if (caldata == 0) { TagInfoList[cnt].SensorAvgValue = "NoCalData"; }
                                     else {
+                                        ///////////////////////////////
+                                        TagInfoList[cnt].SucessCount++;
+                                        ///////////////////////////////
+
                                         double SAV = Math.Round(getTempC(temp, caldata), 2);   
                                         string DisplaySAV = Math.Round(SAV, 2).ToString();
                                         TagInfoList[cnt].SensorAvgValue = SAV.ToString();
@@ -541,58 +547,58 @@ namespace BLE.Client.ViewModels {
                                             // Get Last Four Characters of EPC
                                             string tEPC = TagInfoList[cnt].EPC.Substring(TagInfoList[cnt].EPC.Length - 4);
 
-                                            switch (tEPC) {
-                                                case "1FC1":
-                                                    _Beanie1_T = DisplaySAV;
-                                                    RaisePropertyChanged(() => Beanie1_T);
-                                                    break;
-                                                case "96A1":
-                                                    _Beanie2_T = DisplaySAV;
-                                                    RaisePropertyChanged(() => Beanie2_T);
-                                                    break;
-                                                case "5448":
-                                                    _Beanie3_T = DisplaySAV;
-                                                    RaisePropertyChanged(() => Beanie3_T);
-                                                    break;
-                                                case "7561":
-                                                    _BackNeck1_T = DisplaySAV;
-                                                    RaisePropertyChanged(() => BackNeck1_T);
-                                                    break;
-                                                case "5E01":
-                                                    _Back1_T = DisplaySAV;
-                                                    RaisePropertyChanged(() => Back1_T);
-                                                    break;
-                                                case "30CE":
-                                                    _Chest1_T = DisplaySAV;
-                                                    RaisePropertyChanged(() => Chest1_T);
-                                                    break;
-                                                case "67CC":
-                                                    _RightAb1_T = DisplaySAV;
-                                                    RaisePropertyChanged(() => RightAb1_T);
-                                                    break;
-                                                case "7D24":
-                                                    _LeftAb1_T = DisplaySAV;
-                                                    RaisePropertyChanged(() => LeftAb1_T);
-                                                    break;
-                                                case "9859":
-                                                    _RightUpArm1_T = DisplaySAV;
-                                                    RaisePropertyChanged(() => RightUpArm1_T);
-                                                    break;
-                                                case "7D79":
-                                                    _LeftUpArm1_T = DisplaySAV;
-                                                    RaisePropertyChanged(() => LeftUpArm1_T);
-                                                    break;
-                                                case "7263":
-                                                    _RightLowArm1_T = DisplaySAV;
-                                                    RaisePropertyChanged(() => RightLowArm1_T);
-                                                    break;
-                                                case "34D7":
-                                                    _LeftLowArm1_T = DisplaySAV;
-                                                    RaisePropertyChanged(() => LeftLowArm1_T);
-                                                    break;
-                                                default:
-                                                    break;
-                                            }
+                                            // switch (tEPC) {
+                                            //     case "1FC1":
+                                            //         _Beanie1_T = DisplaySAV;
+                                            //         RaisePropertyChanged(() => Beanie1_T);
+                                            //         break;
+                                            //     case "96A1":
+                                            //         _Beanie2_T = DisplaySAV;
+                                            //         RaisePropertyChanged(() => Beanie2_T);
+                                            //         break;
+                                            //     case "5448":
+                                            //         _Beanie3_T = DisplaySAV;
+                                            //         RaisePropertyChanged(() => Beanie3_T);
+                                            //         break;
+                                            //     case "7561":
+                                            //         _BackNeck1_T = DisplaySAV;
+                                            //         RaisePropertyChanged(() => BackNeck1_T);
+                                            //         break;
+                                            //     case "5E01":
+                                            //         _Back1_T = DisplaySAV;
+                                            //         RaisePropertyChanged(() => Back1_T);
+                                            //         break;
+                                            //     case "30CE":
+                                            //         _Chest1_T = DisplaySAV;
+                                            //         RaisePropertyChanged(() => Chest1_T);
+                                            //         break;
+                                            //     case "67CC":
+                                            //         _RightAb1_T = DisplaySAV;
+                                            //         RaisePropertyChanged(() => RightAb1_T);
+                                            //         break;
+                                            //     case "7D24":
+                                            //         _LeftAb1_T = DisplaySAV;
+                                            //         RaisePropertyChanged(() => LeftAb1_T);
+                                            //         break;
+                                            //     case "9859":
+                                            //         _RightUpArm1_T = DisplaySAV;
+                                            //         RaisePropertyChanged(() => RightUpArm1_T);
+                                            //         break;
+                                            //     case "7D79":
+                                            //         _LeftUpArm1_T = DisplaySAV;
+                                            //         RaisePropertyChanged(() => LeftUpArm1_T);
+                                            //         break;
+                                            //     case "7263":
+                                            //         _RightLowArm1_T = DisplaySAV;
+                                            //         RaisePropertyChanged(() => RightLowArm1_T);
+                                            //         break;
+                                            //     case "34D7":
+                                            //         _LeftLowArm1_T = DisplaySAV;
+                                            //         RaisePropertyChanged(() => LeftLowArm1_T);
+                                            //         break;
+                                            //     default:
+                                            //         break;
+                                            // }
 
                                         }
 
@@ -606,12 +612,13 @@ namespace BLE.Client.ViewModels {
                     }
 
                     if (!found) {
-
                         // if (epcs.Contains(info.epc.ToString())) {
 
                         RFMicroTagInfoViewModel item = new RFMicroTagInfoViewModel();
                         item.EPC = info.epc.ToString();
                         item.SensorAvgValue = "";
+                        item.SucessCount = 0;
+                        item.DisplayName = item.EPC;
 
                         if (ocRSSI >= BleMvxApplication._rfMicro_minOCRSSI && ocRSSI <= BleMvxApplication._rfMicro_maxOCRSSI) {
                             if (temp>=1300 && temp<=3500) {
@@ -619,6 +626,10 @@ namespace BLE.Client.ViewModels {
 
                                 if (caldata==0) { item.SensorAvgValue = "NoCalData"; }
                                 else {
+                                    ///////////////////
+                                    item.SucessCount++;
+                                    ///////////////////
+
                                     double SAV = Math.Round(getTempC(temp, caldata), 1);   
                                     item.SensorAvgValue = SAV.ToString();
                                     item.TimeString = DateTime.Now.ToString("HH:mm:ss");
@@ -649,7 +660,10 @@ namespace BLE.Client.ViewModels {
 
         private void AutoSaveData() {    // Function for Sharing time series data from tags
             InvokeOnMainThread(()=> {
-                string fileName = pick_result.FullPath;    // Get file name from picker
+
+                // string fileName = pick_result.FullPath;    // Get file name from picker
+                string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "tags.csv");
+                // for UWP cannot use filepicker, use local folder instead
 
                 File.WriteAllText(fileName, String.Empty); // Empty text file to rewrite database
                 using (StreamWriter writer = new StreamWriter(fileName, true)) {

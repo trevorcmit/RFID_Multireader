@@ -167,15 +167,6 @@
     <PackageReference Include="LiveChartsCore.SkiaSharpView.XamarinForms">
       <Version>2.0.0-beta.701</Version>
     </PackageReference>
-    <!-- <PackageReference Include="LiveChartsCore">
-      <Version>2.0.0-beta.230</Version>
-    </PackageReference>
-    <PackageReference Include="LiveChartsCore.SkiaSharpView.UWP">
-      <Version>2.0.0-beta.101</Version>
-    </PackageReference>
-    <PackageReference Include="LiveChartsCore.SkiaSharpView.XamarinForms">
-      <Version>2.0.0-beta.230</Version>
-    </PackageReference> -->
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.13</Version>
     </PackageReference>

@@ -1,8 +1,4 @@
 ﻿using System;
-// using System.Collections.Generic;
-// using System.Linq;
-// using System.Text;
-// using System.Threading.Tasks;
 using Xamarin.Forms;
 
 
@@ -20,7 +16,8 @@ namespace BLE.Client.Pages {
             // the page only support 4 ports
             if (BleMvxApplication._reader.rfid.GetAntennaPort() != 4) return;
 
-            if (Device.RuntimePlatform == Device.iOS) {
+            if (Device.RuntimePlatform == Device.iOS)
+            {
                 this.Icon = new FileImageSource();
                 this.Icon.File = "icons8-Settings-50-3-30x30.png";
             }

@@ -15,6 +15,7 @@ using Xamarin;
 using Xamarin.Forms;
 using Xamarin.Essentials;
 
+// For Live Plotting
 // using LiveChartsCore;
 // using LiveChartsCore.Defaults;
 // using LiveChartsCore.SkiaSharpView;
@@ -100,7 +101,6 @@ namespace BLE.Client.ViewModels {
         private string _RightLowArm1; public string RightLowArm1 { get => _RightLowArm1; set { _RightLowArm1 = value; OnPropertyChanged("RightLowArm1"); } }
         private string _LeftHand1; public string LeftHand1 { get => _LeftHand1; set { _LeftHand1 = value; OnPropertyChanged("LeftHand1"); } }
         private string _RightHand1; public string RightHand1 { get => _RightHand1; set { _RightHand1 = value; OnPropertyChanged("RightHand1"); } }
-        private string _Bala1; public string Bala1 { get => _Bala1; set { _Bala1 = value; OnPropertyChanged("Bala1"); } }
 
         private string _Beanie1_T; public string Beanie1_T { get => _Beanie1_T; set { _Beanie1_T = value; OnPropertyChanged("Beanie1_T"); } }
         private string _Back1_T; public string Back1_T { get => _Back1_T; set { _Back1_T = value; OnPropertyChanged("Back1_T"); } }
@@ -114,7 +114,6 @@ namespace BLE.Client.ViewModels {
         private string _RightLowArm1_T; public string RightLowArm1_T { get => _RightLowArm1_T; set { _RightLowArm1_T = value; OnPropertyChanged("RightLowArm1_T"); } }
         private string _LeftHand1_T; public string LeftHand1_T { get => _LeftHand1_T; set { _LeftHand1_T = value; OnPropertyChanged("LeftHand1_T"); } }
         private string _RightHand1_T; public string RightHand1_T { get => _RightHand1_T; set { _RightHand1_T = value; OnPropertyChanged("RightHand1_T"); } }
-        private string _Bala1_T; public string Bala1_T { get => _Bala1_T; set { _Bala1_T = value; OnPropertyChanged("Bala1_T"); } }
 
         private string _Beanie2; public string Beanie2 { get => _Beanie2; set { _Beanie2 = value; OnPropertyChanged("Beanie2"); } }
         private string _Back2; public string Back2 { get => _Back2; set { _Back2 = value; OnPropertyChanged("Back2"); } }
@@ -128,7 +127,6 @@ namespace BLE.Client.ViewModels {
         private string _RightLowArm2; public string RightLowArm2 { get => _RightLowArm2; set { _RightLowArm2 = value; OnPropertyChanged("RightLowArm2"); } }
         private string _LeftHand2; public string LeftHand2 { get => _LeftHand2; set { _LeftHand2 = value; OnPropertyChanged("LeftHand2"); } }
         private string _RightHand2; public string RightHand2 { get => _RightHand2; set { _RightHand2 = value; OnPropertyChanged("RightHand2"); } }
-        private string _Bala2; public string Bala2 { get => _Bala2; set { _Bala2 = value; OnPropertyChanged("Bala2"); } }
 
         private string _Beanie2_T; public string Beanie2_T { get => _Beanie2_T; set { _Beanie2_T = value; OnPropertyChanged("Beanie2_T"); } }
         private string _Back2_T; public string Back2_T { get => _Back2_T; set { _Back2_T = value; OnPropertyChanged("Back2_T"); } }
@@ -142,7 +140,6 @@ namespace BLE.Client.ViewModels {
         private string _RightLowArm2_T; public string RightLowArm2_T { get => _RightLowArm2_T; set { _RightLowArm2_T = value; OnPropertyChanged("RightLowArm2_T"); } }
         private string _LeftHand2_T; public string LeftHand2_T { get => _LeftHand2_T; set { _LeftHand2_T = value; OnPropertyChanged("LeftHand2_T"); } }
         private string _RightHand2_T; public string RightHand2_T { get => _RightHand2_T; set { _RightHand2_T = value; OnPropertyChanged("RightHand2_T"); } }
-        private string _Bala2_T; public string Bala2_T { get => _Bala2_T; set { _Bala2_T = value; OnPropertyChanged("Bala2_T"); } }
 
         private string _Beanie3; public string Beanie3 { get => _Beanie3; set { _Beanie3 = value; OnPropertyChanged("Beanie3"); } }
         private string _Back3; public string Back3 { get => _Back3; set { _Back3 = value; OnPropertyChanged("Back3"); } }
@@ -156,7 +153,6 @@ namespace BLE.Client.ViewModels {
         private string _RightLowArm3; public string RightLowArm3 { get => _RightLowArm3; set { _RightLowArm3 = value; OnPropertyChanged("RightLowArm3"); } }
         private string _LeftHand3; public string LeftHand3 { get => _LeftHand3; set { _LeftHand3 = value; OnPropertyChanged("LeftHand3"); } }
         private string _RightHand3; public string RightHand3 { get => _RightHand3; set { _RightHand3 = value; OnPropertyChanged("RightHand3"); } }
-        private string _Bala3; public string Bala3 { get => _Bala3; set { _Bala3 = value; OnPropertyChanged("Bala3"); } }
 
         private string _Beanie3_T; public string Beanie3_T { get => _Beanie3_T; set { _Beanie3_T = value; OnPropertyChanged("Beanie3_T"); } }
         private string _Back3_T; public string Back3_T { get => _Back3_T; set { _Back3_T = value; OnPropertyChanged("Back3_T"); } }
@@ -170,7 +166,6 @@ namespace BLE.Client.ViewModels {
         private string _RightLowArm3_T; public string RightLowArm3_T { get => _RightLowArm3_T; set { _RightLowArm3_T = value; OnPropertyChanged("RightLowArm3_T"); } }
         private string _LeftHand3_T; public string LeftHand3_T { get => _LeftHand3_T; set { _LeftHand3_T = value; OnPropertyChanged("LeftHand3_T"); } }
         private string _RightHand3_T; public string RightHand3_T { get => _RightHand3_T; set { _RightHand3_T = value; OnPropertyChanged("RightHand3_T"); } }
-        private string _Bala3_T; public string Bala3_T { get => _Bala3_T; set { _Bala3_T = value; OnPropertyChanged("Bala3_T"); } }
 
         public int THRESHOLD = 15;
         
@@ -263,6 +258,8 @@ namespace BLE.Client.ViewModels {
             "9854", "A3B0", "9EC6", "9A91", "343B", "87D4", "81D4", "8A53", "1397"
         };
 
+        private string _DebugVar; public string DebugVar { get => _DebugVar; set { _DebugVar = value; OnPropertyChanged("DebugVar"); } }
+
         #endregion
 
 
@@ -282,7 +279,6 @@ namespace BLE.Client.ViewModels {
             Beanie1      = "gray"; Beanie2      = "gray"; Beanie3      = "gray"; Beanie1_T      = "--"; Beanie2_T      = "--"; Beanie3_T      = "--";
             LeftHand1    = "gray"; LeftHand2    = "gray"; LeftHand3    = "gray"; LeftHand1_T    = "--"; LeftHand2_T    = "--"; LeftHand3_T    = "--";
             RightHand1   = "gray"; RightHand2   = "gray"; RightHand3   = "gray"; RightHand1_T   = "--"; RightHand2_T   = "--"; RightHand3_T   = "--";
-            Bala1        = "gray"; Bala2        = "gray"; Bala3        = "gray"; Bala1_T        = "--"; Bala2_T        = "--"; Bala3_T        = "--";
 
             // Set disconnection event for reconnection
             Adapter.DeviceDisconnected += OnDeviceDisconnected;
@@ -302,7 +298,10 @@ namespace BLE.Client.ViewModels {
             _userDialogs.Toast($"Disconnected {e.Device.Name}");
 
             // ATTEMPTING TO SWITCH TO DISCONNECT CASE
-            await BleMvxApplication._reader.DisconnectAsync();
+            string x = await BleMvxApplication._reader.DisconnectAsync();
+
+            _DebugVar = x;
+            RaisePropertyChanged(() => DebugVar);
 
             ////////////////////////////////////////////////////////
             ///////// ConnectToPreviousDeviceAsync Section /////////
@@ -552,8 +551,8 @@ namespace BLE.Client.ViewModels {
                                                     RaisePropertyChanged(() => Beanie2_T);
                                                     break;
                                                 case "5448":
-                                                    _Bala1_T = DisplaySAV;
-                                                    RaisePropertyChanged(() => Bala1_T);
+                                                    _Beanie3_T = DisplaySAV;
+                                                    RaisePropertyChanged(() => Beanie3_T);
                                                     break;
                                                 case "7561":
                                                     _BackNeck1_T = DisplaySAV;

@@ -35,6 +35,8 @@
             <RowDefinition />   <!-- Row 13 -->
           </Grid.RowDefinitions>
 
+          <Label Grid.Row="1"  Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Font="Large" Text="{Binding DebugVar}" FontAttributes="Bold"/>
+
           <Label Grid.Row="1"  Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="Inside Horiz. Top Left"      FontAttributes="Bold"/>
           <Label Grid.Row="2"  Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="Inside Horiz. Top Middle"    FontAttributes="Bold"/>
           <Label Grid.Row="3"  Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="Inside Horiz. Top Right"     FontAttributes="Bold"/>
@@ -50,7 +52,7 @@
 
           <Label Grid.Row="1"  Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Beanie1_T}"      FontAttributes="Bold"/>
           <Label Grid.Row="2"  Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Beanie2_T}"      FontAttributes="Bold"/>
-          <Label Grid.Row="3"  Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Bala1_T}"        FontAttributes="Bold"/>
+          <Label Grid.Row="3"  Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Beanie3_T}"      FontAttributes="Bold"/>
           <Label Grid.Row="4"  Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding BackNeck1_T}"    FontAttributes="Bold"/>
           <Label Grid.Row="5"  Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Back1_T}"        FontAttributes="Bold"/>
           <Label Grid.Row="6"  Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Chest1_T}"       FontAttributes="Bold"/>

@@ -9,25 +9,16 @@ namespace CSLibrary
 {
     public partial class DeviceFinder
     {
-        /// <summary>
-        /// DeviceFinder Argument
-        /// </summary>
         public class DeviceFinderArgs : EventArgs
         {
             private DeviceInfomation _data;
 
-            /// <summary>
-            /// Device Finder 
-            /// </summary>
             /// <param name="data"></param>
             public DeviceFinderArgs(DeviceInfomation data)
             {
                 _data = data;
             }
 
-            /// <summary>
-            /// Device finder information
-            /// </summary>
             public DeviceInfomation Found
             {
                 get { return _data; }
@@ -35,9 +26,6 @@ namespace CSLibrary
             }
         }
 
-        /// <summary>
-        /// Netfinder information return from device
-        /// </summary>
         public class DeviceInfomation
         {
             public uint ID;
@@ -45,81 +33,6 @@ namespace CSLibrary
             public string deviceName;
 
             public object nativeDeviceInformation;
-
-            /*
-                    /// <summary>
-                    /// Reserved for future use
-                    /// </summary>
-                    public Mode Mode = Mode.Unknown; 
-                    /// <summary>
-                    /// Total time on network
-                    /// </summary>
-                    public TimeEvent TimeElapsedNetwork = new TimeEvent();
-                    /// <summary>
-                    /// Total Power on time
-                    /// </summary>
-                    public TimeEvent TimeElapsedPowerOn = new TimeEvent();
-                    /// <summary>
-                    /// MAC address
-                    /// </summary>
-                    public MAC MACAddress = new MAC();//[6];
-                    /// <summary>
-                    /// IP address
-                    /// </summary>
-                    public IP IPAddress = new IP();
-                    /// <summary>
-                    /// Subnet Mask
-                    /// </summary>
-                    public IP SubnetMask = new IP();
-                    /// <summary>
-                    /// Gateway
-                    /// </summary>
-                    public IP Gateway = new IP();
-                    /// <summary>
-                    /// Trusted hist IP
-                    /// </summary>
-                    public IP TrustedServer = new IP();
-                    /// <summary>
-                    /// Inducated trusted server enable or not.
-                    /// </summary>
-                    public Boolean TrustedServerEnabled = false;
-                    /// <summary>
-                    /// UDP Port
-                    /// </summary>
-                    public ushort Port; // Get port from UDP header
-                    /// <summary>
-                    /// Reserved for future use, Server mode ip
-                    /// </summary>
-                    public byte[] serverip = new byte[4];
-                    /// <summary>
-                    /// enable or disable DHCP
-                    /// </summary>
-                    public bool DHCPEnabled;
-                    /// <summary>
-                    /// Reserved for future use, Server mode port
-                    /// </summary>
-                    public ushort serverport;
-                    /// <summary>
-                    /// DHCP retry
-                    /// </summary>
-                    public byte DHCPRetry;
-                    /// <summary>
-                    /// Device name, user can change it.
-                    /// </summary>
-                    public string DeviceName;
-                    /// <summary>
-                    /// Mode discription
-                    /// </summary>
-                    public string Description;
-                    /// <summary>
-                    /// Connect Mode
-                    /// </summary>        
-                    public byte ConnectMode;
-                    /// <summary>
-                    /// Gateway check reset mode
-                    /// </summary>
-                    public int GatewayCheckResetMode;
-            */
         }
 
         static private Windows.Devices.Enumeration.DeviceWatcher deviceWatcher;
@@ -129,7 +42,6 @@ namespace CSLibrary
 
         static public void SearchDevice()
         {
-            // Additional properties we would like about the device.
             // Property strings are documented here https://msdn.microsoft.com/en-us/library/windows/desktop/ff521659(v=vs.85).aspx
             string[] requestedProperties = { "System.Devices.Aep.DeviceAddress", "System.Devices.Aep.IsConnected", "System.Devices.Aep.Bluetooth.Le.IsConnectable", "System.Devices.Aep.AepId", "System.Devices.Aep.Category" };
 
@@ -156,9 +68,6 @@ namespace CSLibrary
 
         static public void Stop()
         {
-            /// <summary>
-            /// Stops watching for all nearby Bluetooth devices.
-            /// </summary>
             if (deviceWatcher != null)
             {
                 // Unregister the event handlers.
@@ -177,9 +86,7 @@ namespace CSLibrary
 
         static public DeviceInformation GetDeviceInformation(int id)
         {
-            if (id < _deviceDB.Count)
-                return _deviceDB[id];
-
+            if (id < _deviceDB.Count) return _deviceDB[id];
             return null;
         }
 

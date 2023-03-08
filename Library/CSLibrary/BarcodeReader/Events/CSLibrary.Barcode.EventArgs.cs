@@ -27,10 +27,7 @@ namespace CSLibrary.Barcode {
         }
 
         public MessageBase Message {
-            get {
-                return m_msg;
-            }
-
+            get { return m_msg; }
         }
 
         public MessageType MessageType {
@@ -46,17 +43,12 @@ namespace CSLibrary.Barcode {
     {
         private BarcodeState m_state = BarcodeState.IDLE;
 
-        /// <summary>
-        /// Constructor
-        /// </summary>
         /// <param name="state"></param>
         public BarcodeStateEventArgs(BarcodeState state)
         {
             m_state = state;
         }
-        /// <summary>
-        /// Current operation state
-        /// </summary>
+
         public BarcodeState State
         {
             get { return m_state; }

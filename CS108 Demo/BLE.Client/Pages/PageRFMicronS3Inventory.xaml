@@ -6,53 +6,73 @@
   Title="Temperature Inventory"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Xamarin.Forms;assembly=LiveChartsCore.SkiaSharpView.XamarinForms">
 >
 
-  <StackLayout>
+<!--
+  xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Xamarin.Forms;assembly=LiveChartsCore.SkiaSharpView.XamarinForms">
+-->
 
-    <ListView x:Name="liewViewTagData" ItemsSource="{Binding TagInfoList}" SelectedItem="{Binding objItemSelected, Mode=TwoWay}" >
-        <ListView.Header>
-          <!-- <StackLayout BackgroundColor="#DADADA"> -->
-          <StackLayout>
-            <Grid>
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.6*" />
-                <ColumnDefinition Width="0.2*" />
-                <ColumnDefinition Width="0.2*" />
-              </Grid.ColumnDefinitions>
+  <StackLayout Orientation="Vertical">
 
-              <BoxView Grid.Column="0" BackgroundColor="#C7C7C7"/>
-              <BoxView Grid.Column="1" BackgroundColor="#BCBCBC"/>
-              <BoxView Grid.Column="2" BackgroundColor="#C7C7C7"/>
+    <StackLayout Orientation="Horizontal">
 
-              <Label Text="EPC" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Small" VerticalOptions="CenterAndExpand" />
-              <Label Grid.Column="1" Text="ºC" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Small" VerticalOptions="CenterAndExpand" />
-              <Label Grid.Column="2" Text="#"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Small" VerticalOptions="CenterAndExpand" />
-            </Grid>
-          </StackLayout>
-        </ListView.Header>
+      <StackLayout Orientation="Vertical">
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+          </Grid.ColumnDefinitions>
+          <Grid.RowDefinitions>
+            <RowDefinition/>
+          </Grid.RowDefinitions>
 
-        <ListView.ItemTemplate>
-            <DataTemplate>
+          <Image Grid.Row="0" Grid.Column="0" Aspect="AspectFill" Source="Assets/wholehuman.jpg" />
+        
+        </Grid>
+      </StackLayout>
+
+      <StackLayout Orientation="Vertical">
+        <ListView x:Name="liewViewTagData" ItemsSource="{Binding TagInfoList}" SelectedItem="{Binding objItemSelected, Mode=TwoWay}" >
+          <ListView.Header>
+            <StackLayout>
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="0.6*" />
+                  <ColumnDefinition Width="0.2*" />
+                  <ColumnDefinition Width="0.2*" />
+                </Grid.ColumnDefinitions>
+
+                <BoxView Grid.Column="0" BackgroundColor="#C7C7C7"/>
+                <BoxView Grid.Column="1" BackgroundColor="#BCBCBC"/>
+                <BoxView Grid.Column="2" BackgroundColor="#C7C7C7"/>
+
+                <Label Text="EPC" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Small" VerticalOptions="CenterAndExpand" />
+                <Label Grid.Column="1" Text="ºC" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Small" VerticalOptions="CenterAndExpand" />
+                <Label Grid.Column="2" Text="#"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Small" VerticalOptions="CenterAndExpand" />
+              </Grid>
+            </StackLayout>
+          </ListView.Header>
+            <ListView.ItemTemplate>
+              <DataTemplate>
                 <ViewCell>
-                    <StackLayout Orientation="Vertical">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                              <ColumnDefinition Width="0.6*" />
-                              <ColumnDefinition Width="0.2*" />
-                              <ColumnDefinition Width="0.2*" />
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Text="{Binding DisplayName}" VerticalTextAlignment="Start" FontSize="Small" />
-                            <Label Grid.Column="1" Text="{Binding SensorAvgValue}" VerticalTextAlignment="Start" HorizontalTextAlignment="Start" TextColor="{Binding valueColor}"/>
-                            <Label Grid.Column="2" Text="{Binding SucessCount}" VerticalTextAlignment="Start" HorizontalTextAlignment="Center" />
-                        </Grid>
-                    </StackLayout>
+                  <StackLayout Orientation="Vertical">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                  <ColumnDefinition Width="0.6*" />
+                                  <ColumnDefinition Width="0.2*" />
+                                  <ColumnDefinition Width="0.2*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Text="{Binding DisplayName}" VerticalTextAlignment="Start" FontSize="Small" />
+                                <Label Grid.Column="1" Text="{Binding SensorAvgValue}" VerticalTextAlignment="Start" HorizontalTextAlignment="Start" TextColor="{Binding valueColor}"/>
+                                <Label Grid.Column="2" Text="{Binding SucessCount}" VerticalTextAlignment="Start" HorizontalTextAlignment="Center" />
+                            </Grid>
+                  </StackLayout>
                 </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+              </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+      </StackLayout>
 
+    </StackLayout>
 
     <!-- Bottom Inventory/Clear/Share Section --> 
     <StackLayout Orientation="Vertical" VerticalOptions="EndAndExpand">

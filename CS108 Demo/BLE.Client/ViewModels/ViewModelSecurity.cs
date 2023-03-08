@@ -108,5 +108,6 @@ namespace BLE.Client.ViewModels {
 			labelStatus = "WAIT";
 			RaisePropertyChanged(() => labelStatus);
 		}
+
 	}
 }

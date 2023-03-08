@@ -18,7 +18,6 @@ using Xamarin.Essentials;
 // For Live Plotting
 // using LiveChartsCore;
 // using LiveChartsCore.SkiaSharpView.XamarinForms;
-
 // using LiveChartsCore.Defaults;
 // using LiveChartsCore.SkiaSharpView;
 // using LiveChartsCore.SkiaSharpView.Painting;
@@ -54,8 +53,8 @@ namespace BLE.Client.ViewModels {
         #region -------------- RFID inventory -----------------
 
         public ICommand OnStartInventoryButtonCommand { protected set; get; }
-        public ICommand OnClearButtonCommand { protected set; get; }
-        public ICommand OnShareDataCommand { protected set; get; }
+        public ICommand OnClearButtonCommand          { protected set; get; }
+        public ICommand OnShareDataCommand            { protected set; get; }
 
         private ObservableCollection<RFMicroTagInfoViewModel> _TagInfoList = new ObservableCollection<RFMicroTagInfoViewModel>();
         public ObservableCollection<RFMicroTagInfoViewModel> TagInfoList { get { return _TagInfoList; } set { SetProperty(ref _TagInfoList, value); } }
@@ -71,7 +70,8 @@ namespace BLE.Client.ViewModels {
         ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
         public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName = null) {
+        protected virtual void OnPropertyChanged(string propertyName = null)
+        {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         public bool _startInventory = true;

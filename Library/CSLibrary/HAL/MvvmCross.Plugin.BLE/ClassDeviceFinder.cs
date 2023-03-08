@@ -80,7 +80,6 @@ namespace CSLibrary {
         static public DeviceInformation GetDeviceInformation(int id) {
             if (id < _deviceDB.Count)
                 return _deviceDB[id];
-
             return null;
         }
 
@@ -89,7 +88,6 @@ namespace CSLibrary {
 			    if (item.Id == readername)
 				    return item;
 		    }
-
 		    return null;		
 	    }
 

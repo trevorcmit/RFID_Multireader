@@ -37,21 +37,16 @@ namespace CSLibrary {
                     }
                     CSLibrary.Debug.WriteLine("BluetoothIC Get Version Error!");
                     break;
-
                 case 0xc001: break;
-
                 case 0xc002: break;
-
                 case 0xc003:
                     if (recvData.Length == 11)
                         if (recvData[10] == 0x00) return true;
                     CSLibrary.Debug.WriteLine("Set Device Name Fail!");
                     break;
                 case 0xc004:
-                    if (recvData[2] == 0x17)
-                        _deviceName = Encoding.UTF8.GetString(recvData, 10, 21).TrimEnd((Char)0);
-                    else
-                        _deviceName = "";
+                    if (recvData[2] == 0x17) _deviceName = Encoding.UTF8.GetString(recvData, 10, 21).TrimEnd((Char)0);
+                    else                     _deviceName = "";
                     return true;
             }
             return false;

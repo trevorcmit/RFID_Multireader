@@ -19,81 +19,111 @@
       <StackLayout Orientation="Vertical" WidthRequest="1000" VerticalOptions="Fill" >
         <Grid>
           <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.17*" />
+            <ColumnDefinition Width="0.17*" />  <!-- Column 0 -->
             <ColumnDefinition Width="0.0375*"/>
             <ColumnDefinition Width="0.17*" />
             <ColumnDefinition Width="0.0375*"/>
-            <ColumnDefinition Width="0.17*" />
+            <ColumnDefinition Width="0.17*" />  <!-- Column 4 -->
             <ColumnDefinition Width="0.0375*"/>
             <ColumnDefinition Width="0.17*" />
             <ColumnDefinition Width="0.0375*"/>
             <ColumnDefinition Width="0.17*" /> <!-- 9 Columns -->
           </Grid.ColumnDefinitions>
           <Grid.RowDefinitions>
-            <RowDefinition Height="0.100*" /> <!-- Row 0, PICKER ONLY ROW-->
+            <RowDefinition Height="0.1*" /> <!-- Row 0, PICKER ONLY ROW-->
 
+            <!-- Upper Body -->
             <RowDefinition Height="0.045*" /> <!--GAP-->
-            <RowDefinition Height="0.090*" /> <!-- Row 2, Head -->
-            <RowDefinition Height="0.110*" /> <!--GAP-->
-            <RowDefinition Height="0.135*" /> <!-- Row 4, Upper Arms -->
-            <RowDefinition Height="0.135*" /> <!-- Row 5, Lower Arms -->
+            <RowDefinition Height="0.09*"  /> <!-- Row 2, Head -->
+            <RowDefinition Height="0.065*" /> <!--GAP-->
+            <RowDefinition Height="0.025*" />
+            <RowDefinition Height="0.09*"  /> <!-- Row 5, Upper Arms -->
+            <RowDefinition Height="0.105*" /> <!-- Row 6, Lower Arms -->
 
-            <RowDefinition Height="0.385*" /> <!-- Row 6 Lower Body -->
+            <!-- Lower Body -->
+            <RowDefinition Height="0.055*" /> <!--GAP-->
+            <RowDefinition Height="0.11*"  /> <!-- Row 8, Thighs -->
+            <RowDefinition Height="0.07*"  />
+            <RowDefinition Height="0.095*" /> <!-- Row 10 -->
+            <RowDefinition Height="0.07*"  />
+            <RowDefinition Height="0.08*"  /> <!-- Row 12, Socks -->
           </Grid.RowDefinitions>
 
-          <Image Grid.Row="1" Grid.Column="0" Grid.RowSpan="6" Grid.ColumnSpan="9" Aspect="AspectFit" Source="Assets/wholehuman.jpg" />
+          <Image Grid.Row="1" Grid.Column="0" Grid.RowSpan="12" Grid.ColumnSpan="9" Aspect="AspectFit" Source="Assets/wholehuman.jpg" />
 
-          <!--   Head  --> <Image Grid.Row="2"  Grid.Column="4" Aspect="AspectFit" Opacity="0.5" Source="Assets/gray.png" />
+          <!--   Head  -->  <Image Grid.Row="1" Grid.Column="4" Grid.RowSpan="2" Aspect="AspectFit" Opacity="0.4999" Source="Assets/gray.png" />
 
-          <!-- Left Up --> <Image Grid.Row="4"  Grid.Column="2" Aspect="AspectFit" Opacity="0.5" Source="Assets/gray.png" />
-          <!--Right Up --> <Image Grid.Row="4"  Grid.Column="6" Aspect="AspectFit" Opacity="0.5" Source="Assets/gray.png" />
+          <!--  Chest  -->  <Image Grid.Row="4" Grid.RowSpan="2" Grid.Column="4" VerticalOptions="Start" Aspect="AspectFit" Opacity="0.4999" Source="Assets/gray.png" />
 
-          <!--Left Low --> <Image Grid.Row="5"  Grid.Column="2" Aspect="AspectFit" Opacity="0.5" Source="Assets/gray.png" />
-          <!--Right Low--> <Image Grid.Row="5"  Grid.Column="6" Aspect="AspectFit" Opacity="0.5" Source="Assets/gray.png" />
+          <!-- Abdomen -->  <Image Grid.Row="6" Grid.Column="4" Aspect="AspectFit" Opacity="0.4999" Source="Assets/gray.png" />
+
+          <!--Right Up -->  <Image Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="End"   Aspect="AspectFit" Opacity="0.4999" Source="Assets/gray.png" />
+          <!-- Left Up -->  <Image Grid.Row="5" Grid.Column="5" Grid.ColumnSpan="2" HorizontalOptions="Start" Aspect="AspectFit" Opacity="0.4999" Source="Assets/gray.png" />
+
+          <!--Right Low --> <Image Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="End"   Aspect="AspectFit" Opacity="0.4999" Source="Assets/gray.png" />
+          <!-- Left Low --> <Image Grid.Row="6" Grid.Column="5" Grid.ColumnSpan="2" HorizontalOptions="Start" Aspect="AspectFit" Opacity="0.4999" Source="Assets/gray.png" />
+
+          <!--RightThigh--> <Image Grid.Row="8" Grid.Column="3" Grid.ColumnSpan="2" HorizontalOptions="Start" Aspect="AspectFit" Opacity="0.4999" Source="Assets/gray.png" />
+          <!--LeftThigh --> <Image Grid.Row="8" Grid.Column="4" Grid.ColumnSpan="2" HorizontalOptions="End"   Aspect="AspectFit" Opacity="0.4999" Source="Assets/gray.png" />
+
+          <!--RightCalf --> <Image Grid.Row="10" Grid.Column="4" HorizontalOptions="Start" Aspect="AspectFit" Opacity="0.4999" Source="Assets/gray.png" />
+          <!-- LeftCalf --> <Image Grid.Row="10" Grid.Column="4" HorizontalOptions="End"   Aspect="AspectFit" Opacity="0.4999" Source="Assets/gray.png" />
+
+          <!--RightSocks--> <Image Grid.Row="12" Grid.Column="4" HorizontalOptions="Start" Aspect="AspectFit" Opacity="0.4999" Source="Assets/gray.png" />
+          <!--LeftSocks --> <Image Grid.Row="12" Grid.Column="4" HorizontalOptions="End"   Aspect="AspectFit" Opacity="0.4999" Source="Assets/gray.png" />
+
 
           <!-- Picking what is currently displayed -->
           <Picker
-            Grid.Row="0" Grid.Column="0"
-            Title="Hat #"
+            Grid.Row="0" Grid.Column="0" Title="Hat #"
             ItemsSource="{Binding BeaniePicker}"
             SelectedIndex="{Binding SelectBeanie, Mode=OneWayToSource}"
           />
 
           <Picker
-            Grid.Row="0" Grid.Column="2"
-            Title="Shirt #"
+            Grid.Row="0" Grid.Column="2" Title="Shirt #"
             ItemsSource="{Binding ShirtPicker}"
             SelectedIndex="{Binding SelectShirt, Mode=OneWayToSource}"
           />
 
           <Picker
-            Grid.Row="0" Grid.Column="4"
-            Title="Glove #"
+            Grid.Row="0" Grid.Column="4" Title="Glove #"
             ItemsSource="{Binding GlovePicker}"
             SelectedIndex="{Binding SelectGlove, Mode=OneWayToSource}"
           />
 
           <Picker
-            Grid.Row="0" Grid.Column="6"
-            Title="Pants #"
+            Grid.Row="0" Grid.Column="6" Title="Pants #"
             ItemsSource="{Binding PantsPicker}"
             SelectedIndex="{Binding SelectPants, Mode=OneWayToSource}"
           />
 
           <Picker
-            Grid.Row="0" Grid.Column="8"
-            Title="Socks #"
+            Grid.Row="0" Grid.Column="8" Title="Socks #"
             ItemsSource="{Binding SockPicker}"
             SelectedIndex="{Binding SelectSock, Mode=OneWayToSource}"
           />
 
-          <BoxView Grid.Row="1" Grid.Column="0" BackgroundColor="#D403B7" />
+          <!-- <BoxView Grid.Row="1" Grid.Column="0" BackgroundColor="#D403B7" />
           <BoxView Grid.Row="2" Grid.Column="0" BackgroundColor="#02d46D" />
           <BoxView Grid.Row="3" Grid.Column="0" BackgroundColor="#D403B7" />
           <BoxView Grid.Row="4" Grid.Column="0" BackgroundColor="#02d46D" />
           <BoxView Grid.Row="5" Grid.Column="0" BackgroundColor="#D403B7" />
           <BoxView Grid.Row="6" Grid.Column="0" BackgroundColor="#02d46D" />
-        
+          <BoxView Grid.Row="7" Grid.Column="0" BackgroundColor="#D403B7" />
+          <BoxView Grid.Row="8" Grid.Column="0" BackgroundColor="#02d46D" />
+          <BoxView Grid.Row="9" Grid.Column="0" BackgroundColor="#D403B7" />
+          <BoxView Grid.Row="10" Grid.Column="0" BackgroundColor="#02d46D" />
+
+          <BoxView Grid.Row="1" Grid.Column="1" BackgroundColor="#02d46D" />
+          <BoxView Grid.Row="1" Grid.Column="2" BackgroundColor="#D403B7" />
+          <BoxView Grid.Row="1" Grid.Column="3" BackgroundColor="#02d46D" />
+          <BoxView Grid.Row="1" Grid.Column="4" BackgroundColor="#D403B7" />
+          <BoxView Grid.Row="1" Grid.Column="5" BackgroundColor="#02d46D" />
+          <BoxView Grid.Row="1" Grid.Column="6" BackgroundColor="#D403B7" />
+          <BoxView Grid.Row="1" Grid.Column="7" BackgroundColor="#02d46D" />
+          <BoxView Grid.Row="1" Grid.Column="8" BackgroundColor="#D403B7" /> -->
+
         </Grid>
       </StackLayout>
 
@@ -103,14 +133,14 @@
             <StackLayout>
               <Grid>
                 <Grid.ColumnDefinitions>
-                  <ColumnDefinition Width="0.6*" />
-                  <ColumnDefinition Width="0.2*" />
-                  <ColumnDefinition Width="0.2*" />
+                  <ColumnDefinition Width="0.550*"/>
+                  <ColumnDefinition Width="0.225*"/>
+                  <ColumnDefinition Width="0.225*"/>
                 </Grid.ColumnDefinitions>
 
-                <BoxView Grid.Column="0" BackgroundColor="#C6C6C6"/>
-                <BoxView Grid.Column="1" BackgroundColor="#BFBFBF"/>
-                <BoxView Grid.Column="2" BackgroundColor="#C6C6C6"/>
+                <BoxView Grid.Column="0" BackgroundColor="#C6C6C6" />
+                <BoxView Grid.Column="1" BackgroundColor="#C0C0C0" />
+                <BoxView Grid.Column="2" BackgroundColor="#C6C6C6" />
 
                 <Label Text="EPC" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Small" VerticalOptions="CenterAndExpand" />
                 <Label Grid.Column="1" Text="ºC" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Small" VerticalOptions="CenterAndExpand" />
@@ -143,21 +173,7 @@
 
     <!-- Bottom Inventory/Clear/Share Section --> 
     <StackLayout Orientation="Vertical" VerticalOptions="EndAndExpand">
-      <Button Text="{Binding startInventoryButtonText}" Font="Large" Command="{Binding OnStartInventoryButtonCommand}"/>
-        <StackLayout Orientation="Horizontal">
-          <Button 
-            Text="Clear" Font="Large" TextColor="White"
-            Command="{Binding OnClearButtonCommand}" 
-            HorizontalOptions="StartAndExpand" CornerRadius="11"
-            BackgroundColor="#071D6E"
-          />
-          <Button 
-            Text="Share" Font="Large" TextColor="White"
-            Command="{Binding OnShareDataCommand}"   
-            HorizontalOptions="EndAndExpand" CornerRadius="11"
-            BackgroundColor="#071D6E"
-          />
-        </StackLayout>
+      <Button Text="{Binding startInventoryButtonText}" Font="Large" CornerRadius="9" Command="{Binding OnStartInventoryButtonCommand}"/>
     </StackLayout>
 
   </StackLayout>

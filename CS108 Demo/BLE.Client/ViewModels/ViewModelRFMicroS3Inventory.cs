@@ -342,6 +342,8 @@ namespace BLE.Client.ViewModels {
             _BeaniePicker = new List<string> { "Cap 1", "Cap 2", "Cap 3", "Cap 4", "Cap 5", "Cap 6", "Cap 7", "Cap 8" };
             _ShirtPicker = new List<string> { "Shirt 1", "Shirt 2", "Shirt 3", "Shirt 4", "Shirt 5", "Shirt 6", "Shirt 7", "Shirt 8" };
             _PantsPicker = new List<string> { "Pants 1", "Pants 2", "Pants 3", "Pants 4", "Pants 5", "Pants 6", "Pants 7", "Pants 8" };
+            _SockPicker = new List<string> { "Sock 1", "Sock 2", "Sock 3", "Sock 4", "Sock 5", "Sock 6", "Sock 7", "Sock 8" };
+            _GlovePicker = new List<string> { "Glove 1", "Glove 2", "Glove 3", "Glove 4", "Glove 5", "Glove 6", "Glove 7", "Glove 8" };
 
             OnStartInventoryButtonCommand = new Command(StartInventoryClick);
             OnClearButtonCommand = new Command(ClearClick);

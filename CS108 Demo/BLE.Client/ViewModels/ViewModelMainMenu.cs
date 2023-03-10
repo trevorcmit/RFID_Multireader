@@ -71,10 +71,7 @@ namespace BLE.Client.ViewModels {
         private void CheckConnection() {
             if (BleMvxApplication._reader.Status != CSLibrary.HighLevelInterface.READERSTATE.DISCONNECT) {
                 connectedButton = "Connected to " + BleMvxApplication._reader.ReaderName + "/Select Another";
-                connectedButtonTextColor = "#018F34"; // Used to be "Green"
-
-                // Added to keep Guid present after disconnect
-                // ConnectionGuid = BleMvxApplication._config.readerID;
+                connectedButtonTextColor = "#06943A"; // Used to be "Green"
             }
             else {
                 connectedButton = "Press to Scan/Connect Reader";

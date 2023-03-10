@@ -3,7 +3,8 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
   xmlns:pages="clr-namespace:BLE.Client.Pages;assembly=BLE.Client"
   x:Class="BLE.Client.Pages.PageRFMicroS2Inventory"
-  Title="Humidity Inventory">
+  Title="Humidity Inventory"
+>
 
   <StackLayout>
     <Label Text="S2 Inventory Unavailable"/>

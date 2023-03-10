@@ -26,7 +26,7 @@ namespace BLE.Client.ViewModels {
         //// Added to Remove Micro Setting Screen ////
         //////////////////////////////////////////////
         string[] _tagTypeOptions = { "Magnus S2", "Magnus S3" };
-        string[] _powerOptions = { "Low (16dBm)", "Mid (23dBm)", "High (30dBm)", "Cycle Power by Trigger Button", "Follow system Setting" };
+        string[] _powerOptions = { "Low (16dBm)", "Mid (23dBm)", "High (30dBm)", "Cycle Power by Trigger", "Follow System Setting" };
         string[] _targetOptions = { "A", "B", "Toggle A/B" };
         string[] _indicatorsProfileOptions = { "Hot temperature", "Cold temperature", "Moisture detection" };
         string[] _sensorTypeOptions = { "Humidity", "Temperature" };

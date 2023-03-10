@@ -85,181 +85,162 @@ namespace BLE.Client.ViewModels {
         public System.Timers.Timer downtimer = new System.Timers.Timer();
         ////////////////////////////////////////////////////
 
-        // Save FilePicker.PickAsync() result for use in Autosave function
-        public FileResult pick_result; 
+        public FileResult pick_result;  // Save FilePicker.PickAsync() result for use in Autosave function
   
         #endregion
 
 
         #region ------------- EPCs ----------------
-        private string _Beanie1; public string Beanie1 { get => _Beanie1; set { _Beanie1 = value; OnPropertyChanged("Beanie1"); } }
-        private string _Back1; public string Back1 { get => _Back1; set { _Back1 = value; OnPropertyChanged("Back1"); } }
-        private string _BackNeck1; public string BackNeck1 { get => _BackNeck1; set { _BackNeck1 = value; OnPropertyChanged("BackNeck1"); } }
-        private string _Chest1; public string Chest1 { get => _Chest1; set { _Chest1 = value; OnPropertyChanged("Chest1"); } }
-        private string _LeftAb1; public string LeftAb1 { get => _LeftAb1; set { _LeftAb1 = value; OnPropertyChanged("LeftAb1"); } }
-        private string _RightAb1; public string RightAb1 { get => _RightAb1; set { _RightAb1 = value; OnPropertyChanged("RightAb1"); } }
-        private string _LeftUpArm1; public string LeftUpArm1 { get => _LeftUpArm1; set { _LeftUpArm1 = value; OnPropertyChanged("LeftUpArm1"); } }
-        private string _RightUpArm1; public string RightUpArm1 { get => _RightUpArm1; set { _RightUpArm1 = value; OnPropertyChanged("RightUpArm1"); } }
-        private string _LeftLowArm1; public string LeftLowArm1 { get => _LeftLowArm1; set { _LeftLowArm1 = value; OnPropertyChanged("LeftLowArm1"); } }
-        private string _RightLowArm1; public string RightLowArm1 { get => _RightLowArm1; set { _RightLowArm1 = value; OnPropertyChanged("RightLowArm1"); } }
-        private string _LeftHand1; public string LeftHand1 { get => _LeftHand1; set { _LeftHand1 = value; OnPropertyChanged("LeftHand1"); } }
-        private string _RightHand1; public string RightHand1 { get => _RightHand1; set { _RightHand1 = value; OnPropertyChanged("RightHand1"); } }
+        
+        // Display Variables for the Beanie
+        private string _Beanie_In; public string Beanie_In { get => _Beanie_In; set { _Beanie_In = value; OnPropertyChanged("Beanie_In"); } }
+        private string _Beanie_In_T; public string Beanie_In_T { get => _Beanie_In_T; set { _Beanie_In_T = value; OnPropertyChanged("Beanie_In_T"); } }
+        private string _Beanie_Out_T; public string Beanie_Out_T { get => _Beanie_Out_T; set { _Beanie_Out_T = value; OnPropertyChanged("Beanie_Out_T"); } }
 
-        private string _Beanie1_T; public string Beanie1_T { get => _Beanie1_T; set { _Beanie1_T = value; OnPropertyChanged("Beanie1_T"); } }
-        private string _Back1_T; public string Back1_T { get => _Back1_T; set { _Back1_T = value; OnPropertyChanged("Back1_T"); } }
-        private string _BackNeck1_T; public string BackNeck1_T { get => _BackNeck1_T; set { _BackNeck1_T = value; OnPropertyChanged("BackNeck1_T"); } }
-        private string _Chest1_T; public string Chest1_T { get => _Chest1_T; set { _Chest1_T = value; OnPropertyChanged("Chest1_T"); } }
-        private string _LeftAb1_T; public string LeftAb1_T { get => _LeftAb1_T; set { _LeftAb1_T = value; OnPropertyChanged("LeftAb1_T"); } }
-        private string _RightAb1_T; public string RightAb1_T { get => _RightAb1_T; set { _RightAb1_T = value; OnPropertyChanged("RightAb1_T"); } }
-        private string _LeftUpArm1_T; public string LeftUpArm1_T { get => _LeftUpArm1_T; set { _LeftUpArm1_T = value; OnPropertyChanged("LeftUpArm1_T"); } }
-        private string _RightUpArm1_T; public string RightUpArm1_T { get => _RightUpArm1_T; set { _RightUpArm1_T = value; OnPropertyChanged("RightUpArm1_T"); } }
-        private string _LeftLowArm1_T; public string LeftLowArm1_T { get => _LeftLowArm1_T; set { _LeftLowArm1_T = value; OnPropertyChanged("LeftLowArm1_T"); } }
-        private string _RightLowArm1_T; public string RightLowArm1_T { get => _RightLowArm1_T; set { _RightLowArm1_T = value; OnPropertyChanged("RightLowArm1_T"); } }
-        private string _LeftHand1_T; public string LeftHand1_T { get => _LeftHand1_T; set { _LeftHand1_T = value; OnPropertyChanged("LeftHand1_T"); } }
-        private string _RightHand1_T; public string RightHand1_T { get => _RightHand1_T; set { _RightHand1_T = value; OnPropertyChanged("RightHand1_T"); } }
+        // Display Variables for Gloves
+        private string _GloveL; public string GloveL { get => _GloveL; set { _GloveL = value; OnPropertyChanged("GloveL"); } }
+        private string _GloveR; public string GloveR { get => _GloveR; set { _GloveR = value; OnPropertyChanged("GloveR"); } }
+        private string _GloveInL_T; public string GloveInL_T { get => _GloveInL_T; set { _GloveInL_T = value; OnPropertyChanged("GloveInL_T"); } }
+        private string _GloveInR_T; public string GloveInR_T { get => _GloveInR_T; set { _GloveInR_T = value; OnPropertyChanged("GloveInR_T"); } }
+        private string _GloveOutL_T; public string GloveOutL_T { get => _GloveOutL_T; set { _GloveOutL_T = value; OnPropertyChanged("GloveOutL_T"); } }
+        private string _GloveOutR_T; public string GloveOutR_T { get => _GloveOutR_T; set { _GloveOutR_T = value; OnPropertyChanged("GloveOutR_T"); } }
 
-        private string _Beanie2; public string Beanie2 { get => _Beanie2; set { _Beanie2 = value; OnPropertyChanged("Beanie2"); } }
-        private string _Back2; public string Back2 { get => _Back2; set { _Back2 = value; OnPropertyChanged("Back2"); } }
-        private string _BackNeck2; public string BackNeck2 { get => _BackNeck2; set { _BackNeck2 = value; OnPropertyChanged("BackNeck2"); } }
-        private string _Chest2; public string Chest2 { get => _Chest2; set { _Chest2 = value; OnPropertyChanged("Chest2"); } }
-        private string _LeftAb2; public string LeftAb2 { get => _LeftAb2; set { _LeftAb2 = value; OnPropertyChanged("LeftAb2"); } }
-        private string _RightAb2; public string RightAb2 { get => _RightAb2; set { _RightAb2 = value; OnPropertyChanged("RightAb2"); } }
-        private string _LeftUpArm2; public string LeftUpArm2 { get => _LeftUpArm2; set { _LeftUpArm2 = value; OnPropertyChanged("LeftUpArm2"); } }
-        private string _RightUpArm2; public string RightUpArm2 { get => _RightUpArm2; set { _RightUpArm2 = value; OnPropertyChanged("RightUpArm2"); } }
-        private string _LeftLowArm2; public string LeftLowArm2 { get => _LeftLowArm2; set { _LeftLowArm2 = value; OnPropertyChanged("LeftLowArm2"); } }
-        private string _RightLowArm2; public string RightLowArm2 { get => _RightLowArm2; set { _RightLowArm2 = value; OnPropertyChanged("RightLowArm2"); } }
-        private string _LeftHand2; public string LeftHand2 { get => _LeftHand2; set { _LeftHand2 = value; OnPropertyChanged("LeftHand2"); } }
-        private string _RightHand2; public string RightHand2 { get => _RightHand2; set { _RightHand2 = value; OnPropertyChanged("RightHand2"); } }
+        // Display Variables for Pants
+        private string _ThighL; public string ThighL { get => _ThighL; set { _ThighL = value; OnPropertyChanged("ThighL"); } }
+        private string _ThighR; public string ThighR { get => _ThighR; set { _ThighR = value; OnPropertyChanged("ThighR"); } }
+        private string _ThighLIn_T; public string ThighLIn_T { get => _ThighLIn_T; set { _ThighLIn_T = value; OnPropertyChanged("ThighLIn_T"); } }
+        private string _ThighRIn_T; public string ThighRIn_T { get => _ThighRIn_T; set { _ThighRIn_T = value; OnPropertyChanged("ThighRIn_T"); } }
+        private string _ThighLOut_T; public string ThighLOut_T { get => _ThighLOut_T; set { _ThighLOut_T = value; OnPropertyChanged("ThighLOut_T"); } }
+        private string _ThighROut_T; public string ThighROut_T { get => _ThighROut_T; set { _ThighROut_T = value; OnPropertyChanged("ThighROut_T"); } }
+        private string _CalfL; public string CalfL { get => _CalfL; set { _CalfL = value; OnPropertyChanged("CalfL"); } }
+        private string _CalfR; public string CalfR { get => _CalfR; set { _CalfR = value; OnPropertyChanged("CalfR"); } }
+        private string _CalfLIn_T; public string CalfLIn_T { get => _CalfLIn_T; set { _CalfLIn_T = value; OnPropertyChanged("CalfLIn_T"); } }
+        private string _CalfRIn_T; public string CalfRIn_T { get => _CalfRIn_T; set { _CalfRIn_T = value; OnPropertyChanged("CalfRIn_T"); } }
+        private string _CalfLOut_T; public string CalfLOut_T { get => _CalfLOut_T; set { _CalfLOut_T = value; OnPropertyChanged("CalfLOut_T"); } }
+        private string _CalfROut_T; public string CalfROut_T { get => _CalfROut_T; set { _CalfROut_T = value; OnPropertyChanged("CalfROut_T"); } }
 
-        private string _Beanie2_T; public string Beanie2_T { get => _Beanie2_T; set { _Beanie2_T = value; OnPropertyChanged("Beanie2_T"); } }
-        private string _Back2_T; public string Back2_T { get => _Back2_T; set { _Back2_T = value; OnPropertyChanged("Back2_T"); } }
-        private string _BackNeck2_T; public string BackNeck2_T { get => _BackNeck2_T; set { _BackNeck2_T = value; OnPropertyChanged("BackNeck2_T"); } }
-        private string _Chest2_T; public string Chest2_T { get => _Chest2_T; set { _Chest2_T = value; OnPropertyChanged("Chest2_T"); } }
-        private string _LeftAb2_T; public string LeftAb2_T { get => _LeftAb2_T; set { _LeftAb2_T = value; OnPropertyChanged("LeftAb2_T"); } }
-        private string _RightAb2_T; public string RightAb2_T { get => _RightAb2_T; set { _RightAb2_T = value; OnPropertyChanged("RightAb2_T"); } }
-        private string _LeftUpArm2_T; public string LeftUpArm2_T { get => _LeftUpArm2_T; set { _LeftUpArm2_T = value; OnPropertyChanged("LeftUpArm2_T"); } }
-        private string _RightUpArm2_T; public string RightUpArm2_T { get => _RightUpArm2_T; set { _RightUpArm2_T = value; OnPropertyChanged("RightUpArm2_T"); } }
-        private string _LeftLowArm2_T; public string LeftLowArm2_T { get => _LeftLowArm2_T; set { _LeftLowArm2_T = value; OnPropertyChanged("LeftLowArm2_T"); } }
-        private string _RightLowArm2_T; public string RightLowArm2_T { get => _RightLowArm2_T; set { _RightLowArm2_T = value; OnPropertyChanged("RightLowArm2_T"); } }
-        private string _LeftHand2_T; public string LeftHand2_T { get => _LeftHand2_T; set { _LeftHand2_T = value; OnPropertyChanged("LeftHand2_T"); } }
-        private string _RightHand2_T; public string RightHand2_T { get => _RightHand2_T; set { _RightHand2_T = value; OnPropertyChanged("RightHand2_T"); } }
+        // Display Variables for Shirt
+        private string _Chest; public string Chest { get => _Chest; set { _Chest = value; OnPropertyChanged("Chest"); } }
+        private string _ChestIn_T; public string ChestIn_T { get => _ChestIn_T; set { _ChestIn_T = value; OnPropertyChanged("ChestIn_T"); } }
+        private string _ChestOut_T; public string ChestOut_T { get => _ChestOut_T; set { _ChestOut_T = value; OnPropertyChanged("ChestOut_T"); } }
+        private string _Abs; public string Abs { get => _Abs; set { _Abs = value; OnPropertyChanged("Abs"); } }
+        private string _AbIn_T; public string AbIn_T { get => _AbIn_T; set { _AbIn_T = value; OnPropertyChanged("AbIn_T"); } }
+        private string _AbOut_T; public string AbOut_T { get => _AbOut_T; set { _AbOut_T = value; OnPropertyChanged("AbOut_T"); } }
+        private string _RightLow; public string RightLow { get => _RightLow; set { _RightLow = value; OnPropertyChanged("RightLow"); } }
+        private string _RightLowIn_T; public string RightLowIn_T { get => _RightLowIn_T; set { _RightLowIn_T = value; OnPropertyChanged("RightLowIn_T"); } }
+        private string _RightLowOut_T; public string RightLowOut_T { get => _RightLowOut_T; set { _RightLowOut_T = value; OnPropertyChanged("RightLowOut_T"); } }
+        private string _LeftLow; public string LeftLow { get => _LeftLow; set { _LeftLow = value; OnPropertyChanged("LeftLow"); } }
+        private string _LeftLowIn_T; public string LeftLowIn_T { get => _LeftLowIn_T; set { _LeftLowIn_T = value; OnPropertyChanged("LeftLowIn_T"); } }
+        private string _LeftLowOut_T; public string LeftLowOut_T { get => _LeftLowOut_T; set { _LeftLowOut_T = value; OnPropertyChanged("LeftLowOut_T"); } }
+        private string _RightUp; public string RightUp { get => _RightUp; set { _RightUp = value; OnPropertyChanged("RightUp"); } }
+        private string _RightUpIn_T; public string RightUpIn_T { get => _RightUpIn_T; set { _RightUpIn_T = value; OnPropertyChanged("RightUpIn_T"); } }
+        private string _RightUpOut_T; public string RightUpOut_T { get => _RightUpOut_T; set { _RightUpOut_T = value; OnPropertyChanged("RightUpOut_T"); } }
+        private string _LeftUp; public string LeftUp { get => _LeftUp; set { _LeftUp = value; OnPropertyChanged("LeftUp"); } }
+        private string _LeftUpIn_T; public string LeftUpIn_T { get => _LeftUpIn_T; set { _LeftUpIn_T = value; OnPropertyChanged("LeftUpIn_T"); } }
+        private string _LeftUpOut_T; public string LeftUpOut_T { get => _LeftUpOut_T; set { _LeftUpOut_T = value; OnPropertyChanged("LeftUpOut_T"); } }
 
-        private string _Beanie3; public string Beanie3 { get => _Beanie3; set { _Beanie3 = value; OnPropertyChanged("Beanie3"); } }
-        private string _Back3; public string Back3 { get => _Back3; set { _Back3 = value; OnPropertyChanged("Back3"); } }
-        private string _BackNeck3; public string BackNeck3 { get => _BackNeck3; set { _BackNeck3 = value; OnPropertyChanged("BackNeck3"); } }
-        private string _Chest3; public string Chest3 { get => _Chest3; set { _Chest3 = value; OnPropertyChanged("Chest3"); } }
-        private string _LeftAb3; public string LeftAb3 { get => _LeftAb3; set { _LeftAb3 = value; OnPropertyChanged("LeftAb3"); } }
-        private string _RightAb3; public string RightAb3 { get => _RightAb3; set { _RightAb3 = value; OnPropertyChanged("RightAb3"); } }
-        private string _LeftUpArm3; public string LeftUpArm3 { get => _LeftUpArm3; set { _LeftUpArm3 = value; OnPropertyChanged("LeftUpArm3"); } }
-        private string _RightUpArm3; public string RightUpArm3 { get => _RightUpArm3; set { _RightUpArm3 = value; OnPropertyChanged("RightUpArm3"); } }
-        private string _LeftLowArm3; public string LeftLowArm3 { get => _LeftLowArm3; set { _LeftLowArm3 = value; OnPropertyChanged("LeftLowArm3"); } }
-        private string _RightLowArm3; public string RightLowArm3 { get => _RightLowArm3; set { _RightLowArm3 = value; OnPropertyChanged("RightLowArm3"); } }
-        private string _LeftHand3; public string LeftHand3 { get => _LeftHand3; set { _LeftHand3 = value; OnPropertyChanged("LeftHand3"); } }
-        private string _RightHand3; public string RightHand3 { get => _RightHand3; set { _RightHand3 = value; OnPropertyChanged("RightHand3"); } }
+        // Display Variables for Socks
+        private string _SockL; public string SockL { get => _SockL; set { _SockL = value; OnPropertyChanged("SockL"); } }
+        private string _SockR; public string SockR { get => _SockR; set { _SockR = value; OnPropertyChanged("SockR"); } }
+        private string _SockInR_T; public string SockInR_T { get => _SockInR_T; set { _SockInR_T = value; OnPropertyChanged("SockInR_T"); } }
+        private string _SockOutR_T; public string SockOutR_T { get => _SockOutR_T; set { _SockOutR_T = value; OnPropertyChanged("SockOutR_T"); } }
+        private string _SockInL_T; public string SockInL_T { get => _SockInL_T; set { _SockInL_T = value; OnPropertyChanged("SockInL_T"); } }
+        private string _SockOutL_T; public string SockOutL_T { get => _SockOutL_T; set { _SockOutL_T = value; OnPropertyChanged("SockOutL_T"); } }
 
-        private string _Beanie3_T; public string Beanie3_T { get => _Beanie3_T; set { _Beanie3_T = value; OnPropertyChanged("Beanie3_T"); } }
-        private string _Back3_T; public string Back3_T { get => _Back3_T; set { _Back3_T = value; OnPropertyChanged("Back3_T"); } }
-        private string _BackNeck3_T; public string BackNeck3_T { get => _BackNeck3_T; set { _BackNeck3_T = value; OnPropertyChanged("BackNeck3_T"); } }
-        private string _Chest3_T; public string Chest3_T { get => _Chest3_T; set { _Chest3_T = value; OnPropertyChanged("Chest3_T"); } }
-        private string _LeftAb3_T; public string LeftAb3_T { get => _LeftAb3_T; set { _LeftAb3_T = value; OnPropertyChanged("LeftAb3_T"); } }
-        private string _RightAb3_T; public string RightAb3_T { get => _RightAb3_T; set { _RightAb3_T = value; OnPropertyChanged("RightAb3_T"); } }
-        private string _LeftUpArm3_T; public string LeftUpArm3_T { get => _LeftUpArm3_T; set { _LeftUpArm3_T = value; OnPropertyChanged("LeftUpArm3_T"); } }
-        private string _RightUpArm3_T; public string RightUpArm3_T { get => _RightUpArm3_T; set { _RightUpArm3_T = value; OnPropertyChanged("RightUpArm3_T"); } }
-        private string _LeftLowArm3_T; public string LeftLowArm3_T { get => _LeftLowArm3_T; set { _LeftLowArm3_T = value; OnPropertyChanged("LeftLowArm3_T"); } }
-        private string _RightLowArm3_T; public string RightLowArm3_T { get => _RightLowArm3_T; set { _RightLowArm3_T = value; OnPropertyChanged("RightLowArm3_T"); } }
-        private string _LeftHand3_T; public string LeftHand3_T { get => _LeftHand3_T; set { _LeftHand3_T = value; OnPropertyChanged("LeftHand3_T"); } }
-        private string _RightHand3_T; public string RightHand3_T { get => _RightHand3_T; set { _RightHand3_T = value; OnPropertyChanged("RightHand3_T"); } }
 
         public int THRESHOLD = 15;
+
+        class Glove {
+            public string DorsalLeft { get; set; }
+            public string DorsalRight { get; set; }
+            public string FourthLeft { get; set; }
+            public string FourthRight { get; set; }
+            public List<string> TagList { get; set; }
+            public Glove(string dl, string dr, string fl, string fr) {
+                DorsalLeft = dl;
+                DorsalRight = dr;
+                FourthLeft = fl;
+                FourthRight = fr;
+                TagList = new List<string> { DorsalLeft, DorsalRight, FourthLeft, FourthRight };
+            }
+        }
+
+        class Shirt {
+            public string Chest_In { get; set; }
+            public string RightUp_In { get; set; }
+            public string LeftUp_In { get; set; }
+            public string RightLow_In { get; set; }
+            public string LeftLow_In { get; set; }
+            public string Abdomen_In { get; set; }
+            public string Chest_Out { get; set; }
+            public string RightUp_Out { get; set; }
+            public string LeftUp_Out { get; set; }
+            public string RightLow_Out { get; set; }
+            public string LeftLow_Out { get; set; }
+            public string Abdomen_Out { get; set; }
+            public List<string> TagList { get; set; }
+            public Shirt(
+                string ci, string rui, string lui, string rli, string lli, string ai,
+                string co, string ruo, string luo, string rlo, string llo, string ao
+            ) {
+                Chest_In = ci;
+                RightUp_In = rui;
+                LeftUp_In = lui;
+                RightLow_In = rli;
+                LeftLow_In = lli;
+                Abdomen_In = ai;
+                Chest_Out = co;
+                RightUp_Out = ruo;
+                LeftUp_Out = luo;
+                RightLow_Out = rlo;
+                LeftLow_Out = llo;
+                Abdomen_Out = ao;
+                TagList = new List<string> {
+                    Chest_In, RightUp_In, LeftUp_In, RightLow_In, LeftLow_In, Abdomen_In, 
+                    Chest_Out, RightUp_Out, LeftUp_Out, RightLow_Out, LeftLow_Out, Abdomen_Out
+                };
+            }
+        }
         
-        // class Shirt {
-        //     public string Back          { get; set; }
-        //     public string BackNeck      { get; set; }
-        //     public string Chest         { get; set; }
-        //     public string LeftAb        { get; set; }
-        //     public string RightAb       { get; set; }
-        //     public string LeftUpArm     { get; set; }
-        //     public string RightUpArm    { get; set; }
-        //     public string LeftLowArm    { get; set; }
-        //     public string RightLowArm   { get; set; }
-        //     public List<string> TagList { get; set; }
+        class Pants {
+            public string Thigh_In { get; set; }
+            public string Thigh_Out { get; set; }
+            public string Calf_In { get; set; }
+            public string Calf_Out { get; set; }
+            public List<string> TagList { get; set; }
+            public Pants(string ti, string to, string ci, string co) {
+                Thigh_In = ti;
+                Thigh_Out = to;
+                Calf_In = ci;
+                Calf_Out = co;
+                TagList = new List<string> { Thigh_In, Thigh_Out, Calf_In, Calf_Out };
+            }
+        }
 
-        //     public Shirt(
-        //         string backneck, string back, string chest, string leftab, string rightab, 
-        //         string rightuparm, string rightlowarm, string leftuparm, string leftlowarm
-        //     ) {
-        //         // Shirt Locations
-        //         BackNeck    = backneck;
-        //         Back        = back;
-        //         Chest       = chest;
-        //         LeftAb      = leftab;
-        //         RightAb     = rightab;
-        //         LeftUpArm   = leftuparm;
-        //         RightUpArm  = rightuparm;
-        //         LeftLowArm  = leftlowarm;
-        //         RightLowArm = rightlowarm;
-        //         TagList = new List<string> { Back, BackNeck, Chest, LeftAb, RightAb, LeftUpArm, RightUpArm, LeftLowArm, RightLowArm };
-        //     }
-        // }
+        class Sock {
+            public string Above_In { get; set; }
+            public string Above_Out { get; set; }
+            public string Toes { get; set; }
+            public List<string> TagList { get; set; }
+            public Sock(string ai, string ao, string t) {
+                Above_In = ai;
+                Above_Out = ao;
+                Toes = t;
+                TagList = new List<string> { Above_In, Above_Out, Toes };
+            }
+        }
 
-        // class Person {
-        //     public KeyValuePair< string, double? > BackInner { get; set; }
-        //     public KeyValuePair< string, double? > BackOuter { get; set; }
-        //     public KeyValuePair< string, double? > BackNeckInner { get; set; }
-        //     public KeyValuePair< string, double? > BackNeckOuter { get; set; }
-        //     public KeyValuePair< string, double? > ChestInner { get; set; }
-        //     public KeyValuePair< string, double? > ChestOuter { get; set; }
-        //     public KeyValuePair< string, double? > LeftAbInner { get; set; }
-        //     public KeyValuePair< string, double? > LeftAbOuter { get; set; }
-        //     public KeyValuePair< string, double? > RightAbInner { get; set; }
-        //     public KeyValuePair< string, double? > RightAbOuter { get; set; }
-        //     public KeyValuePair< string, double? > LeftUpArmInner { get; set; }
-        //     public KeyValuePair< string, double? > LeftUpArmOuter { get; set; }
-        //     public KeyValuePair< string, double? > RightUpArmInner { get; set; }
-        //     public KeyValuePair< string, double? > RightUpArmOuter { get; set; }
-        //     public KeyValuePair< string, double? > LeftLowArmInner { get; set; }
-        //     public KeyValuePair< string, double? > LeftLowArmOuter { get; set; }
-        //     public KeyValuePair< string, double? > RightLowArmInner { get; set; }
-        //     public KeyValuePair< string, double? > RightLowArmOuter { get; set; }
-
-        //     public Person (
-        //         string bn1, string b1, string c1, string lab1, string rab1,
-        //         string rua1, string rla1, string lua1, string lla1,
-        //         string bn2, string b2, string c2, string lab2, string rab2,
-        //         string rua2, string rla2, string lua2, string lla2
-        //     ) {  
-        //         BackInner = new KeyValuePair<string, double?>(b1, null);
-        //         BackOuter = new KeyValuePair<string, double?>(b2, null);
-        //         BackNeckInner = new KeyValuePair<string, double?>(bn1, null);
-        //         BackNeckOuter = new KeyValuePair<string, double?>(bn2, null);
-        //         ChestInner = new KeyValuePair<string, double?>(c1, null);
-        //         ChestOuter = new KeyValuePair<string, double?>(c2, null);
-        //         LeftAbInner = new KeyValuePair<string, double?>(lab1, null);
-        //         LeftAbOuter = new KeyValuePair<string, double?>(lab2, null);
-        //         RightAbInner = new KeyValuePair<string, double?>(rab1, null);
-        //         RightAbOuter = new KeyValuePair<string, double?>(rab2, null);
-        //         LeftUpArmInner = new KeyValuePair<string, double?>(lua1, null);
-        //         LeftUpArmOuter = new KeyValuePair<string, double?>(lua2, null);
-        //         RightUpArmInner = new KeyValuePair<string, double?>(rua1, null);
-        //         RightUpArmOuter = new KeyValuePair<string, double?>(rua2, null);
-        //         LeftLowArmInner = new KeyValuePair<string, double?>(lla1, null);
-        //         LeftLowArmOuter = new KeyValuePair<string, double?>(lla2, null);
-        //         RightLowArmInner = new KeyValuePair<string, double?>(rla1, null);
-        //         RightLowArmOuter = new KeyValuePair<string, double?>(rla2, null);
-
-        //     }
-        // }
-
-        // Person p = new Person(
-        //     "777F", "67DB", "184A", "885D", "71CF", "BA4C", "8FA9", "B6A1", "2C97",
-        //     "9854", "A3B0", "9EC6", "9A91", "343B", "87D4", "81D4", "8A53", "1397"
-        // );
-
-        // List<string> epcs = new List<string>{
-        //     "777F", "67DB", "184A", "885D", "71CF", "BA4C", "8FA9", "B6A1", "2C97",
-        //     "9854", "A3B0", "9EC6", "9A91", "343B", "87D4", "81D4", "8A53", "1397"
-        // };
-
+        class Beanie {
+            public string Forehead_In { get; set; }
+            public string Forehead_Out { get; set; }
+            public List<string> TagList { get; set; }
+            public Beanie(string fi, string fo) {
+                Forehead_In = fi;
+                Forehead_Out = fo;
+                TagList = new List<string> { Forehead_In, Forehead_Out };
+            }
+        }
+        
         private List<string> _BeaniePicker; public List<string> BeaniePicker { get => _BeaniePicker; set { _BeaniePicker = value; OnPropertyChanged("BeaniePicker"); } }
         private List<string> _ShirtPicker; public List<string> ShirtPicker { get => _ShirtPicker; set { _ShirtPicker = value; OnPropertyChanged("ShirtPicker"); } }
         private List<string> _PantsPicker; public List<string> PantsPicker { get => _PantsPicker; set { _PantsPicker = value; OnPropertyChanged("PantsPicker"); } }
@@ -272,6 +253,9 @@ namespace BLE.Client.ViewModels {
             set { 
                 _SelectBeanie = value; 
                 OnPropertyChanged("SelectBeanie");
+                _Beanie_In_T  = "--"; RaisePropertyChanged(() => Beanie_In_T);
+                _Beanie_Out_T = "--"; RaisePropertyChanged(() => Beanie_Out_T);
+                _Beanie_In    = "gray"; RaisePropertyChanged(() => Beanie_In);
             }
         }
 
@@ -281,6 +265,24 @@ namespace BLE.Client.ViewModels {
             set {
                 _SelectShirt = value;
                 OnPropertyChanged("SelectShirt");
+                _Chest = "gray";    RaisePropertyChanged(() => Chest);
+                _RightUp = "gray";  RaisePropertyChanged(() => RightUp);
+                _LeftUp = "gray";   RaisePropertyChanged(() => LeftUp);
+                _RightLow = "gray"; RaisePropertyChanged(() => RightLow);
+                _LeftLow = "gray";  RaisePropertyChanged(() => LeftLow);
+                _Abs = "gray";      RaisePropertyChanged(() => Abs);
+                _ChestIn_T = "--";     RaisePropertyChanged(() => ChestIn_T);
+                _RightUpIn_T = "--";   RaisePropertyChanged(() => RightUpIn_T);
+                _LeftUpIn_T = "--";    RaisePropertyChanged(() => LeftUpIn_T);
+                _RightLowIn_T = "--";  RaisePropertyChanged(() => RightLowIn_T);
+                _LeftLowIn_T = "--";   RaisePropertyChanged(() => LeftLowIn_T);
+                _AbIn_T = "--";        RaisePropertyChanged(() => AbIn_T);
+                _ChestOut_T = "--";    RaisePropertyChanged(() => ChestOut_T);
+                _RightUpOut_T = "--";  RaisePropertyChanged(() => RightUpOut_T);
+                _LeftUpOut_T = "--";   RaisePropertyChanged(() => LeftUpOut_T);
+                _RightLowOut_T = "--"; RaisePropertyChanged(() => RightLowOut_T);
+                _LeftLowOut_T = "--";  RaisePropertyChanged(() => LeftLowOut_T);
+                _AbOut_T = "--";       RaisePropertyChanged(() => AbOut_T);
             }
         }
 
@@ -290,6 +292,18 @@ namespace BLE.Client.ViewModels {
             set {
                 _SelectPants = value;
                 OnPropertyChanged("SelectPants");
+                _ThighL = "gray"; RaisePropertyChanged(() => ThighL);
+                _ThighR = "gray"; RaisePropertyChanged(() => ThighR);
+                _CalfL  = "gray"; RaisePropertyChanged(() => CalfL);
+                _CalfR  = "gray"; RaisePropertyChanged(() => CalfR);
+                _ThighLIn_T = "--"; RaisePropertyChanged(() => ThighLIn_T);
+                _ThighRIn_T = "--"; RaisePropertyChanged(() => ThighRIn_T);
+                _CalfLIn_T  = "--"; RaisePropertyChanged(() => CalfLIn_T);
+                _CalfRIn_T  = "--"; RaisePropertyChanged(() => CalfRIn_T);
+                _ThighLOut_T = "--"; RaisePropertyChanged(() => ThighLOut_T);
+                _ThighROut_T = "--"; RaisePropertyChanged(() => ThighROut_T);
+                _CalfLOut_T  = "--"; RaisePropertyChanged(() => CalfLOut_T);
+                _CalfROut_T  = "--"; RaisePropertyChanged(() => CalfROut_T);
             }
         }
 
@@ -299,6 +313,12 @@ namespace BLE.Client.ViewModels {
             set {
                 _SelectSock = value;
                 OnPropertyChanged("SelectSock");
+                _SockL = "gray"; RaisePropertyChanged(() => SockL);
+                _SockR = "gray"; RaisePropertyChanged(() => SockR);
+                _SockInL_T  = "--"; RaisePropertyChanged(() => SockInL_T);
+                _SockOutL_T = "--"; RaisePropertyChanged(() => SockOutL_T);
+                _SockInR_T  = "--"; RaisePropertyChanged(() => SockInR_T);
+                _SockOutR_T = "--"; RaisePropertyChanged(() => SockOutR_T);
             }
         }
 
@@ -308,6 +328,12 @@ namespace BLE.Client.ViewModels {
             set {
                 _SelectGlove = value;
                 OnPropertyChanged("SelectGlove");
+                _GloveL = "gray"; RaisePropertyChanged(() => GloveL);
+                _GloveR = "gray"; RaisePropertyChanged(() => GloveR);
+                _GloveInL_T  = "--"; RaisePropertyChanged(() => GloveInL_T);
+                _GloveOutL_T = "--"; RaisePropertyChanged(() => GloveOutL_T);
+                _GloveInR_T  = "--"; RaisePropertyChanged(() => GloveInR_T);
+                _GloveOutR_T = "--"; RaisePropertyChanged(() => GloveOutR_T);
             }
         }
 
@@ -320,18 +346,33 @@ namespace BLE.Client.ViewModels {
         public ViewModelRFMicroS3Inventory(IAdapter adapter, IUserDialogs userDialogs) : base(adapter) {
             _userDialogs = userDialogs;
 
-            Back1        = "gray"; Back2        = "gray"; Back3        = "gray"; Back1_T        = "--"; Back2_T        = "--"; Back3_T        = "--";
-            BackNeck1    = "gray"; BackNeck2    = "gray"; BackNeck3    = "gray"; BackNeck1_T    = "--"; BackNeck2_T    = "--"; BackNeck3_T    = "--";
-            Chest1       = "gray"; Chest2       = "gray"; Chest3       = "gray"; Chest1_T       = "--"; Chest2_T       = "--"; Chest3_T       = "--";
-            LeftAb1      = "gray"; LeftAb2      = "gray"; LeftAb3      = "gray"; LeftAb1_T      = "--"; LeftAb2_T      = "--"; LeftAb3_T      = "--";
-            RightAb1     = "gray"; RightAb2     = "gray"; RightAb3     = "gray"; RightAb1_T     = "--"; RightAb2_T     = "--"; RightAb3_T     = "--";
-            LeftUpArm1   = "gray"; LeftUpArm2   = "gray"; LeftUpArm3   = "gray"; LeftUpArm1_T   = "--"; LeftUpArm2_T   = "--"; LeftUpArm3_T   = "--";
-            RightUpArm1  = "gray"; RightUpArm2  = "gray"; RightUpArm3  = "gray"; RightUpArm1_T  = "--"; RightUpArm2_T  = "--"; RightUpArm3_T  = "--";
-            LeftLowArm1  = "gray"; LeftLowArm2  = "gray"; LeftLowArm3  = "gray"; LeftLowArm1_T  = "--"; LeftLowArm2_T  = "--"; LeftLowArm3_T  = "--";
-            RightLowArm1 = "gray"; RightLowArm2 = "gray"; RightLowArm3 = "gray"; RightLowArm1_T = "--"; RightLowArm2_T = "--"; RightLowArm3_T = "--";
-            Beanie1      = "gray"; Beanie2      = "gray"; Beanie3      = "gray"; Beanie1_T      = "--"; Beanie2_T      = "--"; Beanie3_T      = "--";
-            LeftHand1    = "gray"; LeftHand2    = "gray"; LeftHand3    = "gray"; LeftHand1_T    = "--"; LeftHand2_T    = "--"; LeftHand3_T    = "--";
-            RightHand1   = "gray"; RightHand2   = "gray"; RightHand3   = "gray"; RightHand1_T   = "--"; RightHand2_T   = "--"; RightHand3_T   = "--";
+            Beanie_In = "gray";
+
+            Chest = "gray";
+            Abs = "gray";
+            RightUp = "gray";
+            LeftUp = "gray";
+            LeftLow = "gray";
+            RightLow = "gray";
+
+            ThighL = "gray";
+            ThighR = "gray";
+            CalfL = "gray";
+            CalfR = "gray";
+
+            SockL = "gray";
+            SockR = "gray";
+            SockInL_T  = "--";
+            SockOutL_T = "--";
+            SockInR_T  = "--";
+            SockOutR_T = "--";
+
+            GloveL = "gray";
+            GloveR = "gray";
+            GloveInL_T  = "--";
+            GloveOutL_T = "--";
+            GloveInR_T  = "--";
+            GloveOutR_T = "--";
 
             // Set disconnection event for reconnection
             Adapter.DeviceDisconnected += OnDeviceDisconnected;
@@ -616,7 +657,6 @@ namespace BLE.Client.ViewModels {
 
                     if (!found) {
                         // if (epcs.Contains(info.epc.ToString())) {
-
                         RFMicroTagInfoViewModel item = new RFMicroTagInfoViewModel();
                         item.EPC = info.epc.ToString();
                         item.SensorAvgValue = "";
@@ -651,7 +691,6 @@ namespace BLE.Client.ViewModels {
                         }
                         else { }
                         TagInfoList.Insert(0, item);
-
                         //} // added to filter EPCs to savedata
 
                     }

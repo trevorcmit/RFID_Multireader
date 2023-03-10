@@ -4,8 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pages="clr-namespace:BLE.Client.Pages;assembly=BLE.Client"
     x:Class="BLE.Client.Pages.PageViewPage"
-    Title="Data">
-
+    Title="Data"
+>
 
 	<ScrollView>
 		<StackLayout Margin="0,100,0,0" VerticalOptions="Start">

@@ -16,18 +16,15 @@
 
     <StackLayout Orientation="Horizontal" VerticalOptions="StartAndExpand">
 
-      <StackLayout Orientation="Vertical" WidthRequest="1000" VerticalOptions="Fill" >
-        <Grid>
-          <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.17*" />  <!-- Column 0 -->
-            <ColumnDefinition Width="0.0375*"/>
-            <ColumnDefinition Width="0.17*" />
-            <ColumnDefinition Width="0.0375*"/>
-            <ColumnDefinition Width="0.17*" />  <!-- Column 4 -->
-            <ColumnDefinition Width="0.0375*"/>
-            <ColumnDefinition Width="0.17*" />
-            <ColumnDefinition Width="0.0375*"/>
-            <ColumnDefinition Width="0.17*" /> <!-- 9 Columns -->
+      <StackLayout Orientation="Vertical" WidthRequest="1500" VerticalOptions="Fill" >
+        <Grid ColumnSpacing="1" RowSpacing="4" >
+          <Grid.ColumnDefinitions> <!-- 53 COLUMNS -->
+            <ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/>
           </Grid.ColumnDefinitions>
           <Grid.RowDefinitions>
             <RowDefinition Height="0.1*" /> <!-- Row 0, PICKER ONLY ROW-->
@@ -49,85 +46,88 @@
             <RowDefinition Height="0.08*"  /> <!-- Row 12, Socks -->
           </Grid.RowDefinitions>
 
-          <Image Grid.Row="1" Grid.Column="0" Grid.RowSpan="12" Grid.ColumnSpan="9" Aspect="AspectFit" Source="Assets/wholehuman.jpg" />
+          <Image Grid.Row="1" Grid.Column="0" Grid.RowSpan="12" Grid.ColumnSpan="53" Aspect="AspectFit" Source="Assets/wholehuman.jpg" />
 
-          <!--   Head  -->  <Image Grid.Row="1" Grid.Column="4" Grid.RowSpan="2" Aspect="AspectFit" Opacity="0.4999" Source="Assets/gray.png" />
+          <!--  Head   -->  <Image Grid.Row="1" Grid.Column="22" Grid.RowSpan="2" Grid.ColumnSpan="9" Aspect="AspectFit" Opacity="0.5798" Source="{Binding Beanie_In, StringFormat='Assets/\{0\}.png'}" />
 
-          <!--  Chest  -->  <Image Grid.Row="4" Grid.RowSpan="2" Grid.Column="4" VerticalOptions="Start" Aspect="AspectFit" Opacity="0.4999" Source="Assets/gray.png" />
+          <!--  Chest  -->  <Image Grid.Row="4" Grid.Column="22" Grid.RowSpan="2" Grid.ColumnSpan="9" VerticalOptions="Start" Aspect="AspectFit" Opacity="0.5798" Source="{Binding Chest, StringFormat='Assets/\{0\}.png'}" />
 
-          <!-- Abdomen -->  <Image Grid.Row="6" Grid.Column="4" Aspect="AspectFit" Opacity="0.4999" Source="Assets/gray.png" />
+          <!-- Abdomen -->  <Image Grid.Row="6" Grid.Column="22" Grid.ColumnSpan="9" Aspect="AspectFit" Opacity="0.5798" Source="{Binding Abs, StringFormat='Assets/\{0\}.png'}" />
 
-          <!--Right Up -->  <Image Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="End"   Aspect="AspectFit" Opacity="0.4999" Source="Assets/gray.png" />
-          <!-- Left Up -->  <Image Grid.Row="5" Grid.Column="5" Grid.ColumnSpan="2" HorizontalOptions="Start" Aspect="AspectFit" Opacity="0.4999" Source="Assets/gray.png" />
+          <!--Right Up -->  <Image Grid.Row="4" Grid.RowSpan="2" Grid.Column="16" Grid.ColumnSpan="9" Aspect="AspectFit" Opacity="0.5798" Source="{Binding RightUp, StringFormat='Assets/\{0\}.png'}" />
+          <!-- Left Up -->  <Image Grid.Row="4" Grid.RowSpan="2" Grid.Column="29" Grid.ColumnSpan="9" Aspect="AspectFit" Opacity="0.5798" Source="{Binding LeftUp,  StringFormat='Assets/\{0\}.png'}" />
 
-          <!--Right Low --> <Image Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="End"   Aspect="AspectFit" Opacity="0.4999" Source="Assets/gray.png" />
-          <!-- Left Low --> <Image Grid.Row="6" Grid.Column="5" Grid.ColumnSpan="2" HorizontalOptions="Start" Aspect="AspectFit" Opacity="0.4999" Source="Assets/gray.png" />
+          <!--Right Low --> <Image Grid.Row="6" Grid.Column="15" Grid.ColumnSpan="9" Aspect="AspectFit" Opacity="0.5798" Source="{Binding RightLow, StringFormat='Assets/\{0\}.png'}" />
+          <!-- Left Low --> <Image Grid.Row="6" Grid.Column="30" Grid.ColumnSpan="9" Aspect="AspectFit" Opacity="0.5798" Source="{Binding LeftLow,  StringFormat='Assets/\{0\}.png'}" />
 
-          <!--RightThigh--> <Image Grid.Row="8" Grid.Column="3" Grid.ColumnSpan="2" HorizontalOptions="Start" Aspect="AspectFit" Opacity="0.4999" Source="Assets/gray.png" />
-          <!--LeftThigh --> <Image Grid.Row="8" Grid.Column="4" Grid.ColumnSpan="2" HorizontalOptions="End"   Aspect="AspectFit" Opacity="0.4999" Source="Assets/gray.png" />
+          <!--RightThigh--> <Image Grid.Row="8" Grid.Column="20" Grid.ColumnSpan="9" Aspect="AspectFit" HorizontalOptions="Center" Opacity="0.5798" Source="{Binding ThighR, StringFormat='Assets/\{0\}.png'}" />
+          <!--LeftThigh --> <Image Grid.Row="8" Grid.Column="25" Grid.ColumnSpan="9" Aspect="AspectFit" HorizontalOptions="Center" Opacity="0.5798" Source="{Binding ThighL, StringFormat='Assets/\{0\}.png'}" />
+          <!-- - - - -  --> <Label Grid.Row="8" Grid.Column="20" Grid.ColumnSpan="9" Text="{Binding ThighRIn_T, StringFormat='{0:F0}°'}" FontSize="Medium" VerticalOptions="Start" HorizontalOptions="Center"  />
+          <!--  - - - - --> <Label Grid.Row="8" Grid.Column="25" Grid.ColumnSpan="9" Text="{Binding ThighLIn_T, StringFormat='{0:F0}°'}" FontSize="Medium" VerticalOptions="Start" HorizontalOptions="Center"  />
+          <!-- - - - -  --> <Label Grid.Row="8" Grid.Column="20" Grid.ColumnSpan="9" Text="{Binding ThighROut_T, StringFormat='{0:F0}°'}" FontSize="Medium" VerticalOptions="End" HorizontalOptions="Center"  />
+          <!--  - - - - --> <Label Grid.Row="8" Grid.Column="25" Grid.ColumnSpan="9" Text="{Binding ThighLOut_T, StringFormat='{0:F0}°'}" FontSize="Medium" VerticalOptions="End" HorizontalOptions="Center"  />
 
-          <!--RightCalf --> <Image Grid.Row="10" Grid.Column="4" HorizontalOptions="Start" Aspect="AspectFit" Opacity="0.4999" Source="Assets/gray.png" />
-          <!-- LeftCalf --> <Image Grid.Row="10" Grid.Column="4" HorizontalOptions="End"   Aspect="AspectFit" Opacity="0.4999" Source="Assets/gray.png" />
+          <!--Right Calf--> <Image Grid.Row="10" Grid.Column="20" Grid.ColumnSpan="8" Aspect="AspectFit" Opacity="0.5798" Source="{Binding CalfR, StringFormat='Assets/\{0\}.png'}" />
+          <!--Left Calf --> <Image Grid.Row="10" Grid.Column="25" Grid.ColumnSpan="8" Aspect="AspectFit" Opacity="0.5798" Source="{Binding CalfL, StringFormat='Assets/\{0\}.png'}" />
+          <!-- - - - -  --> <Label Grid.Row="10" Grid.Column="20" Grid.ColumnSpan="8" Text="{Binding CalfRIn_T, StringFormat='{0:F0}°'}"  FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Start" />
+          <!--  - - - - --> <Label Grid.Row="10" Grid.Column="25" Grid.ColumnSpan="8" Text="{Binding CalfLIn_T, StringFormat='{0:F0}°'}"  FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Start" />
+          <!-- - - - -  --> <Label Grid.Row="10" Grid.Column="20" Grid.ColumnSpan="8" Text="{Binding CalfROut_T, StringFormat='{0:F0}°'}" FontSize="Medium" HorizontalOptions="Center" VerticalOptions="End" />
+          <!--  - - - - --> <Label Grid.Row="10" Grid.Column="25" Grid.ColumnSpan="8" Text="{Binding CalfLOut_T, StringFormat='{0:F0}°'}" FontSize="Medium" HorizontalOptions="Center" VerticalOptions="End" />
 
-          <!--RightSocks--> <Image Grid.Row="12" Grid.Column="4" HorizontalOptions="Start" Aspect="AspectFit" Opacity="0.4999" Source="Assets/gray.png" />
-          <!--LeftSocks --> <Image Grid.Row="12" Grid.Column="4" HorizontalOptions="End"   Aspect="AspectFit" Opacity="0.4999" Source="Assets/gray.png" />
-
+          <!--RightSocks--> <Image Grid.Row="11" Grid.RowSpan="2" Grid.Column="21" Grid.ColumnSpan="6" Aspect="AspectFit" VerticalOptions="Center" Opacity="0.5798" Source="{Binding SockR, StringFormat='Assets/\{0\}.png'}" />
+          <!--LeftSocks --> <Image Grid.Row="11" Grid.RowSpan="2" Grid.Column="26" Grid.ColumnSpan="6" Aspect="AspectFit" VerticalOptions="Center" Opacity="0.5798" Source="{Binding SockL, StringFormat='Assets/\{0\}.png'}" />
+          <!-- - - - -  --> <Label Grid.Row="11" Grid.Column="21" Grid.ColumnSpan="6" Text="{Binding SockInR_T,  StringFormat='{0:F0}°'}" HorizontalOptions="Center" FontSize="Medium" VerticalOptions="End" />
+          <!--  - - - - --> <Label Grid.Row="12" Grid.Column="21" Grid.ColumnSpan="6" Text="{Binding SockOutR_T, StringFormat='{0:F0}°'}" HorizontalOptions="Center" FontSize="Medium" />
+          <!-- - - - -  --> <Label Grid.Row="11" Grid.Column="26" Grid.ColumnSpan="6" Text="{Binding SockInL_T,  StringFormat='{0:F0}°'}" HorizontalOptions="Center" FontSize="Medium" VerticalOptions="End" />
+          <!--  - - - - --> <Label Grid.Row="12" Grid.Column="26" Grid.ColumnSpan="6" Text="{Binding SockOutL_T, StringFormat='{0:F0}°'}" HorizontalOptions="Center" FontSize="Medium" />
 
           <!-- Picking what is currently displayed -->
           <Picker
-            Grid.Row="0" Grid.Column="0" Title="Hat #"
+            Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="9" Title="Hat #"
             ItemsSource="{Binding BeaniePicker}"
             SelectedIndex="{Binding SelectBeanie, Mode=OneWayToSource}"
           />
 
           <Picker
-            Grid.Row="0" Grid.Column="2" Title="Shirt #"
+            Grid.Row="0" Grid.Column="11" Grid.ColumnSpan="9" Title="Shirt #"
             ItemsSource="{Binding ShirtPicker}"
             SelectedIndex="{Binding SelectShirt, Mode=OneWayToSource}"
           />
 
           <Picker
-            Grid.Row="0" Grid.Column="4" Title="Glove #"
+            Grid.Row="0" Grid.Column="22" Grid.ColumnSpan="9" Title="Glove #"
             ItemsSource="{Binding GlovePicker}"
             SelectedIndex="{Binding SelectGlove, Mode=OneWayToSource}"
           />
 
           <Picker
-            Grid.Row="0" Grid.Column="6" Title="Pants #"
+            Grid.Row="0" Grid.Column="33" Grid.ColumnSpan="9" Title="Pants #"
             ItemsSource="{Binding PantsPicker}"
             SelectedIndex="{Binding SelectPants, Mode=OneWayToSource}"
           />
 
           <Picker
-            Grid.Row="0" Grid.Column="8" Title="Socks #"
+            Grid.Row="0" Grid.Column="44" Grid.ColumnSpan="9" Title="Socks #"
             ItemsSource="{Binding SockPicker}"
             SelectedIndex="{Binding SelectSock, Mode=OneWayToSource}"
           />
 
-          <!-- <BoxView Grid.Row="1" Grid.Column="0" BackgroundColor="#D403B7" />
-          <BoxView Grid.Row="2" Grid.Column="0" BackgroundColor="#02d46D" />
-          <BoxView Grid.Row="3" Grid.Column="0" BackgroundColor="#D403B7" />
-          <BoxView Grid.Row="4" Grid.Column="0" BackgroundColor="#02d46D" />
-          <BoxView Grid.Row="5" Grid.Column="0" BackgroundColor="#D403B7" />
-          <BoxView Grid.Row="6" Grid.Column="0" BackgroundColor="#02d46D" />
-          <BoxView Grid.Row="7" Grid.Column="0" BackgroundColor="#D403B7" />
-          <BoxView Grid.Row="8" Grid.Column="0" BackgroundColor="#02d46D" />
-          <BoxView Grid.Row="9" Grid.Column="0" BackgroundColor="#D403B7" />
+          <BoxView Grid.Row="1"  Grid.Column="0" BackgroundColor="#D403B7" />
+          <BoxView Grid.Row="2"  Grid.Column="0" BackgroundColor="#02d46D" />
+          <BoxView Grid.Row="3"  Grid.Column="0" BackgroundColor="#D403B7" />
+          <BoxView Grid.Row="4"  Grid.Column="0" BackgroundColor="#02d46D" />
+          <BoxView Grid.Row="5"  Grid.Column="0" BackgroundColor="#D403B7" />
+          <BoxView Grid.Row="6"  Grid.Column="0" BackgroundColor="#02d46D" />
+          <BoxView Grid.Row="7"  Grid.Column="0" BackgroundColor="#D403B7" />
+          <BoxView Grid.Row="8"  Grid.Column="0" BackgroundColor="#02d46D" />
+          <BoxView Grid.Row="9"  Grid.Column="0" BackgroundColor="#D403B7" />
           <BoxView Grid.Row="10" Grid.Column="0" BackgroundColor="#02d46D" />
-
-          <BoxView Grid.Row="1" Grid.Column="1" BackgroundColor="#02d46D" />
-          <BoxView Grid.Row="1" Grid.Column="2" BackgroundColor="#D403B7" />
-          <BoxView Grid.Row="1" Grid.Column="3" BackgroundColor="#02d46D" />
-          <BoxView Grid.Row="1" Grid.Column="4" BackgroundColor="#D403B7" />
-          <BoxView Grid.Row="1" Grid.Column="5" BackgroundColor="#02d46D" />
-          <BoxView Grid.Row="1" Grid.Column="6" BackgroundColor="#D403B7" />
-          <BoxView Grid.Row="1" Grid.Column="7" BackgroundColor="#02d46D" />
-          <BoxView Grid.Row="1" Grid.Column="8" BackgroundColor="#D403B7" /> -->
-
+          <BoxView Grid.Row="11" Grid.Column="0" BackgroundColor="#D403B7" />
+          <BoxView Grid.Row="12" Grid.Column="0" BackgroundColor="#02d46D" />
         </Grid>
       </StackLayout>
 
-      <StackLayout Orientation="Vertical" WidthRequest="1000" VerticalOptions="Fill" HorizontalOptions="EndAndExpand">
+      <StackLayout Orientation="Vertical" WidthRequest="1500" VerticalOptions="Fill" HorizontalOptions="EndAndExpand">
         <ListView x:Name="liewViewTagData" ItemsSource="{Binding TagInfoList}" SelectedItem="{Binding objItemSelected, Mode=TwoWay}" >
           <ListView.Header>
             <StackLayout>

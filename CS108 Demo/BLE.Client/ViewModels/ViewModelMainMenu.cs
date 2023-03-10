@@ -60,7 +60,6 @@ namespace BLE.Client.ViewModels {
             BleMvxApplication._reader.OnReaderStateChanged -= new EventHandler<CSLibrary.Events.OnReaderStateChangedEventArgs>(ReaderStateCChangedEvent);
         }
 
-        // MUST be geant location permission
         private async void GetLocationPermission() {
             if (await _permissions.CheckPermissionStatusAsync(Permission.Location) != PermissionStatus.Granted) {
                 if (Device.RuntimePlatform == Device.Android)
@@ -72,14 +71,14 @@ namespace BLE.Client.ViewModels {
         private void CheckConnection() {
             if (BleMvxApplication._reader.Status != CSLibrary.HighLevelInterface.READERSTATE.DISCONNECT) {
                 connectedButton = "Connected to " + BleMvxApplication._reader.ReaderName + "/Select Another";
-                connectedButtonTextColor = "Green";
+                connectedButtonTextColor = "#018F34"; // Used to be "Green"
 
                 // Added to keep Guid present after disconnect
                 // ConnectionGuid = BleMvxApplication._config.readerID;
             }
             else {
                 connectedButton = "Press to Scan/Connect Reader";
-                connectedButtonTextColor = "Red";
+                connectedButtonTextColor = "#E80323";
             }
             RaisePropertyChanged(() => connectedButton);
             RaisePropertyChanged(() => connectedButtonTextColor);
@@ -298,8 +297,6 @@ namespace BLE.Client.ViewModels {
 
             // Skip Micro Setting Screen
             ShowViewModel<ViewModelRFMicroS3Inventory>(new MvxBundle());
-
-            // ShowViewModel<ViewModelRFMicroSetting>(new MvxBundle());
         }
 
 		public ICommand OnSettingButtonCommand { protected set; get; }

@@ -14,23 +14,90 @@
 
   <StackLayout Orientation="Vertical">
 
-    <StackLayout Orientation="Horizontal">
+    <StackLayout Orientation="Horizontal" VerticalOptions="StartAndExpand">
 
-      <StackLayout Orientation="Vertical">
+      <StackLayout Orientation="Vertical" WidthRequest="1000" VerticalOptions="Fill" >
         <Grid>
           <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="0.17*" />
+            <ColumnDefinition Width="0.0375*"/>
+            <ColumnDefinition Width="0.17*" />
+            <ColumnDefinition Width="0.0375*"/>
+            <ColumnDefinition Width="0.17*" />
+            <ColumnDefinition Width="0.0375*"/>
+            <ColumnDefinition Width="0.17*" />
+            <ColumnDefinition Width="0.0375*"/>
+            <ColumnDefinition Width="0.17*" /> <!-- 9 Columns -->
           </Grid.ColumnDefinitions>
           <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="0.100*" /> <!-- Row 0, PICKER ONLY ROW-->
+
+            <RowDefinition Height="0.045*" /> <!--GAP-->
+            <RowDefinition Height="0.090*" /> <!-- Row 2, Head -->
+            <RowDefinition Height="0.110*" /> <!--GAP-->
+            <RowDefinition Height="0.135*" /> <!-- Row 4, Upper Arms -->
+            <RowDefinition Height="0.135*" /> <!-- Row 5, Lower Arms -->
+
+            <RowDefinition Height="0.385*" /> <!-- Row 6 Lower Body -->
           </Grid.RowDefinitions>
 
-          <Image Grid.Row="0" Grid.Column="0" Aspect="AspectFill" Source="Assets/wholehuman.jpg" />
+          <Image Grid.Row="1" Grid.Column="0" Grid.RowSpan="6" Grid.ColumnSpan="9" Aspect="AspectFit" Source="Assets/wholehuman.jpg" />
+
+          <!--   Head  --> <Image Grid.Row="2"  Grid.Column="4" Aspect="AspectFit" Opacity="0.5" Source="Assets/gray.png" />
+
+          <!-- Left Up --> <Image Grid.Row="4"  Grid.Column="2" Aspect="AspectFit" Opacity="0.5" Source="Assets/gray.png" />
+          <!--Right Up --> <Image Grid.Row="4"  Grid.Column="6" Aspect="AspectFit" Opacity="0.5" Source="Assets/gray.png" />
+
+          <!--Left Low --> <Image Grid.Row="5"  Grid.Column="2" Aspect="AspectFit" Opacity="0.5" Source="Assets/gray.png" />
+          <!--Right Low--> <Image Grid.Row="5"  Grid.Column="6" Aspect="AspectFit" Opacity="0.5" Source="Assets/gray.png" />
+
+          <!-- Picking what is currently displayed -->
+          <Picker
+            Grid.Row="0" Grid.Column="0"
+            Title="Hat #"
+            ItemsSource="{Binding BeaniePicker}"
+            SelectedIndex="{Binding SelectBeanie, Mode=OneWayToSource}"
+          />
+
+          <Picker
+            Grid.Row="0" Grid.Column="2"
+            Title="Shirt #"
+            ItemsSource="{Binding ShirtPicker}"
+            SelectedIndex="{Binding SelectShirt, Mode=OneWayToSource}"
+          />
+
+          <Picker
+            Grid.Row="0" Grid.Column="4"
+            Title="Glove #"
+            ItemsSource="{Binding GlovePicker}"
+            SelectedIndex="{Binding SelectGlove, Mode=OneWayToSource}"
+          />
+
+          <Picker
+            Grid.Row="0" Grid.Column="6"
+            Title="Pants #"
+            ItemsSource="{Binding PantsPicker}"
+            SelectedIndex="{Binding SelectPants, Mode=OneWayToSource}"
+          />
+
+          <Picker
+            Grid.Row="0" Grid.Column="8"
+            Title="Socks #"
+            ItemsSource="{Binding SockPicker}"
+            SelectedIndex="{Binding SelectSock, Mode=OneWayToSource}"
+          />
+
+          <BoxView Grid.Row="1" Grid.Column="0" BackgroundColor="#D403B7" />
+          <BoxView Grid.Row="2" Grid.Column="0" BackgroundColor="#02d46D" />
+          <BoxView Grid.Row="3" Grid.Column="0" BackgroundColor="#D403B7" />
+          <BoxView Grid.Row="4" Grid.Column="0" BackgroundColor="#02d46D" />
+          <BoxView Grid.Row="5" Grid.Column="0" BackgroundColor="#D403B7" />
+          <BoxView Grid.Row="6" Grid.Column="0" BackgroundColor="#02d46D" />
         
         </Grid>
       </StackLayout>
 
-      <StackLayout Orientation="Vertical">
+      <StackLayout Orientation="Vertical" WidthRequest="1000" VerticalOptions="Fill" HorizontalOptions="EndAndExpand">
         <ListView x:Name="liewViewTagData" ItemsSource="{Binding TagInfoList}" SelectedItem="{Binding objItemSelected, Mode=TwoWay}" >
           <ListView.Header>
             <StackLayout>
@@ -41,9 +108,9 @@
                   <ColumnDefinition Width="0.2*" />
                 </Grid.ColumnDefinitions>
 
-                <BoxView Grid.Column="0" BackgroundColor="#C7C7C7"/>
-                <BoxView Grid.Column="1" BackgroundColor="#BCBCBC"/>
-                <BoxView Grid.Column="2" BackgroundColor="#C7C7C7"/>
+                <BoxView Grid.Column="0" BackgroundColor="#C6C6C6"/>
+                <BoxView Grid.Column="1" BackgroundColor="#BFBFBF"/>
+                <BoxView Grid.Column="2" BackgroundColor="#C6C6C6"/>
 
                 <Label Text="EPC" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Small" VerticalOptions="CenterAndExpand" />
                 <Label Grid.Column="1" Text="ºC" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Small" VerticalOptions="CenterAndExpand" />
@@ -55,16 +122,16 @@
               <DataTemplate>
                 <ViewCell>
                   <StackLayout Orientation="Vertical">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                  <ColumnDefinition Width="0.6*" />
-                                  <ColumnDefinition Width="0.2*" />
-                                  <ColumnDefinition Width="0.2*" />
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Text="{Binding DisplayName}" VerticalTextAlignment="Start" FontSize="Small" />
-                                <Label Grid.Column="1" Text="{Binding SensorAvgValue}" VerticalTextAlignment="Start" HorizontalTextAlignment="Start" TextColor="{Binding valueColor}"/>
-                                <Label Grid.Column="2" Text="{Binding SucessCount}" VerticalTextAlignment="Start" HorizontalTextAlignment="Center" />
-                            </Grid>
+                    <Grid>
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.6*" />
+                        <ColumnDefinition Width="0.2*" />
+                        <ColumnDefinition Width="0.2*" />
+                      </Grid.ColumnDefinitions>
+                      <Label Grid.Column="0" Text="{Binding DisplayName}"    VerticalTextAlignment="Start" FontSize="Small" />
+                      <Label Grid.Column="1" Text="{Binding SensorAvgValue}" VerticalTextAlignment="Start" HorizontalTextAlignment="Start" TextColor="{Binding valueColor}"/>
+                      <Label Grid.Column="2" Text="{Binding SucessCount}"    VerticalTextAlignment="Start" HorizontalTextAlignment="Center" />
+                    </Grid>
                   </StackLayout>
                 </ViewCell>
               </DataTemplate>

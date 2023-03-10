@@ -202,63 +202,114 @@ namespace BLE.Client.ViewModels {
         //     }
         // }
 
-        class Person {
-            public KeyValuePair< string, double? > BackInner { get; set; }
-            public KeyValuePair< string, double? > BackOuter { get; set; }
-            public KeyValuePair< string, double? > BackNeckInner { get; set; }
-            public KeyValuePair< string, double? > BackNeckOuter { get; set; }
-            public KeyValuePair< string, double? > ChestInner { get; set; }
-            public KeyValuePair< string, double? > ChestOuter { get; set; }
-            public KeyValuePair< string, double? > LeftAbInner { get; set; }
-            public KeyValuePair< string, double? > LeftAbOuter { get; set; }
-            public KeyValuePair< string, double? > RightAbInner { get; set; }
-            public KeyValuePair< string, double? > RightAbOuter { get; set; }
-            public KeyValuePair< string, double? > LeftUpArmInner { get; set; }
-            public KeyValuePair< string, double? > LeftUpArmOuter { get; set; }
-            public KeyValuePair< string, double? > RightUpArmInner { get; set; }
-            public KeyValuePair< string, double? > RightUpArmOuter { get; set; }
-            public KeyValuePair< string, double? > LeftLowArmInner { get; set; }
-            public KeyValuePair< string, double? > LeftLowArmOuter { get; set; }
-            public KeyValuePair< string, double? > RightLowArmInner { get; set; }
-            public KeyValuePair< string, double? > RightLowArmOuter { get; set; }
+        // class Person {
+        //     public KeyValuePair< string, double? > BackInner { get; set; }
+        //     public KeyValuePair< string, double? > BackOuter { get; set; }
+        //     public KeyValuePair< string, double? > BackNeckInner { get; set; }
+        //     public KeyValuePair< string, double? > BackNeckOuter { get; set; }
+        //     public KeyValuePair< string, double? > ChestInner { get; set; }
+        //     public KeyValuePair< string, double? > ChestOuter { get; set; }
+        //     public KeyValuePair< string, double? > LeftAbInner { get; set; }
+        //     public KeyValuePair< string, double? > LeftAbOuter { get; set; }
+        //     public KeyValuePair< string, double? > RightAbInner { get; set; }
+        //     public KeyValuePair< string, double? > RightAbOuter { get; set; }
+        //     public KeyValuePair< string, double? > LeftUpArmInner { get; set; }
+        //     public KeyValuePair< string, double? > LeftUpArmOuter { get; set; }
+        //     public KeyValuePair< string, double? > RightUpArmInner { get; set; }
+        //     public KeyValuePair< string, double? > RightUpArmOuter { get; set; }
+        //     public KeyValuePair< string, double? > LeftLowArmInner { get; set; }
+        //     public KeyValuePair< string, double? > LeftLowArmOuter { get; set; }
+        //     public KeyValuePair< string, double? > RightLowArmInner { get; set; }
+        //     public KeyValuePair< string, double? > RightLowArmOuter { get; set; }
 
-            public Person (
-                string bn1, string b1, string c1, string lab1, string rab1,
-                string rua1, string rla1, string lua1, string lla1,
-                string bn2, string b2, string c2, string lab2, string rab2,
-                string rua2, string rla2, string lua2, string lla2
-            ) {  
-                BackInner = new KeyValuePair<string, double?>(b1, null);
-                BackOuter = new KeyValuePair<string, double?>(b2, null);
-                BackNeckInner = new KeyValuePair<string, double?>(bn1, null);
-                BackNeckOuter = new KeyValuePair<string, double?>(bn2, null);
-                ChestInner = new KeyValuePair<string, double?>(c1, null);
-                ChestOuter = new KeyValuePair<string, double?>(c2, null);
-                LeftAbInner = new KeyValuePair<string, double?>(lab1, null);
-                LeftAbOuter = new KeyValuePair<string, double?>(lab2, null);
-                RightAbInner = new KeyValuePair<string, double?>(rab1, null);
-                RightAbOuter = new KeyValuePair<string, double?>(rab2, null);
-                LeftUpArmInner = new KeyValuePair<string, double?>(lua1, null);
-                LeftUpArmOuter = new KeyValuePair<string, double?>(lua2, null);
-                RightUpArmInner = new KeyValuePair<string, double?>(rua1, null);
-                RightUpArmOuter = new KeyValuePair<string, double?>(rua2, null);
-                LeftLowArmInner = new KeyValuePair<string, double?>(lla1, null);
-                LeftLowArmOuter = new KeyValuePair<string, double?>(lla2, null);
-                RightLowArmInner = new KeyValuePair<string, double?>(rla1, null);
-                RightLowArmOuter = new KeyValuePair<string, double?>(rla2, null);
+        //     public Person (
+        //         string bn1, string b1, string c1, string lab1, string rab1,
+        //         string rua1, string rla1, string lua1, string lla1,
+        //         string bn2, string b2, string c2, string lab2, string rab2,
+        //         string rua2, string rla2, string lua2, string lla2
+        //     ) {  
+        //         BackInner = new KeyValuePair<string, double?>(b1, null);
+        //         BackOuter = new KeyValuePair<string, double?>(b2, null);
+        //         BackNeckInner = new KeyValuePair<string, double?>(bn1, null);
+        //         BackNeckOuter = new KeyValuePair<string, double?>(bn2, null);
+        //         ChestInner = new KeyValuePair<string, double?>(c1, null);
+        //         ChestOuter = new KeyValuePair<string, double?>(c2, null);
+        //         LeftAbInner = new KeyValuePair<string, double?>(lab1, null);
+        //         LeftAbOuter = new KeyValuePair<string, double?>(lab2, null);
+        //         RightAbInner = new KeyValuePair<string, double?>(rab1, null);
+        //         RightAbOuter = new KeyValuePair<string, double?>(rab2, null);
+        //         LeftUpArmInner = new KeyValuePair<string, double?>(lua1, null);
+        //         LeftUpArmOuter = new KeyValuePair<string, double?>(lua2, null);
+        //         RightUpArmInner = new KeyValuePair<string, double?>(rua1, null);
+        //         RightUpArmOuter = new KeyValuePair<string, double?>(rua2, null);
+        //         LeftLowArmInner = new KeyValuePair<string, double?>(lla1, null);
+        //         LeftLowArmOuter = new KeyValuePair<string, double?>(lla2, null);
+        //         RightLowArmInner = new KeyValuePair<string, double?>(rla1, null);
+        //         RightLowArmOuter = new KeyValuePair<string, double?>(rla2, null);
 
+        //     }
+        // }
+
+        // Person p = new Person(
+        //     "777F", "67DB", "184A", "885D", "71CF", "BA4C", "8FA9", "B6A1", "2C97",
+        //     "9854", "A3B0", "9EC6", "9A91", "343B", "87D4", "81D4", "8A53", "1397"
+        // );
+
+        // List<string> epcs = new List<string>{
+        //     "777F", "67DB", "184A", "885D", "71CF", "BA4C", "8FA9", "B6A1", "2C97",
+        //     "9854", "A3B0", "9EC6", "9A91", "343B", "87D4", "81D4", "8A53", "1397"
+        // };
+
+        private List<string> _BeaniePicker; public List<string> BeaniePicker { get => _BeaniePicker; set { _BeaniePicker = value; OnPropertyChanged("BeaniePicker"); } }
+        private List<string> _ShirtPicker; public List<string> ShirtPicker { get => _ShirtPicker; set { _ShirtPicker = value; OnPropertyChanged("ShirtPicker"); } }
+        private List<string> _PantsPicker; public List<string> PantsPicker { get => _PantsPicker; set { _PantsPicker = value; OnPropertyChanged("PantsPicker"); } }
+        private List<string> _SockPicker; public List<string> SockPicker { get => _SockPicker; set { _SockPicker = value; OnPropertyChanged("SockPicker"); } }
+        private List<string> _GlovePicker; public List<string> GlovePicker { get => _GlovePicker; set { _GlovePicker = value; OnPropertyChanged("GlovePicker"); } }
+
+        private int _SelectBeanie; 
+        public int SelectBeanie {
+            get => _SelectBeanie;
+            set { 
+                _SelectBeanie = value; 
+                OnPropertyChanged("SelectBeanie");
             }
         }
 
-        Person p = new Person(
-            "777F", "67DB", "184A", "885D", "71CF", "BA4C", "8FA9", "B6A1", "2C97",
-            "9854", "A3B0", "9EC6", "9A91", "343B", "87D4", "81D4", "8A53", "1397"
-        );
+        private int _SelectShirt;
+        public int SelectShirt {
+            get => _SelectShirt;
+            set {
+                _SelectShirt = value;
+                OnPropertyChanged("SelectShirt");
+            }
+        }
 
-        List<string> epcs = new List<string>{
-            "777F", "67DB", "184A", "885D", "71CF", "BA4C", "8FA9", "B6A1", "2C97",
-            "9854", "A3B0", "9EC6", "9A91", "343B", "87D4", "81D4", "8A53", "1397"
-        };
+        private int _SelectPants;
+        public int SelectPants {
+            get => _SelectPants;
+            set {
+                _SelectPants = value;
+                OnPropertyChanged("SelectPants");
+            }
+        }
+
+        private int _SelectSock;
+        public int SelectSock {
+            get => _SelectSock;
+            set {
+                _SelectSock = value;
+                OnPropertyChanged("SelectSock");
+            }
+        }
+
+        private int _SelectGlove;
+        public int SelectGlove {
+            get => _SelectGlove;
+            set {
+                _SelectGlove = value;
+                OnPropertyChanged("SelectGlove");
+            }
+        }
 
         private string _DebugVar; public string DebugVar { get => _DebugVar; set { _DebugVar = value; OnPropertyChanged("DebugVar"); } }
 
@@ -287,6 +338,10 @@ namespace BLE.Client.ViewModels {
             Adapter.DeviceConnectionLost += OnDeviceDisconnected; // connection or discconnect?
 
             GetTimes();      // Get Duty Cycle Times
+
+            _BeaniePicker = new List<string> { "Cap 1", "Cap 2", "Cap 3", "Cap 4", "Cap 5", "Cap 6", "Cap 7", "Cap 8" };
+            _ShirtPicker = new List<string> { "Shirt 1", "Shirt 2", "Shirt 3", "Shirt 4", "Shirt 5", "Shirt 6", "Shirt 7", "Shirt 8" };
+            _PantsPicker = new List<string> { "Pants 1", "Pants 2", "Pants 3", "Pants 4", "Pants 5", "Pants 6", "Pants 7", "Pants 8" };
 
             OnStartInventoryButtonCommand = new Command(StartInventoryClick);
             OnClearButtonCommand = new Command(ClearClick);
@@ -481,7 +536,7 @@ namespace BLE.Client.ViewModels {
                         case 0x00: // Normal End
                             break;
                         case 0x0309:
-                            _userDialogs.Alert("Too near to metal, please move CS108 away from metal and start inventory again.");
+                            _userDialogs.Alert("Too close to metal! Please move CS108 away from metal and try again.");
                             break;
                         default:
                             _userDialogs.Alert("Mac error : 0x" + BleMvxApplication._reader.rfid.LastMacErrorCode.ToString("X4"));
@@ -546,60 +601,6 @@ namespace BLE.Client.ViewModels {
                                         finally {
                                             // Get Last Four Characters of EPC
                                             string tEPC = TagInfoList[cnt].EPC.Substring(TagInfoList[cnt].EPC.Length - 4);
-
-                                            // switch (tEPC) {
-                                            //     case "1FC1":
-                                            //         _Beanie1_T = DisplaySAV;
-                                            //         RaisePropertyChanged(() => Beanie1_T);
-                                            //         break;
-                                            //     case "96A1":
-                                            //         _Beanie2_T = DisplaySAV;
-                                            //         RaisePropertyChanged(() => Beanie2_T);
-                                            //         break;
-                                            //     case "5448":
-                                            //         _Beanie3_T = DisplaySAV;
-                                            //         RaisePropertyChanged(() => Beanie3_T);
-                                            //         break;
-                                            //     case "7561":
-                                            //         _BackNeck1_T = DisplaySAV;
-                                            //         RaisePropertyChanged(() => BackNeck1_T);
-                                            //         break;
-                                            //     case "5E01":
-                                            //         _Back1_T = DisplaySAV;
-                                            //         RaisePropertyChanged(() => Back1_T);
-                                            //         break;
-                                            //     case "30CE":
-                                            //         _Chest1_T = DisplaySAV;
-                                            //         RaisePropertyChanged(() => Chest1_T);
-                                            //         break;
-                                            //     case "67CC":
-                                            //         _RightAb1_T = DisplaySAV;
-                                            //         RaisePropertyChanged(() => RightAb1_T);
-                                            //         break;
-                                            //     case "7D24":
-                                            //         _LeftAb1_T = DisplaySAV;
-                                            //         RaisePropertyChanged(() => LeftAb1_T);
-                                            //         break;
-                                            //     case "9859":
-                                            //         _RightUpArm1_T = DisplaySAV;
-                                            //         RaisePropertyChanged(() => RightUpArm1_T);
-                                            //         break;
-                                            //     case "7D79":
-                                            //         _LeftUpArm1_T = DisplaySAV;
-                                            //         RaisePropertyChanged(() => LeftUpArm1_T);
-                                            //         break;
-                                            //     case "7263":
-                                            //         _RightLowArm1_T = DisplaySAV;
-                                            //         RaisePropertyChanged(() => RightLowArm1_T);
-                                            //         break;
-                                            //     case "34D7":
-                                            //         _LeftLowArm1_T = DisplaySAV;
-                                            //         RaisePropertyChanged(() => LeftLowArm1_T);
-                                            //         break;
-                                            //     default:
-                                            //         break;
-                                            // }
-
                                         }
 
                                     } // if caldata is nonzero
@@ -682,7 +683,6 @@ namespace BLE.Client.ViewModels {
         private async void ShareDataButtonClick()
         {
             string fileName = pick_result.FullPath;
-
             await Share.RequestAsync(new ShareFileRequest {
                 Title = "Share Tags",
                 File = new ShareFile(fileName)

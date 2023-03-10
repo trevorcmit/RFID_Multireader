@@ -209,7 +209,7 @@
 
             <!-- ######### Connected Button and Reader Voltage Section ####### -->
             <Button
-                Text="{Binding connectedButton}" CornerRadius="25"
+                Text="{Binding connectedButton}" CornerRadius="17"
                 HorizontalOptions="FillAndExpand"
                 FontSize="Medium"
                 Opacity="0.92"
@@ -243,9 +243,7 @@
                 </RelativeLayout.HeightConstraint>
             </Button>
 
-            <Label
-                Text ="{Binding labelVoltage}" TextColor="{Binding labelVoltageTextColor}"
-            />
+            <Label Text ="{Binding labelVoltage}" TextColor="{Binding labelVoltageTextColor}" />
 
             <!--    Text="{Binding ConnectionDeviceName}" BackgroundColor="#FFFFFF"
 				RelativeLayout.XConstraint ="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.0, Constant=2}"

@@ -62,7 +62,6 @@ namespace BLE.Client.Pages {
                 case "Voltage":
                     BleMvxApplication._config.BatteryLevelIndicatorFormat = 0;
                     break;
-
                 default:
                     BleMvxApplication._config.BatteryLevelIndicatorFormat = 1;
                     break;

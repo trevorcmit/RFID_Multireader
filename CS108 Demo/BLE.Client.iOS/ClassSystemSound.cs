@@ -24,7 +24,6 @@ namespace BLE.Client.iOS {
             backgroundMusic3.Volume = MusicVolume;
             backgroundMusic4.Volume = MusicVolume;
             backgroundMusic5.Volume = MusicVolume;
-
             ActivateAudioSession();
         }
 

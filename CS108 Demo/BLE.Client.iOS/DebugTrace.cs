@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using MvvmCross.Platform.Platform;
 
+
 namespace BLE.Client.iOS
 {
     public class DebugTrace : IMvxTrace
@@ -27,5 +28,6 @@ namespace BLE.Client.iOS
                 Trace(MvxTraceLevel.Error, tag, "Exception during trace of {0} {1}", level, message);
             }
         }
+
     }
 }

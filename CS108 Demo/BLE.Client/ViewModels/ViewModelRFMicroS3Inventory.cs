@@ -180,28 +180,37 @@ namespace BLE.Client.ViewModels {
             public string Abdomen_Out { get; set; }
             public List<string> TagList { get; set; }
             public Shirt(
-                string ci, string rui, string lui, string rli, string lli, string ai,
-                string co, string ruo, string luo, string rlo, string llo, string ao
+                string chest_out, string chest_in, string ab_out, string ab_in, string ru_out, string ru_in,
+                string rl_out, string rl_in, string lu_out, string lu_in, string ll_out, string ll_in
             ) {
-                Chest_In = ci;
-                RightUp_In = rui;
-                LeftUp_In = lui;
-                RightLow_In = rli;
-                LeftLow_In = lli;
-                Abdomen_In = ai;
-                Chest_Out = co;
-                RightUp_Out = ruo;
-                LeftUp_Out = luo;
-                RightLow_Out = rlo;
-                LeftLow_Out = llo;
-                Abdomen_Out = ao;
+                Chest_In = chest_in;
+                RightUp_In = ru_in;
+                LeftUp_In = lu_in;
+                RightLow_In = rl_in;
+                LeftLow_In = ll_in;
+                Abdomen_In = ab_in;
+                Chest_Out = chest_out;
+                RightUp_Out = ru_out;
+                LeftUp_Out = lu_out;
+                RightLow_Out = rl_out;
+                LeftLow_Out = ll_out;
+                Abdomen_Out = ab_out;
                 TagList = new List<string> {
                     Chest_In, RightUp_In, LeftUp_In, RightLow_In, LeftLow_In, Abdomen_In, 
                     Chest_Out, RightUp_Out, LeftUp_Out, RightLow_Out, LeftLow_Out, Abdomen_Out
                 };
             }
         }
-        
+
+        Shirt shirt1 = new Shirt("759A", "8099", "7198", "9A80", "94B4", "896D", "----", "----", "8265", "98CC", "----", "----");
+        Shirt shirt2 = new Shirt("----", "3DBA", "9E3B", "8F77", "6065", "8FA4", "077C", "A035", "A831", "5782", "9B7D", "0A4A");
+        Shirt shirt3 = new Shirt("6D2E", "0B61", "1E72", "1B7E", "5C34", "265C", "----", "----", "92C1", "2371", "----", "----");
+        Shirt shirt4 = new Shirt("6ACF", "4743", "1650", "37BB", "2CC8", "424E", "----", "----", "3750", "5713", "----", "----");
+        Shirt shirt5 = new Shirt("099B", "5577", "2D1C", "5352", "855B", "3C4F", "----", "----", "2A7A", "3B75", "----", "----");
+        Shirt shirt6 = new Shirt("AB82", "98C0", "067B", "734B", "41AC", "BFA4", "----", "B142", "A3BC", "1C2E", "----", "8917");
+        Shirt shirt7 = new Shirt("7B06", "4EE3", "3318", "6415", "OD7C", "1EB3", "----", "----", "1F90", "77DE", "----", "----");
+        Shirt shirt8 = new Shirt("3869", "833E", "774F", "2B45", "483D", "64A5", "----", "----", "737F", "675C", "----", "----");
+
         class Pants {
             public string Thigh_In { get; set; }
             public string Thigh_Out { get; set; }
@@ -241,6 +250,15 @@ namespace BLE.Client.ViewModels {
             }
         }
         
+        Beanie beanie1 = new Beanie("624F", "3F15");
+        Beanie beanie2 = new Beanie("3B3C", "----");
+        Beanie beanie3 = new Beanie("----", "----");
+        Beanie beanie4 = new Beanie("----", "----");
+        Beanie beanie5 = new Beanie("----", "----");
+        Beanie beanie6 = new Beanie("----", "----");
+        Beanie beanie7 = new Beanie("----", "----");
+        Beanie beanie8 = new Beanie("----", "----");
+
         private List<string> _BeaniePicker; public List<string> BeaniePicker { get => _BeaniePicker; set { _BeaniePicker = value; OnPropertyChanged("BeaniePicker"); } }
         private List<string> _ShirtPicker; public List<string> ShirtPicker { get => _ShirtPicker; set { _ShirtPicker = value; OnPropertyChanged("ShirtPicker"); } }
         private List<string> _PantsPicker; public List<string> PantsPicker { get => _PantsPicker; set { _PantsPicker = value; OnPropertyChanged("PantsPicker"); } }
@@ -339,6 +357,8 @@ namespace BLE.Client.ViewModels {
 
         private string _DebugVar; public string DebugVar { get => _DebugVar; set { _DebugVar = value; OnPropertyChanged("DebugVar"); } }
 
+        Dictionary<int, Shirt> shirts = new Dictionary<int, Shirt>();
+
         #endregion
 
 
@@ -347,6 +367,8 @@ namespace BLE.Client.ViewModels {
             _userDialogs = userDialogs;
 
             Beanie_In = "gray";
+            Beanie_In_T = "--";
+            Beanie_Out_T = "--";
 
             Chest = "gray";
             Abs = "gray";
@@ -354,11 +376,31 @@ namespace BLE.Client.ViewModels {
             LeftUp = "gray";
             LeftLow = "gray";
             RightLow = "gray";
+            RightUpIn_T = "--";
+            RightUpOut_T = "--";
+            LeftUpIn_T = "--";
+            LeftUpOut_T = "--";
+            RightLowIn_T = "--";
+            RightLowOut_T = "--";
+            LeftLowIn_T = "--";
+            LeftLowOut_T = "--";
+            ChestIn_T = "--";
+            ChestOut_T = "--";
+            AbIn_T = "--";
+            AbOut_T = "--";
 
             ThighL = "gray";
             ThighR = "gray";
             CalfL = "gray";
             CalfR = "gray";
+            ThighLIn_T = "--";
+            ThighRIn_T = "--";
+            CalfLIn_T = "--";
+            CalfRIn_T = "--";
+            ThighLOut_T = "--";
+            ThighROut_T = "--";
+            CalfLOut_T = "--";
+            CalfROut_T = "--";
 
             SockL = "gray";
             SockR = "gray";
@@ -374,17 +416,22 @@ namespace BLE.Client.ViewModels {
             GloveInR_T  = "--";
             GloveOutR_T = "--";
 
+            shirts = new Dictionary<int, Shirt> {
+                {0, shirt1}, {1, shirt2}, {2, shirt3}, {3, shirt4}, 
+                {4, shirt5}, {5, shirt6}, {6, shirt7}, {7, shirt8}   
+            };
+
             // Set disconnection event for reconnection
             Adapter.DeviceDisconnected += OnDeviceDisconnected;
-            Adapter.DeviceConnectionLost += OnDeviceDisconnected; // connection or discconnect?
+            Adapter.DeviceConnectionLost += OnDeviceDisconnected; // connection or disconnect?
 
-            GetTimes();      // Get Duty Cycle Times
+            GetTimes();  // Get Duty Cycle Times
 
             _BeaniePicker = new List<string> { "Cap 1", "Cap 2", "Cap 3", "Cap 4", "Cap 5", "Cap 6", "Cap 7", "Cap 8" };
-            _ShirtPicker = new List<string> { "Shirt 1", "Shirt 2", "Shirt 3", "Shirt 4", "Shirt 5", "Shirt 6", "Shirt 7", "Shirt 8" };
-            _PantsPicker = new List<string> { "Pants 1", "Pants 2", "Pants 3", "Pants 4", "Pants 5", "Pants 6", "Pants 7", "Pants 8" };
-            _SockPicker = new List<string> { "Sock 1", "Sock 2", "Sock 3", "Sock 4", "Sock 5", "Sock 6", "Sock 7", "Sock 8" };
-            _GlovePicker = new List<string> { "Glove 1", "Glove 2", "Glove 3", "Glove 4", "Glove 5", "Glove 6", "Glove 7", "Glove 8" };
+            _ShirtPicker  = new List<string> { "Shirt 1", "Shirt 2", "Shirt 3", "Shirt 4", "Shirt 5", "Shirt 6", "Shirt 7", "Shirt 8" };
+            _PantsPicker  = new List<string> { "Pants 1", "Pants 2", "Pants 3", "Pants 4", "Pants 5", "Pants 6", "Pants 7", "Pants 8" };
+            _SockPicker   = new List<string> { "Sock 1", "Sock 2", "Sock 3", "Sock 4", "Sock 5", "Sock 6", "Sock 7", "Sock 8" };
+            _GlovePicker  = new List<string> { "Glove 1", "Glove 2", "Glove 3", "Glove 4", "Glove 5", "Glove 6", "Glove 7", "Glove 8" };
 
             OnStartInventoryButtonCommand = new Command(StartInventoryClick);
             OnClearButtonCommand = new Command(ClearClick);
@@ -644,7 +691,91 @@ namespace BLE.Client.ViewModels {
                                         finally {
                                             // Get Last Four Characters of EPC
                                             string tEPC = TagInfoList[cnt].EPC.Substring(TagInfoList[cnt].EPC.Length - 4);
-                                        }
+
+                                            Shirt s1 = shirts[SelectShirt];
+
+                                            if (s1.TagList.Contains(tEPC)) {
+                                                if (tEPC==s1.Chest_In) {
+                                                    _ChestIn_T = DisplaySAV; RaisePropertyChanged(() => ChestIn_T);
+                                                    if ((SAV>THRESHOLD) && (_Chest!="green")) {
+                                                        _Chest = "green"; RaisePropertyChanged(() => Chest);
+                                                    }
+                                                    else if ((SAV<=THRESHOLD) && (_Chest!="red")) {
+                                                        _Chest = "red"; RaisePropertyChanged(() => Chest);
+                                                    }
+                                                }
+                                                else if (tEPC==s1.Chest_Out) {
+                                                    _ChestOut_T = DisplaySAV; RaisePropertyChanged(() => ChestOut_T);
+                                                }
+
+                                                else if (tEPC==s1.Abdomen_In) {
+                                                    _AbIn_T = DisplaySAV; RaisePropertyChanged(() => AbIn_T);
+                                                    if ((SAV>THRESHOLD) && (_Abs!="green")) {
+                                                        _Abs = "green"; RaisePropertyChanged(() => Abs);
+                                                    }
+                                                    else if ((SAV<=THRESHOLD) && (_Abs!="red")) {
+                                                        _Abs = "red"; RaisePropertyChanged(() => Abs);
+                                                    }
+                                                }
+                                                else if (tEPC==s1.Abdomen_Out) {
+                                                    _AbOut_T = DisplaySAV; RaisePropertyChanged(() => AbOut_T);
+                                                }
+
+                                                else if (tEPC==s1.LeftUp_In) {
+                                                    _LeftUpIn_T = DisplaySAV; RaisePropertyChanged(() => LeftUpIn_T);
+                                                    if ((SAV>THRESHOLD) && (_LeftUp!="green")) {
+                                                        _LeftUp = "green"; RaisePropertyChanged(() => LeftUp);
+                                                    }
+                                                    else if ((SAV<=THRESHOLD) && (_LeftUp!="red")) {
+                                                        _LeftUp = "red"; RaisePropertyChanged(() => LeftUp);
+                                                    }
+                                                }
+                                                else if (tEPC==s1.LeftUp_Out) {
+                                                    _LeftUpOut_T = DisplaySAV; RaisePropertyChanged(() => LeftUpOut_T);
+                                                }
+
+                                                else if (tEPC==s1.LeftLow_In) {
+                                                    _LeftLowIn_T = DisplaySAV; RaisePropertyChanged(() => LeftLowIn_T);
+                                                    if ((SAV>THRESHOLD) && (_LeftLow!="green")) {
+                                                        _LeftLow = "green"; RaisePropertyChanged(() => LeftLow);
+                                                    }
+                                                    else if ((SAV<=THRESHOLD) && (_LeftLow!="red")) {
+                                                        _LeftLow = "red"; RaisePropertyChanged(() => LeftLow);
+                                                    }
+                                                }
+                                                else if (tEPC==s1.LeftLow_Out) {
+                                                    _LeftLowOut_T = DisplaySAV; RaisePropertyChanged(() => LeftLowOut_T);
+                                                }
+
+                                                else if (tEPC==s1.RightUp_In) {
+                                                    _RightUpIn_T = DisplaySAV; RaisePropertyChanged(() => RightUpIn_T);
+                                                    if ((SAV>THRESHOLD) && (_RightUp!="green")) {
+                                                        _RightUp = "green"; RaisePropertyChanged(() => RightUp);
+                                                    }
+                                                    else if ((SAV<=THRESHOLD) && (_RightUp!="red")) {
+                                                        _RightUp = "red"; RaisePropertyChanged(() => RightUp);
+                                                    }
+                                                }
+                                                else if (tEPC==s1.RightUp_Out) {
+                                                    _RightUpOut_T = DisplaySAV; RaisePropertyChanged(() => RightUpOut_T);
+                                                }
+
+                                                else if (tEPC==s1.RightLow_In) {
+                                                    _RightLowIn_T = DisplaySAV; RaisePropertyChanged(() => RightLowIn_T);
+                                                    if ((SAV>THRESHOLD) && (_RightLow!="green")) {
+                                                        _RightLow = "green"; RaisePropertyChanged(() => RightLow);
+                                                    }
+                                                    else if ((SAV<=THRESHOLD) && (_RightLow!="red")) {
+                                                        _RightLow = "red"; RaisePropertyChanged(() => RightLow);
+                                                    }
+                                                }
+                                                else if (tEPC==s1.RightLow_Out) {
+                                                    _RightLowOut_T = DisplaySAV; RaisePropertyChanged(() => RightLowOut_T);
+                                                }
+                                            }
+
+
+                                        } // end of Try/Finally block
 
                                     } // if caldata is nonzero
                                 }     // if temp within range

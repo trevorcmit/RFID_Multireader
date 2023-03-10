@@ -363,11 +363,13 @@ namespace BLE.Client.Pages {
             try {
                 value = uint.Parse(entryPower.Text);
                 if (value < 0 || value > 330) throw new System.ArgumentException("Value not valid", "tagPopulation");
-                entryPower.Text = value.ToString();
+                // entryPower.Text = value.ToString();
+                entryPower.Text = "330";
             }
             catch (Exception ex) {
                 await DisplayAlert("", "Value not valid!!!", "OK");
-                entryPower.Text = "300";
+                // entryPower.Text = "300";
+                entryPower.Text = "330";
             }
         }
 

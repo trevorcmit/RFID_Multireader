@@ -151,19 +151,39 @@ namespace BLE.Client.ViewModels {
         public int THRESHOLD = 15;
 
         class Glove {
-            public string DorsalLeft { get; set; }
-            public string DorsalRight { get; set; }
-            public string FourthLeft { get; set; }
-            public string FourthRight { get; set; }
+            public string DorsalLeftIn { get; set; }
+            public string DorsalLeftOut { get; set; }
+            public string DorsalRightIn { get; set; }
+            public string DorsalRightOut { get; set; }
+            public string FourthLeftIn { get; set; }
+            public string FourthLeftOut { get; set; }
+            public string FourthRightIn { get; set; }
+            public string FourthRightOut { get; set; }
             public List<string> TagList { get; set; }
-            public Glove(string dl, string dr, string fl, string fr) {
-                DorsalLeft = dl;
-                DorsalRight = dr;
-                FourthLeft = fl;
-                FourthRight = fr;
-                TagList = new List<string> { DorsalLeft, DorsalRight, FourthLeft, FourthRight };
+            public Glove(
+                string dorsal_left_in, string dorsal_left_out, string dorsal_right_in, string dorsal_right_out, 
+                string fourth_left_in, string fourth_left_out, string fourth_right_in, string fourth_right_out
+            ) {
+                DorsalLeftIn = dorsal_left_in;
+                DorsalLeftOut = dorsal_left_out;
+                DorsalRightIn = dorsal_right_in;
+                DorsalRightOut = dorsal_right_out;
+                FourthLeftIn = fourth_left_in;
+                FourthLeftOut = fourth_left_out;
+                FourthRightIn = fourth_right_in;
+                FourthRightOut = fourth_right_out;
+                TagList = new List<string> { dorsal_left_in, dorsal_left_out, dorsal_right_in, dorsal_right_out, fourth_left_in, fourth_left_out, fourth_right_in, fourth_right_out };
             }
         }
+
+        Glove glove1 = new Glove("6091", "147F", "2AC0", "637B", "43C3", "83B0", "63D4", "3B5C");
+        Glove glove2 = new Glove("----", "2C4A", "91AA", "2693", "----", "----", "----", "----");
+        Glove glove3 = new Glove("----", "6344", "----", "62A5", "----", "----", "----", "----");
+        Glove glove4 = new Glove("----", "1776", "----", "9AB2", "----", "----", "----", "----");
+        Glove glove5 = new Glove("----", "9722", "----", "9A48", "----", "----", "----", "----");
+        Glove glove6 = new Glove("----", "3E5D", "----", "2E3B", "----", "----", "----", "----");
+        Glove glove7 = new Glove("----", "A959", "----", "4202", "----", "----", "----", "----");
+        Glove glove8 = new Glove("----", "91D2", "----", "4B37", "----", "----", "----", "----");
 
         class Shirt {
             public string Chest_In { get; set; }
@@ -204,12 +224,12 @@ namespace BLE.Client.ViewModels {
 
         Shirt shirt1 = new Shirt("759A", "8099", "7198", "9A80", "94B4", "896D", "----", "----", "8265", "98CC", "----", "----");
         Shirt shirt2 = new Shirt("----", "3DBA", "9E3B", "8F77", "6065", "8FA4", "077C", "A035", "A831", "5782", "9B7D", "0A4A");
-        Shirt shirt3 = new Shirt("6D2E", "0B61", "1E72", "1B7E", "5C34", "265C", "----", "----", "92C1", "2371", "----", "----");
-        Shirt shirt4 = new Shirt("6ACF", "4743", "1650", "37BB", "2CC8", "424E", "----", "----", "3750", "5713", "----", "----");
+        Shirt shirt3 = new Shirt("6D2E", "0B61", "1E72", "1B7E", "5C34", "265C", "5E8F", "3DCF", "92C1", "2371", "7181", "2774");
+        Shirt shirt4 = new Shirt("6ACF", "4743", "1650", "37BB", "2CC8", "424E", "7EB3", "2C98", "3750", "5713", "4FDC", "B0A2");
         Shirt shirt5 = new Shirt("099B", "5577", "2D1C", "5352", "855B", "3C4F", "----", "----", "2A7A", "3B75", "----", "----");
-        Shirt shirt6 = new Shirt("AB82", "98C0", "067B", "734B", "41AC", "BFA4", "----", "B142", "A3BC", "1C2E", "----", "8917");
-        Shirt shirt7 = new Shirt("7B06", "4EE3", "3318", "6415", "OD7C", "1EB3", "----", "----", "1F90", "77DE", "----", "----");
-        Shirt shirt8 = new Shirt("3869", "833E", "774F", "2B45", "483D", "64A5", "----", "----", "737F", "675C", "----", "----");
+        Shirt shirt6 = new Shirt("AB82", "98C0", "067B", "734B", "41AC", "BFA4", "8938", "B142", "A3BC", "1C2E", "7BDA", "8917");
+        Shirt shirt7 = new Shirt("7B06", "4EE3", "3318", "6415", "OD7C", "1EB3", "8A72", "2D69", "1F90", "77DE", "2850", "9F6B");
+        Shirt shirt8 = new Shirt("3869", "833E", "774F", "2B45", "483D", "64A5", "0E92", "AC75", "737F", "675C", "2567", "B76E");
 
         class Pants {
             public string Thigh_In { get; set; }
@@ -238,6 +258,15 @@ namespace BLE.Client.ViewModels {
                 TagList = new List<string> { Above_In, Above_Out, Toes };
             }
         }
+
+        Sock sock1 = new Sock("----", "----", "7D30");
+        Sock sock2 = new Sock("----", "----", "B27A");
+        Sock sock3 = new Sock("----", "----", "----");
+        Sock sock4 = new Sock("----", "----", "----");
+        Sock sock5 = new Sock("----", "----", "----");
+        Sock sock6 = new Sock("----", "----", "----");
+        Sock sock7 = new Sock("----", "----", "----");
+        Sock sock8 = new Sock("----", "----", "----");
 
         class Beanie {
             public string Forehead_In { get; set; }
@@ -276,7 +305,6 @@ namespace BLE.Client.ViewModels {
                 _Beanie_In    = "gray"; RaisePropertyChanged(() => Beanie_In);
             }
         }
-
         private int _SelectShirt;
         public int SelectShirt {
             get => _SelectShirt;
@@ -303,7 +331,6 @@ namespace BLE.Client.ViewModels {
                 _AbOut_T = "--";       RaisePropertyChanged(() => AbOut_T);
             }
         }
-
         private int _SelectPants;
         public int SelectPants {
             get => _SelectPants;
@@ -324,7 +351,6 @@ namespace BLE.Client.ViewModels {
                 _CalfROut_T  = "--"; RaisePropertyChanged(() => CalfROut_T);
             }
         }
-
         private int _SelectSock;
         public int SelectSock {
             get => _SelectSock;
@@ -339,7 +365,6 @@ namespace BLE.Client.ViewModels {
                 _SockOutR_T = "--"; RaisePropertyChanged(() => SockOutR_T);
             }
         }
-
         private int _SelectGlove;
         public int SelectGlove {
             get => _SelectGlove;
@@ -358,6 +383,13 @@ namespace BLE.Client.ViewModels {
         private string _DebugVar; public string DebugVar { get => _DebugVar; set { _DebugVar = value; OnPropertyChanged("DebugVar"); } }
 
         Dictionary<int, Shirt> shirts = new Dictionary<int, Shirt>();
+        Dictionary<int, Beanie> beanies = new Dictionary<int, Beanie>();
+        Dictionary<int, Pants> pants = new Dictionary<int, Pants>();
+        Dictionary<int, Sock> socks = new Dictionary<int, Sock>();
+        Dictionary<int, Glove> gloves = new Dictionary<int, Glove>();
+
+        public Random rnd = new Random();
+        public int r;
 
         #endregion
 
@@ -365,6 +397,13 @@ namespace BLE.Client.ViewModels {
 
         public ViewModelRFMicroS3Inventory(IAdapter adapter, IUserDialogs userDialogs) : base(adapter) {
             _userDialogs = userDialogs;
+            r = rnd.Next(100000, 999999);
+
+            _SelectBeanie = 0; RaisePropertyChanged(() => SelectBeanie);
+            _SelectShirt = 0; RaisePropertyChanged(() => SelectShirt);
+            _SelectPants = 0; RaisePropertyChanged(() => SelectPants);
+            _SelectSock = 0; RaisePropertyChanged(() => SelectSock);
+            _SelectGlove = 0; RaisePropertyChanged(() => SelectGlove);
 
             Beanie_In = "gray";
             Beanie_In_T = "--";
@@ -419,6 +458,21 @@ namespace BLE.Client.ViewModels {
             shirts = new Dictionary<int, Shirt> {
                 {0, shirt1}, {1, shirt2}, {2, shirt3}, {3, shirt4}, 
                 {4, shirt5}, {5, shirt6}, {6, shirt7}, {7, shirt8}   
+            };
+
+            beanies = new Dictionary<int, Beanie> {
+                {0, beanie1}, {1, beanie2}, {2, beanie3}, {3, beanie4}, 
+                {4, beanie5}, {5, beanie6}, {6, beanie7}, {7, beanie8}   
+            };
+
+            gloves = new Dictionary<int, Glove> {
+                {0, glove1}, {1, glove2}, {2, glove3}, {3, glove4}, 
+                {4, glove5}, {5, glove6}, {6, glove7}, {7, glove8}   
+            };
+
+            socks = new Dictionary<int, Sock> {
+                {0, sock1}, {1, sock2}, {2, sock3}, {3, sock4}, 
+                {4, sock5}, {5, sock6}, {6, sock7}, {7, sock8}   
             };
 
             // Set disconnection event for reconnection
@@ -693,6 +747,9 @@ namespace BLE.Client.ViewModels {
                                             string tEPC = TagInfoList[cnt].EPC.Substring(TagInfoList[cnt].EPC.Length - 4);
 
                                             Shirt s1 = shirts[SelectShirt];
+                                            Beanie b1 = beanies[SelectBeanie];
+                                            Glove g1 = gloves[SelectGlove];
+                                            Sock sk1 = socks[SelectSock];
 
                                             if (s1.TagList.Contains(tEPC)) {
                                                 if (tEPC==s1.Chest_In) {
@@ -774,6 +831,25 @@ namespace BLE.Client.ViewModels {
                                                 }
                                             }
 
+                                            else if (g1.TagList.Contains(tEPC)) {
+                                                if (tEPC==g1.DorsalLeftIn) {
+                                                    _GloveInL_T = DisplaySAV; RaisePropertyChanged(() => GloveInL_T);
+                                                    if ((SAV>THRESHOLD) && (_GloveL!="green")) {
+                                                        _GloveL = "green"; RaisePropertyChanged(() => GloveL);
+                                                    }
+                                                    else if ((SAV<=THRESHOLD) && (_GloveL!="red")) {
+                                                        _GloveL = "red"; RaisePropertyChanged(() => GloveL);
+                                                    }
+                                                }
+                                                else if (tEPC==g1.DorsalLeftOut) {
+                                                    _GloveInL_T = DisplaySAV; RaisePropertyChanged(() => GloveInL_T);
+                                                }
+                                            }
+
+                                            else if (b1.TagList.Contains(tEPC)) {
+
+                                            }
+
 
                                         } // end of Try/Finally block
 
@@ -816,14 +892,13 @@ namespace BLE.Client.ViewModels {
                                         tag_Data.Add(item.EPC, t_data);
                                         tag_List.Add(item.EPC);
                                     }
-                                    finally {}
+                                    finally { }
                                 }
                             }
                         }
                         else { }
                         TagInfoList.Insert(0, item);
                         //} // added to filter EPCs to savedata
-
                     }
                 }
             });
@@ -831,11 +906,14 @@ namespace BLE.Client.ViewModels {
 
         void VoltageEvent(object sender, CSLibrary.Notification.VoltageEventArgs e) {}
 
+        public string fpath;
+
         private void AutoSaveData() {    // Function for Sharing time series data from tags
             InvokeOnMainThread(()=> {
+                string fpath = "tags_" + r.ToString() + ".csv";
 
                 // string fileName = pick_result.FullPath;    // Get file name from picker
-                string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "tags.csv");
+                string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), fpath);
                 // for UWP cannot use filepicker, use local folder instead
 
                 File.WriteAllText(fileName, String.Empty); // Empty text file to rewrite database

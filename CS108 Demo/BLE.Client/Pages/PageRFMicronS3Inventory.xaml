@@ -7,7 +7,6 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 >
-
 <!--
   xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Xamarin.Forms;assembly=LiveChartsCore.SkiaSharpView.XamarinForms">
 -->
@@ -46,7 +45,7 @@
             <RowDefinition Height="0.08*"  /> <!-- Row 12, Socks -->
           </Grid.RowDefinitions>
 
-          <Image Grid.Row="1" Grid.Column="0" Grid.RowSpan="12" Grid.ColumnSpan="53" Aspect="AspectFit" Source="Assets/wholehuman.jpg" />
+          <!--Body Model--> <Image Grid.Row="1" Grid.Column="0" Grid.RowSpan="12" Grid.ColumnSpan="53" Aspect="AspectFit" Source="Assets/wholehuman.jpg" />
 
           <!--  Beanie  --> <Image Grid.Row="1" Grid.Column="22" Grid.RowSpan="2" Grid.ColumnSpan="9" Aspect="AspectFit" Opacity="0.5798" Source="{Binding Beanie_In, StringFormat='Assets/\{0\}.png'}" />
           <!-- - - - -  --> <Label Grid.Row="1" Grid.Column="22" Grid.RowSpan="2" Grid.ColumnSpan="9" Text="{Binding Beanie_In_T,  StringFormat='{0:F0}°'}" FontSize="Medium" VerticalOptions="Start" HorizontalOptions="Center" />

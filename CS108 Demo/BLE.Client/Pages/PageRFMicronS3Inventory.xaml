@@ -37,10 +37,10 @@
             <RowDefinition Height="0.105*" /> <!-- Row 6, Lower Arms -->
 
             <!-- Lower Body -->
-            <RowDefinition Height="0.055*" /> <!--GAP-->
-            <RowDefinition Height="0.11*"  /> <!-- Row 8, Thighs -->
+            <RowDefinition Height="0.075*" /> <!-- Row 7, Gloves -->
+            <RowDefinition Height="0.09*"  /> <!-- Row 8, Thighs -->
             <RowDefinition Height="0.07*"  />
-            <RowDefinition Height="0.095*" /> <!-- Row 10 -->
+            <RowDefinition Height="0.095*" /> <!-- Row 10, Calves -->
             <RowDefinition Height="0.07*"  />
             <RowDefinition Height="0.08*"  /> <!-- Row 12, Socks -->
           </Grid.RowDefinitions>
@@ -72,6 +72,13 @@
           <!--  - - - - --> <Label Grid.Row="6" Grid.Column="30" Grid.ColumnSpan="9" Text="{Binding LeftLowIn_T, StringFormat='{0:F0}°'}"  FontSize="Medium" VerticalOptions="Start" HorizontalOptions="Center" />
           <!-- - - - -  --> <Label Grid.Row="6" Grid.Column="15" Grid.ColumnSpan="9" Text="{Binding RightLowOut_T, StringFormat='{0:F0}°'}" FontSize="Medium" VerticalOptions="End" HorizontalOptions="Center" />
           <!--  - - - - --> <Label Grid.Row="6" Grid.Column="30" Grid.ColumnSpan="9" Text="{Binding LeftLowOut_T, StringFormat='{0:F0}°'}"  FontSize="Medium" VerticalOptions="End" HorizontalOptions="Center" />
+
+          <!--RightGlove--> <Image Grid.Row="7" Grid.Column="12" Grid.ColumnSpan="8" Aspect="AspectFit" Opacity="0.5798" Source="{Binding GloveR, StringFormat='Assets/\{0\}.png'}" />
+          <!--Left Glove--> <Image Grid.Row="7" Grid.Column="33" Grid.ColumnSpan="8" Aspect="AspectFit" Opacity="0.5798" Source="{Binding GloveL, StringFormat='Assets/\{0\}.png'}" />
+          <!-- - - - -  --> <Label Grid.Row="7" Grid.Column="12" Grid.ColumnSpan="8" Text="{Binding GloveInR_T, StringFormat='{0:F0}°'}" FontSize="Medium" VerticalOptions="Start" HorizontalOptions="Center" />
+          <!--  - - - - --> <Label Grid.Row="7" Grid.Column="33" Grid.ColumnSpan="8" Text="{Binding GloveInL_T, StringFormat='{0:F0}°'}" FontSize="Medium" VerticalOptions="Start" HorizontalOptions="Center" />
+          <!-- - - - -  --> <Label Grid.Row="7" Grid.Column="12" Grid.ColumnSpan="8" Text="{Binding GloveOutR_T, StringFormat='{0:F0}°'}" FontSize="Medium" VerticalOptions="End" HorizontalOptions="Center" />
+          <!--  - - - - --> <Label Grid.Row="7" Grid.Column="33" Grid.ColumnSpan="8" Text="{Binding GloveOutL_T, StringFormat='{0:F0}°'}" FontSize="Medium" VerticalOptions="End" HorizontalOptions="Center" />
 
           <!--RightThigh--> <Image Grid.Row="8" Grid.Column="20" Grid.ColumnSpan="9" Aspect="AspectFit" HorizontalOptions="Center" Opacity="0.5798" Source="{Binding ThighR, StringFormat='Assets/\{0\}.png'}" />
           <!--LeftThigh --> <Image Grid.Row="8" Grid.Column="25" Grid.ColumnSpan="9" Aspect="AspectFit" HorizontalOptions="Center" Opacity="0.5798" Source="{Binding ThighL, StringFormat='Assets/\{0\}.png'}" />

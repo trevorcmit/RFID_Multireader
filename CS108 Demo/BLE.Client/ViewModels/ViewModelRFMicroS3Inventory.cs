@@ -222,11 +222,11 @@ namespace BLE.Client.ViewModels {
             }
         }
 
-        Shirt shirt1 = new Shirt("759A", "8099", "7198", "9A80", "94B4", "896D", "----", "----", "8265", "98CC", "----", "----");
+        Shirt shirt1 = new Shirt("759A", "8099", "7198", "9A80", "94B4", "896D", "80D2", "79D3", "8265", "98CC", "7852", "4E7A");
         Shirt shirt2 = new Shirt("----", "3DBA", "9E3B", "8F77", "6065", "8FA4", "077C", "A035", "A831", "5782", "9B7D", "0A4A");
         Shirt shirt3 = new Shirt("6D2E", "0B61", "1E72", "1B7E", "5C34", "265C", "5E8F", "3DCF", "92C1", "2371", "7181", "2774");
         Shirt shirt4 = new Shirt("6ACF", "4743", "1650", "37BB", "2CC8", "424E", "7EB3", "2C98", "3750", "5713", "4FDC", "B0A2");
-        Shirt shirt5 = new Shirt("099B", "5577", "2D1C", "5352", "855B", "3C4F", "----", "----", "2A7A", "3B75", "----", "----");
+        Shirt shirt5 = new Shirt("099B", "5577", "2D1C", "5352", "855B", "3C4F", "8E8D", "7CD4", "2A7A", "3B75", "1CBB", "9941");
         Shirt shirt6 = new Shirt("AB82", "98C0", "067B", "734B", "41AC", "BFA4", "8938", "B142", "A3BC", "1C2E", "7BDA", "8917");
         Shirt shirt7 = new Shirt("7B06", "4EE3", "3318", "6415", "OD7C", "1EB3", "8A72", "2D69", "1F90", "77DE", "2850", "9F6B");
         Shirt shirt8 = new Shirt("3869", "833E", "774F", "2B45", "483D", "64A5", "0E92", "AC75", "737F", "675C", "2567", "B76E");
@@ -397,7 +397,7 @@ namespace BLE.Client.ViewModels {
 
         public ViewModelRFMicroS3Inventory(IAdapter adapter, IUserDialogs userDialogs) : base(adapter) {
             _userDialogs = userDialogs;
-            r = rnd.Next(100000, 999999);
+            r = rnd.Next(10000, 99999);
 
             _SelectBeanie = 0; RaisePropertyChanged(() => SelectBeanie);
             _SelectShirt = 0; RaisePropertyChanged(() => SelectShirt);
@@ -405,39 +405,25 @@ namespace BLE.Client.ViewModels {
             _SelectSock = 0; RaisePropertyChanged(() => SelectSock);
             _SelectGlove = 0; RaisePropertyChanged(() => SelectGlove);
 
-            Beanie_In = "gray";
-            Beanie_In_T = "--";
-            Beanie_Out_T = "--";
+            Beanie_In = "gray"; Beanie_In_T = "--"; Beanie_Out_T = "--";
 
-            Chest = "gray";
-            Abs = "gray";
-            RightUp = "gray";
             LeftUp = "gray";
             LeftLow = "gray";
             RightLow = "gray";
-            RightUpIn_T = "--";
-            RightUpOut_T = "--";
-            LeftUpIn_T = "--";
-            LeftUpOut_T = "--";
+            RightUp = "gray"; RightUpIn_T = "--"; RightUpOut_T = "--";
+            LeftUp = "gray"; LeftUpIn_T = "--"; LeftUpOut_T = "--";
             RightLowIn_T = "--";
             RightLowOut_T = "--";
             LeftLowIn_T = "--";
             LeftLowOut_T = "--";
-            ChestIn_T = "--";
-            ChestOut_T = "--";
-            AbIn_T = "--";
-            AbOut_T = "--";
+            Chest = "gray"; ChestIn_T = "--"; ChestOut_T = "--";
+            Abs = "gray"; AbIn_T = "--"; AbOut_T = "--";
 
-            ThighL = "gray";
-            ThighR = "gray";
-            CalfL = "gray";
+            ThighL = "gray"; ThighLIn_T = "--"; ThighLOut_T = "--";
+            ThighR = "gray"; ThighRIn_T = "--"; ThighROut_T = "--";
+            CalfL = "gray"; CalfLIn_T = "--";
             CalfR = "gray";
-            ThighLIn_T = "--";
-            ThighRIn_T = "--";
-            CalfLIn_T = "--";
             CalfRIn_T = "--";
-            ThighLOut_T = "--";
-            ThighROut_T = "--";
             CalfLOut_T = "--";
             CalfROut_T = "--";
 
@@ -842,12 +828,35 @@ namespace BLE.Client.ViewModels {
                                                     }
                                                 }
                                                 else if (tEPC==g1.DorsalLeftOut) {
-                                                    _GloveInL_T = DisplaySAV; RaisePropertyChanged(() => GloveInL_T);
+                                                    _GloveOutL_T = DisplaySAV; RaisePropertyChanged(() => GloveOutL_T);
+                                                }
+                                                else if (tEPC==g1.DorsalRightIn) {
+                                                    _GloveInR_T = DisplaySAV; RaisePropertyChanged(() => GloveInR_T);
+                                                    if ((SAV>THRESHOLD) && (_GloveR!="green")) {
+                                                        _GloveR = "green"; RaisePropertyChanged(() => GloveR);
+                                                    }
+                                                    else if ((SAV<=THRESHOLD) && (_GloveR!="red")) {
+                                                        _GloveR = "red"; RaisePropertyChanged(() => GloveR);
+                                                    }
+                                                }
+                                                else if (tEPC==g1.DorsalRightOut) {
+                                                    _GloveOutR_T = DisplaySAV; RaisePropertyChanged(() => GloveOutR_T);
                                                 }
                                             }
 
                                             else if (b1.TagList.Contains(tEPC)) {
-
+                                                if (tEPC==b1.Forehead_In) {
+                                                    _Beanie_In_T = DisplaySAV; RaisePropertyChanged(() => Beanie_In_T);
+                                                    if ((SAV>THRESHOLD) && (_Beanie_In!="green")) {
+                                                        _Beanie_In = "green"; RaisePropertyChanged(() => Beanie_In);
+                                                    }
+                                                    else if ((SAV<=THRESHOLD) && (_Beanie_In!="red")) {
+                                                        _Beanie_In = "red"; RaisePropertyChanged(() => Beanie_In);
+                                                    }
+                                                }
+                                                else if (tEPC==b1.Forehead_Out) {
+                                                    _Beanie_Out_T = DisplaySAV; RaisePropertyChanged(() => Beanie_Out_T);
+                                                }
                                             }
 
 

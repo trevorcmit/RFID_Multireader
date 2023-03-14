@@ -15,7 +15,18 @@
 
     <StackLayout Orientation="Horizontal" VerticalOptions="StartAndExpand">
 
-      <StackLayout Orientation="Vertical" WidthRequest="1500" VerticalOptions="Fill" >
+      <!-- <StackLayout WidthRequest="750" HorizontalOptions="StartAndExpand">
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+          </Grid.ColumnDefinitions>
+          <Grid.RowDefinitions>
+            <RowDefinition />
+          </Grid.RowDefinitions>
+        </Grid>
+      </StackLayout> -->
+
+      <StackLayout Orientation="Vertical" WidthRequest="1500" VerticalOptions="Fill" HorizontalOptions="CenterAndExpand" >
         <Grid ColumnSpacing="1" RowSpacing="4" >
           <Grid.ColumnDefinitions> <!-- 53 COLUMNS -->
             <ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/>
@@ -46,6 +57,13 @@
           </Grid.RowDefinitions>
 
           <!--Body Model--> <Image Grid.Row="1" Grid.Column="0" Grid.RowSpan="12" Grid.ColumnSpan="53" Aspect="AspectFit" Source="Assets/wholehuman.jpg" />
+
+          <!-- Right SS --> <Image Grid.Row="1" Grid.RowSpan="2" Grid.Column="3"  Grid.ColumnSpan="8" Aspect="AspectFit" Opacity="0.5798" Source="{Binding ScapRight, StringFormat='Assets/\{0\}.png'}" />
+          <!-- Left SS  --> <Image Grid.Row="1" Grid.RowSpan="2" Grid.Column="42" Grid.ColumnSpan="8" Aspect="AspectFit" Opacity="0.5798" Source="{Binding ScapLeft,  StringFormat='Assets/\{0\}.png'}" />
+          <!-- - - - -  --> <Label Grid.Row="1" Grid.RowSpan="2" Grid.Column="3"  Grid.ColumnSpan="8" Text="{Binding ScapRightIn_T, StringFormat='{0:F0}°'}" FontSize="Medium" VerticalOptions="Start" HorizontalOptions="Center" />
+          <!--  - - - - --> <Label Grid.Row="1" Grid.RowSpan="2" Grid.Column="42" Grid.ColumnSpan="8" Text="{Binding ScapLeftIn_T,  StringFormat='{0:F0}°'}" FontSize="Medium" VerticalOptions="Start" HorizontalOptions="Center" />
+          <!-- - - - -  --> <Label Grid.Row="1" Grid.RowSpan="2" Grid.Column="3"  Grid.ColumnSpan="8" Text="{Binding ScapRightOut_T, StringFormat='{0:F0}°'}" FontSize="Medium" VerticalOptions="End" HorizontalOptions="Center" />
+          <!--  - - - - --> <Label Grid.Row="1" Grid.RowSpan="2" Grid.Column="42" Grid.ColumnSpan="8" Text="{Binding ScapLeftOut_T,  StringFormat='{0:F0}°'}" FontSize="Medium" VerticalOptions="End" HorizontalOptions="Center" />
 
           <!--  Beanie  --> <Image Grid.Row="1" Grid.Column="22" Grid.RowSpan="2" Grid.ColumnSpan="9" Aspect="AspectFit" Opacity="0.5798" Source="{Binding Beanie_In, StringFormat='Assets/\{0\}.png'}" />
           <!-- - - - -  --> <Label Grid.Row="1" Grid.Column="22" Grid.RowSpan="2" Grid.ColumnSpan="9" Text="{Binding Beanie_In_T,  StringFormat='{0:F0}°'}" FontSize="Medium" VerticalOptions="Start" HorizontalOptions="Center" />
@@ -132,7 +150,8 @@
             SelectedIndex="{Binding SelectSock, Mode=OneWayToSource}"
           />
 
-          <!-- <BoxView Grid.Row="1"  Grid.Column="0" BackgroundColor="#D403B7" />
+          <!-- 
+          <BoxView Grid.Row="1"  Grid.Column="0" BackgroundColor="#D403B7" />
           <BoxView Grid.Row="2"  Grid.Column="0" BackgroundColor="#02d46D" />
           <BoxView Grid.Row="3"  Grid.Column="0" BackgroundColor="#D403B7" />
           <BoxView Grid.Row="4"  Grid.Column="0" BackgroundColor="#02d46D" />
@@ -143,10 +162,23 @@
           <BoxView Grid.Row="9"  Grid.Column="0" BackgroundColor="#D403B7" />
           <BoxView Grid.Row="10" Grid.Column="0" BackgroundColor="#02d46D" />
           <BoxView Grid.Row="11" Grid.Column="0" BackgroundColor="#D403B7" />
-          <BoxView Grid.Row="12" Grid.Column="0" BackgroundColor="#02d46D" /> -->
+          <BoxView Grid.Row="12" Grid.Column="0" BackgroundColor="#02d46D" />
+          -->
         </Grid>
       </StackLayout>
 
+      <!-- <StackLayout WidthRequest="1500" HorizontalOptions="EndAndExpand">
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+          </Grid.ColumnDefinitions>
+          <Grid.RowDefinitions>
+            <RowDefinition />
+          </Grid.RowDefinitions>
+        </Grid>
+      </StackLayout> -->
+
+      
       <StackLayout Orientation="Vertical" WidthRequest="1500" VerticalOptions="Fill" HorizontalOptions="EndAndExpand">
         <ListView x:Name="liewViewTagData" ItemsSource="{Binding TagInfoList}" SelectedItem="{Binding objItemSelected, Mode=TwoWay}" >
           <ListView.Header>
@@ -188,6 +220,7 @@
             </ListView.ItemTemplate>
         </ListView>
       </StackLayout>
+      
 
     </StackLayout>
 

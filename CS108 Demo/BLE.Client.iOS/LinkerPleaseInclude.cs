@@ -7,8 +7,6 @@ using MvvmCross.Binding.BindingContext;
 
 
 namespace BLE.Client.iOS {
-    // This class is never actually executed, but when Xamarin linking is enabled it does ensure types and properties
-    // are preserved in the deployed app
     [Preserve(AllMembers = true)]
     public class LinkerPleaseInclude {
 		public void Include(MvxTaskBasedBindingContext c) {
@@ -18,8 +16,7 @@ namespace BLE.Client.iOS {
         }
 
         public void Include(UIButton uiButton) {
-            uiButton.TouchUpInside += (s, e) =>
-                                      uiButton.SetTitle(uiButton.Title(UIControlState.Normal), UIControlState.Normal);
+            uiButton.TouchUpInside += (s, e) => uiButton.SetTitle(uiButton.Title(UIControlState.Normal), UIControlState.Normal);
         }
 
         public void Include(UIBarButtonItem barButton) {

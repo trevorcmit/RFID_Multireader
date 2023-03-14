@@ -447,34 +447,23 @@ namespace BLE.Client.ViewModels {
             _SelectSock = 0; RaisePropertyChanged(() => SelectSock);
             _SelectGlove = 0; RaisePropertyChanged(() => SelectGlove);
 
-            Beanie_In = "gray"; Beanie_In_T = "--"; Beanie_Out_T = "--";
-
+            Beanie_In = "gray"; Beanie_In_T = "--"; Beanie_Out_T  = "--";
             LeftLow  = "gray"; LeftLowIn_T  = "--"; LeftLowOut_T  = "--";
             RightLow = "gray"; RightLowIn_T = "--"; RightLowOut_T = "--";
             RightUp  = "gray"; RightUpIn_T  = "--"; RightUpOut_T  = "--";
             LeftUp   = "gray"; LeftUpIn_T   = "--"; LeftUpOut_T   = "--";
             Chest    = "gray"; ChestIn_T    = "--"; ChestOut_T    = "--";
             Abs      = "gray"; AbIn_T       = "--"; AbOut_T       = "--";
-
             ThighL = "gray"; ThighLIn_T = "--"; ThighLOut_T = "--";
             ThighR = "gray"; ThighRIn_T = "--"; ThighROut_T = "--";
             CalfL = "gray";  CalfLIn_T = "--";  CalfLOut_T = "--";
             CalfR = "gray";  CalfRIn_T = "--";  CalfROut_T = "--";
-
-            SockL = "gray"; SockInL_T  = "--"; SockOutL_T = "--";
-            SockR = "gray"; SockInR_T  = "--"; SockOutR_T = "--";
-
-            GloveL = "gray";
-            GloveR = "gray";
-            GloveInL_T  = "--";
-            GloveOutL_T = "--";
-            GloveInR_T  = "--";
-            GloveOutR_T = "--";
-
-            ScapLeft = "gray"; ScapLeftIn_T = "--"; ScapLeftOut_T = "--";
-            ScapRight = "gray";
-            ScapRightIn_T = "--";
-            ScapRightOut_T = "--";
+            SockL = "gray"; SockInL_T = "--"; SockOutL_T = "--";
+            SockR = "gray"; SockInR_T = "--"; SockOutR_T = "--";
+            GloveL = "gray"; GloveInL_T  = "--"; GloveOutL_T = "--";
+            GloveR = "gray"; GloveInR_T  = "--"; GloveOutR_T = "--";
+            ScapLeft = "gray";  ScapLeftIn_T = "--";  ScapLeftOut_T = "--";
+            ScapRight = "gray"; ScapRightIn_T = "--"; ScapRightOut_T = "--";
 
             shirts = new Dictionary<int, Shirt> {
                 {0, shirt1}, {1, shirt2}, {2, shirt3}, {3, shirt4}, 

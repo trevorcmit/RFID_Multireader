@@ -239,14 +239,14 @@ namespace BLE.Client.ViewModels {
             }
         }
 
-        Shirt shirt1 = new Shirt("61D8", "2BC6", "427A", "0F7D", "759A", "8099", "7198", "9A80", "94B4", "896D", "80D2", "79D3", "8265", "98CC", "7852", "4E7A");
-        Shirt shirt2 = new Shirt("B57A", "088C", "8853", "5471", "0790", "3DBA", "9E3B", "8F77", "6065", "8FA4", "077C", "A035", "A831", "5782", "9B7D", "0A4A");
+        Shirt shirt1 = new Shirt("61DF", "2BC6", "427A", "0F7D", "8099", "759A", "9A80", "7198", "94B4", "896D", "80D2", "79D3", "8265", "98CC", "7852", "4E7A");
+        Shirt shirt2 = new Shirt("B57A", "088C", "8853", "5471", "0790", "3DBA", "9E3B", "8F77", "A831", "8FA4", "077C", "A035", "6065", "5782", "9B7D", "0A4A");
         Shirt shirt3 = new Shirt("1591", "8C56", "66C9", "1364", "6D2E", "0B61", "1E72", "1B7E", "5C34", "265C", "5E8F", "3DCF", "92C1", "2371", "7181", "2774");
-        Shirt shirt4 = new Shirt("6FD7", "62CA", "----", "056D", "6ACF", "4743", "1650", "37BB", "2CC8", "424E", "7EB3", "2C98", "3750", "5713", "4FDC", "B0A2");
-        Shirt shirt5 = new Shirt("1E9E", "3644", "0086", "3325", "099B", "5577", "2D1C", "5352", "855B", "3C4F", "8E8D", "7CD4", "2A7A", "3B75", "1CBB", "9941");
-        Shirt shirt6 = new Shirt("B4A6", "7D23", "41C1", "4780", "AB82", "98C0", "067B", "734B", "41AC", "BFA4", "8938", "B142", "A3BC", "1C2E", "7BDA", "8917");
-        Shirt shirt7 = new Shirt("9353", "7E20", "2E4F", "60D1", "7B06", "4EE3", "3318", "6415", "OD7C", "1EB3", "8A72", "2D69", "1F90", "77DE", "2850", "9F6B");
-        Shirt shirt8 = new Shirt("277D", "77B5", "0859", "431C", "3869", "833E", "774F", "2B45", "483D", "64A5", "0E92", "AC75", "737F", "675C", "2567", "B76E");
+        Shirt shirt4 = new Shirt("6FD7", "62CA", "A73D", "056D", "4743", "6ACF", "37BB", "1650", "2CC8", "5713", "7EB3", "2C98", "3150", "424E", "4FDC", "B0A2");
+        Shirt shirt5 = new Shirt("0086", "3644", "1E9E", "3325", "099B", "5577", "2D1C", "5352", "855B", "3B75", "1CBB", "7CD4", "2A7A", "3C47", "8E8D", "9941");
+        Shirt shirt6 = new Shirt("B4A6", "7D23", "41C1", "4780", "AB82", "98C0", "067B", "734B", "41AC", "1C2E", "8938", "B142", "A38C", "8FA4", "7BDA", "8917");
+        Shirt shirt7 = new Shirt("9353", "7E20", "2E4F", "60D1", "7B06", "4EE3", "3318", "6415", "0D7C", "1EB3", "8A72", "2D69", "1F90", "77DE", "2850", "9F6B");
+        Shirt shirt8 = new Shirt("277D", "77B5", "0859", "431C", "3869", "833E", "774F", "2B4F", "64A5", "483D", "0E92", "AC75", "675C", "737F", "2567", "B76E");
 
         class Pants {
             public string Thigh_In_L { get; set; }
@@ -276,9 +276,9 @@ namespace BLE.Client.ViewModels {
         Pants pants1 = new Pants("409D", "1734", "A389", "AC37", "5439", "508F", "67A1", "701B");
         Pants pants2 = new Pants("8992", "AB37", "5E5E", "9873", "846F", "592A", "8220", "6227");
         Pants pants3 = new Pants("9D63", "4465", "6BA1", "2445", "1D74", "3A8A", "726C", "8C46");
-        Pants pants4 = new Pants("----", "----", "----", "----", "----", "----", "----", "----");
-        Pants pants5 = new Pants("----", "----", "----", "----", "----", "----", "----", "----");
-        Pants pants6 = new Pants("----", "----", "----", "----", "----", "----", "----", "----");
+        Pants pants4 = new Pants("2AAB", "113D", "7646", "1336", "1885", "6BB0", "842A", "2C4E");
+        Pants pants5 = new Pants("299E", "0887", "B35D", "41B6", "60A1", "8960", "A296", "62BE");
+        Pants pants6 = new Pants("----", "472E", "----", "B64D", "----", "----", "----", "268E");
         Pants pants7 = new Pants("----", "----", "----", "----", "----", "----", "----", "----");
         Pants pants8 = new Pants("----", "----", "----", "----", "----", "----", "----", "----");
 
@@ -295,14 +295,14 @@ namespace BLE.Client.ViewModels {
             }
         }
 
-        Sock sock1 = new Sock("----", "----", "7D30");
-        Sock sock2 = new Sock("----", "----", "B27A");
-        Sock sock3 = new Sock("----", "----", "----");
-        Sock sock4 = new Sock("----", "----", "----");
-        Sock sock5 = new Sock("----", "----", "----");
-        Sock sock6 = new Sock("----", "----", "----");
-        Sock sock7 = new Sock("----", "----", "----");
-        Sock sock8 = new Sock("----", "----", "----");
+        Sock sock1L = new Sock("B19F", "653F", "7D30");
+        Sock sock1R = new Sock("9B83", "9850", "B27A");
+        Sock sock2L = new Sock("4C48", "7E4B", "824B");
+        Sock sock2R = new Sock("3932", "5372", "4B8B");
+        Sock sock3L = new Sock("2EC8", "4187", "2B26");
+        Sock sock3R = new Sock("4D16", "5D86", "6F91");
+        Sock sock4L = new Sock("55BA", "713D", "7244");
+        Sock sock4R = new Sock("5C1B", "2C29", "A95E");
 
         class Beanie {
             public string Forehead_In { get; set; }
@@ -316,13 +316,9 @@ namespace BLE.Client.ViewModels {
         }
         
         Beanie beanie1 = new Beanie("624F", "3F15");
-        Beanie beanie2 = new Beanie("3B3C", "----");
-        Beanie beanie3 = new Beanie("----", "----");
-        Beanie beanie4 = new Beanie("----", "----");
-        Beanie beanie5 = new Beanie("----", "----");
-        Beanie beanie6 = new Beanie("----", "----");
-        Beanie beanie7 = new Beanie("----", "----");
-        Beanie beanie8 = new Beanie("----", "----");
+        Beanie beanie2 = new Beanie("3B3C", "0962");
+        Beanie beanie3 = new Beanie("83A7", "7191");
+        Beanie beanie4 = new Beanie("6D29", "3159");
 
         private List<string> _BeaniePicker; public List<string> BeaniePicker { get => _BeaniePicker; set { _BeaniePicker = value; OnPropertyChanged("BeaniePicker"); } }
         private List<string> _ShirtPicker; public List<string> ShirtPicker { get => _ShirtPicker; set { _ShirtPicker = value; OnPropertyChanged("ShirtPicker"); } }
@@ -427,8 +423,8 @@ namespace BLE.Client.ViewModels {
         Dictionary<int, Shirt> shirts = new Dictionary<int, Shirt>();
         Dictionary<int, Beanie> beanies = new Dictionary<int, Beanie>();
         Dictionary<int, Pants> pants = new Dictionary<int, Pants>();
-        Dictionary<int, Sock> socks = new Dictionary<int, Sock>();
         Dictionary<int, Glove> gloves = new Dictionary<int, Glove>();
+        Dictionary<int, List<Sock>> socks = new Dictionary<int, List<Sock>>();
 
         public Random rnd = new Random();
         public int r;
@@ -441,19 +437,19 @@ namespace BLE.Client.ViewModels {
             _userDialogs = userDialogs;
             r = rnd.Next(10000, 99999);
 
-            _SelectBeanie = 0; RaisePropertyChanged(() => SelectBeanie);
-            _SelectShirt = 0; RaisePropertyChanged(() => SelectShirt);
-            _SelectPants = 0; RaisePropertyChanged(() => SelectPants);
-            _SelectSock = 0; RaisePropertyChanged(() => SelectSock);
-            _SelectGlove = 0; RaisePropertyChanged(() => SelectGlove);
+            _SelectBeanie = 0;  RaisePropertyChanged(() => SelectBeanie);
+            _SelectShirt  = 0;  RaisePropertyChanged(() => SelectShirt);
+            _SelectPants  = 0;  RaisePropertyChanged(() => SelectPants);
+            _SelectSock   = 0;  RaisePropertyChanged(() => SelectSock);
+            _SelectGlove  = 0;  RaisePropertyChanged(() => SelectGlove);
 
-            Beanie_In = "gray"; Beanie_In_T = "--"; Beanie_Out_T  = "--";
-            LeftLow  = "gray"; LeftLowIn_T  = "--"; LeftLowOut_T  = "--";
-            RightLow = "gray"; RightLowIn_T = "--"; RightLowOut_T = "--";
-            RightUp  = "gray"; RightUpIn_T  = "--"; RightUpOut_T  = "--";
-            LeftUp   = "gray"; LeftUpIn_T   = "--"; LeftUpOut_T   = "--";
-            Chest    = "gray"; ChestIn_T    = "--"; ChestOut_T    = "--";
-            Abs      = "gray"; AbIn_T       = "--"; AbOut_T       = "--";
+            Beanie_In = "gray"; Beanie_In_T  = "--"; Beanie_Out_T  = "--";
+            LeftLow   = "gray"; LeftLowIn_T  = "--"; LeftLowOut_T  = "--";
+            RightLow  = "gray"; RightLowIn_T = "--"; RightLowOut_T = "--";
+            RightUp   = "gray"; RightUpIn_T  = "--"; RightUpOut_T  = "--";
+            LeftUp    = "gray"; LeftUpIn_T   = "--"; LeftUpOut_T   = "--";
+            Chest     = "gray"; ChestIn_T    = "--"; ChestOut_T    = "--";
+            Abs       = "gray"; AbIn_T       = "--"; AbOut_T       = "--";
             ThighL = "gray"; ThighLIn_T = "--"; ThighLOut_T = "--";
             ThighR = "gray"; ThighRIn_T = "--"; ThighROut_T = "--";
             CalfL = "gray";  CalfLIn_T = "--";  CalfLOut_T = "--";
@@ -472,7 +468,6 @@ namespace BLE.Client.ViewModels {
 
             beanies = new Dictionary<int, Beanie> {
                 {0, beanie1}, {1, beanie2}, {2, beanie3}, {3, beanie4}, 
-                {4, beanie5}, {5, beanie6}, {6, beanie7}, {7, beanie8}   
             };
 
             gloves = new Dictionary<int, Glove> {
@@ -480,14 +475,17 @@ namespace BLE.Client.ViewModels {
                 {4, glove5}, {5, glove6}, {6, glove7}, {7, glove8}   
             };
 
-            socks = new Dictionary<int, Sock> {
-                {0, sock1}, {1, sock2}, {2, sock3}, {3, sock4}, 
-                {4, sock5}, {5, sock6}, {6, sock7}, {7, sock8}   
-            };
-
             pants = new Dictionary<int, Pants> {
                 {0, pants1}, {1, pants2}, {2, pants3}, {3, pants4}, 
                 {4, pants5}, {5, pants6}, {6, pants7}, {7, pants8}   
+            };
+
+            List<Sock> socks1 = new List<Sock> { sock1L, sock1R };
+            List<Sock> socks2 = new List<Sock> { sock2L, sock2R };
+            List<Sock> socks3 = new List<Sock> { sock3L, sock3R };
+            List<Sock> socks4 = new List<Sock> { sock4L, sock4R };
+            socks = new Dictionary<int, List<Sock>> {
+                {0, socks1}, {1, socks2}, {2, socks3}, {3, socks4}
             };
 
             // Set disconnection event for reconnection
@@ -496,10 +494,10 @@ namespace BLE.Client.ViewModels {
 
             GetTimes();  // Get Duty Cycle Times
 
-            _BeaniePicker = new List<string> { "Cap 1", "Cap 2", "Cap 3", "Cap 4", "Cap 5", "Cap 6", "Cap 7", "Cap 8" };
+            _BeaniePicker = new List<string> { "Cap 1", "Cap 2", "Cap 3", "Cap 4" };
             _ShirtPicker  = new List<string> { "Shirt 1", "Shirt 2", "Shirt 3", "Shirt 4", "Shirt 5", "Shirt 6", "Shirt 7", "Shirt 8" };
             _PantsPicker  = new List<string> { "Pants 1", "Pants 2", "Pants 3", "Pants 4", "Pants 5", "Pants 6", "Pants 7", "Pants 8" };
-            _SockPicker   = new List<string> { "Sock 1", "Sock 2", "Sock 3", "Sock 4", "Sock 5", "Sock 6", "Sock 7", "Sock 8" };
+            _SockPicker   = new List<string> { "Socks 1", "Socks 2", "Socks 3", "Socks 4" };
             _GlovePicker  = new List<string> { "Glove 1", "Glove 2", "Glove 3", "Glove 4", "Glove 5", "Glove 6", "Glove 7", "Glove 8" };
 
             OnStartInventoryButtonCommand = new Command(StartInventoryClick);
@@ -764,8 +762,10 @@ namespace BLE.Client.ViewModels {
                                             Shirt s1 = shirts[SelectShirt];
                                             Beanie b1 = beanies[SelectBeanie];
                                             Glove g1 = gloves[SelectGlove];
-                                            Sock sk1 = socks[SelectSock];
+                                            List<Sock> sk1 = socks[SelectSock];
+                                            Pants p1 = pants[SelectPants];
 
+                                            // Shirt
                                             if (s1.TagList.Contains(tEPC)) {
                                                 if (tEPC==s1.Chest_In) {
                                                     _ChestIn_T = DisplaySAV; RaisePropertyChanged(() => ChestIn_T);
@@ -872,6 +872,7 @@ namespace BLE.Client.ViewModels {
                                                 }
                                             }
 
+                                            // Gloves
                                             else if (g1.TagList.Contains(tEPC)) {
                                                 if (tEPC==g1.DorsalLeftIn) {
                                                     _GloveInL_T = DisplaySAV; RaisePropertyChanged(() => GloveInL_T);
@@ -899,6 +900,7 @@ namespace BLE.Client.ViewModels {
                                                 }
                                             }
 
+                                            // Beanie
                                             else if (b1.TagList.Contains(tEPC)) {
                                                 if (tEPC==b1.Forehead_In) {
                                                     _Beanie_In_T = DisplaySAV; RaisePropertyChanged(() => Beanie_In_T);
@@ -914,6 +916,55 @@ namespace BLE.Client.ViewModels {
                                                 }
                                             }
 
+                                            // Left Sock
+                                            else if (sk1[0].TagList.Contains(tEPC)) {
+                                                if (tEPC==sk1[0].Above_In) {
+                                                    _SockInL_T = DisplaySAV; RaisePropertyChanged(() => SockInL_T);
+                                                    if ((SAV>THRESHOLD) && (_SockL!="green")) {
+                                                        _SockL = "green"; RaisePropertyChanged(() => SockL);
+                                                    }
+                                                    else if ((SAV<=THRESHOLD) && (_SockL!="red")) {
+                                                        _SockL = "red"; RaisePropertyChanged(() => SockL);
+                                                    }
+                                                }
+                                                else if (tEPC==sk1[0].Above_Out) {
+                                                    _SockOutL_T = DisplaySAV; RaisePropertyChanged(() => SockOutL_T);
+                                                }
+                                                else if (tEPC==sk1[0].Toes) {
+                                                    _SockInL_T = DisplaySAV; RaisePropertyChanged(() => SockInL_T);
+                                                    if ((SAV>THRESHOLD) && (_SockL!="green")) {
+                                                        _SockL = "green"; RaisePropertyChanged(() => SockL);
+                                                    }
+                                                    else if ((SAV<=THRESHOLD) && (_SockL!="red")) {
+                                                        _SockL = "red"; RaisePropertyChanged(() => SockL);
+                                                    }
+                                                }
+                                            }
+                                        
+                                            // Right Sock
+                                            else if (sk1[1].TagList.Contains(tEPC)) {
+                                                if (tEPC==sk1[1].Above_In) {
+                                                    _SockInR_T = DisplaySAV; RaisePropertyChanged(() => SockInR_T);
+                                                    if ((SAV>THRESHOLD) && (_SockR!="green")) {
+                                                        _SockR = "green"; RaisePropertyChanged(() => SockR);
+                                                    }
+                                                    else if ((SAV<=THRESHOLD) && (_SockR!="red")) {
+                                                        _SockR = "red"; RaisePropertyChanged(() => SockR);
+                                                    }
+                                                }
+                                                else if (tEPC==sk1[1].Above_Out) {
+                                                    _SockOutR_T = DisplaySAV; RaisePropertyChanged(() => SockOutR_T);
+                                                }
+                                                else if (tEPC==sk1[1].Toes) {
+                                                    _SockInR_T = DisplaySAV; RaisePropertyChanged(() => SockInR_T);
+                                                    if ((SAV>THRESHOLD) && (_SockR!="green")) {
+                                                        _SockR = "green"; RaisePropertyChanged(() => SockR);
+                                                    }
+                                                    else if ((SAV<=THRESHOLD) && (_SockR!="red")) {
+                                                        _SockR = "red"; RaisePropertyChanged(() => SockR);
+                                                    }
+                                                }
+                                            }
 
                                         } // end of Try/Finally block
 

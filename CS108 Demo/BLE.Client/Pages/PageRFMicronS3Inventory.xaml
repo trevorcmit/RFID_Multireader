@@ -14,28 +14,28 @@
 
       <StackLayout Orientation="Vertical" VerticalOptions="Fill" HorizontalOptions="CenterAndExpand" >
         <Grid ColumnSpacing="1" RowSpacing="4" >
-          <Grid.ColumnDefinitions> <!-- 55 COLUMNS -->
-            <ColumnDefinition Width="0.27*"/>
-            <ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/>
-            <ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/>
-            <ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/>
-            <ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/>
-            <ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/> 
-            <ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/>
-            <ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/>
-            <ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/>
-            <ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/>
-            <ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/> 
-            <ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/><ColumnDefinition Width="0.00867924*"/>
-            <ColumnDefinition Width="0.27*"/>
+          <Grid.ColumnDefinitions>     <!-- 55 COLUMNS -->
+            <ColumnDefinition Width="0.25*"/>
+            <ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/>
+            <ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/>
+            <ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/>
+            <ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/>
+            <ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/> 
+            <ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/>
+            <ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/>
+            <ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/>
+            <ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/>
+            <ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/> 
+            <ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/><ColumnDefinition Width="0.0094339*"/>
+            <ColumnDefinition Width="0.25*"/>
           </Grid.ColumnDefinitions>
           <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*" /> <!-- Row 0, PICKER ONLY ROW-->
+            <RowDefinition Height="0.1*"   />  <!-- Row 0, PICKER ONLY ROW-->
 
             <!-- Upper Body -->
-            <RowDefinition Height="0.045*" /> <!--GAP-->
+            <RowDefinition Height="0.045*" />
             <RowDefinition Height="0.09*"  /> <!-- Row 2, Head -->
-            <RowDefinition Height="0.065*" /> <!--GAP-->
+            <RowDefinition Height="0.065*" />
             <RowDefinition Height="0.025*" />
             <RowDefinition Height="0.09*"  /> <!-- Row 5, Upper Arms -->
             <RowDefinition Height="0.105*" /> <!-- Row 6, Lower Arms -->
@@ -57,8 +57,8 @@
           <!--  - - - - --> <Label Grid.Row="1" Grid.Column="43" Grid.ColumnSpan="9" HorizontalOptions="Center" Text="Left Subscap"  FontSize="Default" VerticalOptions="End" />
           <!-- - - - -  --> <Label Grid.Row="2" Grid.RowSpan="2" Grid.Column="4"  Grid.ColumnSpan="8" Text="{Binding ScapRightIn_T, StringFormat='{0:F0}°'}" FontSize="Medium" VerticalOptions="Start" FontAttributes="Bold" HorizontalOptions="Center" />
           <!--  - - - - --> <Label Grid.Row="2" Grid.RowSpan="2" Grid.Column="43" Grid.ColumnSpan="8" Text="{Binding ScapLeftIn_T,  StringFormat='{0:F0}°'}" FontSize="Medium" VerticalOptions="Start" FontAttributes="Bold" HorizontalOptions="Center" />
-          <!-- - - - -  --> <Label Grid.Row="2" Grid.RowSpan="2" Grid.Column="4"  Grid.ColumnSpan="8" Text="{Binding ScapRightOut_T, StringFormat='{0:F0}°'}" FontSize="Default" VerticalOptions="End" HorizontalOptions="Center" />
-          <!--  - - - - --> <Label Grid.Row="2" Grid.RowSpan="2" Grid.Column="43" Grid.ColumnSpan="8" Text="{Binding ScapLeftOut_T,  StringFormat='{0:F0}°'}" FontSize="Default" VerticalOptions="End" HorizontalOptions="Center" />
+          <!-- - - - -  --> <Label Grid.Row="2" Grid.RowSpan="2" Grid.Column="4"  Grid.ColumnSpan="8" Text="{Binding ScapRightOut_T, StringFormat='{0:F0}°'}" FontSize="Default" VerticalOptions="Center" HorizontalOptions="Center" />
+          <!--  - - - - --> <Label Grid.Row="2" Grid.RowSpan="2" Grid.Column="43" Grid.ColumnSpan="8" Text="{Binding ScapLeftOut_T,  StringFormat='{0:F0}°'}" FontSize="Default" VerticalOptions="Center" HorizontalOptions="Center" />
 
           <!--  Beanie  --> <Image Grid.Row="1" Grid.Column="23" Grid.RowSpan="2" Grid.ColumnSpan="9" Aspect="AspectFit" Opacity="0.5798" Source="{Binding Beanie_In, StringFormat='Assets/\{0\}.png'}" />
           <!-- - - - -  --> <Label Grid.Row="1" Grid.Column="23" Grid.RowSpan="2" Grid.ColumnSpan="9" Text="{Binding Beanie_In_T,  StringFormat='{0:F0}°'}" FontSize="Medium" VerticalOptions="Start" HorizontalOptions="Center" FontAttributes="Bold" />
@@ -66,7 +66,7 @@
 
           <!--  Chest   --> <Image Grid.Row="4" Grid.Column="23" Grid.RowSpan="2" Grid.ColumnSpan="9" VerticalOptions="Start" Aspect="AspectFit" Opacity="0.5798" Source="{Binding Chest, StringFormat='Assets/\{0\}.png'}" />
           <!-- - - - -  --> <Label Grid.Row="4" Grid.Column="23" Grid.RowSpan="2" Grid.ColumnSpan="9" Text="{Binding ChestIn_T,  StringFormat='{0:F0}°'}" FontSize="Medium" FontAttributes="Bold" VerticalOptions="Start" HorizontalOptions="Center" />
-          <!--  - - - - --> <Label Grid.Row="4" Grid.Column="23" Grid.RowSpan="2" Grid.ColumnSpan="9" Text="{Binding ChestOut_T, StringFormat='{0:F0}°'}" FontSize="Default" VerticalOptions="End"   HorizontalOptions="Center" />
+          <!--  - - - - --> <Label Grid.Row="4" Grid.Column="23" Grid.RowSpan="2" Grid.ColumnSpan="9" Text="{Binding ChestOut_T, StringFormat='{0:F0}°'}" FontSize="Default" VerticalOptions="Center" HorizontalOptions="Center" />
 
           <!-- Abdomen -->  <Image Grid.Row="6" Grid.Column="23" Grid.ColumnSpan="9" Aspect="AspectFit" Opacity="0.5798" Source="{Binding Abs, StringFormat='Assets/\{0\}.png'}" />
           <!-- - - - -  --> <Label Grid.Row="6" Grid.Column="23" Grid.ColumnSpan="9" Text="{Binding AbIn_T,  StringFormat='{0:F0}°'}" FontSize="Medium" FontAttributes="Bold" VerticalOptions="Start" HorizontalOptions="Center" />
@@ -107,12 +107,12 @@
           <!-- - - - -  --> <Label Grid.Row="10" Grid.Column="21" Grid.ColumnSpan="8" Text="{Binding CalfROut_T, StringFormat='{0:F0}°'}" FontSize="Default" HorizontalOptions="Center" VerticalOptions="End" />
           <!--  - - - - --> <Label Grid.Row="10" Grid.Column="26" Grid.ColumnSpan="8" Text="{Binding CalfLOut_T, StringFormat='{0:F0}°'}" FontSize="Default" HorizontalOptions="Center" VerticalOptions="End" />
 
-          <!--RightSocks--> <Image Grid.Row="11" Grid.RowSpan="2" Grid.Column="22" Grid.ColumnSpan="6" Aspect="AspectFit" VerticalOptions="Center" Opacity="0.5798" Source="{Binding SockR, StringFormat='Assets/\{0\}.png'}" />
-          <!--LeftSocks --> <Image Grid.Row="11" Grid.RowSpan="2" Grid.Column="27" Grid.ColumnSpan="6" Aspect="AspectFit" VerticalOptions="Center" Opacity="0.5798" Source="{Binding SockL, StringFormat='Assets/\{0\}.png'}" />
-          <!-- - - - -  --> <Label Grid.Row="11" Grid.Column="22" Grid.ColumnSpan="6" Text="{Binding SockInR_T,  StringFormat='{0:F0}°'}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="Medium" VerticalOptions="End" />
-          <!--  - - - - --> <Label Grid.Row="12" Grid.Column="22" Grid.ColumnSpan="6" Text="{Binding SockOutR_T, StringFormat='{0:F0}°'}" HorizontalOptions="Center" FontSize="Default" />
-          <!-- - - - -  --> <Label Grid.Row="11" Grid.Column="27" Grid.ColumnSpan="6" Text="{Binding SockInL_T,  StringFormat='{0:F0}°'}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="Medium" VerticalOptions="End" />
-          <!--  - - - - --> <Label Grid.Row="12" Grid.Column="27" Grid.ColumnSpan="6" Text="{Binding SockOutL_T, StringFormat='{0:F0}°'}" HorizontalOptions="Center" FontSize="Default" />
+          <!--RightSocks--> <Image Grid.Row="11" Grid.RowSpan="2" Grid.Column="20" Grid.ColumnSpan="8" Aspect="AspectFit" VerticalOptions="Center" Opacity="0.5798" Source="{Binding SockR, StringFormat='Assets/\{0\}.png'}" />
+          <!--LeftSocks --> <Image Grid.Row="11" Grid.RowSpan="2" Grid.Column="27" Grid.ColumnSpan="8" Aspect="AspectFit" VerticalOptions="Center" Opacity="0.5798" Source="{Binding SockL, StringFormat='Assets/\{0\}.png'}" />
+          <!-- - - - -  --> <Label Grid.Row="11" Grid.Column="20" Grid.ColumnSpan="8" Text="{Binding SockInR_T,  StringFormat='{0:F0}°'}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="Medium" VerticalOptions="End" />
+          <!--  - - - - --> <Label Grid.Row="12" Grid.Column="20" Grid.ColumnSpan="8" Text="{Binding SockOutR_T, StringFormat='{0:F0}°'}" HorizontalOptions="Center" FontSize="Default" />
+          <!-- - - - -  --> <Label Grid.Row="11" Grid.Column="27" Grid.ColumnSpan="8" Text="{Binding SockInL_T,  StringFormat='{0:F0}°'}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="Medium" VerticalOptions="End" />
+          <!--  - - - - --> <Label Grid.Row="12" Grid.Column="27" Grid.ColumnSpan="8" Text="{Binding SockOutL_T, StringFormat='{0:F0}°'}" HorizontalOptions="Center" FontSize="Default" />
 
           <!-- Picking what is currently displayed -->
           <Picker

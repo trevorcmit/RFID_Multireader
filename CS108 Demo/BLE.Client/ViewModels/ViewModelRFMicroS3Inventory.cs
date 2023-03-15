@@ -184,13 +184,13 @@ namespace BLE.Client.ViewModels {
         }
 
         Glove glove1 = new Glove("6091", "147F", "2AC0", "637B", "43C3", "83B0", "63D4", "3B5C");
-        Glove glove2 = new Glove("----", "2C4A", "91AA", "2693", "----", "----", "----", "----");
-        Glove glove3 = new Glove("----", "6344", "----", "62A5", "----", "----", "----", "----");
-        Glove glove4 = new Glove("----", "1776", "----", "9AB2", "----", "----", "----", "----");
-        Glove glove5 = new Glove("----", "9722", "----", "9A48", "----", "----", "----", "----");
-        Glove glove6 = new Glove("----", "3E5D", "----", "2E3B", "----", "----", "----", "----");
-        Glove glove7 = new Glove("----", "A959", "----", "4202", "----", "----", "----", "----");
-        Glove glove8 = new Glove("----", "91D2", "----", "4B37", "----", "----", "----", "----");
+        Glove glove2 = new Glove("A457", "2C4A", "91AA", "2693", "780A", "AD41", "4E4C", "3B61");
+        Glove glove3 = new Glove("BA65", "6344", "A998", "62A5", "3697", "6E17", "3AAE", "A891");
+        Glove glove4 = new Glove("6953", "1776", "4C65", "9AB2", "369D", "5B3C", "52C9", "4F0C");
+        Glove glove5 = new Glove("3598", "9722", "123C", "9A48", "2E8E", "9C80", "2E9B", "B1A2");
+        Glove glove6 = new Glove("4050", "3E5D", "9DB4", "2E3B", "822E", "AF99", "9326", "7CC2");
+        Glove glove7 = new Glove("9E31", "A959", "949B", "42D2", "7596", "69BC", "4697", "7C53");
+        Glove glove8 = new Glove("8432", "91D2", "885A", "4B37", "45A4", "A060", "8AC9", "4F98");
 
         class Shirt {
             public string Chest_In { get; set; }
@@ -239,12 +239,12 @@ namespace BLE.Client.ViewModels {
             }
         }
 
-        Shirt shirt1 = new Shirt("61DF", "2BC6", "427A", "0F7D", "8099", "759A", "9A80", "7198", "94B4", "896D", "80D2", "79D3", "8265", "98CC", "7852", "4E7A");
+        Shirt shirt1 = new Shirt("61DF", "2BC6", "427A", "0F7D", "8099", "759A", "9A80", "7198", "94B4", "896D", "80D2", "79D3", "8265", "988C", "7852", "4E7A");
         Shirt shirt2 = new Shirt("B57A", "088C", "8853", "5471", "0790", "3DBA", "9E3B", "8F77", "A831", "8FA4", "077C", "A035", "6065", "5782", "9B7D", "0A4A");
         Shirt shirt3 = new Shirt("1591", "8C56", "66C9", "1364", "6D2E", "0B61", "1E72", "1B7E", "5C34", "265C", "5E8F", "3DCF", "92C1", "2371", "7181", "2774");
         Shirt shirt4 = new Shirt("6FD7", "62CA", "A73D", "056D", "4743", "6ACF", "37BB", "1650", "2CC8", "5713", "7EB3", "2C98", "3150", "424E", "4FDC", "B0A2");
         Shirt shirt5 = new Shirt("0086", "3644", "1E9E", "3325", "099B", "5577", "2D1C", "5352", "855B", "3B75", "1CBB", "7CD4", "2A7A", "3C47", "8E8D", "9941");
-        Shirt shirt6 = new Shirt("B4A6", "7D23", "41C1", "4780", "AB82", "98C0", "067B", "734B", "41AC", "1C2E", "8938", "B142", "A38C", "8FA4", "7BDA", "8917");
+        Shirt shirt6 = new Shirt("B4A6", "138F", "41C1", "6A9E", "AB82", "98C0", "067B", "734B", "41AC", "1C2E", "8938", "B142", "A38C", "8FA4", "7BDA", "8917");
         Shirt shirt7 = new Shirt("9353", "7E20", "2E4F", "60D1", "7B06", "4EE3", "3318", "6415", "0D7C", "1EB3", "8A72", "2D69", "1F90", "77DE", "2850", "9F6B");
         Shirt shirt8 = new Shirt("277D", "77B5", "0859", "431C", "3869", "833E", "774F", "2B4F", "64A5", "483D", "0E92", "AC75", "675C", "737F", "2567", "B76E");
 
@@ -275,12 +275,12 @@ namespace BLE.Client.ViewModels {
 
         Pants pants1 = new Pants("409D", "1734", "A389", "AC37", "5439", "508F", "67A1", "701B");
         Pants pants2 = new Pants("8992", "AB37", "5E5E", "9873", "846F", "592A", "8220", "6227");
-        Pants pants3 = new Pants("9D63", "4465", "6BA1", "2445", "1D74", "3A8A", "726C", "8C46");
+        Pants pants3 = new Pants("9063", "4465", "6BA1", "2445", "1D74", "3A8A", "726C", "8C46");
         Pants pants4 = new Pants("2AAB", "113D", "7646", "1336", "1885", "6BB0", "842A", "2C4E");
-        Pants pants5 = new Pants("299E", "0887", "B35D", "41B6", "60A1", "8960", "A296", "62BE");
-        Pants pants6 = new Pants("----", "472E", "----", "B64D", "----", "----", "----", "268E");
-        Pants pants7 = new Pants("----", "----", "----", "----", "----", "----", "----", "----");
-        Pants pants8 = new Pants("----", "----", "----", "----", "----", "----", "----", "----");
+        Pants pants5 = new Pants("299E", "0887", "B35D", "41B6", "60A1", "8960", "A296", "6CBE");
+        Pants pants6 = new Pants("2853", "472E", "028E", "B64D", "8045", "38CD", "016B", "268E");
+        Pants pants7 = new Pants("1572", "83BB", "8895", "8B48", "297A", "1EA6", "8175", "239D");
+        Pants pants8 = new Pants("1838", "1D35", "877A", "8060", "3E0C", "64D4", "4119", "5F1A");
 
         class Sock {
             public string Above_In { get; set; }
@@ -315,9 +315,9 @@ namespace BLE.Client.ViewModels {
             }
         }
         
-        Beanie beanie1 = new Beanie("624F", "3F15");
+        Beanie beanie1 = new Beanie("624F", "3E6B");
         Beanie beanie2 = new Beanie("3B3C", "0962");
-        Beanie beanie3 = new Beanie("83A7", "7191");
+        Beanie beanie3 = new Beanie("83A7", "7195");
         Beanie beanie4 = new Beanie("6D29", "3159");
 
         private List<string> _BeaniePicker; public List<string> BeaniePicker { get => _BeaniePicker; set { _BeaniePicker = value; OnPropertyChanged("BeaniePicker"); } }
@@ -443,22 +443,22 @@ namespace BLE.Client.ViewModels {
             _SelectSock   = 0;  RaisePropertyChanged(() => SelectSock);
             _SelectGlove  = 0;  RaisePropertyChanged(() => SelectGlove);
 
-            Beanie_In = "gray"; Beanie_In_T  = "--"; Beanie_Out_T  = "--";
-            LeftLow   = "gray"; LeftLowIn_T  = "--"; LeftLowOut_T  = "--";
-            RightLow  = "gray"; RightLowIn_T = "--"; RightLowOut_T = "--";
-            RightUp   = "gray"; RightUpIn_T  = "--"; RightUpOut_T  = "--";
-            LeftUp    = "gray"; LeftUpIn_T   = "--"; LeftUpOut_T   = "--";
-            Chest     = "gray"; ChestIn_T    = "--"; ChestOut_T    = "--";
-            Abs       = "gray"; AbIn_T       = "--"; AbOut_T       = "--";
-            ThighL = "gray"; ThighLIn_T = "--"; ThighLOut_T = "--";
-            ThighR = "gray"; ThighRIn_T = "--"; ThighROut_T = "--";
-            CalfL = "gray";  CalfLIn_T = "--";  CalfLOut_T = "--";
-            CalfR = "gray";  CalfRIn_T = "--";  CalfROut_T = "--";
-            SockL = "gray"; SockInL_T = "--"; SockOutL_T = "--";
-            SockR = "gray"; SockInR_T = "--"; SockOutR_T = "--";
-            GloveL = "gray"; GloveInL_T  = "--"; GloveOutL_T = "--";
-            GloveR = "gray"; GloveInR_T  = "--"; GloveOutR_T = "--";
-            ScapLeft = "gray";  ScapLeftIn_T = "--";  ScapLeftOut_T = "--";
+            Beanie_In = "gray"; Beanie_In_T   = "--"; Beanie_Out_T   = "--";
+            LeftLow   = "gray"; LeftLowIn_T   = "--"; LeftLowOut_T   = "--";
+            RightLow  = "gray"; RightLowIn_T  = "--"; RightLowOut_T  = "--";
+            RightUp   = "gray"; RightUpIn_T   = "--"; RightUpOut_T   = "--";
+            LeftUp    = "gray"; LeftUpIn_T    = "--"; LeftUpOut_T    = "--";
+            Chest     = "gray"; ChestIn_T     = "--"; ChestOut_T     = "--";
+            Abs       = "gray"; AbIn_T        = "--"; AbOut_T        = "--";
+            ThighL    = "gray"; ThighLIn_T    = "--"; ThighLOut_T    = "--";
+            ThighR    = "gray"; ThighRIn_T    = "--"; ThighROut_T    = "--";
+            CalfL     = "gray"; CalfLIn_T     = "--"; CalfLOut_T     = "--";
+            CalfR     = "gray"; CalfRIn_T     = "--"; CalfROut_T     = "--";
+            SockL     = "gray"; SockInL_T     = "--"; SockOutL_T     = "--";
+            SockR     = "gray"; SockInR_T     = "--"; SockOutR_T     = "--";
+            GloveL    = "gray"; GloveInL_T    = "--"; GloveOutL_T    = "--";
+            GloveR    = "gray"; GloveInR_T    = "--"; GloveOutR_T    = "--";
+            ScapLeft  = "gray"; ScapLeftIn_T  = "--"; ScapLeftOut_T  = "--";
             ScapRight = "gray"; ScapRightIn_T = "--"; ScapRightOut_T = "--";
 
             shirts = new Dictionary<int, Shirt> {
@@ -779,7 +779,6 @@ namespace BLE.Client.ViewModels {
                                                 else if (tEPC==s1.Chest_Out) {
                                                     _ChestOut_T = DisplaySAV; RaisePropertyChanged(() => ChestOut_T);
                                                 }
-
                                                 else if (tEPC==s1.Abdomen_In) {
                                                     _AbIn_T = DisplaySAV; RaisePropertyChanged(() => AbIn_T);
                                                     if ((SAV>THRESHOLD) && (_Abs!="green")) {
@@ -792,7 +791,6 @@ namespace BLE.Client.ViewModels {
                                                 else if (tEPC==s1.Abdomen_Out) {
                                                     _AbOut_T = DisplaySAV; RaisePropertyChanged(() => AbOut_T);
                                                 }
-
                                                 else if (tEPC==s1.LeftUp_In) {
                                                     _LeftUpIn_T = DisplaySAV; RaisePropertyChanged(() => LeftUpIn_T);
                                                     if ((SAV>THRESHOLD) && (_LeftUp!="green")) {
@@ -805,7 +803,6 @@ namespace BLE.Client.ViewModels {
                                                 else if (tEPC==s1.LeftUp_Out) {
                                                     _LeftUpOut_T = DisplaySAV; RaisePropertyChanged(() => LeftUpOut_T);
                                                 }
-
                                                 else if (tEPC==s1.LeftLow_In) {
                                                     _LeftLowIn_T = DisplaySAV; RaisePropertyChanged(() => LeftLowIn_T);
                                                     if ((SAV>THRESHOLD) && (_LeftLow!="green")) {
@@ -818,7 +815,6 @@ namespace BLE.Client.ViewModels {
                                                 else if (tEPC==s1.LeftLow_Out) {
                                                     _LeftLowOut_T = DisplaySAV; RaisePropertyChanged(() => LeftLowOut_T);
                                                 }
-
                                                 else if (tEPC==s1.RightUp_In) {
                                                     _RightUpIn_T = DisplaySAV; RaisePropertyChanged(() => RightUpIn_T);
                                                     if ((SAV>THRESHOLD) && (_RightUp!="green")) {
@@ -831,7 +827,6 @@ namespace BLE.Client.ViewModels {
                                                 else if (tEPC==s1.RightUp_Out) {
                                                     _RightUpOut_T = DisplaySAV; RaisePropertyChanged(() => RightUpOut_T);
                                                 }
-
                                                 else if (tEPC==s1.RightLow_In) {
                                                     _RightLowIn_T = DisplaySAV; RaisePropertyChanged(() => RightLowIn_T);
                                                     if ((SAV>THRESHOLD) && (_RightLow!="green")) {
@@ -844,7 +839,6 @@ namespace BLE.Client.ViewModels {
                                                 else if (tEPC==s1.RightLow_Out) {
                                                     _RightLowOut_T = DisplaySAV; RaisePropertyChanged(() => RightLowOut_T);
                                                 }
-
                                                 else if (tEPC==s1.SubscapLeft_In) {
                                                     _ScapLeftIn_T = DisplaySAV; RaisePropertyChanged(() => ScapLeftIn_T);
                                                     if ((SAV>THRESHOLD) && (_ScapLeft!="green")) {
@@ -857,7 +851,6 @@ namespace BLE.Client.ViewModels {
                                                 else if (tEPC==s1.SubscapLeft_Out) {
                                                     _ScapLeftOut_T = DisplaySAV; RaisePropertyChanged(() => ScapLeftOut_T);
                                                 }
-
                                                 else if (tEPC==s1.SubscapRight_In) {
                                                     _ScapRightIn_T = DisplaySAV; RaisePropertyChanged(() => ScapRightIn_T);
                                                     if ((SAV>THRESHOLD) && (_ScapRight!="green")) {
@@ -872,9 +865,60 @@ namespace BLE.Client.ViewModels {
                                                 }
                                             }
 
+                                            else if (p1.TagList.Contains(tEPC)) {
+                                                if (tEPC==p1.Calf_In_L) {
+                                                    _CalfLIn_T = DisplaySAV; RaisePropertyChanged(() => CalfLIn_T);
+                                                    if ((SAV>THRESHOLD) && (_CalfL!="green")) {
+                                                        _CalfL = "green"; RaisePropertyChanged(() => CalfL);
+                                                    }
+                                                    else if ((SAV<=THRESHOLD) && (_CalfL!="red")) {
+                                                        _CalfL = "red"; RaisePropertyChanged(() => CalfL);
+                                                    }
+                                                }
+                                                else if (tEPC==p1.Calf_In_R) {
+                                                    _CalfRIn_T = DisplaySAV; RaisePropertyChanged(() => CalfRIn_T);
+                                                    if ((SAV>THRESHOLD) && (_CalfR!="green")) {
+                                                        _CalfR = "green"; RaisePropertyChanged(() => CalfR);
+                                                    }
+                                                    else if ((SAV<=THRESHOLD) && (_CalfR!="red")) {
+                                                        _CalfR = "red"; RaisePropertyChanged(() => CalfR);
+                                                    }
+                                                }
+                                                else if (tEPC==p1.Calf_Out_L) {
+                                                    _CalfLOut_T = DisplaySAV; RaisePropertyChanged(() => CalfLOut_T);
+                                                }
+                                                else if (tEPC==p1.Calf_Out_R) {
+                                                    _CalfROut_T = DisplaySAV; RaisePropertyChanged(() => CalfROut_T);
+                                                }
+                                                else if (tEPC==p1.Thigh_In_L) {
+                                                    _ThighLIn_T = DisplaySAV; RaisePropertyChanged(() => ThighLIn_T);
+                                                    if ((SAV>THRESHOLD) && (_ThighL!="green")) {
+                                                        _ThighL = "green"; RaisePropertyChanged(() => ThighL);
+                                                    }
+                                                    else if ((SAV<=THRESHOLD) && (_ThighL!="red")) {
+                                                        _ThighL = "red"; RaisePropertyChanged(() => ThighL);
+                                                    }
+                                                }
+                                                else if (tEPC==p1.Thigh_In_R) {
+                                                    _ThighRIn_T = DisplaySAV; RaisePropertyChanged(() => ThighRIn_T);
+                                                    if ((SAV>THRESHOLD) && (_ThighR!="green")) {
+                                                        _ThighR = "green"; RaisePropertyChanged(() => ThighR);
+                                                    }
+                                                    else if ((SAV<=THRESHOLD) && (_ThighR!="red")) {
+                                                        _ThighR = "red"; RaisePropertyChanged(() => ThighR);
+                                                    }
+                                                }
+                                                else if (tEPC==p1.Thigh_Out_L) {
+                                                    _ThighLOut_T = DisplaySAV; RaisePropertyChanged(() => ThighLOut_T);
+                                                }
+                                                else if (tEPC==p1.Thigh_Out_R) {
+                                                    _ThighROut_T = DisplaySAV; RaisePropertyChanged(() => ThighROut_T);
+                                                }
+                                            }
+
                                             // Gloves
                                             else if (g1.TagList.Contains(tEPC)) {
-                                                if (tEPC==g1.DorsalLeftIn) {
+                                                if ((tEPC==g1.DorsalLeftIn)||(tEPC==g1.FourthLeftIn)) {
                                                     _GloveInL_T = DisplaySAV; RaisePropertyChanged(() => GloveInL_T);
                                                     if ((SAV>THRESHOLD) && (_GloveL!="green")) {
                                                         _GloveL = "green"; RaisePropertyChanged(() => GloveL);
@@ -886,7 +930,7 @@ namespace BLE.Client.ViewModels {
                                                 else if (tEPC==g1.DorsalLeftOut) {
                                                     _GloveOutL_T = DisplaySAV; RaisePropertyChanged(() => GloveOutL_T);
                                                 }
-                                                else if (tEPC==g1.DorsalRightIn) {
+                                                else if ((tEPC==g1.DorsalRightIn)||(tEPC==g1.FourthRightIn)) {
                                                     _GloveInR_T = DisplaySAV; RaisePropertyChanged(() => GloveInR_T);
                                                     if ((SAV>THRESHOLD) && (_GloveR!="green")) {
                                                         _GloveR = "green"; RaisePropertyChanged(() => GloveR);
@@ -966,12 +1010,12 @@ namespace BLE.Client.ViewModels {
                                                 }
                                             }
 
-                                        } // end of Try/Finally block
+                                        }   // end of Try/Finally block
 
-                                    } // if caldata is nonzero
-                                }     // if temp within range
+                                    }       // if caldata is nonzero
+                                }           // if temp within range
                             }
-                            else {}
+                            else { }
                             found = true;
                             break;
                         }

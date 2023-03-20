@@ -637,11 +637,11 @@ namespace BLE.Client.ViewModels {
 
         async void GetTimes() {
             // Necessary part for picking autosave location
-            // pick_result = await FilePicker.PickAsync();
+            pick_result = await FilePicker.PickAsync();
 
             // Save every second and we cycle by half seconds
-            _active_time   = 1000;
-            _inactive_time = 1000;
+            _active_time   = 2000;
+            _inactive_time = 2000;
 
             RaisePropertyChanged(() => active_time);
             RaisePropertyChanged(() => inactive_time);
@@ -1069,10 +1069,10 @@ namespace BLE.Client.ViewModels {
 
         private void AutoSaveData() {    // Function for Sharing time series data from tags
             InvokeOnMainThread(()=> {
-                string fpath = "tags_" + r.ToString() + ".csv";
+                // string fpath = "tags_" + r.ToString() + ".csv";
 
-                // string fileName = pick_result.FullPath;    // Get file name from picker
-                string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), fpath);
+                string fileName = pick_result.FullPath;    // Get file name from picker
+                // string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), fpath);
                 // for UWP cannot use filepicker, use local folder instead
 
                 File.WriteAllText(fileName, String.Empty); // Empty text file to rewrite database

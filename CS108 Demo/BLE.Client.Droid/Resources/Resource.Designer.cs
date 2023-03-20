@@ -17604,6 +17604,9 @@ namespace BLE.Client.Droid
 			// aapt resource value: 0x7F07016E
 			public const int white_play = 2131165550;
 			
+			// aapt resource value: 0x7F07016F
+			public const int wholehuman = 2131165551;
+			
 			static Drawable()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();

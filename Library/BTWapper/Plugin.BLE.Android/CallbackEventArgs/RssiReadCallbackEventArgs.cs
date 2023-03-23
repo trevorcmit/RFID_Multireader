@@ -2,6 +2,7 @@
 using Android.Bluetooth;
 using Plugin.BLE.Abstractions.Contracts;
 
+
 namespace Plugin.BLE.Android.CallbackEventArgs
 {
     public class RssiReadCallbackEventArgs : EventArgs
@@ -14,5 +15,6 @@ namespace Plugin.BLE.Android.CallbackEventArgs
             Error = error;
             Rssi = rssi;
         }
+
     }
 }

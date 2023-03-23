@@ -2,6 +2,7 @@ using System;
 using Android.Bluetooth;
 using Plugin.BLE.Abstractions;
 
+
 namespace Plugin.BLE.Extensions
 {
     internal static class CharacteristicWriteTypeExtension
@@ -18,5 +19,6 @@ namespace Plugin.BLE.Extensions
                     throw new NotImplementedException();
             }
         }
+
     }
 }

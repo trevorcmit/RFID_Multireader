@@ -73,8 +73,6 @@ namespace Plugin.BLE.Android {
         }
 
         private void ConnectToGattForceBleTransportAPI(bool autoconnect) {
-            // This parameter is present from API 18 but only public from API 23
-            // So reflection is used before API 23
             if (Build.VERSION.SdkInt < BuildVersionCodes.Lollipop)
             {
                 BluetoothDevice.ConnectGatt(Application.Context, autoconnect, _gattCallback);
@@ -94,7 +92,6 @@ namespace Plugin.BLE.Android {
             {
                 BluetoothDevice.ConnectGatt(Application.Context, autoconnect, _gattCallback, BluetoothTransports.Le);
             }
-
         }
 
         public void Disconnect() {

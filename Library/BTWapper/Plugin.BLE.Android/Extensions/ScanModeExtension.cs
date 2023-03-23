@@ -4,11 +4,9 @@ using Plugin.BLE.Abstractions.Contracts;
 using AndroidScanMode = Android.Bluetooth.LE.ScanMode;
 using Trace = Plugin.BLE.Abstractions.Trace;
 
+
 namespace Plugin.BLE.Extensions
 {
-    /// <summary>
-    /// See https://developer.android.com/reference/android/bluetooth/le/ScanSettings.html
-    /// </summary>
     internal static class ScanModeExtension
     {
         public static AndroidScanMode ToNative(this ScanMode scanMode)
@@ -35,5 +33,6 @@ namespace Plugin.BLE.Extensions
                     throw new ArgumentOutOfRangeException(nameof(scanMode), scanMode, null);
             }
         }
+
     }
 }

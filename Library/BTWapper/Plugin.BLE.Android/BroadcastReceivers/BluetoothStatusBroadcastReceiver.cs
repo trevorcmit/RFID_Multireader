@@ -4,6 +4,7 @@ using Android.Content;
 using Plugin.BLE.Abstractions.Contracts;
 using Plugin.BLE.Extensions;
 
+
 namespace Plugin.BLE.BroadcastReceivers
 {
     public class BluetoothStatusBroadcastReceiver : BroadcastReceiver
@@ -19,8 +20,7 @@ namespace Plugin.BLE.BroadcastReceivers
         {
             var action = intent.Action;
 
-            if (action != BluetoothAdapter.ActionStateChanged)
-                return;
+            if (action != BluetoothAdapter.ActionStateChanged) return;
 
             var state = intent.GetIntExtra(BluetoothAdapter.ExtraState, -1);
 
@@ -33,5 +33,6 @@ namespace Plugin.BLE.BroadcastReceivers
             var btState = (State) state;
             _stateChangedHandler?.Invoke(btState.ToBluetoothState());
         }
+
     }
 }

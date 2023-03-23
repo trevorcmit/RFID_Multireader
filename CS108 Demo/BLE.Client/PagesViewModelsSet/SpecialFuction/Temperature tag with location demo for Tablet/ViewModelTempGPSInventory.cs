@@ -1,25 +1,19 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Collections.Generic;
+// using System.Collections.Generic;
 using Acr.UserDialogs;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform;
-
+// using MvvmCross.Platform;
 using System.Windows.Input;
 using Xamarin.Forms;
-
-
 using Plugin.BLE.Abstractions.Contracts;
-
 using Plugin.BLE.Abstractions;
-using Plugin.BLE.Abstractions.Extensions;
-
+// using Plugin.BLE.Abstractions.Extensions;
 using Prism.Mvvm;
-
 using Plugin.Share;
-using Plugin.Share.Abstractions;
-
+// using Plugin.Share.Abstractions;
 using Xamarin.Essentials;
+
 
 namespace BLE.Client.ViewModels
 {
@@ -937,20 +931,6 @@ namespace BLE.Client.ViewModels
         {
             try
             {
-                //var request = new GeolocationRequest(GeolocationAccuracy.Low, TimeSpan.FromSeconds(1));
-                ////var location = await Geolocation.GetLocationAsync(request, cts.Token);
-                //cts = new System.Threading.CancellationTokenSource();
-                //_lastLocation = await Geolocation.GetLocationAsync(request, cts.Token);
-
-                //var request = new GeolocationRequest();
-                //_lastLocation = await Geolocation.GetLastKnownLocationAsync();
-
-                //Xamarin.Essentials.Accelerometer.Start(SensorSpeed.Default);
-                //Xamarin.Essentials.Barometer.Start(SensorSpeed.Default);
-                //Xamarin.Essentials.Compass.Start(SensorSpeed.Default);
-                //Xamarin.Essentials.Gyroscope.Start(SensorSpeed.Default);
-                //Xamarin.Essentials.Magnetometer.Start(SensorSpeed.Default);
-
                 if (!_InSleep)
                 {
                     var request = new GeolocationRequest(GeolocationAccuracy.Default, TimeSpan.FromSeconds(0.1));
@@ -974,32 +954,20 @@ namespace BLE.Client.ViewModels
             catch (FeatureNotSupportedException fnsEx)
             {
                 int a = 10;
-                // Handle not supported on device exception
             }
             catch (FeatureNotEnabledException fneEx)
             {
                 int a = 10;
-                // Handle not enabled on device exception
             }
             catch (PermissionException pEx)
             {
                 int a = 10;
-                // Handle permission exception
             }
             catch (Exception ex)
             {
                 int a = 10;
-                // Unable to get location
             }
         }
-
-        /*        protected override void OnDisappearing()
-                {
-                    if (cts != null && !cts.IsCancellationRequested)
-                        cts.Cancel();
-                    base.OnDisappearing();
-                }
-        */
 
     }
 }

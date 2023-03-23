@@ -9,6 +9,7 @@ using Plugin.BLE.Extensions;
 using Adapter = Plugin.BLE.Android.Adapter;
 using IAdapter = Plugin.BLE.Abstractions.Contracts.IAdapter;
 
+
 namespace Plugin.BLE
 {
     internal class BleImplementation : BleImplementationBase
@@ -44,5 +45,6 @@ namespace Plugin.BLE
         {
             State = state;
         }
+
     }
 }

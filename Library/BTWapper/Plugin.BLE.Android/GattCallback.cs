@@ -4,6 +4,7 @@ using Plugin.BLE.Abstractions;
 using Plugin.BLE.Abstractions.Extensions;
 using Plugin.BLE.Android.CallbackEventArgs;
 
+
 namespace Plugin.BLE.Android
 {
     public interface IGattCallback
@@ -47,60 +48,46 @@ namespace Plugin.BLE.Android
                 return;
             }
 
-            //ToDo ignore just for me
             Trace.Message($"References of parent device and gatt callback device equal? {ReferenceEquals(_device.BluetoothDevice, gatt.Device).ToString().ToUpper()}");
-
             Trace.Message($"OnConnectionStateChange: GattStatus: {status}");
 
             switch (newState)
             {
-                // disconnected
                 case ProfileState.Disconnected:
 
-                    // Close GATT regardless, else we can accumulate zombie gatts.
                     CloseGattInstances(gatt);
 
                     if (_device.IsOperationRequested)
                     {
                         Trace.Message("Disconnected by user");
-
-                        //Found so we can remove it
                         _device.IsOperationRequested = false;
                         _adapter.ConnectedDeviceRegistry.Remove(gatt.Device.Address);
 
                         if (status != GattStatus.Success)
                         {
-                            // The above error event handles the case where the error happened during a Connect call, which will close out any waiting asyncs.
-                            // Android > 5.0 uses this switch branch when an error occurs during connect
                             Trace.Message($"Error while connecting '{_device.Name}'. Not raising disconnect event.");
                             _adapter.HandleConnectionFail(_device, $"GattCallback error: {status}");
                         }
                         else
                         {
-                            //we already hadled device error so no need th raise disconnect event(happens when device not in range)
                             _adapter.HandleDisconnectedDevice(true, _device);
                         }
                         break;
                     }
 
-                    //connection must have been lost, because the callback was not triggered by calling disconnect
                     Trace.Message($"Disconnected '{_device.Name}' by lost connection");
 
                     _adapter.ConnectedDeviceRegistry.Remove(gatt.Device.Address);
                     _adapter.HandleDisconnectedDevice(false, _device);
 
-                    // inform pending tasks
                     ConnectionInterrupted?.Invoke(this, EventArgs.Empty);
                     break;
-                // connecting
                 case ProfileState.Connecting:
                     Trace.Message("Connecting");
                     break;
-                // connected
                 case ProfileState.Connected:
                     Trace.Message("Connected");
 
-                    //Check if the operation was requested by the user                    
                     if (_device.IsOperationRequested)
                     {
                         _device.Update(gatt.Device, gatt);
@@ -247,8 +234,8 @@ namespace Plugin.BLE.Android
                 case GattStatus.Success:
                     break;
             }
-
             return exception;
         }
+
     }
 }

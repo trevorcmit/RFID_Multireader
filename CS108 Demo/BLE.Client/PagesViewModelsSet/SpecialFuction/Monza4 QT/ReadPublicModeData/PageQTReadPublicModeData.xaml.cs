@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+// using System.Collections.Generic;
+// using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-
+// using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+// using Xamarin.Forms.Xaml;
+
 
 namespace BLE.Client.Pages
 {
@@ -47,7 +47,6 @@ namespace BLE.Client.Pages
                         case 1: // EPC
                             entrySelectedMask.Text = BleMvxApplication._SELECT_EPC;
                             break;
-
                         case 2: // TID
                             if (BleMvxApplication._SELECT_TID.Length != 0)
                                 entrySelectedMask.Text = BleMvxApplication._SELECT_TID;
@@ -122,20 +121,14 @@ namespace BLE.Client.Pages
                  
                 labelEPCLength.Text = "EPC Length " + (epcWordLen * 16).ToString() + " bits";
             }
-            catch (Exception ex)
-            {
-
-            }
+            catch (Exception ex) {}
         }
 
         public async void onentryPCUnfocused(object sender, EventArgs e)
         {
-            if (entryPC.Text.Length == 0)
-                entryPC.Text = "3000";
-            if (entryPC.Text.Length > 4)
-                entryPC.Text = entryPC.Text.Remove(4);
-            else if (entryPC.Text.Length < 4)
-                entryPC.Text += "0000".Remove(4-entryPC.Text.Length);
+            if (entryPC.Text.Length == 0)      entryPC.Text = "3000";
+            if (entryPC.Text.Length > 4)       entryPC.Text = entryPC.Text.Remove(4);
+            else if (entryPC.Text.Length < 4)  entryPC.Text += "0000".Remove(4-entryPC.Text.Length);
 
             onentryEPCTextChanged(sender, e);
 
@@ -159,8 +152,7 @@ namespace BLE.Client.Pages
             else
             {
                 entryEPC.TextColor = Color.Black;
-                if (entryEPC.Text.Length > _EPCLength)
-                    entryEPC.Text = entryEPC.Text.Remove(_EPCLength);
+                if (entryEPC.Text.Length > _EPCLength) entryEPC.Text = entryEPC.Text.Remove(_EPCLength);
             }
         }
 
@@ -169,14 +161,11 @@ namespace BLE.Client.Pages
             if (entryEPC.Text.Length != _EPCLength)
             {
                 await DisplayAlert("EPC value invalid", "", null, "OK");
-                if (switchEPC.IsToggled)
-                    entryEPC.Focus();
+                if (switchEPC.IsToggled) entryEPC.Focus();
             }
         }
 
-        public async void onentryTemperatureCodeTextChanged(object sender, EventArgs e)
-        {
-        }
+        public async void onentryTemperatureCodeTextChanged(object sender, EventArgs e) {}
 
     }
 }

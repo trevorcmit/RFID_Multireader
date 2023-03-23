@@ -239,9 +239,9 @@ namespace BLE.Client.ViewModels {
             }
         }
 
-        Shirt shirt1 = new Shirt("61DF", "2BC6", "427A", "0F7D", "8099", "759A", "9A80", "7198", "94B4", "896D", "80D2", "79D3", "8265", "988C", "7852", "4E7A");
-        Shirt shirt2 = new Shirt("B57A", "088C", "8853", "5471", "0790", "3DBA", "9E3B", "8F77", "A831", "8FA4", "077C", "A035", "6065", "5782", "9B7D", "0A4A");
-        Shirt shirt3 = new Shirt("1591", "8C56", "66C9", "1364", "6D2E", "0B61", "1E72", "1B7E", "5C34", "265C", "5E8F", "3DCF", "92C1", "2371", "7181", "2774");
+        Shirt shirt1 = new Shirt("61DF", "2BC6", "427A", "0F7D", "8099", "759A", "9A80", "7198", "94B4", "988C", "80D2", "79D3", "8265", "896D", "7852", "4E7A");
+        Shirt shirt2 = new Shirt("B57A", "088C", "8853", "5471", "3DBA", "0709", "9E3B", "8F77", "6065", "5782", "9B7D", "0A4A", "A831", "813D", "077C", "A035");
+        Shirt shirt3 = new Shirt("1591", "8C56", "66C9", "1364", "6D2E", "0B61", "1E72", "1B7E", "5C34", "2371", "5E8F", "3DCF", "92C1", "265C", "7181", "2774");
         Shirt shirt4 = new Shirt("6FD7", "62CA", "A73D", "056D", "4743", "6ACF", "37BB", "1650", "2CC8", "5713", "7EB3", "2C98", "3150", "424E", "4FDC", "B0A2");
         Shirt shirt5 = new Shirt("0086", "3644", "1E9E", "3325", "099B", "5577", "2D1C", "5352", "855B", "3B75", "1CBB", "7CD4", "2A7A", "3C47", "8E8D", "9941");
         Shirt shirt6 = new Shirt("B4A6", "138F", "41C1", "6A9E", "AB82", "98C0", "067B", "734B", "41AC", "1C2E", "8938", "B142", "A38C", "8FA4", "7BDA", "8917");
@@ -258,7 +258,8 @@ namespace BLE.Client.ViewModels {
             public string Calf_Out_R { get; set; }
             public string Calf_In_R { get; set; }
             public List<string> TagList { get; set; }
-            public Pants(string til, string tol, string tir, string tor, string cil, string col, string cir, string cor) {
+            public Pants(string til, string tol, string tir, string tor, string cil, string col, string cir, string cor)
+            {
                 Thigh_In_L = til;
                 Thigh_Out_L = tol;
                 Thigh_In_R = tir;
@@ -267,20 +268,22 @@ namespace BLE.Client.ViewModels {
                 Calf_Out_L = col;
                 Calf_In_R = cir;
                 Calf_Out_R = cor;
-                TagList = new List<string> {
+
+                TagList = new List<string>
+                {
                     Thigh_In_L, Thigh_Out_L, Thigh_In_R, Thigh_Out_R, Calf_In_L, Calf_Out_L, Calf_In_R, Calf_Out_R
                 };
             }
         }
 
         Pants pants1 = new Pants("409D", "1734", "A389", "AC37", "5439", "508F", "67A1", "701B");
-        Pants pants2 = new Pants("8992", "AB37", "5E5E", "9873", "846F", "592A", "8220", "6227");
-        Pants pants3 = new Pants("9063", "4465", "6BA1", "2445", "1D74", "3A8A", "726C", "8C46");
+        Pants pants2 = new Pants("5E5E", "AB37", "8992", "9873", "846F", "592A", "8220", "6227");
+        Pants pants3 = new Pants("6BA1", "4465", "9063", "2445", "1D74", "3A8A", "726C", "8C46");
         Pants pants4 = new Pants("2AAB", "113D", "7646", "1336", "1885", "6BB0", "842A", "2C4E");
         Pants pants5 = new Pants("299E", "0887", "B35D", "41B6", "60A1", "8960", "A296", "6CBE");
-        Pants pants6 = new Pants("2853", "472E", "028E", "B64D", "8045", "38CD", "016B", "268E");
-        Pants pants7 = new Pants("1572", "83BB", "8895", "8B48", "297A", "1EA6", "8175", "239D");
-        Pants pants8 = new Pants("1838", "1D35", "877A", "8060", "3E0C", "64D4", "4119", "5F1A");
+        Pants pants6 = new Pants("028E", "472E", "2853", "B64D", "016B", "38CD", "8045", "268E");
+        Pants pants7 = new Pants("1572", "83BB", "8895", "8B48", "8175", "1EA6", "297A", "239D");
+        Pants pants8 = new Pants("877A", "1D35", "1838", "8060", "3E0C", "64D4", "5F1A", "64D4");
 
         class Sock {
             public string Above_In { get; set; }
@@ -420,14 +423,14 @@ namespace BLE.Client.ViewModels {
 
         private string _DebugVar; public string DebugVar { get => _DebugVar; set { _DebugVar = value; OnPropertyChanged("DebugVar"); } }
 
-        Dictionary<int, Shirt> shirts = new Dictionary<int, Shirt>();
-        Dictionary<int, Beanie> beanies = new Dictionary<int, Beanie>();
-        Dictionary<int, Pants> pants = new Dictionary<int, Pants>();
-        Dictionary<int, Glove> gloves = new Dictionary<int, Glove>();
-        Dictionary<int, List<Sock>> socks = new Dictionary<int, List<Sock>>();
+        Dictionary<int, Shirt> shirts      =  new  Dictionary<int, Shirt>() ;
+        Dictionary<int, Beanie> beanies    =  new  Dictionary<int, Beanie>() ;
+        Dictionary<int, Pants> pants       =  new  Dictionary<int, Pants>() ;
+        Dictionary<int, Glove> gloves      =  new  Dictionary<int, Glove>() ;
+        Dictionary<int, List<Sock>> socks  =  new  Dictionary<int, List<Sock>>() ;
 
-        public Random rnd = new Random();
-        public int r;
+        // public Random rnd = new Random();
+        // public int r;
 
         #endregion
 
@@ -435,7 +438,7 @@ namespace BLE.Client.ViewModels {
 
         public ViewModelRFMicroS3Inventory(IAdapter adapter, IUserDialogs userDialogs) : base(adapter) {
             _userDialogs = userDialogs;
-            r = rnd.Next(10000, 99999);
+            // r = rnd.Next(10000, 99999);
 
             _SelectBeanie = 0;  RaisePropertyChanged(() => SelectBeanie);
             _SelectShirt  = 0;  RaisePropertyChanged(() => SelectShirt);

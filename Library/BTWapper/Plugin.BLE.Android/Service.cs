@@ -6,6 +6,7 @@ using Android.Bluetooth;
 using Plugin.BLE.Abstractions;
 using Plugin.BLE.Abstractions.Contracts;
 
+
 namespace Plugin.BLE.Android
 {
     public class Service : ServiceBase
@@ -30,5 +31,6 @@ namespace Plugin.BLE.Android
                 _nativeService.Characteristics.Select(characteristic => new Characteristic(characteristic, _gatt, _gattCallback, this))
                 .Cast<ICharacteristic>().ToList());
         }
+
     }
 }

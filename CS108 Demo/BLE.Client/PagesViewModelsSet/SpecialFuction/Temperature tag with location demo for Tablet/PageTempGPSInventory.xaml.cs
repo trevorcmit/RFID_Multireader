@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿// using System;
+// using System.Collections.Generic;
+// using System.Linq;
+// using System.Text;
+// using System.Threading.Tasks;
 using Xamarin.Forms;
+
 
 namespace BLE.Client.Pages
 {
@@ -19,5 +19,6 @@ namespace BLE.Client.Pages
                 ((ListView)sender).SelectedItem = null; // de-select the row
             };
         }
+
     }
 }

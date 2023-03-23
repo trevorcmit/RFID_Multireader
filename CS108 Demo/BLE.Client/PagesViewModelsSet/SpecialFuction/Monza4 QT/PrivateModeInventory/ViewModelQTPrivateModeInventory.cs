@@ -1,23 +1,18 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Collections.Generic;
+// using System.Collections.Generic;
 using Acr.UserDialogs;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform;
-
+// using MvvmCross.Platform;
 using System.Windows.Input;
 using Xamarin.Forms;
-
-
 using Plugin.BLE.Abstractions.Contracts;
-
-using Plugin.BLE.Abstractions;
-using Plugin.BLE.Abstractions.Extensions;
-
+// using Plugin.BLE.Abstractions;
+// using Plugin.BLE.Abstractions.Extensions;
 using Prism.Mvvm;
+// using Plugin.Share;
+// using Plugin.Share.Abstractions;
 
-using Plugin.Share;
-using Plugin.Share.Abstractions;
 
 namespace BLE.Client.ViewModels {
     public class ViewModelQTPrivateModeInventory : BaseViewModel {

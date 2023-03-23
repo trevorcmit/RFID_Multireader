@@ -5,8 +5,10 @@ using Plugin.BLE.Abstractions;
 using Plugin.BLE.Abstractions.Contracts;
 
 
-namespace MvvmCross.Plugins.BLE.Droid {
-    public class Plugin : IMvxPlugin {
+namespace MvvmCross.Plugins.BLE.Droid
+{
+    public class Plugin : IMvxPlugin
+    {
         public Plugin() {
             Trace.TraceImplementation = Mvx.Trace;
         }

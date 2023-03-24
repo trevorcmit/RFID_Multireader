@@ -41,10 +41,11 @@ namespace BLE.Client.ViewModels {
             private string _TimeString;    // Time at which last tag was read
             public string TimeString { get { return this._TimeString; } set { this.SetProperty(ref this._TimeString, value); } }
             /////////////////////////////////////////////////////////////////////////////////////////////////////////
-            private string _EPC;            public string EPC { get { return this._EPC; } set { this.SetProperty(ref this._EPC, value); } }
-            private string _sensorAvgValue; public string SensorAvgValue { get { return this._sensorAvgValue; } set { this.SetProperty(ref this._sensorAvgValue, value); } }
-            private uint _sucessCount;      public uint SucessCount { get { return this._sucessCount; } set { this.SetProperty(ref this._sucessCount, value); } }
-            private string _DisplayName;    public string DisplayName { get { return this._DisplayName; } set { this.SetProperty(ref this._DisplayName, value); } }
+            private string _EPC;             public string EPC { get { return this._EPC; } set { this.SetProperty(ref this._EPC, value); } }
+            private string _sensorAvgValue;  public string SensorAvgValue { get { return this._sensorAvgValue; } set { this.SetProperty(ref this._sensorAvgValue, value); } }
+            private uint _sucessCount;       public uint SucessCount { get { return this._sucessCount; } set { this.SetProperty(ref this._sucessCount, value); } }
+            private string _DisplayName;     public string DisplayName { get { return this._DisplayName; } set { this.SetProperty(ref this._DisplayName, value); } }
+            private uint _OCRSSI;            public uint OCRSSI { get { return this._OCRSSI; } set { this.SetProperty(ref this._OCRSSI, value); } }
             public RFMicroTagInfoViewModel() {}    // Class constructor (constructs nothing)
         }
 
@@ -67,6 +68,7 @@ namespace BLE.Client.ViewModels {
         List<string> tag_List = new List<string>();
         Dictionary<string, List<string>> tag_Time = new Dictionary<string, List<string>>();
         Dictionary<string, List<string>> tag_Data = new Dictionary<string, List<string>>();
+        Dictionary<string, List<string>> tag_RSSI = new Dictionary<string, List<string>>();
         ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -429,8 +431,8 @@ namespace BLE.Client.ViewModels {
         Dictionary<int, Glove> gloves      =  new  Dictionary<int, Glove>() ;
         Dictionary<int, List<Sock>> socks  =  new  Dictionary<int, List<Sock>>() ;
 
-        // public Random rnd = new Random();
-        // public int r;
+        public Random rnd = new Random();
+        public int r;
 
         #endregion
 
@@ -438,7 +440,7 @@ namespace BLE.Client.ViewModels {
 
         public ViewModelRFMicroS3Inventory(IAdapter adapter, IUserDialogs userDialogs) : base(adapter) {
             _userDialogs = userDialogs;
-            // r = rnd.Next(10000, 99999);
+            r = rnd.Next(10000, 99999);
 
             _SelectBeanie = 0;  RaisePropertyChanged(() => SelectBeanie);
             _SelectShirt  = 0;  RaisePropertyChanged(() => SelectShirt);
@@ -736,6 +738,8 @@ namespace BLE.Client.ViewModels {
                                         TagInfoList[cnt].SensorAvgValue = SAV.ToString();
                                         TagInfoList[cnt].TimeString = DateTime.Now.ToString("HH:mm:ss");
 
+                                        TagInfoList[cnt].OCRSSI = ocRSSI;
+
                                         try {
                                             if (!tag_List.Contains(TagInfoList[cnt].EPC)) {      // Check Tag_List contains tags, add new data
                                                 tag_List.Add(TagInfoList[cnt].EPC);
@@ -755,6 +759,14 @@ namespace BLE.Client.ViewModels {
                                             }
                                             else {
                                                 tag_Data[TagInfoList[cnt].EPC].Add(TagInfoList[cnt].SensorAvgValue);
+                                            }
+
+                                            if (!tag_RSSI.ContainsKey(TagInfoList[cnt].EPC)) {   // Check Tag_Data contains tags, add new data
+                                                List<string> t_RSSI = new List<string>{TagInfoList[cnt].OCRSSI.ToString()};
+                                                tag_RSSI.Add(TagInfoList[cnt].EPC, t_RSSI);
+                                            }
+                                            else {
+                                                tag_RSSI[TagInfoList[cnt].EPC].Add(TagInfoList[cnt].OCRSSI.ToString());
                                             }
                                         }
 
@@ -920,98 +932,98 @@ namespace BLE.Client.ViewModels {
                                             }
 
                                             // Gloves
-                                            else if (g1.TagList.Contains(tEPC)) {
-                                                if ((tEPC==g1.DorsalLeftIn)||(tEPC==g1.FourthLeftIn)) {
-                                                    _GloveInL_T = DisplaySAV; RaisePropertyChanged(() => GloveInL_T);
-                                                    if ((SAV>THRESHOLD) && (_GloveL!="green")) {
-                                                        _GloveL = "green"; RaisePropertyChanged(() => GloveL);
-                                                    }
-                                                    else if ((SAV<=THRESHOLD) && (_GloveL!="red")) {
-                                                        _GloveL = "red"; RaisePropertyChanged(() => GloveL);
-                                                    }
-                                                }
-                                                else if (tEPC==g1.DorsalLeftOut) {
-                                                    _GloveOutL_T = DisplaySAV; RaisePropertyChanged(() => GloveOutL_T);
-                                                }
-                                                else if ((tEPC==g1.DorsalRightIn)||(tEPC==g1.FourthRightIn)) {
-                                                    _GloveInR_T = DisplaySAV; RaisePropertyChanged(() => GloveInR_T);
-                                                    if ((SAV>THRESHOLD) && (_GloveR!="green")) {
-                                                        _GloveR = "green"; RaisePropertyChanged(() => GloveR);
-                                                    }
-                                                    else if ((SAV<=THRESHOLD) && (_GloveR!="red")) {
-                                                        _GloveR = "red"; RaisePropertyChanged(() => GloveR);
-                                                    }
-                                                }
-                                                else if (tEPC==g1.DorsalRightOut) {
-                                                    _GloveOutR_T = DisplaySAV; RaisePropertyChanged(() => GloveOutR_T);
-                                                }
-                                            }
+                                            // else if (g1.TagList.Contains(tEPC)) {
+                                            //     if ((tEPC==g1.DorsalLeftIn)||(tEPC==g1.FourthLeftIn)) {
+                                            //         _GloveInL_T = DisplaySAV; RaisePropertyChanged(() => GloveInL_T);
+                                            //         if ((SAV>THRESHOLD) && (_GloveL!="green")) {
+                                            //             _GloveL = "green"; RaisePropertyChanged(() => GloveL);
+                                            //         }
+                                            //         else if ((SAV<=THRESHOLD) && (_GloveL!="red")) {
+                                            //             _GloveL = "red"; RaisePropertyChanged(() => GloveL);
+                                            //         }
+                                            //     }
+                                            //     else if (tEPC==g1.DorsalLeftOut) {
+                                            //         _GloveOutL_T = DisplaySAV; RaisePropertyChanged(() => GloveOutL_T);
+                                            //     }
+                                            //     else if ((tEPC==g1.DorsalRightIn)||(tEPC==g1.FourthRightIn)) {
+                                            //         _GloveInR_T = DisplaySAV; RaisePropertyChanged(() => GloveInR_T);
+                                            //         if ((SAV>THRESHOLD) && (_GloveR!="green")) {
+                                            //             _GloveR = "green"; RaisePropertyChanged(() => GloveR);
+                                            //         }
+                                            //         else if ((SAV<=THRESHOLD) && (_GloveR!="red")) {
+                                            //             _GloveR = "red"; RaisePropertyChanged(() => GloveR);
+                                            //         }
+                                            //     }
+                                            //     else if (tEPC==g1.DorsalRightOut) {
+                                            //         _GloveOutR_T = DisplaySAV; RaisePropertyChanged(() => GloveOutR_T);
+                                            //     }
+                                            // }
 
                                             // Beanie
-                                            else if (b1.TagList.Contains(tEPC)) {
-                                                if (tEPC==b1.Forehead_In) {
-                                                    _Beanie_In_T = DisplaySAV; RaisePropertyChanged(() => Beanie_In_T);
-                                                    if ((SAV>THRESHOLD) && (_Beanie_In!="green")) {
-                                                        _Beanie_In = "green"; RaisePropertyChanged(() => Beanie_In);
-                                                    }
-                                                    else if ((SAV<=THRESHOLD) && (_Beanie_In!="red")) {
-                                                        _Beanie_In = "red"; RaisePropertyChanged(() => Beanie_In);
-                                                    }
-                                                }
-                                                else if (tEPC==b1.Forehead_Out) {
-                                                    _Beanie_Out_T = DisplaySAV; RaisePropertyChanged(() => Beanie_Out_T);
-                                                }
-                                            }
+                                            // else if (b1.TagList.Contains(tEPC)) {
+                                            //     if (tEPC==b1.Forehead_In) {
+                                            //         _Beanie_In_T = DisplaySAV; RaisePropertyChanged(() => Beanie_In_T);
+                                            //         if ((SAV>THRESHOLD) && (_Beanie_In!="green")) {
+                                            //             _Beanie_In = "green"; RaisePropertyChanged(() => Beanie_In);
+                                            //         }
+                                            //         else if ((SAV<=THRESHOLD) && (_Beanie_In!="red")) {
+                                            //             _Beanie_In = "red"; RaisePropertyChanged(() => Beanie_In);
+                                            //         }
+                                            //     }
+                                            //     else if (tEPC==b1.Forehead_Out) {
+                                            //         _Beanie_Out_T = DisplaySAV; RaisePropertyChanged(() => Beanie_Out_T);
+                                            //     }
+                                            // }
 
                                             // Left Sock
-                                            else if (sk1[0].TagList.Contains(tEPC)) {
-                                                if (tEPC==sk1[0].Above_In) {
-                                                    _SockInL_T = DisplaySAV; RaisePropertyChanged(() => SockInL_T);
-                                                    if ((SAV>THRESHOLD) && (_SockL!="green")) {
-                                                        _SockL = "green"; RaisePropertyChanged(() => SockL);
-                                                    }
-                                                    else if ((SAV<=THRESHOLD) && (_SockL!="red")) {
-                                                        _SockL = "red"; RaisePropertyChanged(() => SockL);
-                                                    }
-                                                }
-                                                else if (tEPC==sk1[0].Above_Out) {
-                                                    _SockOutL_T = DisplaySAV; RaisePropertyChanged(() => SockOutL_T);
-                                                }
-                                                else if (tEPC==sk1[0].Toes) {
-                                                    _SockInL_T = DisplaySAV; RaisePropertyChanged(() => SockInL_T);
-                                                    if ((SAV>THRESHOLD) && (_SockL!="green")) {
-                                                        _SockL = "green"; RaisePropertyChanged(() => SockL);
-                                                    }
-                                                    else if ((SAV<=THRESHOLD) && (_SockL!="red")) {
-                                                        _SockL = "red"; RaisePropertyChanged(() => SockL);
-                                                    }
-                                                }
-                                            }
+                                            // else if (sk1[0].TagList.Contains(tEPC)) {
+                                            //     if (tEPC==sk1[0].Above_In) {
+                                            //         _SockInL_T = DisplaySAV; RaisePropertyChanged(() => SockInL_T);
+                                            //         if ((SAV>THRESHOLD) && (_SockL!="green")) {
+                                            //             _SockL = "green"; RaisePropertyChanged(() => SockL);
+                                            //         }
+                                            //         else if ((SAV<=THRESHOLD) && (_SockL!="red")) {
+                                            //             _SockL = "red"; RaisePropertyChanged(() => SockL);
+                                            //         }
+                                            //     }
+                                            //     else if (tEPC==sk1[0].Above_Out) {
+                                            //         _SockOutL_T = DisplaySAV; RaisePropertyChanged(() => SockOutL_T);
+                                            //     }
+                                            //     else if (tEPC==sk1[0].Toes) {
+                                            //         _SockInL_T = DisplaySAV; RaisePropertyChanged(() => SockInL_T);
+                                            //         if ((SAV>THRESHOLD) && (_SockL!="green")) {
+                                            //             _SockL = "green"; RaisePropertyChanged(() => SockL);
+                                            //         }
+                                            //         else if ((SAV<=THRESHOLD) && (_SockL!="red")) {
+                                            //             _SockL = "red"; RaisePropertyChanged(() => SockL);
+                                            //         }
+                                            //     }
+                                            // }
                                         
                                             // Right Sock
-                                            else if (sk1[1].TagList.Contains(tEPC)) {
-                                                if (tEPC==sk1[1].Above_In) {
-                                                    _SockInR_T = DisplaySAV; RaisePropertyChanged(() => SockInR_T);
-                                                    if ((SAV>THRESHOLD) && (_SockR!="green")) {
-                                                        _SockR = "green"; RaisePropertyChanged(() => SockR);
-                                                    }
-                                                    else if ((SAV<=THRESHOLD) && (_SockR!="red")) {
-                                                        _SockR = "red"; RaisePropertyChanged(() => SockR);
-                                                    }
-                                                }
-                                                else if (tEPC==sk1[1].Above_Out) {
-                                                    _SockOutR_T = DisplaySAV; RaisePropertyChanged(() => SockOutR_T);
-                                                }
-                                                else if (tEPC==sk1[1].Toes) {
-                                                    _SockInR_T = DisplaySAV; RaisePropertyChanged(() => SockInR_T);
-                                                    if ((SAV>THRESHOLD) && (_SockR!="green")) {
-                                                        _SockR = "green"; RaisePropertyChanged(() => SockR);
-                                                    }
-                                                    else if ((SAV<=THRESHOLD) && (_SockR!="red")) {
-                                                        _SockR = "red"; RaisePropertyChanged(() => SockR);
-                                                    }
-                                                }
-                                            }
+                                            // else if (sk1[1].TagList.Contains(tEPC)) {
+                                            //     if (tEPC==sk1[1].Above_In) {
+                                            //         _SockInR_T = DisplaySAV; RaisePropertyChanged(() => SockInR_T);
+                                            //         if ((SAV>THRESHOLD) && (_SockR!="green")) {
+                                            //             _SockR = "green"; RaisePropertyChanged(() => SockR);
+                                            //         }
+                                            //         else if ((SAV<=THRESHOLD) && (_SockR!="red")) {
+                                            //             _SockR = "red"; RaisePropertyChanged(() => SockR);
+                                            //         }
+                                            //     }
+                                            //     else if (tEPC==sk1[1].Above_Out) {
+                                            //         _SockOutR_T = DisplaySAV; RaisePropertyChanged(() => SockOutR_T);
+                                            //     }
+                                            //     else if (tEPC==sk1[1].Toes) {
+                                            //         _SockInR_T = DisplaySAV; RaisePropertyChanged(() => SockInR_T);
+                                            //         if ((SAV>THRESHOLD) && (_SockR!="green")) {
+                                            //             _SockR = "green"; RaisePropertyChanged(() => SockR);
+                                            //         }
+                                            //         else if ((SAV<=THRESHOLD) && (_SockR!="red")) {
+                                            //             _SockR = "red"; RaisePropertyChanged(() => SockR);
+                                            //         }
+                                            //     }
+                                            // }
 
                                         }   // end of Try/Finally block
 
@@ -1025,12 +1037,13 @@ namespace BLE.Client.ViewModels {
                     }
 
                     if (!found) {
-                        // if (epcs.Contains(info.epc.ToString())) {
                         RFMicroTagInfoViewModel item = new RFMicroTagInfoViewModel();
                         item.EPC = info.epc.ToString();
                         item.SensorAvgValue = "";
                         item.SucessCount = 0;
                         item.DisplayName = item.EPC;
+
+                        item.OCRSSI = ocRSSI;
 
                         if (ocRSSI >= BleMvxApplication._rfMicro_minOCRSSI && ocRSSI <= BleMvxApplication._rfMicro_maxOCRSSI) {
                             if (temp>=1300 && temp<=3500) {
@@ -1048,10 +1061,12 @@ namespace BLE.Client.ViewModels {
 
                                     List<string> t_time = new List<string>{ item.TimeString };
                                     List<string> t_data = new List<string>{ item.SensorAvgValue };
+                                    List<string> t_RSSI = new List<string>{ item.OCRSSI.ToString() };
 
                                     try {
                                         tag_Time.Add(item.EPC, t_time);
                                         tag_Data.Add(item.EPC, t_data);
+                                        tag_RSSI.Add(item.EPC, t_RSSI);
                                         tag_List.Add(item.EPC);
                                     }
                                     finally { }
@@ -1060,7 +1075,6 @@ namespace BLE.Client.ViewModels {
                         }
                         else { }
                         TagInfoList.Insert(0, item);
-                        //} // added to filter EPCs to savedata
                     }
                 }
             });
@@ -1072,10 +1086,12 @@ namespace BLE.Client.ViewModels {
 
         private void AutoSaveData() {    // Function for Sharing time series data from tags
             InvokeOnMainThread(()=> {
-                // string fpath = "tags_" + r.ToString() + ".csv";
+                string fpath = "tags_" + r.ToString() + ".csv";
+                string rssipath = "RSSI_" + r.ToString() + ".csv";
 
-                string fileName = pick_result.FullPath;    // Get file name from picker
-                // string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), fpath);
+                // string fileName = pick_result.FullPath;    // Get file name from picker
+                string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), fpath);
+                string rssiName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), rssipath);
                 // for UWP cannot use filepicker, use local folder instead
 
                 File.WriteAllText(fileName, String.Empty); // Empty text file to rewrite database
@@ -1089,6 +1105,19 @@ namespace BLE.Client.ViewModels {
                     }
                     writer.Close();
                 }
+
+                File.WriteAllText(rssiName, String.Empty); // Empty text file to rewrite database
+                using (StreamWriter writer = new StreamWriter(rssiName, true)) {
+                    foreach (string name in tag_List) {
+                        writer.WriteLine(name + "\n" + "[");
+                        foreach (var i in tag_Time[name]) { writer.WriteLine(i); }
+                        writer.WriteLine("]\n[");
+                        foreach (var j in tag_RSSI[name]) { writer.WriteLine(j); }
+                        writer.WriteLine("]\n ");
+                    }
+                    writer.Close();
+                }
+
             });
         }
 

@@ -6,7 +6,7 @@
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
   IgnorableNamespaces="uap mp">
 
-  <Identity Name="45592InternationalFabricM.fID-T" Publisher="CN=3A3725BF-0795-4BB7-89E5-AA99FF490905" Version="1.0.32.0" />
+  <Identity Name="45592InternationalFabricM.fID-T" Publisher="CN=3A3725BF-0795-4BB7-89E5-AA99FF490905" Version="1.0.33.0" />
   <mp:PhoneIdentity 
     PhoneProductId="94f149e2-8b5b-4684-bb6e-f797b857d972" 
     PhonePublisherId="00000000-0000-0000-0000-000000000000"

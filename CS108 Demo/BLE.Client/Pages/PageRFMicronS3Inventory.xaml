@@ -13,7 +13,7 @@
     <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
 
       <StackLayout Orientation="Vertical" VerticalOptions="Fill" HorizontalOptions="CenterAndExpand" >
-        <Grid ColumnSpacing="1" RowSpacing="3" BackgroundColor="#FFFFFF">
+        <Grid ColumnSpacing="1" RowSpacing="2" BackgroundColor="#FFFFFF">
           <Grid.ColumnDefinitions>     <!-- 55 COLUMNS -->
             <ColumnDefinition Width="0.01*"/>
             <ColumnDefinition Width="0.01849*"/><ColumnDefinition Width="0.01849*"/><ColumnDefinition Width="0.01849*"/><ColumnDefinition Width="0.01849*"/><ColumnDefinition Width="0.01849*"/>
@@ -30,30 +30,31 @@
             <ColumnDefinition Width="0.01*"/>
           </Grid.ColumnDefinitions>
           <Grid.RowDefinitions>
-            <RowDefinition Height="0.10*"  />
-            <RowDefinition Height="0.15*"  />
-            <RowDefinition Height="0.10*"  />
-            <RowDefinition Height="0.20*"  />  <!-- Row 3, Chest -->
-            <RowDefinition Height="0.15*"  />  <!-- Row 4, Upper Arms -->
-            <RowDefinition Height="0.15*"  />  
-            <RowDefinition Height="0.15*"  />  <!-- Row 6, Lower Arms and Abs -->
+            <RowDefinition Height="0.13*" />
+            <RowDefinition Height="0.12*" />
+            <RowDefinition Height="0.10*" />
+            <RowDefinition Height="0.20*" />  <!-- Row 3, Chest -->
+            <RowDefinition Height="0.15*" />  <!-- Row 4, Upper Arms -->
+            <RowDefinition Height="0.15*" />
+            <RowDefinition Height="0.15*" />  <!-- Row 6, Lower Arms and Abs -->
           </Grid.RowDefinitions>
 
+          <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="55" Text="Yoel Fink" FontSize="Title" FontAttributes="Bold" HorizontalOptions="Center" />
 
-          <!--Body Model--> <Image Grid.Row="0" Grid.Column="1" Grid.RowSpan="7" Grid.ColumnSpan="53" Aspect="AspectFit" Source="Assets/singletorso.jpg" />
+          <!--Body Model--> <Image Grid.Row="1" Grid.Column="1" Grid.RowSpan="6" Grid.ColumnSpan="53" Aspect="AspectFit" Source="Assets/singletorso.jpg" />
 
           <!--  Chest   --> <Image Grid.Row="3" Grid.Column="23" Grid.ColumnSpan="9" VerticalOptions="Start" Aspect="AspectFit" Opacity="0.561" Source="{Binding Chest, StringFormat='Assets/\{0\}.png'}" />
-          <!-- - - - -  --> <Label Grid.Row="3" Grid.Column="23" Grid.ColumnSpan="9" Text="{Binding ChestIn_T,  StringFormat='{0:F0}° cal/s'}" FontSize="Title" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" />
+          <!-- - - - -  --> <Label Grid.Row="3" Grid.Column="23" Grid.ColumnSpan="9" Text="{Binding ChestIn_T,  StringFormat='{0:F0} cal/s'}" FontSize="Title" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" />
 
-          <!-- - Back - --> <Image Grid.Row="1" Grid.Column="10" Grid.ColumnSpan="9" VerticalOptions="Start" Aspect="AspectFit" Opacity="0.561" Source="{Binding Back, StringFormat='Assets/\{0\}.png'}" />
-          <!-- - - - -  --> <Label Grid.Row="1" Grid.Column="10" Grid.ColumnSpan="9" Text="{Binding BackIn_T,  StringFormat='{0:F0}°'}" FontSize="Title" VerticalOptions="Start" HorizontalOptions="Center" FontAttributes="Bold" />
-          <!--  - - - - --> <Label Grid.Row="1" Grid.Column="10" Grid.ColumnSpan="9" Text="{Binding BackOut_T, StringFormat='{0:F0}°'}" FontSize="Title" VerticalOptions="End"   HorizontalOptions="Center" />
-          <!-- - - - -  --> <Label Grid.Row="0" Grid.Column="10" Grid.ColumnSpan="9" Text="Back" VerticalOptions="End" FontSize="Large" HorizontalOptions="Center" />
+          <!-- - Back - --> <Image Grid.Row="2" Grid.Column="9" Grid.ColumnSpan="9" VerticalOptions="Start" Aspect="AspectFit" Opacity="0.561" Source="{Binding Back, StringFormat='Assets/\{0\}.png'}" />
+          <!-- - - - -  --> <Label Grid.Row="2" Grid.Column="9" Grid.ColumnSpan="9" Text="{Binding BackIn_T,  StringFormat='{0:F0}°'}" FontSize="Title" VerticalOptions="Start" HorizontalOptions="Center" FontAttributes="Bold" />
+          <!--  - - - - --> <Label Grid.Row="2" Grid.Column="9" Grid.ColumnSpan="9" Text="{Binding BackOut_T, StringFormat='{0:F0}°'}" FontSize="Title" VerticalOptions="End"   HorizontalOptions="Center" />
+          <!-- - - - -  --> <Label Grid.Row="1" Grid.Column="9" Grid.ColumnSpan="9" Text="Back" VerticalOptions="End" FontSize="Large" HorizontalOptions="Center" />
 
-          <!--Back Neck --> <Image Grid.Row="1" Grid.Column="35" Grid.ColumnSpan="9" VerticalOptions="Start" Aspect="AspectFit" Opacity="0.561" Source="{Binding BackNeck, StringFormat='Assets/\{0\}.png'}" />
-          <!-- - - - -  --> <Label Grid.Row="1" Grid.Column="35" Grid.ColumnSpan="9" Text="{Binding BackNeckIn_T,  StringFormat='{0:F0}°'}" FontSize="Title" VerticalOptions="Start" HorizontalOptions="Center" FontAttributes="Bold" />
-          <!--  - - - - --> <Label Grid.Row="1" Grid.Column="35" Grid.ColumnSpan="9" Text="{Binding BackNeckOut_T, StringFormat='{0:F0}°'}" FontSize="Title" VerticalOptions="End"   HorizontalOptions="Center" />
-          <!-- - - - -  --> <Label Grid.Row="0" Grid.Column="35" Grid.ColumnSpan="9" Text="Back Neck" VerticalOptions="End" FontSize="Large" HorizontalOptions="Center" /> 
+          <!--Back Neck --> <Image Grid.Row="2" Grid.Column="36" Grid.ColumnSpan="9" VerticalOptions="Start" Aspect="AspectFit" Opacity="0.561" Source="{Binding BackNeck, StringFormat='Assets/\{0\}.png'}" />
+          <!-- - - - -  --> <Label Grid.Row="2" Grid.Column="36" Grid.ColumnSpan="9" Text="{Binding BackNeckIn_T,  StringFormat='{0:F0}°'}" FontSize="Title" VerticalOptions="Start" HorizontalOptions="Center" FontAttributes="Bold" />
+          <!--  - - - - --> <Label Grid.Row="2" Grid.Column="36" Grid.ColumnSpan="9" Text="{Binding BackNeckOut_T, StringFormat='{0:F0}°'}" FontSize="Title" VerticalOptions="End"   HorizontalOptions="Center" />
+          <!-- - - - -  --> <Label Grid.Row="1" Grid.Column="36" Grid.ColumnSpan="9" Text="Back Neck" VerticalOptions="End" FontSize="Large" HorizontalOptions="Center" /> 
 
           <!-- Abdomen  --> <Image Grid.Row="6" Grid.Column="20" Grid.ColumnSpan="9" Aspect="AspectFit" Opacity="0.561" Source="{Binding RightAb, StringFormat='Assets/\{0\}.png'}" />
           <!--  Right - --> <Label Grid.Row="6" Grid.Column="20" Grid.ColumnSpan="9" Text="{Binding RightAbIn_T,  StringFormat='{0:F0}°'}" FontSize="Title" VerticalOptions="Start" HorizontalOptions="Center" FontAttributes="Bold" />

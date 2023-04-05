@@ -76,7 +76,7 @@ namespace BLE.Client.ViewModels {
         public System.Timers.Timer downtimer = new System.Timers.Timer();
         ////////////////////////////////////////////////////
 
-        // public FileResult pick_result;  // Save FilePicker.PickAsync() result for use in Autosave function
+        public FileResult pick_result;  // Save FilePicker.PickAsync() result for use in Autosave function
   
         #endregion
 
@@ -146,6 +146,19 @@ namespace BLE.Client.ViewModels {
 
         public Random rnd = new Random();
         public int r;
+
+        public Dictionary<string, double> CORRECTION = new Dictionary<string, double> {
+            { "460E", 0.572158 },
+            { "B642", 0.026506 },
+            { "8320", -0.13917 },
+            { "9D1F", -0.73628 },
+            { "152D", 0.291637 },
+            { "88A5", -0.21336 },
+            { "2B1C", -0.42449 },
+            { "B0A5", -0.36315 },
+            { "87B4", 0.231665 },
+            { "0F4B", -1.30015 },
+        };
 
 
         ////////////////////////////////////////////////////////////////////////////
@@ -322,7 +335,7 @@ namespace BLE.Client.ViewModels {
 
         async void GetTimes() {
             // Necessary part for picking autosave location
-            // pick_result = await FilePicker.PickAsync();
+            pick_result = await FilePicker.PickAsync();
 
             // Save every second and we cycle by half seconds
             _active_time   = 2000;
@@ -410,7 +423,13 @@ namespace BLE.Client.ViewModels {
                                         TagInfoList[cnt].SucessCount++;
                                         ///////////////////////////////
 
-                                        double SAV = Math.Round(getTempC(temp, caldata), 2);   
+                                        string tEPC = TagInfoList[cnt].EPC.Substring(TagInfoList[cnt].EPC.Length - 4);
+                                        double SAV = Math.Round(getTempC(temp, caldata), 4);
+
+                                        if (CORRECTION.ContainsKey(tEPC)) {
+                                            SAV = SAV - CORRECTION[tEPC];
+                                        }
+
                                         string DisplaySAV = Math.Round(SAV, 2).ToString();
                                         TagInfoList[cnt].SensorAvgValue = SAV.ToString();
                                         TagInfoList[cnt].TimeString = DateTime.Now.ToString("HH:mm:ss");
@@ -448,212 +467,9 @@ namespace BLE.Client.ViewModels {
 
                                         finally {
                                             // Get Last Four Characters of EPC
-                                            string tEPC = TagInfoList[cnt].EPC.Substring(TagInfoList[cnt].EPC.Length - 4);
-
-                                            if (shirt18.TagList.Contains(tEPC)) {
-                                                if (tEPC==shirt18.Chest) {
-                                                    Chest1in = SAV;
-                                                    if ((Chest1out!=0.0) && (Chest1in!=0.0)) {
-                                                        double flux = -2.39f * (Chest1in - Chest1out);
-                                                        _ChestIn_T = flux.ToString("0.00");
-                                                        RaisePropertyChanged(() => ChestIn_T);
-
-                                                        if ((flux > 0.0) && (_Chest!="green")) {
-                                                            _Chest = "green";
-                                                            RaisePropertyChanged(() => Chest);
-                                                        }
-                                                        else if ((flux< 0.0) && (_Chest!="red")) {
-                                                            _Chest = "red";
-                                                            RaisePropertyChanged(() => Chest);
-                                                        }
-                                                    }
-                                                }
-
-                                                else if (tEPC==shirt18.LeftUpArm) {
-                                                    _LeftUpIn_T = DisplaySAV; RaisePropertyChanged(() => LeftUpIn_T);
-                                                    if ((SAV>THRESHOLD) && (_LeftUp!="green")) {
-                                                        _LeftUp = "green"; RaisePropertyChanged(() => LeftUp);
-                                                    }
-                                                    else if ((SAV<=THRESHOLD) && (_LeftUp!="red")) {
-                                                        _LeftUp = "red"; RaisePropertyChanged(() => LeftUp);
-                                                    }
-                                                }
-
-                                                else if (tEPC==shirt18.LeftLowArm) {
-                                                    _LeftLowIn_T = DisplaySAV; RaisePropertyChanged(() => LeftLowIn_T);
-                                                    if ((SAV>THRESHOLD) && (_LeftLow!="green")) {
-                                                        _LeftLow = "green"; RaisePropertyChanged(() => LeftLow);
-                                                    }
-                                                    else if ((SAV<=THRESHOLD) && (_LeftLow!="red")) {
-                                                        _LeftLow = "red"; RaisePropertyChanged(() => LeftLow);
-                                                    }
-                                                }
-
-                                                else if (tEPC==shirt18.RightUpArm) {
-                                                    _RightUpIn_T = DisplaySAV; RaisePropertyChanged(() => RightUpIn_T);
-                                                    if ((SAV>THRESHOLD) && (_RightUp!="green")) {
-                                                        _RightUp = "green"; RaisePropertyChanged(() => RightUp);
-                                                    }
-                                                    else if ((SAV<=THRESHOLD) && (_RightUp!="red")) {
-                                                        _RightUp = "red"; RaisePropertyChanged(() => RightUp);
-                                                    }
-                                                }
-
-                                                else if (tEPC==shirt18.RightLowArm) {
-                                                    _RightLowIn_T = DisplaySAV; RaisePropertyChanged(() => RightLowIn_T);
-                                                    if ((SAV>THRESHOLD) && (_RightLow!="green")) {
-                                                        _RightLow = "green"; RaisePropertyChanged(() => RightLow);
-                                                    }
-                                                    else if ((SAV<=THRESHOLD) && (_RightLow!="red")) {
-                                                        _RightLow = "red"; RaisePropertyChanged(() => RightLow);
-                                                    }
-                                                }
-
-                                                else if (tEPC==shirt18.Back) {
-                                                    _BackIn_T = DisplaySAV; RaisePropertyChanged(() => BackIn_T);
-                                                    if ((SAV>THRESHOLD) && (_Back!="green")) {
-                                                        _Back = "green"; RaisePropertyChanged(() => Back);
-                                                    }
-                                                    else if ((SAV<=THRESHOLD) && (_Back!="red")) {
-                                                        _Back = "red"; RaisePropertyChanged(() => Back);
-                                                    }
-                                                }
-
-                                                else if (tEPC==shirt18.BackNeck) {
-                                                    _BackNeckIn_T = DisplaySAV; RaisePropertyChanged(() => BackNeckIn_T);
-                                                    if ((SAV>THRESHOLD) && (_BackNeck!="green")) {
-                                                        _BackNeck = "green"; RaisePropertyChanged(() => BackNeck);
-                                                    }
-                                                    else if ((SAV<=THRESHOLD) && (_BackNeck!="red")) {
-                                                        _BackNeck = "red"; RaisePropertyChanged(() => BackNeck);
-                                                    }
-                                                }
-
-                                                else if (tEPC==shirt18.LeftAb) {
-                                                    _LeftAbIn_T = DisplaySAV; RaisePropertyChanged(() => LeftAbIn_T);
-                                                    if ((SAV>THRESHOLD) && (_LeftAb!="green")) {
-                                                        _LeftAb = "green"; RaisePropertyChanged(() => LeftAb);
-                                                    }
-                                                    else if ((SAV<=THRESHOLD) && (_LeftAb!="red")) {
-                                                        _LeftAb = "red"; RaisePropertyChanged(() => LeftAb);
-                                                    }
-                                                }
-
-                                                else if (tEPC==shirt18.RightAb) {
-                                                    _RightAbIn_T = DisplaySAV; RaisePropertyChanged(() => RightAbIn_T);
-                                                    if ((SAV>THRESHOLD) && (_RightAb!="green")) {
-                                                        _RightAb = "green"; RaisePropertyChanged(() => RightAb);
-                                                    }
-                                                    else if ((SAV<=THRESHOLD) && (_RightAb!="red")) {
-                                                        _RightAb = "red"; RaisePropertyChanged(() => RightAb);
-                                                    }
-                                                }
-
-                                            }
-
-                                            // Shirt
-                                            else if (shirt20.TagList.Contains(tEPC)) {
-
-                                                if (tEPC==shirt20.Chest) {
-                                                    Chest1out = SAV;
-                                                    if ((Chest1out!=0.0) && (Chest1in!=0.0)) {
-                                                        double flux = -2.39f * (Chest1in - Chest1out);
-                                                        _ChestIn_T = flux.ToString("0.00");
-                                                        RaisePropertyChanged(() => ChestIn_T);
-                                                        if ((flux > 0.0) && (_Chest!="green")) {
-                                                            _Chest = "green";
-                                                            RaisePropertyChanged(() => Chest);
-                                                        }
-                                                        else if ((flux< 0.0) && (_Chest!="red")) {
-                                                            _Chest = "red";
-                                                            RaisePropertyChanged(() => Chest);
-                                                        }
-                                                    }
-                                                }
-                                                
-                                                else if (tEPC==shirt20.LeftUpArm) {
-                                                    _LeftUpOut_T = DisplaySAV; RaisePropertyChanged(() => LeftUpOut_T);
-                                                    if ((SAV>THRESHOLD) && (_LeftUp!="green")) {
-                                                        _LeftUp = "green"; RaisePropertyChanged(() => LeftUp);
-                                                    }
-                                                    else if ((SAV<=THRESHOLD) && (_LeftUp!="red")) {
-                                                        _LeftUp = "red"; RaisePropertyChanged(() => LeftUp);
-                                                    }
-                                                }
-
-                                                else if (tEPC==shirt20.LeftLowArm) {
-                                                    _LeftLowOut_T = DisplaySAV; RaisePropertyChanged(() => LeftLowOut_T);
-                                                    if ((SAV>THRESHOLD) && (_LeftLow!="green")) {
-                                                        _LeftLow = "green"; RaisePropertyChanged(() => LeftLow);
-                                                    }
-                                                    else if ((SAV<=THRESHOLD) && (_LeftLow!="red")) {
-                                                        _LeftLow = "red"; RaisePropertyChanged(() => LeftLow);
-                                                    }
-                                                }
-
-                                                else if (tEPC==shirt20.RightUpArm) {
-                                                    _RightUpOut_T = DisplaySAV; RaisePropertyChanged(() => RightUpOut_T);
-                                                    if ((SAV>THRESHOLD) && (_RightUp!="green")) {
-                                                        _RightUp = "green"; RaisePropertyChanged(() => RightUp);
-                                                    }
-                                                    else if ((SAV<=THRESHOLD) && (_RightUp!="red")) {
-                                                        _RightUp = "red"; RaisePropertyChanged(() => RightUp);
-                                                    }
-                                                }
-
-                                                else if (tEPC==shirt20.RightLowArm) {
-                                                    _RightLowOut_T = DisplaySAV; RaisePropertyChanged(() => RightLowOut_T);
-                                                    if ((SAV>THRESHOLD) && (_RightLow!="green")) {
-                                                        _RightLow = "green"; RaisePropertyChanged(() => RightLow);
-                                                    }
-                                                    else if ((SAV<=THRESHOLD) && (_RightLow!="red")) {
-                                                        _RightLow = "red"; RaisePropertyChanged(() => RightLow);
-                                                    }
-                                                }
-
-                                                else if (tEPC==shirt20.Back) {
-                                                    _BackOut_T = DisplaySAV; RaisePropertyChanged(() => BackOut_T);
-                                                    if ((SAV>THRESHOLD) && (_Back!="green")) {
-                                                        _Back = "green"; RaisePropertyChanged(() => Back);
-                                                    }
-                                                    else if ((SAV<=THRESHOLD) && (_Back!="red")) {
-                                                        _Back = "red"; RaisePropertyChanged(() => Back);
-                                                    }
-                                                }
-
-                                                else if (tEPC==shirt20.BackNeck) {
-                                                    _BackNeckOut_T = DisplaySAV; RaisePropertyChanged(() => BackNeckOut_T);
-                                                    if ((SAV>THRESHOLD) && (_BackNeck!="green")) {
-                                                        _BackNeck = "green"; RaisePropertyChanged(() => BackNeck);
-                                                    }
-                                                    else if ((SAV<=THRESHOLD) && (_BackNeck!="red")) {
-                                                        _BackNeck = "red"; RaisePropertyChanged(() => BackNeck);
-                                                    }
-                                                }
-
-                                                else if (tEPC==shirt20.LeftAb) {
-                                                    _LeftAbOut_T = DisplaySAV; RaisePropertyChanged(() => LeftAbOut_T);
-                                                    if ((SAV>THRESHOLD) && (_LeftAb!="green")) {
-                                                        _LeftAb = "green"; RaisePropertyChanged(() => LeftAb);
-                                                    }
-                                                    else if ((SAV<=THRESHOLD) && (_LeftAb!="red")) {
-                                                        _LeftAb = "red"; RaisePropertyChanged(() => LeftAb);
-                                                    }
-                                                }
-
-                                                else if (tEPC==shirt20.RightAb) {
-                                                    _RightAbOut_T = DisplaySAV; RaisePropertyChanged(() => RightAbOut_T);
-                                                    if ((SAV>THRESHOLD) && (_RightAb!="green")) {
-                                                        _RightAb = "green"; RaisePropertyChanged(() => RightAb);
-                                                    }
-                                                    else if ((SAV<=THRESHOLD) && (_RightAb!="red")) {
-                                                        _RightAb = "red"; RaisePropertyChanged(() => RightAb);
-                                                    }
-                                                }
-
-                                            }
-
-                                        }   // End of Try/Finally block
+                                            // string tEPC = TagInfoList[cnt].EPC.Substring(TagInfoList[cnt].EPC.Length - 4);
+                                            
+                                        }  // End of Try/Finally block
 
                                     }     // If caldata is nonzero...
                                 }         // If temp within range...
@@ -716,9 +532,9 @@ namespace BLE.Client.ViewModels {
                 string fpath = "tags_" + r.ToString() + ".csv";
                 string rssipath = "RSSI_" + r.ToString() + ".csv";
 
-                // string fileName = pick_result.FullPath;    // Get file name from picker
-                string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), fpath);
-                string rssiName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), rssipath);
+                string fileName = pick_result.FullPath;    // Get file name from picker
+                // string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), fpath);
+                // string rssiName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), rssipath);
                 // for UWP cannot use filepicker, use local folder instead
 
                 File.WriteAllText(fileName, String.Empty); // Empty text file to rewrite database
@@ -733,17 +549,17 @@ namespace BLE.Client.ViewModels {
                     writer.Close();
                 }
 
-                File.WriteAllText(rssiName, String.Empty); // Empty text file to rewrite database
-                using (StreamWriter writer = new StreamWriter(rssiName, true)) {
-                    foreach (string name in tag_List) {
-                        writer.WriteLine(name + "\n" + "[");
-                        foreach (var i in tag_Time[name]) { writer.WriteLine(i); }
-                        writer.WriteLine("]\n[");
-                        foreach (var j in tag_RSSI[name]) { writer.WriteLine(j); }
-                        writer.WriteLine("]\n ");
-                    }
-                    writer.Close();
-                }
+                // File.WriteAllText(rssiName, String.Empty); // Empty text file to rewrite database
+                // using (StreamWriter writer = new StreamWriter(rssiName, true)) {
+                //     foreach (string name in tag_List) {
+                //         writer.WriteLine(name + "\n" + "[");
+                //         foreach (var i in tag_Time[name]) { writer.WriteLine(i); }
+                //         writer.WriteLine("]\n[");
+                //         foreach (var j in tag_RSSI[name]) { writer.WriteLine(j); }
+                //         writer.WriteLine("]\n ");
+                //     }
+                //     writer.Close();
+                // }
             });
         }
 

@@ -11,8 +11,10 @@ using Xamarin.Forms;
 using BLE.Client;
 
 
-namespace BLE.Client.ViewModels {
-    public class ViewModelMainMenu : BaseViewModel {
+namespace BLE.Client.ViewModels
+{
+    public class ViewModelMainMenu : BaseViewModel
+    {
         private readonly IUserDialogs _userDialogs;
         readonly IPermissions _permissions;
         private IDevice _device;
@@ -56,7 +58,8 @@ namespace BLE.Client.ViewModels {
             GetLocationPermission();
         }
 
-        ~ViewModelMainMenu() {
+        ~ViewModelMainMenu()
+        {
             BleMvxApplication._reader.OnReaderStateChanged -= new EventHandler<CSLibrary.Events.OnReaderStateChangedEventArgs>(ReaderStateCChangedEvent);
         }
 
@@ -155,11 +158,13 @@ namespace BLE.Client.ViewModels {
 
                 if ((BleMvxApplication._reader.bluetoothIC.GetFirmwareVersion() & 0x0F0000) != 0x030000) // ignore CS463
                 if (BleMvxApplication._reader.rfid.GetFirmwareVersion() < 0x0002061D || BleMvxApplication._reader.siliconlabIC.GetFirmwareVersion() < 0x00010009 || BleMvxApplication._reader.bluetoothIC.GetFirmwareVersion() < 0x0001000E) {
-                    _userDialogs.AlertAsync("Firmware too old" + Environment.NewLine + 
-                                            "Please upgrade firmware to at least :" + Environment.NewLine +
-                                            "RFID Processor firmware: V2.6.29" + Environment.NewLine +
-                                            "SiliconLab Firmware: V1.0.9" + Environment.NewLine +
-                                            "Bluetooth Firmware: V1.0.14");
+                    _userDialogs.AlertAsync(
+                        "Firmware too old" + Environment.NewLine + 
+                        "Please upgrade firmware to at least :" + Environment.NewLine +
+                        "RFID Processor firmware: V2.6.29" + Environment.NewLine +
+                        "SiliconLab Firmware: V1.0.9" + Environment.NewLine +
+                        "Bluetooth Firmware: V1.0.14"
+                    );
                 }
 
                 ClassBattery.SetBatteryMode(ClassBattery.BATTERYMODE.IDLE);
@@ -274,9 +279,9 @@ namespace BLE.Client.ViewModels {
             }
 
             // Initial Micro Setting for S3 Temp Tags with High Power Read
-            BleMvxApplication._rfMicro_TagType = Array.IndexOf(_tagTypeOptions, "Magnus S3");
-            BleMvxApplication._rfMicro_Power = Array.IndexOf(_powerOptions, "High (30dBm)");
-            BleMvxApplication._rfMicro_Target = Array.IndexOf(_targetOptions, "Toggle A/B"); 
+            BleMvxApplication._rfMicro_TagType    = Array.IndexOf(_tagTypeOptions, "Magnus S3");
+            BleMvxApplication._rfMicro_Power      = Array.IndexOf(_powerOptions, "High (30dBm)");
+            BleMvxApplication._rfMicro_Target     = Array.IndexOf(_targetOptions, "Toggle A/B"); 
             BleMvxApplication._rfMicro_SensorType = Array.IndexOf(_sensorTypeOptions, "Temperature");
 
             // Set to record Celsius temperature
@@ -284,7 +289,7 @@ namespace BLE.Client.ViewModels {
 
             // Set OCRSSI values
             BleMvxApplication._rfMicro_minOCRSSI = 0;
-            BleMvxApplication._rfMicro_maxOCRSSI = 30;
+            BleMvxApplication._rfMicro_maxOCRSSI = 31;
             
             // Threshold values
             BleMvxApplication._rfMicro_thresholdComparison = 0;

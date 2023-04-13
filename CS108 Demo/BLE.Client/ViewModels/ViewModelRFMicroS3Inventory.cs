@@ -10,8 +10,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
-using Xamarin;
+// using Xamarin;
 using Xamarin.Forms;
 using Xamarin.Essentials;
 
@@ -20,9 +21,10 @@ using Plugin.BLE.Abstractions.Extensions;
 using System.Threading;
 
 
-
-namespace BLE.Client.ViewModels {
-    public class ViewModelRFMicroS3Inventory : BaseViewModel {
+namespace BLE.Client.ViewModels
+{
+    public class ViewModelRFMicroS3Inventory : BaseViewModel
+    {
         public class RFMicroTagInfoViewModel : BindableBase
         {
             /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -85,26 +87,27 @@ namespace BLE.Client.ViewModels {
         #region ------------- EPCs ----------------
 
         // Display Variables for Shirt
-        private string _Chest; public string Chest { get => _Chest; set { _Chest = value; OnPropertyChanged("Chest"); } }
-        private string _ChestIn_T; public string ChestIn_T { get => _ChestIn_T; set { _ChestIn_T = value; OnPropertyChanged("ChestIn_T"); } }
-        private string _RightLow; public string RightLow { get => _RightLow; set { _RightLow = value; OnPropertyChanged("RightLow"); } }
-        private string _RightLowIn_T; public string RightLowIn_T { get => _RightLowIn_T; set { _RightLowIn_T = value; OnPropertyChanged("RightLowIn_T"); } }
+        private string _ChestIn;       public string ChestIn {       get => _ChestIn; set { _ChestIn = value; OnPropertyChanged("ChestIn"); } }
+        private string _ChestOut;      public string ChestOut {      get => _ChestOut; set { _ChestOut = value; OnPropertyChanged("ChestOut"); } }
+        private string _Chest;         public string Chest {         get => _Chest; set { _Chest = value; OnPropertyChanged("Chest"); } }
+        private string _RightLow;      public string RightLow {      get => _RightLow; set { _RightLow = value; OnPropertyChanged("RightLow"); } }
+        private string _RightLowIn_T;  public string RightLowIn_T {  get => _RightLowIn_T; set { _RightLowIn_T = value; OnPropertyChanged("RightLowIn_T"); } }
         private string _RightLowOut_T; public string RightLowOut_T { get => _RightLowOut_T; set { _RightLowOut_T = value; OnPropertyChanged("RightLowOut_T"); } }
-        private string _LeftLow; public string LeftLow { get => _LeftLow; set { _LeftLow = value; OnPropertyChanged("LeftLow"); } }
-        private string _LeftLowIn_T; public string LeftLowIn_T { get => _LeftLowIn_T; set { _LeftLowIn_T = value; OnPropertyChanged("LeftLowIn_T"); } }
-        private string _LeftLowOut_T; public string LeftLowOut_T { get => _LeftLowOut_T; set { _LeftLowOut_T = value; OnPropertyChanged("LeftLowOut_T"); } }
-        private string _RightUp; public string RightUp { get => _RightUp; set { _RightUp = value; OnPropertyChanged("RightUp"); } }
-        private string _RightUpIn_T; public string RightUpIn_T { get => _RightUpIn_T; set { _RightUpIn_T = value; OnPropertyChanged("RightUpIn_T"); } }
-        private string _RightUpOut_T; public string RightUpOut_T { get => _RightUpOut_T; set { _RightUpOut_T = value; OnPropertyChanged("RightUpOut_T"); } }
-        private string _LeftUp; public string LeftUp { get => _LeftUp; set { _LeftUp = value; OnPropertyChanged("LeftUp"); } }
-        private string _LeftUpIn_T; public string LeftUpIn_T { get => _LeftUpIn_T; set { _LeftUpIn_T = value; OnPropertyChanged("LeftUpIn_T"); } }
-        private string _LeftUpOut_T; public string LeftUpOut_T { get => _LeftUpOut_T; set { _LeftUpOut_T = value; OnPropertyChanged("LeftUpOut_T"); } }
-        private string _LeftAb; public string LeftAb { get => _LeftAb; set { _LeftAb = value; OnPropertyChanged("LeftAb"); } }
-        private string _LeftAbIn_T; public string LeftAbIn_T { get => _LeftAbIn_T; set { _LeftAbIn_T = value; OnPropertyChanged("LeftAbIn_T"); } }
-        private string _LeftAbOut_T; public string LeftAbOut_T { get => _LeftAbOut_T; set { _LeftAbOut_T = value; OnPropertyChanged("LeftAbOut_T"); } }
-        private string _RightAb; public string RightAb { get => _RightAb; set { _RightAb = value; OnPropertyChanged("RightAb"); } }
-        private string _RightAbIn_T; public string RightAbIn_T { get => _RightAbIn_T; set { _RightAbIn_T = value; OnPropertyChanged("RightAbIn_T"); } }
-        private string _RightAbOut_T; public string RightAbOut_T { get => _RightAbOut_T; set { _RightAbOut_T = value; OnPropertyChanged("RightAbOut_T"); } }
+        private string _LeftLow;       public string LeftLow {       get => _LeftLow; set { _LeftLow = value; OnPropertyChanged("LeftLow"); } }
+        private string _LeftLowIn_T;   public string LeftLowIn_T {   get => _LeftLowIn_T; set { _LeftLowIn_T = value; OnPropertyChanged("LeftLowIn_T"); } }
+        private string _LeftLowOut_T;  public string LeftLowOut_T {  get => _LeftLowOut_T; set { _LeftLowOut_T = value; OnPropertyChanged("LeftLowOut_T"); } }
+        private string _RightUp;       public string RightUp {       get => _RightUp; set { _RightUp = value; OnPropertyChanged("RightUp"); } }
+        private string _RightUpIn_T;   public string RightUpIn_T {   get => _RightUpIn_T; set { _RightUpIn_T = value; OnPropertyChanged("RightUpIn_T"); } }
+        private string _RightUpOut_T;  public string RightUpOut_T {  get => _RightUpOut_T; set { _RightUpOut_T = value; OnPropertyChanged("RightUpOut_T"); } }
+        private string _LeftUp;        public string LeftUp {        get => _LeftUp; set { _LeftUp = value; OnPropertyChanged("LeftUp"); } }
+        private string _LeftUpIn_T;    public string LeftUpIn_T {    get => _LeftUpIn_T; set { _LeftUpIn_T = value; OnPropertyChanged("LeftUpIn_T"); } }
+        private string _LeftUpOut_T;   public string LeftUpOut_T {   get => _LeftUpOut_T; set { _LeftUpOut_T = value; OnPropertyChanged("LeftUpOut_T"); } }
+        private string _LeftAb;        public string LeftAb {        get => _LeftAb; set { _LeftAb = value; OnPropertyChanged("LeftAb"); } }
+        private string _LeftAbIn_T;    public string LeftAbIn_T {    get => _LeftAbIn_T; set { _LeftAbIn_T = value; OnPropertyChanged("LeftAbIn_T"); } }
+        private string _LeftAbOut_T;   public string LeftAbOut_T {   get => _LeftAbOut_T; set { _LeftAbOut_T = value; OnPropertyChanged("LeftAbOut_T"); } }
+        private string _RightAb;       public string RightAb {       get => _RightAb; set { _RightAb = value; OnPropertyChanged("RightAb"); } }
+        private string _RightAbIn_T;   public string RightAbIn_T {   get => _RightAbIn_T; set { _RightAbIn_T = value; OnPropertyChanged("RightAbIn_T"); } }
+        private string _RightAbOut_T;  public string RightAbOut_T {  get => _RightAbOut_T; set { _RightAbOut_T = value; OnPropertyChanged("RightAbOut_T"); } }
 
         public int THRESHOLD = 15;
         public double WET = 0.25f;
@@ -142,7 +145,7 @@ namespace BLE.Client.ViewModels {
             }
         }
 
-        // 25 on INSIDE, 26 on OUTSIDE
+        // 25 on INSIDE, 26 on OUTSIDE (MWTC EPCs)
         // Shirt shirt18 = new Shirt( "B43E", "19B1", "AEA6", "9152", "59D6", "3060", "7491", "893F", "38C3" );
         // Shirt shirt20 = new Shirt( "84B5", "A02C", "0A80", "787B", "83D5", "77DB", "9FA0", "6EC4", "AF3F" ); 
         Shirt shirt25 = new Shirt( "205E", "9A88", "9F3D", "6F32", "1F74", "51B0", "AD80", "3277", "1E53" );
@@ -167,9 +170,6 @@ namespace BLE.Client.ViewModels {
             // { "0F4B", -1.30015 },
         };
 
-
-        ////////////////////////////////////////////////////////////////////////////
-        /////////////////// Added for UMich demo, on MWTC shirts ///////////////////
         ////////////////////////////////////////////////////////////////////////////
         private string _Back; public string Back { get => _Back; set { _Back = value; OnPropertyChanged("Back"); } }
         private string _BackIn_T; public string BackIn_T { get => _BackIn_T; set { _BackIn_T = value; OnPropertyChanged("BackIn_T"); } }
@@ -188,6 +188,16 @@ namespace BLE.Client.ViewModels {
         public double RightUpout = 0.0; public double RightUpin = 0.0;
         public double LeftLowout = 0.0; public double LeftLowin = 0.0;
         public double RightLowout = 0.0; public double RightLowin = 0.0;
+
+        private string _BackWet;        public string BackWet { get => _BackWet; set { _BackWet = value; OnPropertyChanged("BackWet"); } }
+        private string _BackNeckWet;    public string BackNeckWet { get => _BackNeckWet; set { _BackNeckWet = value; OnPropertyChanged("BackNeckWet"); } }
+        private string _ChestWet;       public string ChestWet { get => _ChestWet; set { _ChestWet = value; OnPropertyChanged("ChestWet"); } }
+        private string _LeftAbWet;      public string LeftAbWet { get => _LeftAbWet; set { _LeftAbWet = value; OnPropertyChanged("LeftAbWet"); } }
+        private string _RightAbWet;     public string RightAbWet { get => _RightAbWet; set { _RightAbWet = value; OnPropertyChanged("RightAbWet"); } }
+        private string _LeftUpWet;   public string LeftUpWet { get => _LeftUpWet; set { _LeftUpWet = value; OnPropertyChanged("LeftUpWet"); } }
+        private string _RightUpWet;  public string RightUpWet { get => _RightUpWet; set { _RightUpWet = value; OnPropertyChanged("RightUpWet"); } }
+        private string _LeftLowWet;  public string LeftLowWet { get => _LeftLowWet; set { _LeftLowWet = value; OnPropertyChanged("LeftLowWet"); } }
+        private string _RightLowWet; public string RightLowWet { get => _RightLowWet; set { _RightLowWet = value; OnPropertyChanged("RightLowWet"); } }
         ////////////////////////////////////////////////////////////////////////////
 
         #endregion
@@ -201,11 +211,21 @@ namespace BLE.Client.ViewModels {
             RightLow  = "gray"; RightLowIn_T  = "--"; RightLowOut_T  = "--";
             RightUp   = "gray"; RightUpIn_T   = "--"; RightUpOut_T   = "--";
             LeftUp    = "gray"; LeftUpIn_T    = "--"; LeftUpOut_T    = "--";
-            Chest     = "gray"; ChestIn_T     = "--";
+            Chest     = "gray"; ChestIn       = "--"; ChestOut       = "--";
             Back      = "gray"; BackIn_T      = "--"; BackOut_T      = "--";
             BackNeck  = "gray"; BackNeckIn_T  = "--"; BackNeckOut_T  = "--";
             LeftAb    = "gray"; LeftAbIn_T    = "--"; LeftAbOut_T    = "--";
             RightAb   = "gray"; RightAbIn_T   = "--"; RightAbOut_T   = "--";
+
+            ChestWet    = "Dry"; 
+            BackWet     = "Dry";
+            BackNeckWet = "Dry";
+            LeftAbWet   = "Dry";
+            RightAbWet  = "Dry";
+            LeftUpWet   = "Dry";
+            RightUpWet  = "Dry";
+            LeftLowWet  = "Dry";
+            RightLowWet = "Dry";
 
             // Set disconnection event for reconnection
             Adapter.DeviceDisconnected += OnDeviceDisconnected;
@@ -422,7 +442,7 @@ namespace BLE.Client.ViewModels {
             }
         }
 
-        private void AddOrUpdateTagData(CSLibrary.Structures.TagCallbackInfo info)
+        private async void AddOrUpdateTagData(CSLibrary.Structures.TagCallbackInfo info)
         {
             InvokeOnMainThread(() => {
                 bool found = false;
@@ -494,15 +514,21 @@ namespace BLE.Client.ViewModels {
                                             {
                                                 if (tEPC==shirt25.Chest) {
                                                     Chest1in = SAV;
-                                                    if ((Chest1out!=0.0) && (Chest1in!=0.0)) {
-                                                        double flux = -2.39f * (Chest1in - Chest1out);
-                                                        _ChestIn_T = flux.ToString("0.00"); RaisePropertyChanged(() => ChestIn_T);
+                                                    _ChestIn = DisplaySAV; RaisePropertyChanged(() => ChestIn);
 
-                                                        if ((flux>0.0) && (_Chest!="green")) {
-                                                            _Chest = "green"; RaisePropertyChanged(() => Chest);
+                                                    if ((Chest1in!=0.0) && (Chest1out!=0.0)) {
+                                                        if (Math.Abs(Chest1out - Chest1in) < WET) {
+                                                            _Chest = "blue"; RaisePropertyChanged(() => Chest);
+                                                            _ChestWet = "Wet"; RaisePropertyChanged(() => ChestWet);
                                                         }
-                                                        else if ((flux<0.0) && (_Chest!="red")) {
-                                                            _Chest = "red"; RaisePropertyChanged(() => Chest);
+                                                        else {
+                                                            _ChestWet = "Dry"; RaisePropertyChanged(() => ChestWet);
+                                                            if ((SAV>THRESHOLD) && (_Chest!="green")) {
+                                                                _Chest = "green"; RaisePropertyChanged(() => Chest);
+                                                            }
+                                                            else if ((SAV<=THRESHOLD) && (_Chest!="red")) {
+                                                                _Chest = "red"; RaisePropertyChanged(() => Chest);
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -513,8 +539,10 @@ namespace BLE.Client.ViewModels {
                                                     if ((LeftUpin!=0.0) && (LeftUpout!=0.0)) {
                                                         if (Math.Abs(LeftUpout - LeftUpin) < WET) {
                                                             _LeftUp = "blue"; RaisePropertyChanged(() => LeftUp);
+                                                            _LeftUpWet = "Wet"; RaisePropertyChanged(() => LeftUpWet);
                                                         }
                                                         else {
+                                                            _LeftUpWet = "Dry"; RaisePropertyChanged(() => LeftUpWet);
                                                             if ((SAV>THRESHOLD) && (_LeftUp!="green")) {
                                                                 _LeftUp = "green"; RaisePropertyChanged(() => LeftUp);
                                                             }
@@ -531,8 +559,10 @@ namespace BLE.Client.ViewModels {
                                                     if ((RightUpin!=0.0) && (RightUpout!=0.0)) {
                                                         if (Math.Abs(RightUpout - RightUpin) < WET) {
                                                             _RightUp = "blue"; RaisePropertyChanged(() => RightUp);
+                                                            _RightUpWet = "Wet"; RaisePropertyChanged(() => RightUpWet);
                                                         }
                                                         else {
+                                                            _RightUpWet = "Dry"; RaisePropertyChanged(() => RightUpWet);
                                                             if ((SAV>THRESHOLD) && (_RightUp!="green")) {
                                                                 _RightUp = "green"; RaisePropertyChanged(() => RightUp);
                                                             }
@@ -549,8 +579,10 @@ namespace BLE.Client.ViewModels {
                                                     if ((LeftLowin!=0.0) && (LeftLowout!=0.0)) {
                                                         if (Math.Abs(LeftLowout - LeftLowin) < WET) {
                                                             _LeftLow = "blue"; RaisePropertyChanged(() => LeftLow);
+                                                            _LeftLowWet = "Wet"; RaisePropertyChanged(() => LeftLowWet);
                                                         }
                                                         else {
+                                                            _LeftLowWet = "Dry"; RaisePropertyChanged(() => LeftLowWet);
                                                             if ((SAV>THRESHOLD) && (_LeftLow!="green")) {
                                                                 _LeftLow = "green"; RaisePropertyChanged(() => LeftLow);
                                                             }
@@ -567,8 +599,10 @@ namespace BLE.Client.ViewModels {
                                                     if ((RightLowin!=0.0) && (RightLowout!=0.0)) {
                                                         if (Math.Abs(RightLowout - RightLowin) < WET) {
                                                             _RightLow = "blue"; RaisePropertyChanged(() => RightLow);
+                                                            _RightLowWet = "Wet"; RaisePropertyChanged(() => RightLowWet);
                                                         }
                                                         else {
+                                                            _RightLowWet = "Dry"; RaisePropertyChanged(() => RightLowWet);
                                                             if ((SAV>THRESHOLD) && (_RightLow!="green")) {
                                                                 _RightLow = "green"; RaisePropertyChanged(() => RightLow);
                                                             }
@@ -585,8 +619,10 @@ namespace BLE.Client.ViewModels {
                                                     if ((Backin!=0.0) && (Backout!=0.0)) {
                                                         if (Math.Abs(Backout - Backin) < WET) {
                                                             _Back = "blue"; RaisePropertyChanged(() => Back);
+                                                            _BackWet = "Wet"; RaisePropertyChanged(( )=> BackWet);
                                                         }
                                                         else {
+                                                            _BackWet = "Dry"; RaisePropertyChanged(()=>BackWet);
                                                             if ((SAV>THRESHOLD) && (_Back!="green")) {
                                                                 _Back = "green"; RaisePropertyChanged(() => Back);
                                                             }
@@ -603,8 +639,10 @@ namespace BLE.Client.ViewModels {
                                                     if ((BackNeckin!=0.0) && (BackNeckout!=0.0)) {
                                                         if (Math.Abs(BackNeckout - BackNeckin) < WET) {
                                                             _BackNeck = "blue"; RaisePropertyChanged(() => BackNeck);
+                                                            _BackNeckWet = "Wet"; RaisePropertyChanged(() =>BackNeckWet);
                                                         }
                                                         else {
+                                                            _BackNeckWet = "Dry"; RaisePropertyChanged(() => BackNeckWet);
                                                             if ((SAV>THRESHOLD) && (_BackNeck!="green")) {
                                                                 _BackNeck = "green"; RaisePropertyChanged(() => BackNeck);
                                                             }
@@ -621,8 +659,10 @@ namespace BLE.Client.ViewModels {
                                                     if ((LeftAbin!=0.0) && (LeftAbout!=0.0)) {
                                                         if (Math.Abs(LeftAbout - LeftAbin) < WET) {
                                                             _LeftAb = "blue"; RaisePropertyChanged(() => LeftAb);
+                                                            _LeftAbWet = "Wet"; RaisePropertyChanged(() => LeftAbWet);
                                                         }
                                                         else {
+                                                            _LeftAbWet = "Dry"; RaisePropertyChanged(() => LeftAbWet);
                                                             if ((SAV>THRESHOLD) && (_LeftAb!="green")) {
                                                                 _LeftAb = "green"; RaisePropertyChanged(() => LeftAb);
                                                             }
@@ -639,8 +679,10 @@ namespace BLE.Client.ViewModels {
                                                     if ((RightAbin!=0.0) && (RightAbout!=0.0)) {
                                                         if (Math.Abs(RightAbout - RightAbin) < WET) {
                                                             _RightAb = "blue"; RaisePropertyChanged(() => RightAb);
+                                                            _RightAbWet = "Wet"; RaisePropertyChanged(() => RightAbWet);
                                                         }
                                                         else {
+                                                            _RightAbWet = "Dry"; RaisePropertyChanged(() => RightAbWet);
                                                             if ((SAV>THRESHOLD) && (_RightAb!="green")) {
                                                                 _RightAb = "green"; RaisePropertyChanged(() => RightAb);
                                                             }
@@ -656,15 +698,21 @@ namespace BLE.Client.ViewModels {
                                             {
                                                 if (tEPC==shirt26.Chest) {
                                                     Chest1out = SAV;
-                                                    if ((Chest1out!=0.0) && (Chest1in!=0.0)) {
-                                                        double flux = -2.39f * (Chest1in - Chest1out);
-                                                        _ChestIn_T = flux.ToString("0.00"); RaisePropertyChanged(() => ChestIn_T);
+                                                    _ChestOut = DisplaySAV; RaisePropertyChanged(() => ChestOut);
 
-                                                        if ((flux>0.0) && (_Chest!="green")) {
-                                                            _Chest = "green"; RaisePropertyChanged(() => Chest);
+                                                    if ((Chest1out!=0.0) && (Chest1in!=0.0)) {
+                                                        if (Math.Abs(Chest1out - Chest1in) < WET) {
+                                                            _Chest = "blue"; RaisePropertyChanged(() => Chest);
+                                                            _ChestWet = "Wet"; RaisePropertyChanged(() => ChestWet);
                                                         }
-                                                        else if ((flux<0.0) && (_Chest!="red")) {
-                                                            _Chest = "red"; RaisePropertyChanged(() => Chest);
+                                                        else {
+                                                            _ChestWet = "Dry"; RaisePropertyChanged(() => ChestWet);
+                                                            if ((SAV>THRESHOLD) && (_Chest!="green")) {
+                                                                _Chest = "green"; RaisePropertyChanged(() => Chest);
+                                                            }
+                                                            else if ((SAV<=THRESHOLD) && (_Chest!="red")) {
+                                                                _Chest = "red"; RaisePropertyChanged(() => Chest);
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -675,8 +723,10 @@ namespace BLE.Client.ViewModels {
                                                     if ((Backout!=0.0) && (Backin!=0.0)) {
                                                         if (Math.Abs(Backout - Backin) < WET) {
                                                             _Back = "blue"; RaisePropertyChanged(() => Back);
+                                                            _BackWet = "Wet"; RaisePropertyChanged(()=>BackWet);
                                                         }
                                                         else {
+                                                            _BackWet="Dry"; RaisePropertyChanged(()=> BackWet);
                                                             if ((SAV>THRESHOLD) && (_Back!="green")) {
                                                                 _Back = "green"; RaisePropertyChanged(() => Back);
                                                             }
@@ -693,8 +743,10 @@ namespace BLE.Client.ViewModels {
                                                     if ((BackNeckout!=0.0) && (BackNeckin!=0.0)) {
                                                         if (Math.Abs(BackNeckout - BackNeckin) < WET) {
                                                             _BackNeck = "blue"; RaisePropertyChanged(() => BackNeck);
+                                                            _BackNeckWet = "Wet"; RaisePropertyChanged(() => BackNeckWet);
                                                         }
                                                         else {
+                                                            _BackNeckWet = "Dry"; RaisePropertyChanged(() => BackNeckWet);
                                                             if ((SAV>THRESHOLD) && (_BackNeck!="green")) {
                                                                 _BackNeck = "green"; RaisePropertyChanged(() => BackNeck);
                                                             }
@@ -711,8 +763,10 @@ namespace BLE.Client.ViewModels {
                                                     if ((LeftUpout!=0.0) && (LeftUpin!=0.0)) {
                                                         if (Math.Abs(LeftUpout - LeftUpin) < WET) {
                                                             _LeftUp = "blue"; RaisePropertyChanged(() => LeftUp);
+                                                            _LeftUpWet = "Wet"; RaisePropertyChanged(() => LeftUpWet);
                                                         }
                                                         else {
+                                                            _LeftUpWet = "Dry"; RaisePropertyChanged(() => LeftUpWet);
                                                             if ((SAV>THRESHOLD) && (_LeftUp!="green")) {
                                                                 _LeftUp = "green"; RaisePropertyChanged(() => LeftUp);
                                                             }
@@ -729,8 +783,10 @@ namespace BLE.Client.ViewModels {
                                                     if ((LeftLowout!=0.0) && (LeftLowin!=0.0)) {
                                                         if (Math.Abs(LeftLowout - LeftLowin) < WET) {
                                                             _LeftLow = "blue"; RaisePropertyChanged(() => LeftLow);
+                                                            _LeftLowWet = "Wet"; RaisePropertyChanged(() => LeftLowWet);
                                                         }
                                                         else {
+                                                            _LeftLowWet = "Dry"; RaisePropertyChanged(() => LeftLowWet);
                                                             if ((SAV>THRESHOLD) && (_LeftLow!="green")) {
                                                                 _LeftLow = "green"; RaisePropertyChanged(() => LeftLow);
                                                             }
@@ -747,8 +803,10 @@ namespace BLE.Client.ViewModels {
                                                     if ((RightUpout!=0.0) && (RightUpin!=0.0)) {
                                                         if (Math.Abs(RightUpout - RightUpin) < WET) {
                                                             _RightUp = "blue"; RaisePropertyChanged(() => RightUp);
+                                                            _RightUpWet = "Wet"; RaisePropertyChanged(() => RightUpWet);
                                                         }
                                                         else {
+                                                            _RightUpWet = "Dry"; RaisePropertyChanged(() => RightUpWet);
                                                             if ((SAV>THRESHOLD) && (_RightUp!="green")) {
                                                                 _RightUp = "green"; RaisePropertyChanged(() => RightUp);
                                                             }
@@ -765,8 +823,10 @@ namespace BLE.Client.ViewModels {
                                                     if ((RightLowout!=0.0) && (RightLowin!=0.0)) {
                                                         if (Math.Abs(RightLowout - RightLowin) < WET) {
                                                             _RightLow = "blue"; RaisePropertyChanged(() => RightLow);
+                                                            _RightLowWet = "Wet"; RaisePropertyChanged(() => RightLowWet);
                                                         }
                                                         else {
+                                                            _RightLowWet = "Dry"; RaisePropertyChanged(() => RightLowWet);
                                                             if ((SAV>THRESHOLD) && (_RightLow!="green")) {
                                                                 _RightLow = "green"; RaisePropertyChanged(() => RightLow);
                                                             }
@@ -783,8 +843,10 @@ namespace BLE.Client.ViewModels {
                                                     if ((LeftAbout!=0.0) && (LeftAbin!=0.0)) {
                                                         if (Math.Abs(LeftAbout - LeftAbin) < WET) {
                                                             _LeftAb = "blue"; RaisePropertyChanged(() => LeftAb);
+                                                            _LeftAbWet = "Wet"; RaisePropertyChanged(() => LeftAbWet);
                                                         }
                                                         else {
+                                                            _LeftAbWet = "Dry"; RaisePropertyChanged(() => LeftAbWet);
                                                             if ((SAV>THRESHOLD) && (_LeftAb!="green")) {
                                                                 _LeftAb = "green"; RaisePropertyChanged(() => LeftAb);
                                                             }
@@ -801,8 +863,10 @@ namespace BLE.Client.ViewModels {
                                                     if ((RightAbout!=0.0) && (RightAbin!=0.0)) {
                                                         if (Math.Abs(RightAbout - RightAbin) < WET) {
                                                             _RightAb = "blue"; RaisePropertyChanged(() => RightAb);
+                                                            _RightAbWet = "Wet"; RaisePropertyChanged(() => RightAbWet);
                                                         }
                                                         else {
+                                                            _RightAbWet = "Dry"; RaisePropertyChanged(() => RightAbWet);
                                                             if ((SAV>THRESHOLD) && (_RightAb!="green")) {
                                                                 _RightAb = "green"; RaisePropertyChanged(() => RightAb);
                                                             }
@@ -812,8 +876,16 @@ namespace BLE.Client.ViewModels {
                                                         }
                                                     }
                                                 }
-                                            }
-                                            
+                                            } 
+
+                                            // List<double> temp_check = new List<double> {
+                                            //     LeftUpin, LeftLowin, RightUpin, RightLowin, LeftAbin, RightAbin,
+                                            //     LeftUpout, LeftLowout, RightUpout, RightLowout, LeftAbout, RightAbout,
+                                            //     Backout, Backin, Chest1out, Chest1in,
+                                            //     BackNeckin, BackNeckout
+                                            // };
+
+
                                         }  // End of Try/Finally block
 
                                     }     // If caldata is nonzero...
@@ -866,6 +938,15 @@ namespace BLE.Client.ViewModels {
                     }
                 }
             });
+
+            List<string> temp_check = new List<string> {
+                Chest, Back, LeftUp, LeftLow, RightUp, RightLow, LeftAb, RightAb, BackNeck
+            };
+
+            if (temp_check.Contains("red"))
+            {
+                bool answer = await Application.Current.MainPage.DisplayAlert("Alert!", "Temperature is too low!", "OK", "Cancel");
+            }
         }
 
         void VoltageEvent(object sender, CSLibrary.Notification.VoltageEventArgs e) {}

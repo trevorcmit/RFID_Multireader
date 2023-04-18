@@ -3,9 +3,11 @@ using System.Text;
 using Xamarin.Forms;
 
 
-namespace BLE.Client.Pages {
-	public partial class PageRFMicroReadTemp {
-        public PageRFMicroReadTemp() {InitializeComponent();}
+namespace BLE.Client.Pages
+{
+	public partial class PageRFMicroReadTemp
+    {
+        public PageRFMicroReadTemp() { InitializeComponent(); }
 
         protected override void OnAppearing() { base.OnAppearing(); }
 

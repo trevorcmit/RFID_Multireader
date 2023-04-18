@@ -267,6 +267,8 @@ namespace BLE.Client.ViewModels {
             fTemperature /= 10;
             return fTemperature;
         }
+
+        public void VoltageEvent(object sender, CSLibrary.Notification.VoltageEventArgs e) {}
         ///////////////////////////////////////////////////////////////
 
     }

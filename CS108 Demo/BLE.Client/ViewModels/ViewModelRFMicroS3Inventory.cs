@@ -216,65 +216,6 @@ namespace BLE.Client.ViewModels
                 if (values.Count > Length) { values.RemoveAt(0); times.RemoveAt(0); }
             }
 
-            // public double slope_helper(double [] x, double [] y) {
-            //         double slope = 0.0;
-            //         if ((x != null) && (y != null) && (x.length == y.length) && (x.length > 0)) {
-            //             slope = correlation(x, y)/sumOfSquares(x);
-            //         }
-            //         return slope;
-            // }
-
-            // public double Average_Helper(List<double> values) {
-            //     double av = values.Count > 0 ? values.Average() : 0.0;
-            //     return av;
-            // }
-
-            // public double sumOfSquares(List<double> values) {
-            //     double sumOfSquares = 0.0;
-            //     sumOfSquares = Arrays.stream(values).map(v -> v*v).sum();
-            //     double average = average(values);
-            //     sumOfSquares -= average*average*values.length;
-            //     return sumOfSquares;
-            // }
-
-            // public static double correlation(double [] x, double [] y) {
-            //     double correlation = 0.0;
-            //     if ((x != null) && (y != null) && (x.length == y.length) && (x.length > 0)) {
-            //         for (int i = 0; i < x.length; ++i) {
-            //             correlation += x[i]*y[i];
-            //         }
-            //         double xave = average(x);
-            //         double yave = average(y);
-            //         correlation -= xave*yave*x.length;
-            //     }
-            //     return correlation;
-            // }
-
-            // public static double FindLinearLeastSquaresFit(
-            //     List<PointF> points, out double m, out double b)
-            // {
-            //     // Perform the calculation.
-            //     // Find the values S1, Sx, Sy, Sxx, and Sxy.
-            //     double S1 = points.Count;
-            //     double Sx = 0;
-            //     double Sy = 0;
-            //     double Sxx = 0;
-            //     double Sxy = 0;
-            //     foreach (PointF pt in points)
-            //     {
-            //         Sx += pt.X;
-            //         Sy += pt.Y;
-            //         Sxx += pt.X * pt.X;
-            //         Sxy += pt.X * pt.Y;
-            //     }
-
-            //     // Solve for m and b.
-            //     m = (Sxy * S1 - Sx * Sy) / (Sxx * S1 - Sx * Sx);
-            //     b = (Sxy * Sx - Sy * Sxx) / (Sx * Sx - S1 * Sxx);
-
-            //     return Math.Sqrt(ErrorSquared(points, m, b));
-            // }
-
             public double Slope()
             {
                 if (values.Count==Length)
@@ -1017,54 +958,144 @@ namespace BLE.Client.ViewModels
                                                     In_ChestRecent.Add(dt, SAV);
                                                     _ChestIn = Math.Round(In_ChestRecent.Slope(), 2).ToString();
                                                     RaisePropertyChanged(() => ChestIn);
+                                                    if ((Chest1out!=0.0)&&(Chest1in!=0.0)) {
+                                                        if (Math.Abs(Chest1out - Chest1in) < WET) {
+                                                            _Chest = "blue"; RaisePropertyChanged(() => Chest);
+                                                            _ChestWet = "Wet"; RaisePropertyChanged(() => ChestWet);
+                                                        }
+                                                        else {
+                                                            _Chest = "green"; RaisePropertyChanged(() => Chest);
+                                                            _ChestWet = "Dry"; RaisePropertyChanged(() => ChestWet);
+                                                        }
+                                                    }
                                                 }
                                                 else if (tEPC==shirt25.Back)
                                                 {
                                                     In_BackRecent.Add(dt, SAV);
                                                     _BackIn_T = Math.Round(In_BackRecent.Slope(), 2).ToString();
                                                     RaisePropertyChanged(() => BackIn_T);
+                                                    if ((Backout!=0.0)&&(Backin!=0.0)) {
+                                                        if (Math.Abs(Backout - Backin) < WET) {
+                                                            _Back = "blue"; RaisePropertyChanged(() => Back);
+                                                            _BackWet = "Wet"; RaisePropertyChanged(() => BackWet);
+                                                        }
+                                                        else {
+                                                            _Back = "green"; RaisePropertyChanged(() => Back);
+                                                            _BackWet = "Dry"; RaisePropertyChanged(() => BackWet);
+                                                        }
+                                                    }
                                                 }
                                                 else if (tEPC==shirt25.BackNeck)
                                                 {
                                                     In_BackNeckRecent.Add(dt, SAV);
                                                     _BackNeckIn_T = Math.Round(In_BackNeckRecent.Slope(), 2).ToString();
                                                     RaisePropertyChanged(() => BackNeckIn_T);
+                                                    if ((BackNeckout!=0.0)&&(BackNeckin!=0.0)) {
+                                                        if (Math.Abs(BackNeckout - BackNeckin) < WET) {
+                                                            _BackNeck = "blue"; RaisePropertyChanged(() => BackNeck);
+                                                            _BackNeckWet = "Wet"; RaisePropertyChanged(() => BackNeckWet);
+                                                        }
+                                                        else {
+                                                            _BackNeck = "green"; RaisePropertyChanged(() => BackNeck);
+                                                            _BackNeckWet = "Dry"; RaisePropertyChanged(() => BackNeckWet);
+                                                        }
+                                                    }
                                                 }
                                                 else if (tEPC==shirt25.LeftUpArm)
                                                 {
                                                     In_LeftUpRecent.Add(dt, SAV);
                                                     _LeftUpIn_T = Math.Round(In_LeftUpRecent.Slope(), 2).ToString();
                                                     RaisePropertyChanged(() => LeftUpIn_T);
+                                                    if ((LeftUpout!=0.0)&&(LeftUpin!=0.0)) {
+                                                        if (Math.Abs(LeftUpout - LeftUpin) < WET) {
+                                                            _LeftUp = "blue"; RaisePropertyChanged(() => LeftUp);
+                                                            _LeftUpWet = "Wet"; RaisePropertyChanged(() => LeftUpWet);
+                                                        }
+                                                        else {
+                                                            _LeftUp = "green"; RaisePropertyChanged(() => LeftUp);
+                                                            _LeftUpWet = "Dry"; RaisePropertyChanged(() => LeftUpWet);
+                                                        }
+                                                    }
                                                 }
                                                 else if (tEPC==shirt25.LeftLowArm)
                                                 {
                                                     In_LeftLowRecent.Add(dt, SAV);
                                                     _LeftLowIn_T = Math.Round(In_LeftLowRecent.Slope(), 2).ToString();
                                                     RaisePropertyChanged(() => LeftLowIn_T);
+                                                    if ((LeftLowout!=0.0)&&(LeftLowin!=0.0)) {
+                                                        if (Math.Abs(LeftLowout - LeftLowin) < WET) {
+                                                            _LeftLow = "blue"; RaisePropertyChanged(() => LeftLow);
+                                                            _LeftLowWet = "Wet"; RaisePropertyChanged(() => LeftLowWet);
+                                                        }
+                                                        else {
+                                                            _LeftLow = "green"; RaisePropertyChanged(() => LeftLow);
+                                                            _LeftLowWet = "Dry"; RaisePropertyChanged(() => LeftLowWet);
+                                                        }
+                                                    }
                                                 }
                                                 else if (tEPC==shirt25.RightUpArm)
                                                 {
                                                     In_RightUpRecent.Add(dt, SAV);
                                                     _RightUpIn_T = Math.Round(In_RightUpRecent.Slope(), 2).ToString();
                                                     RaisePropertyChanged(() => RightUpIn_T);
+                                                    if ((RightUpout!=0.0)&&(RightUpin!=0.0)) {
+                                                        if (Math.Abs(RightUpout - RightUpin) < WET) {
+                                                            _RightUp = "blue"; RaisePropertyChanged(() => RightUp);
+                                                            _RightUpWet = "Wet"; RaisePropertyChanged(() => RightUpWet);
+                                                        }
+                                                        else {
+                                                            _RightUp = "green"; RaisePropertyChanged(() => RightUp);
+                                                            _RightUpWet = "Dry"; RaisePropertyChanged(() => RightUpWet);
+                                                        }
+                                                    }
                                                 }
                                                 else if (tEPC==shirt25.RightLowArm)
                                                 {
                                                     In_RightLowRecent.Add(dt, SAV);
                                                     _RightLowIn_T = Math.Round(In_RightLowRecent.Slope(), 2).ToString();
                                                     RaisePropertyChanged(() => RightLowIn_T);
+                                                    if ((RightLowout!=0.0)&&(RightLowin!=0.0)) {
+                                                        if (Math.Abs(RightLowout - RightLowin) < WET) {
+                                                            _RightLow = "blue"; RaisePropertyChanged(() => RightLow);
+                                                            _RightLowWet = "Wet"; RaisePropertyChanged(() => RightLowWet);
+                                                        }
+                                                        else {
+                                                            _RightLow = "green"; RaisePropertyChanged(() => RightLow);
+                                                            _RightLowWet = "Dry"; RaisePropertyChanged(() => RightLowWet);
+                                                        }
+                                                    }
                                                 }
                                                 else if (tEPC==shirt25.LeftAb)
                                                 {
                                                     In_LeftAbRecent.Add(dt, SAV);
                                                     _LeftAbIn_T = Math.Round(In_LeftAbRecent.Slope(), 2).ToString();
                                                     RaisePropertyChanged(() => LeftAbIn_T);
+                                                    if ((LeftAbout!=0.0)&&(LeftAbin!=0.0)) {
+                                                        if (Math.Abs(LeftAbout - LeftAbin) < WET) {
+                                                            _LeftAb = "blue"; RaisePropertyChanged(() => LeftAb);
+                                                            _LeftAbWet = "Wet"; RaisePropertyChanged(() => LeftAbWet);
+                                                        }
+                                                        else {
+                                                            _LeftAb = "green"; RaisePropertyChanged(() => LeftAb);
+                                                            _LeftAbWet = "Dry"; RaisePropertyChanged(() => LeftAbWet);
+                                                        }
+                                                    }
                                                 }
                                                 else if (tEPC==shirt25.RightAb)
                                                 {
                                                     In_RightAbRecent.Add(dt, SAV);
                                                     _RightAbIn_T = Math.Round(In_RightAbRecent.Slope(), 2).ToString();
                                                     RaisePropertyChanged(() => RightAbIn_T);
+                                                    if ((RightAbout!=0.0)&&(RightAbin!=0.0)) {
+                                                        if (Math.Abs(RightAbout - RightAbin) < WET) {
+                                                            _RightAb = "blue"; RaisePropertyChanged(() => RightAb);
+                                                            _RightAbWet = "Wet"; RaisePropertyChanged(() => RightAbWet);
+                                                        }
+                                                        else {
+                                                            _RightAb = "green"; RaisePropertyChanged(() => RightAb);
+                                                            _RightAbWet = "Dry"; RaisePropertyChanged(() => RightAbWet);
+                                                        }
+                                                    }
                                                 }
                                             }
                                             else if (shirt26.TagList.Contains(tEPC))
@@ -1074,54 +1105,144 @@ namespace BLE.Client.ViewModels
                                                     Out_ChestRecent.Add(dt, SAV);
                                                     _ChestOut = Math.Round(Out_ChestRecent.Slope(), 2).ToString();
                                                     RaisePropertyChanged(() => ChestOut);
+                                                    if ((Chest1out!=0.0)&&(Chest1in!=0.0)) {
+                                                        if (Math.Abs(Chest1out - Chest1in) < WET) {
+                                                            _Chest = "blue"; RaisePropertyChanged(() => Chest);
+                                                            _ChestWet = "Wet"; RaisePropertyChanged(() => ChestWet);
+                                                        }
+                                                        else {
+                                                            _Chest = "green"; RaisePropertyChanged(() => Chest);
+                                                            _ChestWet = "Dry"; RaisePropertyChanged(() => ChestWet);
+                                                        }
+                                                    }
                                                 }
                                                 else if (tEPC==shirt26.Back)
                                                 {
                                                     Out_BackRecent.Add(dt, SAV);
                                                     _BackOut_T = Math.Round(Out_BackRecent.Slope(), 2).ToString();
                                                     RaisePropertyChanged(() => BackOut_T);
+                                                    if ((Backout!=0.0)&&(Backin!=0.0)) {
+                                                        if (Math.Abs(Backout - Backin) < WET) {
+                                                            _Back = "blue"; RaisePropertyChanged(() => Back);
+                                                            _BackWet = "Wet"; RaisePropertyChanged(() => BackWet);
+                                                        }
+                                                        else {
+                                                            _Back = "green"; RaisePropertyChanged(() => Back);
+                                                            _BackWet = "Dry"; RaisePropertyChanged(() => BackWet);
+                                                        }
+                                                    }
                                                 }
                                                 else if (tEPC==shirt26.BackNeck)
                                                 {
                                                     Out_BackNeckRecent.Add(dt, SAV);
                                                     _BackNeckOut_T = Math.Round(Out_BackNeckRecent.Slope(), 2).ToString();
                                                     RaisePropertyChanged(() => BackNeckOut_T);
+                                                    if ((BackNeckout!=0.0)&&(BackNeckin!=0.0)) {
+                                                        if (Math.Abs(BackNeckout - BackNeckin) < WET) {
+                                                            _BackNeck = "blue"; RaisePropertyChanged(() => BackNeck);
+                                                            _BackNeckWet = "Wet"; RaisePropertyChanged(() => BackNeckWet);
+                                                        }
+                                                        else {
+                                                            _BackNeck = "green"; RaisePropertyChanged(() => BackNeck);
+                                                            _BackNeckWet = "Dry"; RaisePropertyChanged(() => BackNeckWet);
+                                                        }
+                                                    }
                                                 }
                                                 else if (tEPC==shirt26.LeftUpArm)
                                                 {
                                                     Out_LeftUpRecent.Add(dt, SAV);
                                                     _LeftUpOut_T = Math.Round(Out_LeftUpRecent.Slope(), 2).ToString();
                                                     RaisePropertyChanged(() => LeftUpOut_T);
+                                                    if ((LeftUpout!=0.0)&&(LeftUpin!=0.0)) {
+                                                        if (Math.Abs(LeftUpout - LeftUpin) < WET) {
+                                                            _LeftUp = "blue"; RaisePropertyChanged(() => LeftUp);
+                                                            _LeftUpWet = "Wet"; RaisePropertyChanged(() => LeftUpWet);
+                                                        }
+                                                        else {
+                                                            _LeftUp = "green"; RaisePropertyChanged(() => LeftUp);
+                                                            _LeftUpWet = "Dry"; RaisePropertyChanged(() => LeftUpWet);
+                                                        }
+                                                    }
                                                 }
                                                 else if (tEPC==shirt26.LeftLowArm)
                                                 {
                                                     Out_LeftLowRecent.Add(dt, SAV);
                                                     _LeftLowOut_T = Math.Round(Out_LeftLowRecent.Slope(), 2).ToString();
                                                     RaisePropertyChanged(() => LeftLowOut_T);
+                                                    if ((LeftLowout!=0.0)&&(LeftLowin!=0.0)) {
+                                                        if (Math.Abs(LeftLowout - LeftLowin) < WET) {
+                                                            _LeftLow = "blue"; RaisePropertyChanged(() => LeftLow);
+                                                            _LeftLowWet = "Wet"; RaisePropertyChanged(() => LeftLowWet);
+                                                        }
+                                                        else {
+                                                            _LeftLow = "green"; RaisePropertyChanged(() => LeftLow);
+                                                            _LeftLowWet = "Dry"; RaisePropertyChanged(() => LeftLowWet);
+                                                        }
+                                                    }
                                                 }
                                                 else if (tEPC==shirt26.RightUpArm)
                                                 {
                                                     Out_RightUpRecent.Add(dt, SAV);
                                                     _RightUpOut_T = Math.Round(Out_RightUpRecent.Slope(), 2).ToString();
                                                     RaisePropertyChanged(() => RightUpOut_T);
+                                                    if ((RightUpout!=0.0)&&(RightUpin!=0.0)) {
+                                                        if (Math.Abs(RightUpout - RightUpin) < WET) {
+                                                            _RightUp = "blue"; RaisePropertyChanged(() => RightUp);
+                                                            _RightUpWet = "Wet"; RaisePropertyChanged(() => RightUpWet);
+                                                        }
+                                                        else {
+                                                            _RightUp = "green"; RaisePropertyChanged(() => RightUp);
+                                                            _RightUpWet = "Dry"; RaisePropertyChanged(() => RightUpWet);
+                                                        }
+                                                    }
                                                 }
                                                 else if (tEPC==shirt26.RightLowArm)
                                                 {
                                                     Out_RightLowRecent.Add(dt, SAV);
                                                     _RightLowOut_T = Math.Round(Out_RightLowRecent.Slope(), 2).ToString();
                                                     RaisePropertyChanged(() => RightLowOut_T);
+                                                    if ((RightLowout!=0.0)&&(RightLowin!=0.0)) {
+                                                        if (Math.Abs(RightLowout - RightLowin) < WET) {
+                                                            _RightLow = "blue"; RaisePropertyChanged(() => RightLow);
+                                                            _RightLowWet = "Wet"; RaisePropertyChanged(() => RightLowWet);
+                                                        }
+                                                        else {
+                                                            _RightLow = "green"; RaisePropertyChanged(() => RightLow);
+                                                            _RightLowWet = "Dry"; RaisePropertyChanged(() => RightLowWet);
+                                                        }
+                                                    }
                                                 }
                                                 else if (tEPC==shirt26.LeftAb)
                                                 {
                                                     Out_LeftAbRecent.Add(dt, SAV);
                                                     _LeftAbOut_T = Math.Round(Out_LeftAbRecent.Slope(), 2).ToString();
                                                     RaisePropertyChanged(() => LeftAbOut_T);
+                                                    if ((LeftAbout!=0.0)&&(LeftAbin!=0.0)) {
+                                                        if (Math.Abs(LeftAbout - LeftAbin) < WET) {
+                                                            _LeftAb = "blue"; RaisePropertyChanged(() => LeftAb);
+                                                            _LeftAbWet = "Wet"; RaisePropertyChanged(() => LeftAbWet);
+                                                        }
+                                                        else {
+                                                            _LeftAb = "green"; RaisePropertyChanged(() => LeftAb);
+                                                            _LeftAbWet = "Dry"; RaisePropertyChanged(() => LeftAbWet);
+                                                        }
+                                                    }
                                                 }
                                                 else if (tEPC==shirt26.RightAb)
                                                 {
                                                     Out_RightAbRecent.Add(dt, SAV);
                                                     _RightAbOut_T = Math.Round(Out_RightAbRecent.Slope(), 2).ToString();
                                                     RaisePropertyChanged(() => RightAbOut_T);
+                                                    if ((RightAbout!=0.0)&&(RightAbin!=0.0)) {
+                                                        if (Math.Abs(RightAbout - RightAbin) < WET) {
+                                                            _RightAb = "blue"; RaisePropertyChanged(() => RightAb);
+                                                            _RightAbWet = "Wet"; RaisePropertyChanged(() => RightAbWet);
+                                                        }
+                                                        else {
+                                                            _RightAb = "green"; RaisePropertyChanged(() => RightAb);
+                                                            _RightAbWet = "Dry"; RaisePropertyChanged(() => RightAbWet);
+                                                        }
+                                                    }
                                                 }
                                             }
 

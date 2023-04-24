@@ -2,8 +2,10 @@
 using Xamarin.Forms;
 
 
-namespace BLE.Client.Pages {
-	public partial class PageSettingAntenna {
+namespace BLE.Client.Pages
+{
+	public partial class PageSettingAntenna
+    {
         class ANTENNAOPTION {
             private global::Xamarin.Forms.Switch switchAntennaEnable;
             private global::Xamarin.Forms.Entry entryPower;

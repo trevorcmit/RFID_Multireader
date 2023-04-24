@@ -4,8 +4,10 @@ using MvvmCross.Core.ViewModels;
 using Plugin.BLE.Abstractions.Contracts;
 
 
-namespace BLE.Client.ViewModels {
-    public class ViewModelSetting : BaseViewModel {
+namespace BLE.Client.ViewModels
+{
+    public class ViewModelSetting : BaseViewModel
+    {
         private readonly IUserDialogs _userDialogs;
 
         public ViewModelSetting(IAdapter adapter, IUserDialogs userDialogs) : base(adapter) {

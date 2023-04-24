@@ -47,11 +47,14 @@ namespace BLE.Client.ViewModels
         public ICommand OnStartInventoryButtonCommand { protected set; get; }
         public ICommand OnClearButtonCommand          { protected set; get; }
         public ICommand OnShareDataCommand            { protected set; get; }
+        public ICommand OnSwitchCommand               { protected set; get; }
 
         private ObservableCollection<RFMicroTagInfoViewModel> _TagInfoList = new ObservableCollection<RFMicroTagInfoViewModel>();
         public ObservableCollection<RFMicroTagInfoViewModel> TagInfoList { get { return _TagInfoList; } set { SetProperty(ref _TagInfoList, value); } }
 
         private string _startInventoryButtonText = "Start Inventory"; public string startInventoryButtonText { get { return _startInventoryButtonText; } }
+        private string _SwitchButtonText = "Switch to Gradient"; public string SwitchButtonText { get { return _SwitchButtonText; } }
+        bool IS_GRAD = false;
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////// For Saving Data / CSV exporting ///////////////////////////////////
@@ -110,7 +113,7 @@ namespace BLE.Client.ViewModels
         private string _RightAbOut_T;  public string RightAbOut_T {  get => _RightAbOut_T; set { _RightAbOut_T = value; OnPropertyChanged("RightAbOut_T"); } }
 
         public int THRESHOLD = 15;
-        public double WET = 0.25f;
+        public double WET = -7.0f;
 
         class Shirt
         {
@@ -192,10 +195,10 @@ namespace BLE.Client.ViewModels
         private string _ChestWet;       public string ChestWet { get => _ChestWet; set { _ChestWet = value; OnPropertyChanged("ChestWet"); } }
         private string _LeftAbWet;      public string LeftAbWet { get => _LeftAbWet; set { _LeftAbWet = value; OnPropertyChanged("LeftAbWet"); } }
         private string _RightAbWet;     public string RightAbWet { get => _RightAbWet; set { _RightAbWet = value; OnPropertyChanged("RightAbWet"); } }
-        private string _LeftUpWet;   public string LeftUpWet { get => _LeftUpWet; set { _LeftUpWet = value; OnPropertyChanged("LeftUpWet"); } }
-        private string _RightUpWet;  public string RightUpWet { get => _RightUpWet; set { _RightUpWet = value; OnPropertyChanged("RightUpWet"); } }
-        private string _LeftLowWet;  public string LeftLowWet { get => _LeftLowWet; set { _LeftLowWet = value; OnPropertyChanged("LeftLowWet"); } }
-        private string _RightLowWet; public string RightLowWet { get => _RightLowWet; set { _RightLowWet = value; OnPropertyChanged("RightLowWet"); } }
+        private string _LeftUpWet;      public string LeftUpWet { get => _LeftUpWet; set { _LeftUpWet = value; OnPropertyChanged("LeftUpWet"); } }
+        private string _RightUpWet;     public string RightUpWet { get => _RightUpWet; set { _RightUpWet = value; OnPropertyChanged("RightUpWet"); } }
+        private string _LeftLowWet;     public string LeftLowWet { get => _LeftLowWet; set { _LeftLowWet = value; OnPropertyChanged("LeftLowWet"); } }
+        private string _RightLowWet;    public string RightLowWet { get => _RightLowWet; set { _RightLowWet = value; OnPropertyChanged("RightLowWet"); } }
         ////////////////////////////////////////////////////////////////////////////
 
         ////////////////////////////////////////////////////////////////////////////
@@ -211,12 +214,23 @@ namespace BLE.Client.ViewModels
 
             public void Add(DateTime t, double d)
             {
-                values.Add(d);
-                times.Add(t);
-                if (values.Count > Length) { values.RemoveAt(0); times.RemoveAt(0); }
+                // Check last time is more than one second ago
+                if (times.Count==0)
+                {
+                    values.Add(d); times.Add(t);
+                }
+                else
+                {
+                    if (times[times.Count-1] <= t.AddSeconds(-1))
+                    {
+                        values.Add(d);
+                        times.Add(t);
+                        if (values.Count > Length) { values.RemoveAt(0); times.RemoveAt(0); }
+                    }
+                }
             }
 
-            public double Slope()
+            public string Slope()
             {
                 if (values.Count==Length)
                 {
@@ -224,8 +238,6 @@ namespace BLE.Client.ViewModels
                     double sumY = 0.0;
                     double sumXY = 0.0;
                     double sumXX = 0.0;
-
-                    // double t0 = times[0].ToOADate();
 
                     for (int i=0; i<Length; i++)
                     {
@@ -239,11 +251,12 @@ namespace BLE.Client.ViewModels
 
                     // Calculate gradient
                     double m = (10.0f * sumXY - sumX * sumY) / (10.0f * sumXX - sumX * sumX);
-                    return m;
+                    string output = Math.Round(m, 2).ToString() + "°/s";
+                    return output;
                 }
                 else
                 {
-                    return 0.0f;
+                    return "0°/s";
                 }
 
             }
@@ -270,6 +283,8 @@ namespace BLE.Client.ViewModels
         Recent Out_LeftLowRecent = new Recent();
         Recent Out_RightLowRecent = new Recent();
 
+        private string _SwitchButtonColor; public string SwitchButtonColor { get => _SwitchButtonColor; set { _SwitchButtonColor = value; OnPropertyChanged("SwitchButtonColor"); } }
+
         #endregion
 
 
@@ -277,25 +292,15 @@ namespace BLE.Client.ViewModels
             _userDialogs = userDialogs;
             r = rnd.Next(10000, 99999);
 
-            LeftLow   = "gray"; LeftLowIn_T   = "--"; LeftLowOut_T   = "--";
-            RightLow  = "gray"; RightLowIn_T  = "--"; RightLowOut_T  = "--";
-            RightUp   = "gray"; RightUpIn_T   = "--"; RightUpOut_T   = "--";
-            LeftUp    = "gray"; LeftUpIn_T    = "--"; LeftUpOut_T    = "--";
-            Chest     = "gray"; ChestIn       = "--"; ChestOut       = "--";
-            Back      = "gray"; BackIn_T      = "--"; BackOut_T      = "--";
-            BackNeck  = "gray"; BackNeckIn_T  = "--"; BackNeckOut_T  = "--";
-            LeftAb    = "gray"; LeftAbIn_T    = "--"; LeftAbOut_T    = "--";
-            RightAb   = "gray"; RightAbIn_T   = "--"; RightAbOut_T   = "--";
-
-            ChestWet    = "Dry"; 
-            BackWet     = "Dry";
-            BackNeckWet = "Dry";
-            LeftAbWet   = "Dry";
-            RightAbWet  = "Dry";
-            LeftUpWet   = "Dry";
-            RightUpWet  = "Dry";
-            LeftLowWet  = "Dry";
-            RightLowWet = "Dry";
+            LeftLow   = "gray"; LeftLowIn_T   = "--"; LeftLowOut_T   = "--"; LeftLowWet  = "Dry";
+            RightLow  = "gray"; RightLowIn_T  = "--"; RightLowOut_T  = "--"; RightLowWet = "Dry";
+            RightUp   = "gray"; RightUpIn_T   = "--"; RightUpOut_T   = "--"; RightUpWet  = "Dry";
+            LeftUp    = "gray"; LeftUpIn_T    = "--"; LeftUpOut_T    = "--"; LeftUpWet   = "Dry";
+            Chest     = "gray"; ChestIn       = "--"; ChestOut       = "--"; ChestWet    = "Dry";
+            Back      = "gray"; BackIn_T      = "--"; BackOut_T      = "--"; BackWet     = "Dry";
+            BackNeck  = "gray"; BackNeckIn_T  = "--"; BackNeckOut_T  = "--"; BackNeckWet = "Dry";
+            LeftAb    = "gray"; LeftAbIn_T    = "--"; LeftAbOut_T    = "--"; LeftAbWet   = "Dry";
+            RightAb   = "gray"; RightAbIn_T   = "--"; RightAbOut_T   = "--"; RightAbWet  = "Dry";
 
             // Set disconnection event for reconnection
             Adapter.DeviceDisconnected += OnDeviceDisconnected;
@@ -306,6 +311,7 @@ namespace BLE.Client.ViewModels
             OnStartInventoryButtonCommand = new Command(StartInventoryClick);
             OnClearButtonCommand = new Command(ClearClick);
             OnShareDataCommand = new Command(ShareDataButtonClick);
+            OnSwitchCommand = new Command(SwitchClick);
         }
 
         // Event for Device Disconnection
@@ -362,6 +368,81 @@ namespace BLE.Client.ViewModels
             BleMvxApplication._reader.notification.OnVoltageEvent += new EventHandler<CSLibrary.Notification.VoltageEventArgs>(VoltageEvent);
 
             InventorySetting();
+        }
+
+        public void InventorySetting() {
+            switch (BleMvxApplication._config.RFID_FrequenceSwitch) {
+                case 0:
+                    BleMvxApplication._reader.rfid.SetHoppingChannels(BleMvxApplication._config.RFID_Region);
+                    _SwitchButtonColor = "#FF3D3E"; RaisePropertyChanged(() => SwitchButtonColor);
+                    break;
+                case 1:
+                    BleMvxApplication._reader.rfid.SetFixedChannel(BleMvxApplication._config.RFID_Region, BleMvxApplication._config.RFID_FixedChannel);
+                    _SwitchButtonColor = "#E4F004"; RaisePropertyChanged(() => SwitchButtonColor);
+                    break;
+                case 2:
+                    BleMvxApplication._reader.rfid.SetAgileChannels(BleMvxApplication._config.RFID_Region);
+                    _SwitchButtonColor = "#19AFFE"; RaisePropertyChanged(() => SwitchButtonColor);
+                    break;
+            }
+            BleMvxApplication._reader.rfid.Options.TagRanging.flags = CSLibrary.Constants.SelectFlags.ZERO;
+
+            // Setting 1
+            SetPower(BleMvxApplication._rfMicro_Power);
+
+            // Setting 3
+            BleMvxApplication._config.RFID_DynamicQParms.toggleTarget = (BleMvxApplication._rfMicro_Target == 2) ? 1U : 0U;
+            BleMvxApplication._config.RFID_DynamicQParms.retryCount = 5; // for RFMicro special setting
+            BleMvxApplication._reader.rfid.SetDynamicQParms(BleMvxApplication._config.RFID_DynamicQParms);
+            BleMvxApplication._config.RFID_DynamicQParms.retryCount = 0; // reset to normal
+
+            // Setting 4
+            BleMvxApplication._config.RFID_FixedQParms.toggleTarget = (BleMvxApplication._rfMicro_Target == 2) ? 1U : 0U;
+            BleMvxApplication._config.RFID_FixedQParms.retryCount = 5; // for RFMicro special setting
+            BleMvxApplication._reader.rfid.SetFixedQParms(BleMvxApplication._config.RFID_FixedQParms);
+            BleMvxApplication._config.RFID_FixedQParms.retryCount = 0; // reset to normal
+
+            // Setting 2
+            BleMvxApplication._reader.rfid.SetOperationMode(BleMvxApplication._config.RFID_OperationMode);
+            BleMvxApplication._reader.rfid.SetTagGroup(CSLibrary.Constants.Selected.ASSERTED, BleMvxApplication._config.RFID_TagGroup.session, (BleMvxApplication._rfMicro_Target != 1) ? CSLibrary.Constants.SessionTarget.A : CSLibrary.Constants.SessionTarget.B);
+            BleMvxApplication._reader.rfid.SetCurrentSingulationAlgorithm(BleMvxApplication._config.RFID_Algorithm);
+            BleMvxApplication._reader.rfid.SetCurrentLinkProfile(BleMvxApplication._config.RFID_Profile);
+
+            // Select RFMicro S3 filter
+            {
+                CSLibrary.Structures.SelectCriterion extraSlecetion = new CSLibrary.Structures.SelectCriterion();
+
+                extraSlecetion.action = new CSLibrary.Structures.SelectAction(CSLibrary.Constants.Target.SELECTED, CSLibrary.Constants.Action.ASLINVA_DSLINVB, 0);
+                extraSlecetion.mask = new CSLibrary.Structures.SelectMask(CSLibrary.Constants.MemoryBank.TID, 0, 28, new byte[] { 0xe2, 0x82, 0x40, 0x30 });
+                BleMvxApplication._reader.rfid.SetSelectCriteria(0, extraSlecetion);
+
+                // Set OCRSSI Limit
+                extraSlecetion.action = new CSLibrary.Structures.SelectAction(CSLibrary.Constants.Target.SELECTED, CSLibrary.Constants.Action.NOTHING_DSLINVB, 0);
+                extraSlecetion.mask = new CSLibrary.Structures.SelectMask(CSLibrary.Constants.MemoryBank.BANK3, 0xd0, 8, new byte[] { (byte)(0x20 | BleMvxApplication._rfMicro_minOCRSSI) });
+                BleMvxApplication._reader.rfid.SetSelectCriteria(1, extraSlecetion);
+
+                extraSlecetion.action = new CSLibrary.Structures.SelectAction(CSLibrary.Constants.Target.SELECTED, CSLibrary.Constants.Action.NOTHING_DSLINVB, 0);
+                extraSlecetion.mask = new CSLibrary.Structures.SelectMask(CSLibrary.Constants.MemoryBank.BANK3, 0xd0, 8, new byte[] { (byte)(BleMvxApplication._rfMicro_maxOCRSSI) });
+                BleMvxApplication._reader.rfid.SetSelectCriteria(2, extraSlecetion);
+
+                // Temperature and Sensor code
+                extraSlecetion.action = new CSLibrary.Structures.SelectAction(CSLibrary.Constants.Target.SELECTED, CSLibrary.Constants.Action.NOTHING_DSLINVB, 0);
+                extraSlecetion.mask = new CSLibrary.Structures.SelectMask(CSLibrary.Constants.MemoryBank.BANK3, 0xe0, 0, new byte[] { 0x00 });
+                BleMvxApplication._reader.rfid.SetSelectCriteria(3, extraSlecetion);
+
+                BleMvxApplication._reader.rfid.Options.TagRanging.flags |= CSLibrary.Constants.SelectFlags.SELECT;
+            }
+
+            // Multi bank inventory
+            BleMvxApplication._reader.rfid.Options.TagRanging.multibanks = 2;
+            BleMvxApplication._reader.rfid.Options.TagRanging.bank1 = CSLibrary.Constants.MemoryBank.BANK0;
+            BleMvxApplication._reader.rfid.Options.TagRanging.offset1 = 12; // Address C
+            BleMvxApplication._reader.rfid.Options.TagRanging.count1 = 3;
+            BleMvxApplication._reader.rfid.Options.TagRanging.bank2 = CSLibrary.Constants.MemoryBank.USER;
+            BleMvxApplication._reader.rfid.Options.TagRanging.offset2 = 8;
+            BleMvxApplication._reader.rfid.Options.TagRanging.count2 = 4;
+            BleMvxApplication._reader.rfid.Options.TagRanging.compactmode = false;
+            BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_PRERANGING);
         }
 
         public override void Suspend()
@@ -430,6 +511,58 @@ namespace BLE.Client.ViewModels
                 StopInventory();
                 activetimer.Enabled = false;
                 downtimer.Enabled = false; 
+            }
+        }
+
+        void SwitchClick()
+        {
+            if (IS_GRAD==false)
+            {
+                IS_GRAD = true;
+                _SwitchButtonText = "Switch to Temperature"; RaisePropertyChanged(() => SwitchButtonText);
+
+                _BackIn_T = In_BackRecent.Slope();            RaisePropertyChanged(() => BackIn_T);
+                _BackOut_T = Out_BackRecent.Slope();          RaisePropertyChanged(() => BackOut_T);
+                _BackNeckIn_T = In_BackNeckRecent.Slope();    RaisePropertyChanged(() => BackNeckIn_T);
+                _BackNeckOut_T = Out_BackNeckRecent.Slope();  RaisePropertyChanged(() => BackNeckOut_T);
+                _ChestOut = Out_ChestRecent.Slope();          RaisePropertyChanged(() => ChestOut);
+                _ChestIn = In_ChestRecent.Slope();            RaisePropertyChanged(() => ChestIn);
+                _LeftAbIn_T = In_LeftAbRecent.Slope();        RaisePropertyChanged(() => LeftAbIn_T);
+                _LeftAbOut_T = Out_LeftAbRecent.Slope();      RaisePropertyChanged(() => LeftAbOut_T);
+                _RightAbIn_T = In_RightAbRecent.Slope();      RaisePropertyChanged(() => RightAbIn_T);
+                _RightAbOut_T = Out_RightAbRecent.Slope();    RaisePropertyChanged(() => RightAbOut_T);
+                _LeftUpIn_T = In_LeftUpRecent.Slope();        RaisePropertyChanged(() => LeftUpIn_T);
+                _LeftUpOut_T = Out_LeftUpRecent.Slope();      RaisePropertyChanged(() => LeftUpOut_T);
+                _RightUpIn_T = In_RightUpRecent.Slope();      RaisePropertyChanged(() => RightUpIn_T);
+                _RightUpOut_T = Out_RightUpRecent.Slope();    RaisePropertyChanged(() => RightUpOut_T);
+                _LeftLowIn_T = In_LeftLowRecent.Slope();      RaisePropertyChanged(() => LeftLowIn_T);
+                _LeftLowOut_T = Out_LeftLowRecent.Slope();    RaisePropertyChanged(() => LeftLowOut_T);
+                _RightLowIn_T = In_RightLowRecent.Slope();    RaisePropertyChanged(() => RightLowIn_T);
+                _RightLowOut_T = Out_RightLowRecent.Slope();  RaisePropertyChanged(() => RightLowOut_T);
+            }
+            else if (IS_GRAD==true)
+            {
+                IS_GRAD = false;
+                _SwitchButtonText = "Switch to Gradient"; RaisePropertyChanged(() => SwitchButtonText);
+
+                _BackIn_T = Backin.ToString();            RaisePropertyChanged(() => BackIn_T);
+                _BackOut_T = Backout.ToString();          RaisePropertyChanged(() => BackOut_T);
+                _BackNeckIn_T = BackNeckin.ToString();    RaisePropertyChanged(() => BackNeckIn_T);
+                _BackNeckOut_T = BackNeckout.ToString();  RaisePropertyChanged(() => BackNeckOut_T);
+                _ChestOut = Chest1out.ToString();         RaisePropertyChanged(() => ChestOut);
+                _ChestIn = Chest1in.ToString();           RaisePropertyChanged(() => ChestIn);
+                _LeftAbIn_T = LeftAbin.ToString();        RaisePropertyChanged(() => LeftAbIn_T);
+                _LeftAbOut_T = LeftAbout.ToString();      RaisePropertyChanged(() => LeftAbOut_T);
+                _RightAbIn_T = RightAbin.ToString();      RaisePropertyChanged(() => RightAbIn_T);
+                _RightAbOut_T = RightAbout.ToString();    RaisePropertyChanged(() => RightAbOut_T);
+                _LeftUpIn_T = LeftUpin.ToString();        RaisePropertyChanged(() => LeftUpIn_T);
+                _LeftUpOut_T = LeftUpout.ToString();      RaisePropertyChanged(() => LeftUpOut_T);
+                _RightUpIn_T = RightUpin.ToString();      RaisePropertyChanged(() => RightUpIn_T);
+                _RightUpOut_T = RightUpout.ToString();    RaisePropertyChanged(() => RightUpOut_T);
+                _LeftLowIn_T = LeftLowin.ToString();      RaisePropertyChanged(() => LeftLowIn_T);
+                _LeftLowOut_T = LeftLowout.ToString();    RaisePropertyChanged(() => LeftLowOut_T);
+                _RightLowIn_T = RightLowin.ToString();    RaisePropertyChanged(() => RightLowIn_T);
+                _RightLowOut_T = RightLowout.ToString();  RaisePropertyChanged(() => RightLowOut_T);
             }
         }
 
@@ -531,24 +664,23 @@ namespace BLE.Client.ViewModels
                                 if (temp >= 1300 && temp <= 3500) {
                                     UInt64 caldata = (UInt64)(((UInt64)info.Bank2Data[0]<<48) | ((UInt64)info.Bank2Data[1]<<32) | ((UInt64)info.Bank2Data[2]<<16) | ((UInt64)info.Bank2Data[3]));
 
-                                    if (caldata == 0) { TagInfoList[cnt].SensorAvgValue = "NoCalData"; }
-                                    else {
-                                        ///////////////////////////////
-                                        TagInfoList[cnt].SucessCount++;
-                                        ///////////////////////////////
-
+                                    if (caldata==0) { TagInfoList[cnt].SensorAvgValue = "NoCalData"; }
+                                    else
+                                    {
                                         string tEPC = TagInfoList[cnt].EPC.Substring(TagInfoList[cnt].EPC.Length - 4);
-                                        double SAV = Math.Round(getTempC(temp, caldata), 4);
+                                        double SAV = Math.Round(getTempC(temp, caldata), 6);
 
-                                        // if (CORRECTION.ContainsKey(tEPC)) {
+                                        // if (CORRECTION.ContainsKey(tEPC))
+                                        // {
                                         //     SAV = SAV - CORRECTION[tEPC];
                                         // }
 
-                                        string DisplaySAV = Math.Round(SAV, 2).ToString();
+                                        string DisplaySAV = Math.Round(SAV, 2).ToString() + "°";
                                         DateTime dt = DateTime.Now;
                                         TagInfoList[cnt].SensorAvgValue = SAV.ToString();
                                         TagInfoList[cnt].TimeString = DateTime.Now.ToString("HH:mm:ss");
                                         TagInfoList[cnt].OCRSSI = ocRSSI;
+                                        TagInfoList[cnt].SucessCount++;
 
                                         try
                                         {
@@ -583,383 +715,24 @@ namespace BLE.Client.ViewModels
 
                                         finally
                                         {
-                                            // if (shirt25.TagList.Contains(tEPC))
-                                            // {
-                                            //     if (tEPC==shirt25.Chest) {
-                                            //         Chest1in = SAV;
-                                            //         _ChestIn = DisplaySAV; RaisePropertyChanged(() => ChestIn);
-
-                                            //         if ((Chest1in!=0.0) && (Chest1out!=0.0)) {
-                                            //             if (Math.Abs(Chest1out - Chest1in) < WET) {
-                                            //                 _Chest = "blue"; RaisePropertyChanged(() => Chest);
-                                            //                 _ChestWet = "Wet"; RaisePropertyChanged(() => ChestWet);
-                                            //             }
-                                            //             else {
-                                            //                 _ChestWet = "Dry"; RaisePropertyChanged(() => ChestWet);
-                                            //                 if ((SAV>THRESHOLD) && (_Chest!="green")) {
-                                            //                     _Chest = "green"; RaisePropertyChanged(() => Chest);
-                                            //                 }
-                                            //                 else if ((SAV<=THRESHOLD) && (_Chest!="red")) {
-                                            //                     _Chest = "red"; RaisePropertyChanged(() => Chest);
-                                            //                 }
-                                            //             }
-                                            //         }
-                                            //     }
-                                            //     else if (tEPC==shirt25.LeftUpArm) {
-                                            //         LeftUpin = SAV;
-                                            //         _LeftUpIn_T = DisplaySAV; RaisePropertyChanged(() => LeftUpIn_T);
-
-                                            //         if ((LeftUpin!=0.0) && (LeftUpout!=0.0)) {
-                                            //             if (Math.Abs(LeftUpout - LeftUpin) < WET) {
-                                            //                 _LeftUp = "blue"; RaisePropertyChanged(() => LeftUp);
-                                            //                 _LeftUpWet = "Wet"; RaisePropertyChanged(() => LeftUpWet);
-                                            //             }
-                                            //             else {
-                                            //                 _LeftUpWet = "Dry"; RaisePropertyChanged(() => LeftUpWet);
-                                            //                 if ((SAV>THRESHOLD) && (_LeftUp!="green")) {
-                                            //                     _LeftUp = "green"; RaisePropertyChanged(() => LeftUp);
-                                            //                 }
-                                            //                 else if ((SAV<=THRESHOLD) && (_LeftUp!="red")) {
-                                            //                     _LeftUp = "red"; RaisePropertyChanged(() => LeftUp);
-                                            //                 }
-                                            //             }
-                                            //         }
-                                            //     }
-                                            //     else if (tEPC==shirt25.RightUpArm) {
-                                            //         RightUpin = SAV;
-                                            //         _RightUpIn_T = DisplaySAV; RaisePropertyChanged(() => RightUpIn_T);
-
-                                            //         if ((RightUpin!=0.0) && (RightUpout!=0.0)) {
-                                            //             if (Math.Abs(RightUpout - RightUpin) < WET) {
-                                            //                 _RightUp = "blue"; RaisePropertyChanged(() => RightUp);
-                                            //                 _RightUpWet = "Wet"; RaisePropertyChanged(() => RightUpWet);
-                                            //             }
-                                            //             else {
-                                            //                 _RightUpWet = "Dry"; RaisePropertyChanged(() => RightUpWet);
-                                            //                 if ((SAV>THRESHOLD) && (_RightUp!="green")) {
-                                            //                     _RightUp = "green"; RaisePropertyChanged(() => RightUp);
-                                            //                 }
-                                            //                 else if ((SAV<=THRESHOLD) && (_RightUp!="red")) {
-                                            //                     _RightUp = "red"; RaisePropertyChanged(() => RightUp);
-                                            //                 }
-                                            //             }
-                                            //         }
-                                            //     }
-                                            //     else if (tEPC==shirt25.LeftLowArm) {
-                                            //         LeftLowin = SAV;
-                                            //         _LeftLowIn_T = DisplaySAV; RaisePropertyChanged(() => LeftLowIn_T);
-
-                                            //         if ((LeftLowin!=0.0) && (LeftLowout!=0.0)) {
-                                            //             if (Math.Abs(LeftLowout - LeftLowin) < WET) {
-                                            //                 _LeftLow = "blue"; RaisePropertyChanged(() => LeftLow);
-                                            //                 _LeftLowWet = "Wet"; RaisePropertyChanged(() => LeftLowWet);
-                                            //             }
-                                            //             else {
-                                            //                 _LeftLowWet = "Dry"; RaisePropertyChanged(() => LeftLowWet);
-                                            //                 if ((SAV>THRESHOLD) && (_LeftLow!="green")) {
-                                            //                     _LeftLow = "green"; RaisePropertyChanged(() => LeftLow);
-                                            //                 }
-                                            //                 else if ((SAV<=THRESHOLD) && (_LeftLow!="red")) {
-                                            //                     _LeftLow = "red"; RaisePropertyChanged(() => LeftLow);
-                                            //                 }
-                                            //             }
-                                            //         }
-                                            //     }
-                                            //     else if(tEPC==shirt25.RightLowArm) {
-                                            //         RightLowin = SAV;
-                                            //         _RightLowIn_T = DisplaySAV; RaisePropertyChanged(() => RightLowIn_T);
-
-                                            //         if ((RightLowin!=0.0) && (RightLowout!=0.0)) {
-                                            //             if (Math.Abs(RightLowout - RightLowin) < WET) {
-                                            //                 _RightLow = "blue"; RaisePropertyChanged(() => RightLow);
-                                            //                 _RightLowWet = "Wet"; RaisePropertyChanged(() => RightLowWet);
-                                            //             }
-                                            //             else {
-                                            //                 _RightLowWet = "Dry"; RaisePropertyChanged(() => RightLowWet);
-                                            //                 if ((SAV>THRESHOLD) && (_RightLow!="green")) {
-                                            //                     _RightLow = "green"; RaisePropertyChanged(() => RightLow);
-                                            //                 }
-                                            //                 else if ((SAV<=THRESHOLD) && (_RightLow!="red")) {
-                                            //                     _RightLow = "red"; RaisePropertyChanged(() => RightLow);
-                                            //                 }
-                                            //             }
-                                            //         }
-                                            //     }
-                                            //     else if (tEPC==shirt25.Back) {
-                                            //         Backin = SAV;
-                                            //         _BackIn_T = DisplaySAV; RaisePropertyChanged(() => BackIn_T);
-
-                                            //         if ((Backin!=0.0) && (Backout!=0.0)) {
-                                            //             if (Math.Abs(Backout - Backin) < WET) {
-                                            //                 _Back = "blue"; RaisePropertyChanged(() => Back);
-                                            //                 _BackWet = "Wet"; RaisePropertyChanged(( )=> BackWet);
-                                            //             }
-                                            //             else {
-                                            //                 _BackWet = "Dry"; RaisePropertyChanged(()=>BackWet);
-                                            //                 if ((SAV>THRESHOLD) && (_Back!="green")) {
-                                            //                     _Back = "green"; RaisePropertyChanged(() => Back);
-                                            //                 }
-                                            //                 else if ((SAV<=THRESHOLD) && (_Back!="red")) {
-                                            //                     _Back = "red"; RaisePropertyChanged(() => Back);
-                                            //                 }
-                                            //             }
-                                            //         }
-                                            //     }
-                                            //     else if (tEPC==shirt25.BackNeck) {
-                                            //         BackNeckin = SAV;
-                                            //         _BackNeckIn_T = DisplaySAV; RaisePropertyChanged(() => BackNeckIn_T);
-
-                                            //         if ((BackNeckin!=0.0) && (BackNeckout!=0.0)) {
-                                            //             if (Math.Abs(BackNeckout - BackNeckin) < WET) {
-                                            //                 _BackNeck = "blue"; RaisePropertyChanged(() => BackNeck);
-                                            //                 _BackNeckWet = "Wet"; RaisePropertyChanged(() =>BackNeckWet);
-                                            //             }
-                                            //             else {
-                                            //                 _BackNeckWet = "Dry"; RaisePropertyChanged(() => BackNeckWet);
-                                            //                 if ((SAV>THRESHOLD) && (_BackNeck!="green")) {
-                                            //                     _BackNeck = "green"; RaisePropertyChanged(() => BackNeck);
-                                            //                 }
-                                            //                 else if ((SAV<=THRESHOLD) && (_BackNeck!="red")) {
-                                            //                     _BackNeck = "red"; RaisePropertyChanged(() => BackNeck);
-                                            //                 }
-                                            //             }
-                                            //         }
-                                            //     }
-                                            //     else if (tEPC==shirt25.LeftAb) {
-                                            //         LeftAbin = SAV;
-                                            //         _LeftAbIn_T = DisplaySAV; RaisePropertyChanged(() => LeftAbIn_T);
-
-                                            //         if ((LeftAbin!=0.0) && (LeftAbout!=0.0)) {
-                                            //             if (Math.Abs(LeftAbout - LeftAbin) < WET) {
-                                            //                 _LeftAb = "blue"; RaisePropertyChanged(() => LeftAb);
-                                            //                 _LeftAbWet = "Wet"; RaisePropertyChanged(() => LeftAbWet);
-                                            //             }
-                                            //             else {
-                                            //                 _LeftAbWet = "Dry"; RaisePropertyChanged(() => LeftAbWet);
-                                            //                 if ((SAV>THRESHOLD) && (_LeftAb!="green")) {
-                                            //                     _LeftAb = "green"; RaisePropertyChanged(() => LeftAb);
-                                            //                 }
-                                            //                 else if ((SAV<=THRESHOLD) && (_LeftAb!="red")) {
-                                            //                     _LeftAb = "red"; RaisePropertyChanged(() => LeftAb);
-                                            //                 }
-                                            //             }
-                                            //         }
-                                            //     }
-                                            //     else if (tEPC==shirt25.RightAb) {
-                                            //         RightAbin = SAV;
-                                            //         _RightAbIn_T = DisplaySAV; RaisePropertyChanged(() => RightAbIn_T);
-
-                                            //         if ((RightAbin!=0.0) && (RightAbout!=0.0)) {
-                                            //             if (Math.Abs(RightAbout - RightAbin) < WET) {
-                                            //                 _RightAb = "blue"; RaisePropertyChanged(() => RightAb);
-                                            //                 _RightAbWet = "Wet"; RaisePropertyChanged(() => RightAbWet);
-                                            //             }
-                                            //             else {
-                                            //                 _RightAbWet = "Dry"; RaisePropertyChanged(() => RightAbWet);
-                                            //                 if ((SAV>THRESHOLD) && (_RightAb!="green")) {
-                                            //                     _RightAb = "green"; RaisePropertyChanged(() => RightAb);
-                                            //                 }
-                                            //                 else if ((SAV<=THRESHOLD) && (_RightAb!="red")) {
-                                            //                     _RightAb = "red"; RaisePropertyChanged(() => RightAb);
-                                            //                 }
-                                            //             }
-                                            //         }
-                                            //     }
-                                            // }
-
-                                            // else if (shirt26.TagList.Contains(tEPC))
-                                            // {
-                                            //     if (tEPC==shirt26.Chest) {
-                                            //         Chest1out = SAV;
-                                            //         _ChestOut = DisplaySAV; RaisePropertyChanged(() => ChestOut);
-
-                                            //         if ((Chest1out!=0.0) && (Chest1in!=0.0)) {
-                                            //             if (Math.Abs(Chest1out - Chest1in) < WET) {
-                                            //                 _Chest = "blue"; RaisePropertyChanged(() => Chest);
-                                            //                 _ChestWet = "Wet"; RaisePropertyChanged(() => ChestWet);
-                                            //             }
-                                            //             else {
-                                            //                 _ChestWet = "Dry"; RaisePropertyChanged(() => ChestWet);
-                                            //                 if ((SAV>THRESHOLD) && (_Chest!="green")) {
-                                            //                     _Chest = "green"; RaisePropertyChanged(() => Chest);
-                                            //                 }
-                                            //                 else if ((SAV<=THRESHOLD) && (_Chest!="red")) {
-                                            //                     _Chest = "red"; RaisePropertyChanged(() => Chest);
-                                            //                 }
-                                            //             }
-                                            //         }
-                                            //     }
-                                            //     else if (tEPC==shirt26.Back) {
-                                            //         Backout = SAV;
-                                            //         _BackOut_T = DisplaySAV; RaisePropertyChanged(() => BackOut_T);
-
-                                            //         if ((Backout!=0.0) && (Backin!=0.0)) {
-                                            //             if (Math.Abs(Backout - Backin) < WET) {
-                                            //                 _Back = "blue"; RaisePropertyChanged(() => Back);
-                                            //                 _BackWet = "Wet"; RaisePropertyChanged(()=>BackWet);
-                                            //             }
-                                            //             else {
-                                            //                 _BackWet="Dry"; RaisePropertyChanged(()=> BackWet);
-                                            //                 if ((SAV>THRESHOLD) && (_Back!="green")) {
-                                            //                     _Back = "green"; RaisePropertyChanged(() => Back);
-                                            //                 }
-                                            //                 else if ((SAV<=THRESHOLD) && (_Back!="red")) {
-                                            //                     _Back = "red"; RaisePropertyChanged(() => Back);
-                                            //                 }
-                                            //             }
-                                            //         }
-                                            //     }
-                                            //     else if (tEPC==shirt26.BackNeck) {
-                                            //         BackNeckout = SAV;
-                                            //         _BackNeckOut_T = DisplaySAV; RaisePropertyChanged(() => BackNeckOut_T);
-
-                                            //         if ((BackNeckout!=0.0) && (BackNeckin!=0.0)) {
-                                            //             if (Math.Abs(BackNeckout - BackNeckin) < WET) {
-                                            //                 _BackNeck = "blue"; RaisePropertyChanged(() => BackNeck);
-                                            //                 _BackNeckWet = "Wet"; RaisePropertyChanged(() => BackNeckWet);
-                                            //             }
-                                            //             else {
-                                            //                 _BackNeckWet = "Dry"; RaisePropertyChanged(() => BackNeckWet);
-                                            //                 if ((SAV>THRESHOLD) && (_BackNeck!="green")) {
-                                            //                     _BackNeck = "green"; RaisePropertyChanged(() => BackNeck);
-                                            //                 }
-                                            //                 else if ((SAV<=THRESHOLD) && (_BackNeck!="red")) {
-                                            //                     _BackNeck = "red"; RaisePropertyChanged(() => BackNeck);
-                                            //                 }
-                                            //             }
-                                            //         }
-                                            //     }
-                                            //     else if (tEPC==shirt26.LeftUpArm) {
-                                            //         LeftUpout = SAV;
-                                            //         _LeftUpOut_T = DisplaySAV; RaisePropertyChanged(() => LeftUpOut_T);
-
-                                            //         if ((LeftUpout!=0.0) && (LeftUpin!=0.0)) {
-                                            //             if (Math.Abs(LeftUpout - LeftUpin) < WET) {
-                                            //                 _LeftUp = "blue"; RaisePropertyChanged(() => LeftUp);
-                                            //                 _LeftUpWet = "Wet"; RaisePropertyChanged(() => LeftUpWet);
-                                            //             }
-                                            //             else {
-                                            //                 _LeftUpWet = "Dry"; RaisePropertyChanged(() => LeftUpWet);
-                                            //                 if ((SAV>THRESHOLD) && (_LeftUp!="green")) {
-                                            //                     _LeftUp = "green"; RaisePropertyChanged(() => LeftUp);
-                                            //                 }
-                                            //                 else if ((SAV<=THRESHOLD) && (_LeftUp!="red")) {
-                                            //                     _LeftUp = "red"; RaisePropertyChanged(() => LeftUp);
-                                            //                 }
-                                            //             }
-                                            //         }
-                                            //     }
-                                            //     else if (tEPC==shirt26.LeftLowArm) {
-                                            //         LeftLowout = SAV;
-                                            //         _LeftLowOut_T = DisplaySAV; RaisePropertyChanged(() => LeftLowOut_T);
-
-                                            //         if ((LeftLowout!=0.0) && (LeftLowin!=0.0)) {
-                                            //             if (Math.Abs(LeftLowout - LeftLowin) < WET) {
-                                            //                 _LeftLow = "blue"; RaisePropertyChanged(() => LeftLow);
-                                            //                 _LeftLowWet = "Wet"; RaisePropertyChanged(() => LeftLowWet);
-                                            //             }
-                                            //             else {
-                                            //                 _LeftLowWet = "Dry"; RaisePropertyChanged(() => LeftLowWet);
-                                            //                 if ((SAV>THRESHOLD) && (_LeftLow!="green")) {
-                                            //                     _LeftLow = "green"; RaisePropertyChanged(() => LeftLow);
-                                            //                 }
-                                            //                 else if ((SAV<=THRESHOLD) && (_LeftLow!="red")) {
-                                            //                     _LeftLow = "red"; RaisePropertyChanged(() => LeftLow);
-                                            //                 }
-                                            //             }
-                                            //         }
-                                            //     }
-                                            //     else if (tEPC==shirt26.RightUpArm) {
-                                            //         RightUpout = SAV;
-                                            //         _RightUpOut_T = DisplaySAV; RaisePropertyChanged(() => RightUpOut_T);
-
-                                            //         if ((RightUpout!=0.0) && (RightUpin!=0.0)) {
-                                            //             if (Math.Abs(RightUpout - RightUpin) < WET) {
-                                            //                 _RightUp = "blue"; RaisePropertyChanged(() => RightUp);
-                                            //                 _RightUpWet = "Wet"; RaisePropertyChanged(() => RightUpWet);
-                                            //             }
-                                            //             else {
-                                            //                 _RightUpWet = "Dry"; RaisePropertyChanged(() => RightUpWet);
-                                            //                 if ((SAV>THRESHOLD) && (_RightUp!="green")) {
-                                            //                     _RightUp = "green"; RaisePropertyChanged(() => RightUp);
-                                            //                 }
-                                            //                 else if ((SAV<=THRESHOLD) && (_RightUp!="red")) {
-                                            //                     _RightUp = "red"; RaisePropertyChanged(() => RightUp);
-                                            //                 }
-                                            //             }
-                                            //         }
-                                            //     }
-                                            //     else if (tEPC==shirt26.RightLowArm) {
-                                            //         RightLowout = SAV;
-                                            //         _RightLowOut_T = DisplaySAV; RaisePropertyChanged(() => RightLowOut_T);
-
-                                            //         if ((RightLowout!=0.0) && (RightLowin!=0.0)) {
-                                            //             if (Math.Abs(RightLowout - RightLowin) < WET) {
-                                            //                 _RightLow = "blue"; RaisePropertyChanged(() => RightLow);
-                                            //                 _RightLowWet = "Wet"; RaisePropertyChanged(() => RightLowWet);
-                                            //             }
-                                            //             else {
-                                            //                 _RightLowWet = "Dry"; RaisePropertyChanged(() => RightLowWet);
-                                            //                 if ((SAV>THRESHOLD) && (_RightLow!="green")) {
-                                            //                     _RightLow = "green"; RaisePropertyChanged(() => RightLow);
-                                            //                 }
-                                            //                 else if ((SAV<=THRESHOLD) && (_RightLow!="red")) {
-                                            //                     _RightLow = "red"; RaisePropertyChanged(() => RightLow);
-                                            //                 }
-                                            //             }
-                                            //         }
-                                            //     }
-                                            //     else if (tEPC==shirt26.LeftAb) {
-                                            //         LeftAbout = SAV;
-                                            //         _LeftAbOut_T = DisplaySAV; RaisePropertyChanged(() => LeftAbOut_T);
-
-                                            //         if ((LeftAbout!=0.0) && (LeftAbin!=0.0)) {
-                                            //             if (Math.Abs(LeftAbout - LeftAbin) < WET) {
-                                            //                 _LeftAb = "blue"; RaisePropertyChanged(() => LeftAb);
-                                            //                 _LeftAbWet = "Wet"; RaisePropertyChanged(() => LeftAbWet);
-                                            //             }
-                                            //             else {
-                                            //                 _LeftAbWet = "Dry"; RaisePropertyChanged(() => LeftAbWet);
-                                            //                 if ((SAV>THRESHOLD) && (_LeftAb!="green")) {
-                                            //                     _LeftAb = "green"; RaisePropertyChanged(() => LeftAb);
-                                            //                 }
-                                            //                 else if ((SAV<=THRESHOLD) && (_LeftAb!="red")) {
-                                            //                     _LeftAb = "red"; RaisePropertyChanged(() => LeftAb);
-                                            //                 }
-                                            //             }
-                                            //         }
-                                            //     }
-                                            //     else if (tEPC==shirt26.RightAb) {
-                                            //         RightAbout = SAV;
-                                            //         _RightAbOut_T = DisplaySAV; RaisePropertyChanged(() => RightAbOut_T);
-
-                                            //         if ((RightAbout!=0.0) && (RightAbin!=0.0)) {
-                                            //             if (Math.Abs(RightAbout - RightAbin) < WET) {
-                                            //                 _RightAb = "blue"; RaisePropertyChanged(() => RightAb);
-                                            //                 _RightAbWet = "Wet"; RaisePropertyChanged(() => RightAbWet);
-                                            //             }
-                                            //             else {
-                                            //                 _RightAbWet = "Dry"; RaisePropertyChanged(() => RightAbWet);
-                                            //                 if ((SAV>THRESHOLD) && (_RightAb!="green")) {
-                                            //                     _RightAb = "green"; RaisePropertyChanged(() => RightAb);
-                                            //                 }
-                                            //                 else if ((SAV<=THRESHOLD) && (_RightAb!="red")) {
-                                            //                     _RightAb = "red"; RaisePropertyChanged(() => RightAb);
-                                            //                 }
-                                            //             }
-                                            //         }
-                                            //     }
-                                            // } 
-
                                             if (shirt25.TagList.Contains(tEPC))
                                             {
                                                 if (tEPC==shirt25.Chest)
                                                 {
-                                                    In_ChestRecent.Add(dt, SAV);
-                                                    _ChestIn = Math.Round(In_ChestRecent.Slope(), 2).ToString();
-                                                    RaisePropertyChanged(() => ChestIn);
+                                                    if (IS_GRAD==true)
+                                                    {
+                                                        In_ChestRecent.Add(dt, SAV);
+                                                        _ChestIn = In_ChestRecent.Slope();
+                                                        RaisePropertyChanged(() => ChestIn);
+                                                    }
+                                                    else
+                                                    {
+                                                        _ChestIn = DisplaySAV;
+                                                        RaisePropertyChanged(() => ChestIn);
+                                                    }
+                                                    Chest1in = SAV;
                                                     if ((Chest1out!=0.0)&&(Chest1in!=0.0)) {
-                                                        if (Math.Abs(Chest1out - Chest1in) < WET) {
+                                                        if ((Math.Abs(Chest1out - Chest1in) < WET)||(Chest1in < Chest1out)) {
                                                             _Chest = "blue"; RaisePropertyChanged(() => Chest);
                                                             _ChestWet = "Wet"; RaisePropertyChanged(() => ChestWet);
                                                         }
@@ -971,11 +744,20 @@ namespace BLE.Client.ViewModels
                                                 }
                                                 else if (tEPC==shirt25.Back)
                                                 {
-                                                    In_BackRecent.Add(dt, SAV);
-                                                    _BackIn_T = Math.Round(In_BackRecent.Slope(), 2).ToString();
-                                                    RaisePropertyChanged(() => BackIn_T);
+                                                    if (IS_GRAD==true)
+                                                    {
+                                                        In_BackRecent.Add(dt, SAV);
+                                                        _BackIn_T = In_BackRecent.Slope();
+                                                        RaisePropertyChanged(() => BackIn_T);
+                                                    }
+                                                    else
+                                                    {
+                                                        _BackIn_T = DisplaySAV;
+                                                        RaisePropertyChanged(() => BackIn_T);
+                                                    }
+                                                    Backin = SAV;
                                                     if ((Backout!=0.0)&&(Backin!=0.0)) {
-                                                        if (Math.Abs(Backout - Backin) < WET) {
+                                                        if ((Math.Abs(Backout - Backin) < WET)||(Backin < Backout)) {
                                                             _Back = "blue"; RaisePropertyChanged(() => Back);
                                                             _BackWet = "Wet"; RaisePropertyChanged(() => BackWet);
                                                         }
@@ -987,11 +769,20 @@ namespace BLE.Client.ViewModels
                                                 }
                                                 else if (tEPC==shirt25.BackNeck)
                                                 {
-                                                    In_BackNeckRecent.Add(dt, SAV);
-                                                    _BackNeckIn_T = Math.Round(In_BackNeckRecent.Slope(), 2).ToString();
-                                                    RaisePropertyChanged(() => BackNeckIn_T);
+                                                    if (IS_GRAD==true)
+                                                    {
+                                                        In_BackNeckRecent.Add(dt, SAV);
+                                                        _BackNeckIn_T = In_BackNeckRecent.Slope();
+                                                        RaisePropertyChanged(() => BackNeckIn_T);
+                                                    }
+                                                    else
+                                                    {
+                                                        _BackNeckIn_T = DisplaySAV;
+                                                        RaisePropertyChanged(() => BackNeckIn_T);
+                                                    }
+                                                    BackNeckin = SAV;
                                                     if ((BackNeckout!=0.0)&&(BackNeckin!=0.0)) {
-                                                        if (Math.Abs(BackNeckout - BackNeckin) < WET) {
+                                                        if ((Math.Abs(BackNeckout - BackNeckin) < WET)||(BackNeckin < BackNeckout)) {
                                                             _BackNeck = "blue"; RaisePropertyChanged(() => BackNeck);
                                                             _BackNeckWet = "Wet"; RaisePropertyChanged(() => BackNeckWet);
                                                         }
@@ -1003,11 +794,20 @@ namespace BLE.Client.ViewModels
                                                 }
                                                 else if (tEPC==shirt25.LeftUpArm)
                                                 {
-                                                    In_LeftUpRecent.Add(dt, SAV);
-                                                    _LeftUpIn_T = Math.Round(In_LeftUpRecent.Slope(), 2).ToString();
-                                                    RaisePropertyChanged(() => LeftUpIn_T);
+                                                    if (IS_GRAD==true)
+                                                    {
+                                                        In_LeftUpRecent.Add(dt, SAV);
+                                                        _LeftUpIn_T = In_LeftUpRecent.Slope();
+                                                        RaisePropertyChanged(() => LeftUpIn_T);
+                                                    }
+                                                    else
+                                                    {
+                                                        _LeftUpIn_T = DisplaySAV;
+                                                        RaisePropertyChanged(() => LeftUpIn_T);
+                                                    }
+                                                    LeftUpin = SAV;
                                                     if ((LeftUpout!=0.0)&&(LeftUpin!=0.0)) {
-                                                        if (Math.Abs(LeftUpout - LeftUpin) < WET) {
+                                                        if ((Math.Abs(LeftUpout - LeftUpin) < WET)||(LeftUpin < LeftUpout)) {
                                                             _LeftUp = "blue"; RaisePropertyChanged(() => LeftUp);
                                                             _LeftUpWet = "Wet"; RaisePropertyChanged(() => LeftUpWet);
                                                         }
@@ -1019,11 +819,20 @@ namespace BLE.Client.ViewModels
                                                 }
                                                 else if (tEPC==shirt25.LeftLowArm)
                                                 {
-                                                    In_LeftLowRecent.Add(dt, SAV);
-                                                    _LeftLowIn_T = Math.Round(In_LeftLowRecent.Slope(), 2).ToString();
-                                                    RaisePropertyChanged(() => LeftLowIn_T);
+                                                    if (IS_GRAD==true)
+                                                    {
+                                                        In_LeftLowRecent.Add(dt, SAV);
+                                                        _LeftLowIn_T = In_LeftLowRecent.Slope();
+                                                        RaisePropertyChanged(() => LeftLowIn_T);
+                                                    }
+                                                    else
+                                                    {
+                                                        _LeftLowIn_T = DisplaySAV;
+                                                        RaisePropertyChanged(() => LeftLowIn_T);
+                                                    }
+                                                    LeftLowin = SAV;
                                                     if ((LeftLowout!=0.0)&&(LeftLowin!=0.0)) {
-                                                        if (Math.Abs(LeftLowout - LeftLowin) < WET) {
+                                                        if ((Math.Abs(LeftLowout - LeftLowin) < WET)||(LeftLowin < LeftLowout)) {
                                                             _LeftLow = "blue"; RaisePropertyChanged(() => LeftLow);
                                                             _LeftLowWet = "Wet"; RaisePropertyChanged(() => LeftLowWet);
                                                         }
@@ -1035,11 +844,20 @@ namespace BLE.Client.ViewModels
                                                 }
                                                 else if (tEPC==shirt25.RightUpArm)
                                                 {
-                                                    In_RightUpRecent.Add(dt, SAV);
-                                                    _RightUpIn_T = Math.Round(In_RightUpRecent.Slope(), 2).ToString();
-                                                    RaisePropertyChanged(() => RightUpIn_T);
+                                                    if (IS_GRAD==true)
+                                                    {
+                                                        In_RightUpRecent.Add(dt, SAV);
+                                                        _RightUpIn_T = In_RightUpRecent.Slope();
+                                                        RaisePropertyChanged(() => RightUpIn_T);
+                                                    }
+                                                    else
+                                                    {
+                                                        _RightUpIn_T = DisplaySAV;
+                                                        RaisePropertyChanged(() => RightUpIn_T);
+                                                    }
+                                                    RightUpin = SAV;
                                                     if ((RightUpout!=0.0)&&(RightUpin!=0.0)) {
-                                                        if (Math.Abs(RightUpout - RightUpin) < WET) {
+                                                        if ((Math.Abs(RightUpout - RightUpin) < WET)||(RightUpin < RightUpout)) {
                                                             _RightUp = "blue"; RaisePropertyChanged(() => RightUp);
                                                             _RightUpWet = "Wet"; RaisePropertyChanged(() => RightUpWet);
                                                         }
@@ -1051,11 +869,20 @@ namespace BLE.Client.ViewModels
                                                 }
                                                 else if (tEPC==shirt25.RightLowArm)
                                                 {
-                                                    In_RightLowRecent.Add(dt, SAV);
-                                                    _RightLowIn_T = Math.Round(In_RightLowRecent.Slope(), 2).ToString();
-                                                    RaisePropertyChanged(() => RightLowIn_T);
+                                                    if (IS_GRAD==true)
+                                                    {
+                                                        In_RightLowRecent.Add(dt, SAV);
+                                                        _RightLowIn_T = In_RightLowRecent.Slope();
+                                                        RaisePropertyChanged(() => RightLowIn_T);
+                                                    }
+                                                    else
+                                                    {
+                                                        _RightLowIn_T = DisplaySAV;
+                                                        RaisePropertyChanged(() => RightLowIn_T);
+                                                    }
+                                                    RightLowin = SAV;
                                                     if ((RightLowout!=0.0)&&(RightLowin!=0.0)) {
-                                                        if (Math.Abs(RightLowout - RightLowin) < WET) {
+                                                        if ((Math.Abs(RightLowout - RightLowin) < WET)||(RightLowin < RightLowout)) {
                                                             _RightLow = "blue"; RaisePropertyChanged(() => RightLow);
                                                             _RightLowWet = "Wet"; RaisePropertyChanged(() => RightLowWet);
                                                         }
@@ -1067,11 +894,20 @@ namespace BLE.Client.ViewModels
                                                 }
                                                 else if (tEPC==shirt25.LeftAb)
                                                 {
-                                                    In_LeftAbRecent.Add(dt, SAV);
-                                                    _LeftAbIn_T = Math.Round(In_LeftAbRecent.Slope(), 2).ToString();
-                                                    RaisePropertyChanged(() => LeftAbIn_T);
+                                                    if (IS_GRAD==true)
+                                                    {
+                                                        In_LeftAbRecent.Add(dt, SAV);
+                                                        _LeftAbIn_T = In_LeftAbRecent.Slope();
+                                                        RaisePropertyChanged(() => LeftAbIn_T);
+                                                    }
+                                                    else
+                                                    {
+                                                        _LeftAbIn_T = DisplaySAV;
+                                                        RaisePropertyChanged(() => LeftAbIn_T);
+                                                    }
+                                                    LeftAbin = SAV;
                                                     if ((LeftAbout!=0.0)&&(LeftAbin!=0.0)) {
-                                                        if (Math.Abs(LeftAbout - LeftAbin) < WET) {
+                                                        if ((Math.Abs(LeftAbout - LeftAbin) < WET)||(LeftAbin < LeftAbout)) {
                                                             _LeftAb = "blue"; RaisePropertyChanged(() => LeftAb);
                                                             _LeftAbWet = "Wet"; RaisePropertyChanged(() => LeftAbWet);
                                                         }
@@ -1083,11 +919,20 @@ namespace BLE.Client.ViewModels
                                                 }
                                                 else if (tEPC==shirt25.RightAb)
                                                 {
-                                                    In_RightAbRecent.Add(dt, SAV);
-                                                    _RightAbIn_T = Math.Round(In_RightAbRecent.Slope(), 2).ToString();
-                                                    RaisePropertyChanged(() => RightAbIn_T);
+                                                    if (IS_GRAD)
+                                                    {
+                                                        In_RightAbRecent.Add(dt, SAV);
+                                                        _RightAbIn_T = In_RightAbRecent.Slope();
+                                                        RaisePropertyChanged(() => RightAbIn_T);
+                                                    }
+                                                    else
+                                                    {
+                                                        _RightAbIn_T = DisplaySAV;
+                                                        RaisePropertyChanged(() => RightAbIn_T);
+                                                    }
+                                                    RightAbin = SAV;
                                                     if ((RightAbout!=0.0)&&(RightAbin!=0.0)) {
-                                                        if (Math.Abs(RightAbout - RightAbin) < WET) {
+                                                        if ((Math.Abs(RightAbout - RightAbin) < WET)||(RightAbin < RightAbout)) {
                                                             _RightAb = "blue"; RaisePropertyChanged(() => RightAb);
                                                             _RightAbWet = "Wet"; RaisePropertyChanged(() => RightAbWet);
                                                         }
@@ -1102,11 +947,20 @@ namespace BLE.Client.ViewModels
                                             {
                                                 if (tEPC==shirt26.Chest)
                                                 {
-                                                    Out_ChestRecent.Add(dt, SAV);
-                                                    _ChestOut = Math.Round(Out_ChestRecent.Slope(), 2).ToString();
-                                                    RaisePropertyChanged(() => ChestOut);
+                                                    if (IS_GRAD==true)
+                                                    {
+                                                        Out_ChestRecent.Add(dt, SAV);
+                                                        _ChestOut = Out_ChestRecent.Slope();
+                                                        RaisePropertyChanged(() => ChestOut);
+                                                    }
+                                                    else
+                                                    {
+                                                        _ChestOut = DisplaySAV;
+                                                        RaisePropertyChanged(() => ChestOut);
+                                                    }
+                                                    Chest1out = SAV;
                                                     if ((Chest1out!=0.0)&&(Chest1in!=0.0)) {
-                                                        if (Math.Abs(Chest1out - Chest1in) < WET) {
+                                                        if ((Math.Abs(Chest1out - Chest1in) < WET)||(Chest1in < Chest1out)) {
                                                             _Chest = "blue"; RaisePropertyChanged(() => Chest);
                                                             _ChestWet = "Wet"; RaisePropertyChanged(() => ChestWet);
                                                         }
@@ -1118,11 +972,20 @@ namespace BLE.Client.ViewModels
                                                 }
                                                 else if (tEPC==shirt26.Back)
                                                 {
-                                                    Out_BackRecent.Add(dt, SAV);
-                                                    _BackOut_T = Math.Round(Out_BackRecent.Slope(), 2).ToString();
-                                                    RaisePropertyChanged(() => BackOut_T);
+                                                    if (IS_GRAD==true)
+                                                    {
+                                                        Out_BackRecent.Add(dt, SAV);
+                                                        _BackOut_T = Out_BackRecent.Slope();
+                                                        RaisePropertyChanged(() => BackOut_T);
+                                                    }
+                                                    else
+                                                    {
+                                                        _BackOut_T = DisplaySAV;
+                                                        RaisePropertyChanged(() => BackOut_T);
+                                                    }
+                                                    Backout = SAV;
                                                     if ((Backout!=0.0)&&(Backin!=0.0)) {
-                                                        if (Math.Abs(Backout - Backin) < WET) {
+                                                        if ((Math.Abs(Backout - Backin) < WET)||(Backin < Backout)) {
                                                             _Back = "blue"; RaisePropertyChanged(() => Back);
                                                             _BackWet = "Wet"; RaisePropertyChanged(() => BackWet);
                                                         }
@@ -1134,11 +997,20 @@ namespace BLE.Client.ViewModels
                                                 }
                                                 else if (tEPC==shirt26.BackNeck)
                                                 {
-                                                    Out_BackNeckRecent.Add(dt, SAV);
-                                                    _BackNeckOut_T = Math.Round(Out_BackNeckRecent.Slope(), 2).ToString();
-                                                    RaisePropertyChanged(() => BackNeckOut_T);
+                                                    if (IS_GRAD)
+                                                    {
+                                                        Out_BackNeckRecent.Add(dt, SAV);
+                                                        _BackNeckOut_T = Out_BackNeckRecent.Slope();
+                                                        RaisePropertyChanged(() => BackNeckOut_T);
+                                                    }
+                                                    else
+                                                    {
+                                                        _BackNeckOut_T = DisplaySAV;
+                                                        RaisePropertyChanged(() => BackNeckOut_T);
+                                                    }
+                                                    BackNeckout = SAV;
                                                     if ((BackNeckout!=0.0)&&(BackNeckin!=0.0)) {
-                                                        if (Math.Abs(BackNeckout - BackNeckin) < WET) {
+                                                        if ((Math.Abs(BackNeckout - BackNeckin) < WET)||(BackNeckin < BackNeckout)) {
                                                             _BackNeck = "blue"; RaisePropertyChanged(() => BackNeck);
                                                             _BackNeckWet = "Wet"; RaisePropertyChanged(() => BackNeckWet);
                                                         }
@@ -1150,11 +1022,20 @@ namespace BLE.Client.ViewModels
                                                 }
                                                 else if (tEPC==shirt26.LeftUpArm)
                                                 {
-                                                    Out_LeftUpRecent.Add(dt, SAV);
-                                                    _LeftUpOut_T = Math.Round(Out_LeftUpRecent.Slope(), 2).ToString();
-                                                    RaisePropertyChanged(() => LeftUpOut_T);
+                                                    if (IS_GRAD==true)
+                                                    {
+                                                        Out_LeftUpRecent.Add(dt, SAV);
+                                                        _LeftUpOut_T = Out_LeftUpRecent.Slope();
+                                                        RaisePropertyChanged(() => LeftUpOut_T);
+                                                    }
+                                                    else
+                                                    {
+                                                        _LeftUpOut_T = DisplaySAV;
+                                                        RaisePropertyChanged(() => LeftUpOut_T);
+                                                    }
+                                                    LeftUpout = SAV;
                                                     if ((LeftUpout!=0.0)&&(LeftUpin!=0.0)) {
-                                                        if (Math.Abs(LeftUpout - LeftUpin) < WET) {
+                                                        if ((Math.Abs(LeftUpout - LeftUpin) < WET)||(LeftUpin < LeftUpout)) {
                                                             _LeftUp = "blue"; RaisePropertyChanged(() => LeftUp);
                                                             _LeftUpWet = "Wet"; RaisePropertyChanged(() => LeftUpWet);
                                                         }
@@ -1166,11 +1047,20 @@ namespace BLE.Client.ViewModels
                                                 }
                                                 else if (tEPC==shirt26.LeftLowArm)
                                                 {
-                                                    Out_LeftLowRecent.Add(dt, SAV);
-                                                    _LeftLowOut_T = Math.Round(Out_LeftLowRecent.Slope(), 2).ToString();
-                                                    RaisePropertyChanged(() => LeftLowOut_T);
+                                                    if (IS_GRAD==true)
+                                                    {
+                                                        Out_LeftLowRecent.Add(dt, SAV);
+                                                        _LeftLowOut_T = Out_LeftLowRecent.Slope();
+                                                        RaisePropertyChanged(() => LeftLowOut_T);
+                                                    }
+                                                    else
+                                                    {
+                                                        _LeftLowOut_T = DisplaySAV;
+                                                        RaisePropertyChanged(() => LeftLowOut_T);
+                                                    }
+                                                    LeftLowout = SAV;
                                                     if ((LeftLowout!=0.0)&&(LeftLowin!=0.0)) {
-                                                        if (Math.Abs(LeftLowout - LeftLowin) < WET) {
+                                                        if ((Math.Abs(LeftLowout - LeftLowin) < WET)||(LeftLowin < LeftLowout)) {
                                                             _LeftLow = "blue"; RaisePropertyChanged(() => LeftLow);
                                                             _LeftLowWet = "Wet"; RaisePropertyChanged(() => LeftLowWet);
                                                         }
@@ -1182,11 +1072,20 @@ namespace BLE.Client.ViewModels
                                                 }
                                                 else if (tEPC==shirt26.RightUpArm)
                                                 {
-                                                    Out_RightUpRecent.Add(dt, SAV);
-                                                    _RightUpOut_T = Math.Round(Out_RightUpRecent.Slope(), 2).ToString();
-                                                    RaisePropertyChanged(() => RightUpOut_T);
+                                                    if (IS_GRAD==true)
+                                                    {
+                                                        Out_RightUpRecent.Add(dt, SAV);
+                                                        _RightUpOut_T = Out_RightUpRecent.Slope();
+                                                        RaisePropertyChanged(() => RightUpOut_T);
+                                                    }
+                                                    else
+                                                    {
+                                                        _RightUpOut_T = DisplaySAV;
+                                                        RaisePropertyChanged(() => RightUpOut_T);
+                                                    }
+                                                    RightUpout = SAV;
                                                     if ((RightUpout!=0.0)&&(RightUpin!=0.0)) {
-                                                        if (Math.Abs(RightUpout - RightUpin) < WET) {
+                                                        if ((Math.Abs(RightUpout - RightUpin) < WET)||(RightUpin < RightUpout)) {
                                                             _RightUp = "blue"; RaisePropertyChanged(() => RightUp);
                                                             _RightUpWet = "Wet"; RaisePropertyChanged(() => RightUpWet);
                                                         }
@@ -1198,11 +1097,20 @@ namespace BLE.Client.ViewModels
                                                 }
                                                 else if (tEPC==shirt26.RightLowArm)
                                                 {
-                                                    Out_RightLowRecent.Add(dt, SAV);
-                                                    _RightLowOut_T = Math.Round(Out_RightLowRecent.Slope(), 2).ToString();
-                                                    RaisePropertyChanged(() => RightLowOut_T);
+                                                    if (IS_GRAD==true)
+                                                    {
+                                                        Out_RightLowRecent.Add(dt, SAV);
+                                                        _RightLowOut_T = Out_RightLowRecent.Slope();
+                                                        RaisePropertyChanged(() => RightLowOut_T);
+                                                    }
+                                                    else
+                                                    {
+                                                        _RightLowOut_T = DisplaySAV;
+                                                        RaisePropertyChanged(() => RightLowOut_T);
+                                                    }
+                                                    RightLowout = SAV;
                                                     if ((RightLowout!=0.0)&&(RightLowin!=0.0)) {
-                                                        if (Math.Abs(RightLowout - RightLowin) < WET) {
+                                                        if ((Math.Abs(RightLowout - RightLowin) < WET)||(RightLowin < RightLowout)) {
                                                             _RightLow = "blue"; RaisePropertyChanged(() => RightLow);
                                                             _RightLowWet = "Wet"; RaisePropertyChanged(() => RightLowWet);
                                                         }
@@ -1214,11 +1122,20 @@ namespace BLE.Client.ViewModels
                                                 }
                                                 else if (tEPC==shirt26.LeftAb)
                                                 {
-                                                    Out_LeftAbRecent.Add(dt, SAV);
-                                                    _LeftAbOut_T = Math.Round(Out_LeftAbRecent.Slope(), 2).ToString();
-                                                    RaisePropertyChanged(() => LeftAbOut_T);
+                                                    if (IS_GRAD==true)
+                                                    {
+                                                        Out_LeftAbRecent.Add(dt, SAV);
+                                                        _LeftAbOut_T = Out_LeftAbRecent.Slope();
+                                                        RaisePropertyChanged(() => LeftAbOut_T);
+                                                    }
+                                                    else
+                                                    {
+                                                        _LeftAbOut_T = DisplaySAV;
+                                                        RaisePropertyChanged(() => LeftAbOut_T);
+                                                    }
+                                                    LeftAbout = SAV;
                                                     if ((LeftAbout!=0.0)&&(LeftAbin!=0.0)) {
-                                                        if (Math.Abs(LeftAbout - LeftAbin) < WET) {
+                                                        if ((Math.Abs(LeftAbout - LeftAbin) < WET)||(LeftAbin < LeftAbout)) {
                                                             _LeftAb = "blue"; RaisePropertyChanged(() => LeftAb);
                                                             _LeftAbWet = "Wet"; RaisePropertyChanged(() => LeftAbWet);
                                                         }
@@ -1230,11 +1147,20 @@ namespace BLE.Client.ViewModels
                                                 }
                                                 else if (tEPC==shirt26.RightAb)
                                                 {
-                                                    Out_RightAbRecent.Add(dt, SAV);
-                                                    _RightAbOut_T = Math.Round(Out_RightAbRecent.Slope(), 2).ToString();
-                                                    RaisePropertyChanged(() => RightAbOut_T);
+                                                    if (IS_GRAD==true)
+                                                    {
+                                                        Out_RightAbRecent.Add(dt, SAV);
+                                                        _RightAbOut_T = Out_RightAbRecent.Slope();
+                                                        RaisePropertyChanged(() => RightAbOut_T);
+                                                    }
+                                                    else
+                                                    {
+                                                        _RightAbOut_T = DisplaySAV;
+                                                        RaisePropertyChanged(() => RightAbOut_T);
+                                                    }
+                                                    RightAbout = SAV;
                                                     if ((RightAbout!=0.0)&&(RightAbin!=0.0)) {
-                                                        if (Math.Abs(RightAbout - RightAbin) < WET) {
+                                                        if ((Math.Abs(RightAbout - RightAbin) < WET)||(RightAbin < RightAbout)) {
                                                             _RightAb = "blue"; RaisePropertyChanged(() => RightAb);
                                                             _RightAbWet = "Wet"; RaisePropertyChanged(() => RightAbWet);
                                                         }
@@ -1298,15 +1224,6 @@ namespace BLE.Client.ViewModels
                     }
                 }
             });
-
-            // List<string> temp_check = new List<string> {
-            //     Chest, Back, LeftUp, LeftLow, RightUp, RightLow, LeftAb, RightAb, BackNeck
-            // };
-
-            // if (temp_check.Contains("red"))
-            // {
-            //     bool answer = await Application.Current.MainPage.DisplayAlert("Alert!", "Temperature is too low!", "OK", "Cancel");
-            // }
         }
 
         public string fpath;

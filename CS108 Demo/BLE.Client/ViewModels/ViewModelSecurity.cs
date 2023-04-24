@@ -6,23 +6,25 @@ using Xamarin.Forms;
 using Plugin.BLE.Abstractions.Contracts;
 
 
-namespace BLE.Client.ViewModels {
-	public class ViewModelSecurity : BaseViewModel {
+namespace BLE.Client.ViewModels
+{
+	public class ViewModelSecurity : BaseViewModel
+	{
 		private readonly IUserDialogs _userDialogs;
 
-		public string entrySelectedEPC {get; set;}
-		public string entrySelectedPWD {get; set;}
+		public string entrySelectedEPC { get; set; }
+		public string entrySelectedPWD { get; set; }
 
-		public string buttonEPCText {get; set;}
-		public string buttonACCPWDText {get; set;}
-		public string buttonKILLPWDText {get; set;}
-		public string buttonTIDText {get; set;}
-		public string buttonUSERText {get; set;}
-        public string buttonFFFFFLockText {get; set;}
+		public string buttonEPCText { get; set; }
+		public string buttonACCPWDText { get; set; }
+		public string buttonKILLPWDText { get; set; }
+		public string buttonTIDText { get; set; }
+		public string buttonUSERText { get; set; }
+        public string buttonFFFFFLockText { get; set; }
 
-        public string labelStatus {get; set;}
+        public string labelStatus { get; set; }
 
-		public ICommand OnApplyButtonCommand {protected set; get;}
+		public ICommand OnApplyButtonCommand { protected set; get; }
 
 		public ViewModelSecurity(IAdapter adapter, IUserDialogs userDialogs) : base(adapter) {
 			_userDialogs = userDialogs;

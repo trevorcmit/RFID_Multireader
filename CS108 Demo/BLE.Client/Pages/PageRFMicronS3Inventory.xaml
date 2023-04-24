@@ -40,46 +40,46 @@
           <!--Body Model--> <Image Grid.Row="1" Grid.Column="0" Grid.RowSpan="6" Grid.ColumnSpan="55" Aspect="Fill" Source="Assets/singletorso.jpg" />
 
           <!--  Chest   --> <Image Grid.Row="3" Grid.Column="23" Grid.ColumnSpan="9" VerticalOptions="Center" Aspect="AspectFit" Opacity="0.48" Source="{Binding Chest, StringFormat='Assets/\{0\}.png'}" />
-          <!-- - - - -  --> <Label Grid.Row="3" Grid.Column="23" Grid.ColumnSpan="9" Text="{Binding ChestIn,   StringFormat='{0:F0}°/s'}" FontSize="Default" VerticalOptions="Start" HorizontalOptions="Center" FontAttributes="Bold" />
-          <!-- - - - -  --> <Label Grid.Row="3" Grid.Column="23" Grid.ColumnSpan="9" Text="{Binding ChestOut,  StringFormat='{0:F0}°/s'}" FontSize="Default" VerticalOptions="End"   HorizontalOptions="Center" />
+          <!-- - - - -  --> <Label Grid.Row="3" Grid.Column="23" Grid.ColumnSpan="9" Text="{Binding ChestIn,   StringFormat='{0:F0}'}" FontSize="Default" VerticalOptions="Start" HorizontalOptions="Center" FontAttributes="Bold" />
+          <!-- - - - -  --> <Label Grid.Row="3" Grid.Column="23" Grid.ColumnSpan="9" Text="{Binding ChestOut,  StringFormat='{0:F0}'}" FontSize="Default" VerticalOptions="End"   HorizontalOptions="Center" />
 
           <!-- - Back - --> <Image Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="9" VerticalOptions="Start" Aspect="AspectFit" Opacity="0.48" Source="{Binding Back, StringFormat='Assets/\{0\}.png'}" />
-          <!-- - - - -  --> <Label Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="9" Text="{Binding BackIn_T,  StringFormat='{0:F0}°/s'}" FontSize="Default" VerticalOptions="Start" HorizontalOptions="Center" FontAttributes="Bold" />
-          <!--  - - - - --> <Label Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="9" Text="{Binding BackOut_T, StringFormat='{0:F0}°/s'}" FontSize="Default" VerticalOptions="End"   HorizontalOptions="Center" />
+          <!-- - - - -  --> <Label Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="9" Text="{Binding BackIn_T,  StringFormat='{0:F0}'}" FontSize="Default" VerticalOptions="Start" HorizontalOptions="Center" FontAttributes="Bold" />
+          <!--  - - - - --> <Label Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="9" Text="{Binding BackOut_T, StringFormat='{0:F0}'}" FontSize="Default" VerticalOptions="End"   HorizontalOptions="Center" />
           <!-- - - - -  --> <Label Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="9" Text="Back" VerticalOptions="End" HorizontalOptions="Center" />
           <!--  - - - - --> <Label Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="9" Text="{Binding BackWet}" VerticalOptions="Start"   HorizontalOptions="Center" />
 
           <!--Back Neck --> <Image Grid.Row="1" Grid.Column="41" Grid.ColumnSpan="9" VerticalOptions="Start" Aspect="AspectFit" Opacity="0.48" Source="{Binding BackNeck, StringFormat='Assets/\{0\}.png'}" />
-          <!-- - - - -  --> <Label Grid.Row="1" Grid.Column="41" Grid.ColumnSpan="9" Text="{Binding BackNeckIn_T,  StringFormat='{0:F0}°/s'}" FontSize="Default" VerticalOptions="Start" HorizontalOptions="Center" FontAttributes="Bold" />
-          <!--  - - - - --> <Label Grid.Row="1" Grid.Column="41" Grid.ColumnSpan="9" Text="{Binding BackNeckOut_T, StringFormat='{0:F0}°/s'}" FontSize="Default" VerticalOptions="End"   HorizontalOptions="Center" />
+          <!-- - - - -  --> <Label Grid.Row="1" Grid.Column="41" Grid.ColumnSpan="9" Text="{Binding BackNeckIn_T,  StringFormat='{0:F0}'}" FontSize="Default" VerticalOptions="Start" HorizontalOptions="Center" FontAttributes="Bold" />
+          <!--  - - - - --> <Label Grid.Row="1" Grid.Column="41" Grid.ColumnSpan="9" Text="{Binding BackNeckOut_T, StringFormat='{0:F0}'}" FontSize="Default" VerticalOptions="End"   HorizontalOptions="Center" />
           <!-- - - - -  --> <Label Grid.Row="0" Grid.Column="41" Grid.ColumnSpan="9" Text="Back Neck" VerticalOptions="End" HorizontalOptions="Center" />
           <!--  - - - - --> <Label Grid.Row="2" Grid.Column="41" Grid.ColumnSpan="9" Text="{Binding BackNeckWet}" VerticalOptions="Start" HorizontalOptions="Center" />
 
           <!-- Abdomen  --> <Image Grid.Row="6" Grid.Column="19" Grid.ColumnSpan="9" Aspect="AspectFit" Opacity="0.48" Source="{Binding RightAb, StringFormat='Assets/\{0\}.png'}" />
-          <!--  Right - --> <Label Grid.Row="6" Grid.Column="19" Grid.ColumnSpan="9" Text="{Binding RightAbIn_T,  StringFormat='{0:F0}°/s'}" FontSize="Default" VerticalOptions="Start" HorizontalOptions="Center" FontAttributes="Bold" />
-          <!--  - - - - --> <Label Grid.Row="6" Grid.Column="19" Grid.ColumnSpan="9" Text="{Binding RightAbOut_T, StringFormat='{0:F0}°/s'}" FontSize="Default" VerticalOptions="End"   HorizontalOptions="Center" />
+          <!--  Right - --> <Label Grid.Row="6" Grid.Column="19" Grid.ColumnSpan="9" Text="{Binding RightAbIn_T,  StringFormat='{0:F0}'}" FontSize="Default" VerticalOptions="Start" HorizontalOptions="Center" FontAttributes="Bold" />
+          <!--  - - - - --> <Label Grid.Row="6" Grid.Column="19" Grid.ColumnSpan="9" Text="{Binding RightAbOut_T, StringFormat='{0:F0}'}" FontSize="Default" VerticalOptions="End"   HorizontalOptions="Center" />
           <!--  - - - - --> <Label Grid.Row="7" Grid.Column="19" Grid.ColumnSpan="9" Text="{Binding RightAbWet}" VerticalOptions="Start" HorizontalOptions="Center" />
           <!-- Abdomen  --> <Image Grid.Row="6" Grid.Column="26" Grid.ColumnSpan="9" Aspect="AspectFit" Opacity="0.48" Source="{Binding LeftAb, StringFormat='Assets/\{0\}.png'}" />
-          <!-- -Left -  --> <Label Grid.Row="6" Grid.Column="26" Grid.ColumnSpan="9" Text="{Binding LeftAbIn_T,  StringFormat='{0:F0}°/s'}" FontSize="Default" VerticalOptions="Start" HorizontalOptions="Center" FontAttributes="Bold" />
-          <!-- - - - -  --> <Label Grid.Row="6" Grid.Column="26" Grid.ColumnSpan="9" Text="{Binding LeftAbOut_T, StringFormat='{0:F0}°/s'}" FontSize="Default" VerticalOptions="End"   HorizontalOptions="Center" />
+          <!-- -Left -  --> <Label Grid.Row="6" Grid.Column="26" Grid.ColumnSpan="9" Text="{Binding LeftAbIn_T,  StringFormat='{0:F0}'}" FontSize="Default" VerticalOptions="Start" HorizontalOptions="Center" FontAttributes="Bold" />
+          <!-- - - - -  --> <Label Grid.Row="6" Grid.Column="26" Grid.ColumnSpan="9" Text="{Binding LeftAbOut_T, StringFormat='{0:F0}'}" FontSize="Default" VerticalOptions="End"   HorizontalOptions="Center" />
           <!--  - - - - --> <Label Grid.Row="7" Grid.Column="26" Grid.ColumnSpan="9" Text="{Binding LeftAbWet}" VerticalOptions="Start" HorizontalOptions="Center" />
 
           <!-- Right Up --> <Image Grid.Row="4" Grid.Column="10" Grid.ColumnSpan="9" Aspect="AspectFit" Opacity="0.48" Source="{Binding RightUp, StringFormat='Assets/\{0\}.png'}" />
           <!-- Left Up  --> <Image Grid.Row="4" Grid.Column="37" Grid.ColumnSpan="9" Aspect="AspectFit" Opacity="0.48" Source="{Binding LeftUp,  StringFormat='Assets/\{0\}.png'}" />
-          <!-- - - - -  --> <Label Grid.Row="4" Grid.Column="10" Grid.ColumnSpan="9" Text="{Binding RightUpIn_T, StringFormat='{0:F0}°/s'}" FontSize="Default" FontAttributes="Bold"  VerticalOptions="Start" HorizontalOptions="Center" />
-          <!--  - - - - --> <Label Grid.Row="4" Grid.Column="37" Grid.ColumnSpan="9" Text="{Binding LeftUpIn_T,  StringFormat='{0:F0}°/s'}" FontSize="Default" FontAttributes="Bold"  VerticalOptions="Start" HorizontalOptions="Center" />
-          <!-- - - - -  --> <Label Grid.Row="4" Grid.Column="10" Grid.ColumnSpan="9" Text="{Binding RightUpOut_T, StringFormat='{0:F0}°/s'}" FontSize="Default" VerticalOptions="End" HorizontalOptions="Center" />
-          <!--  - - - - --> <Label Grid.Row="4" Grid.Column="37" Grid.ColumnSpan="9" Text="{Binding LeftUpOut_T,  StringFormat='{0:F0}°/s'}" FontSize="Default" VerticalOptions="End" HorizontalOptions="Center" />
+          <!-- - - - -  --> <Label Grid.Row="4" Grid.Column="10" Grid.ColumnSpan="9" Text="{Binding RightUpIn_T, StringFormat='{0:F0}'}" FontSize="Default" FontAttributes="Bold"  VerticalOptions="Start" HorizontalOptions="Center" />
+          <!--  - - - - --> <Label Grid.Row="4" Grid.Column="37" Grid.ColumnSpan="9" Text="{Binding LeftUpIn_T,  StringFormat='{0:F0}'}" FontSize="Default" FontAttributes="Bold"  VerticalOptions="Start" HorizontalOptions="Center" />
+          <!-- - - - -  --> <Label Grid.Row="4" Grid.Column="10" Grid.ColumnSpan="9" Text="{Binding RightUpOut_T, StringFormat='{0:F0}'}" FontSize="Default" VerticalOptions="End" HorizontalOptions="Center" />
+          <!--  - - - - --> <Label Grid.Row="4" Grid.Column="37" Grid.ColumnSpan="9" Text="{Binding LeftUpOut_T,  StringFormat='{0:F0}'}" FontSize="Default" VerticalOptions="End" HorizontalOptions="Center" />
           <!--  - - - - --> <Label Grid.Row="5" Grid.Column="10" Grid.ColumnSpan="9" Text="{Binding RightUpWet}" VerticalOptions="Start" HorizontalOptions="Center" />
           <!--  - - - - --> <Label Grid.Row="5" Grid.Column="37" Grid.ColumnSpan="9" Text="{Binding LeftUpWet}" VerticalOptions="Start"  HorizontalOptions="Center" />
 
-          <!--Right Low --> <Image Grid.Row="6" Grid.Column="5" Grid.ColumnSpan="9" Aspect="AspectFit" Opacity="0.48" Source="{Binding RightLow, StringFormat='Assets/\{0\}.png'}" />
+          <!--Right Low --> <Image Grid.Row="6" Grid.Column="5"  Grid.ColumnSpan="9" Aspect="AspectFit" Opacity="0.48" Source="{Binding RightLow, StringFormat='Assets/\{0\}.png'}" />
           <!-- Left Low --> <Image Grid.Row="6" Grid.Column="41" Grid.ColumnSpan="9" Aspect="AspectFit" Opacity="0.48" Source="{Binding LeftLow,  StringFormat='Assets/\{0\}.png'}" />
-          <!-- - - - -  --> <Label Grid.Row="6" Grid.Column="5" Grid.ColumnSpan="9" Text="{Binding RightLowIn_T, StringFormat='{0:F0}°/s'}" FontSize="Default" FontAttributes="Bold" VerticalOptions="Start" HorizontalOptions="Center" />
-          <!--  - - - - --> <Label Grid.Row="6" Grid.Column="41" Grid.ColumnSpan="9" Text="{Binding LeftLowIn_T, StringFormat='{0:F0}°/s'}"  FontSize="Default" FontAttributes="Bold" VerticalOptions="Start" HorizontalOptions="Center" />
-          <!-- - - - -  --> <Label Grid.Row="6" Grid.Column="5" Grid.ColumnSpan="9" Text="{Binding RightLowOut_T, StringFormat='{0:F0}°/s'}" FontSize="Default" VerticalOptions="End" HorizontalOptions="Center" />
-          <!--  - - - - --> <Label Grid.Row="6" Grid.Column="41" Grid.ColumnSpan="9" Text="{Binding LeftLowOut_T, StringFormat='{0:F0}°/s'}"  FontSize="Default" VerticalOptions="End" HorizontalOptions="Center" />
-          <!--  - - - - --> <Label Grid.Row="7" Grid.Column="5" Grid.ColumnSpan="9" Text="{Binding RightLowWet}" VerticalOptions="Start" HorizontalOptions="Center" />
+          <!-- - - - -  --> <Label Grid.Row="6" Grid.Column="5"  Grid.ColumnSpan="9" Text="{Binding RightLowIn_T, StringFormat='{0:F0}'}" FontSize="Default" FontAttributes="Bold" VerticalOptions="Start" HorizontalOptions="Center" />
+          <!--  - - - - --> <Label Grid.Row="6" Grid.Column="41" Grid.ColumnSpan="9" Text="{Binding LeftLowIn_T, StringFormat='{0:F0}'}"  FontSize="Default" FontAttributes="Bold" VerticalOptions="Start" HorizontalOptions="Center" />
+          <!-- - - - -  --> <Label Grid.Row="6" Grid.Column="5"  Grid.ColumnSpan="9" Text="{Binding RightLowOut_T, StringFormat='{0:F0}'}" FontSize="Default" VerticalOptions="End" HorizontalOptions="Center" />
+          <!--  - - - - --> <Label Grid.Row="6" Grid.Column="41" Grid.ColumnSpan="9" Text="{Binding LeftLowOut_T, StringFormat='{0:F0}'}"  FontSize="Default" VerticalOptions="End" HorizontalOptions="Center" />
+          <!--  - - - - --> <Label Grid.Row="7" Grid.Column="5"  Grid.ColumnSpan="9" Text="{Binding RightLowWet}" VerticalOptions="Start" HorizontalOptions="Center" />
           <!--  - - - - --> <Label Grid.Row="7" Grid.Column="41" Grid.ColumnSpan="9" Text="{Binding LeftLowWet}"  VerticalOptions="Start" HorizontalOptions="Center" />
 
         </Grid>
@@ -88,7 +88,8 @@
 
     <!-- Bottom Inventory/Clear/Share Section --> 
     <StackLayout Orientation="Vertical" VerticalOptions="EndAndExpand">
-      <Button Text="{Binding startInventoryButtonText}" Font="Large" CornerRadius="9" Command="{Binding OnStartInventoryButtonCommand}"/>
+      <Button Text="{Binding startInventoryButtonText}" Font="Large" CornerRadius="8" Command="{Binding OnStartInventoryButtonCommand}" />
+      <Button Text="{Binding SwitchButtonText}"         Font="Large" CornerRadius="8" Command="{Binding OnSwitchCommand}" BackgroundColor="{Binding SwitchButtonColor}"/>
     </StackLayout>
 
   </StackLayout>

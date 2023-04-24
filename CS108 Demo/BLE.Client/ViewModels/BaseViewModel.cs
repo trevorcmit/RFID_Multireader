@@ -125,77 +125,77 @@ namespace BLE.Client.ViewModels {
         ///////////////////////////////////////////////////////////////
         ///// Moved from ViewModelRFMicroS3Inventory to declutter /////
         ///////////////////////////////////////////////////////////////
-        public async void InventorySetting() {
-            switch (BleMvxApplication._config.RFID_FrequenceSwitch) {
-                case 0:
-                    BleMvxApplication._reader.rfid.SetHoppingChannels(BleMvxApplication._config.RFID_Region);
-                    break;
-                case 1:
-                    BleMvxApplication._reader.rfid.SetFixedChannel(BleMvxApplication._config.RFID_Region, BleMvxApplication._config.RFID_FixedChannel);
-                    break;
-                case 2:
-                    BleMvxApplication._reader.rfid.SetAgileChannels(BleMvxApplication._config.RFID_Region);
-                    break;
-            }
-            BleMvxApplication._reader.rfid.Options.TagRanging.flags = CSLibrary.Constants.SelectFlags.ZERO;
+        // public async void InventorySetting() {
+        //     switch (BleMvxApplication._config.RFID_FrequenceSwitch) {
+        //         case 0:
+        //             BleMvxApplication._reader.rfid.SetHoppingChannels(BleMvxApplication._config.RFID_Region);
+        //             break;
+        //         case 1:
+        //             BleMvxApplication._reader.rfid.SetFixedChannel(BleMvxApplication._config.RFID_Region, BleMvxApplication._config.RFID_FixedChannel);
+        //             break;
+        //         case 2:
+        //             BleMvxApplication._reader.rfid.SetAgileChannels(BleMvxApplication._config.RFID_Region);
+        //             break;
+        //     }
+        //     BleMvxApplication._reader.rfid.Options.TagRanging.flags = CSLibrary.Constants.SelectFlags.ZERO;
 
-            // Setting 1
-            SetPower(BleMvxApplication._rfMicro_Power);
+        //     // Setting 1
+        //     SetPower(BleMvxApplication._rfMicro_Power);
 
-            // Setting 3
-            BleMvxApplication._config.RFID_DynamicQParms.toggleTarget = (BleMvxApplication._rfMicro_Target == 2) ? 1U : 0U;
-            BleMvxApplication._config.RFID_DynamicQParms.retryCount = 5; // for RFMicro special setting
-            BleMvxApplication._reader.rfid.SetDynamicQParms(BleMvxApplication._config.RFID_DynamicQParms);
-            BleMvxApplication._config.RFID_DynamicQParms.retryCount = 0; // reset to normal
+        //     // Setting 3
+        //     BleMvxApplication._config.RFID_DynamicQParms.toggleTarget = (BleMvxApplication._rfMicro_Target == 2) ? 1U : 0U;
+        //     BleMvxApplication._config.RFID_DynamicQParms.retryCount = 5; // for RFMicro special setting
+        //     BleMvxApplication._reader.rfid.SetDynamicQParms(BleMvxApplication._config.RFID_DynamicQParms);
+        //     BleMvxApplication._config.RFID_DynamicQParms.retryCount = 0; // reset to normal
 
-            // Setting 4
-            BleMvxApplication._config.RFID_FixedQParms.toggleTarget = (BleMvxApplication._rfMicro_Target == 2) ? 1U : 0U;
-            BleMvxApplication._config.RFID_FixedQParms.retryCount = 5; // for RFMicro special setting
-            BleMvxApplication._reader.rfid.SetFixedQParms(BleMvxApplication._config.RFID_FixedQParms);
-            BleMvxApplication._config.RFID_FixedQParms.retryCount = 0; // reset to normal
+        //     // Setting 4
+        //     BleMvxApplication._config.RFID_FixedQParms.toggleTarget = (BleMvxApplication._rfMicro_Target == 2) ? 1U : 0U;
+        //     BleMvxApplication._config.RFID_FixedQParms.retryCount = 5; // for RFMicro special setting
+        //     BleMvxApplication._reader.rfid.SetFixedQParms(BleMvxApplication._config.RFID_FixedQParms);
+        //     BleMvxApplication._config.RFID_FixedQParms.retryCount = 0; // reset to normal
 
-            // Setting 2
-            BleMvxApplication._reader.rfid.SetOperationMode(BleMvxApplication._config.RFID_OperationMode);
-            BleMvxApplication._reader.rfid.SetTagGroup(CSLibrary.Constants.Selected.ASSERTED, BleMvxApplication._config.RFID_TagGroup.session, (BleMvxApplication._rfMicro_Target != 1) ? CSLibrary.Constants.SessionTarget.A : CSLibrary.Constants.SessionTarget.B);
-            BleMvxApplication._reader.rfid.SetCurrentSingulationAlgorithm(BleMvxApplication._config.RFID_Algorithm);
-            BleMvxApplication._reader.rfid.SetCurrentLinkProfile(BleMvxApplication._config.RFID_Profile);
+        //     // Setting 2
+        //     BleMvxApplication._reader.rfid.SetOperationMode(BleMvxApplication._config.RFID_OperationMode);
+        //     BleMvxApplication._reader.rfid.SetTagGroup(CSLibrary.Constants.Selected.ASSERTED, BleMvxApplication._config.RFID_TagGroup.session, (BleMvxApplication._rfMicro_Target != 1) ? CSLibrary.Constants.SessionTarget.A : CSLibrary.Constants.SessionTarget.B);
+        //     BleMvxApplication._reader.rfid.SetCurrentSingulationAlgorithm(BleMvxApplication._config.RFID_Algorithm);
+        //     BleMvxApplication._reader.rfid.SetCurrentLinkProfile(BleMvxApplication._config.RFID_Profile);
 
-            // Select RFMicro S3 filter
-            {
-                CSLibrary.Structures.SelectCriterion extraSlecetion = new CSLibrary.Structures.SelectCriterion();
+        //     // Select RFMicro S3 filter
+        //     {
+        //         CSLibrary.Structures.SelectCriterion extraSlecetion = new CSLibrary.Structures.SelectCriterion();
 
-                extraSlecetion.action = new CSLibrary.Structures.SelectAction(CSLibrary.Constants.Target.SELECTED, CSLibrary.Constants.Action.ASLINVA_DSLINVB, 0);
-                extraSlecetion.mask = new CSLibrary.Structures.SelectMask(CSLibrary.Constants.MemoryBank.TID, 0, 28, new byte[] { 0xe2, 0x82, 0x40, 0x30 });
-                BleMvxApplication._reader.rfid.SetSelectCriteria(0, extraSlecetion);
+        //         extraSlecetion.action = new CSLibrary.Structures.SelectAction(CSLibrary.Constants.Target.SELECTED, CSLibrary.Constants.Action.ASLINVA_DSLINVB, 0);
+        //         extraSlecetion.mask = new CSLibrary.Structures.SelectMask(CSLibrary.Constants.MemoryBank.TID, 0, 28, new byte[] { 0xe2, 0x82, 0x40, 0x30 });
+        //         BleMvxApplication._reader.rfid.SetSelectCriteria(0, extraSlecetion);
 
-                // Set OCRSSI Limit
-                extraSlecetion.action = new CSLibrary.Structures.SelectAction(CSLibrary.Constants.Target.SELECTED, CSLibrary.Constants.Action.NOTHING_DSLINVB, 0);
-                extraSlecetion.mask = new CSLibrary.Structures.SelectMask(CSLibrary.Constants.MemoryBank.BANK3, 0xd0, 8, new byte[] { (byte)(0x20 | BleMvxApplication._rfMicro_minOCRSSI) });
-                BleMvxApplication._reader.rfid.SetSelectCriteria(1, extraSlecetion);
+        //         // Set OCRSSI Limit
+        //         extraSlecetion.action = new CSLibrary.Structures.SelectAction(CSLibrary.Constants.Target.SELECTED, CSLibrary.Constants.Action.NOTHING_DSLINVB, 0);
+        //         extraSlecetion.mask = new CSLibrary.Structures.SelectMask(CSLibrary.Constants.MemoryBank.BANK3, 0xd0, 8, new byte[] { (byte)(0x20 | BleMvxApplication._rfMicro_minOCRSSI) });
+        //         BleMvxApplication._reader.rfid.SetSelectCriteria(1, extraSlecetion);
 
-                extraSlecetion.action = new CSLibrary.Structures.SelectAction(CSLibrary.Constants.Target.SELECTED, CSLibrary.Constants.Action.NOTHING_DSLINVB, 0);
-                extraSlecetion.mask = new CSLibrary.Structures.SelectMask(CSLibrary.Constants.MemoryBank.BANK3, 0xd0, 8, new byte[] { (byte)(BleMvxApplication._rfMicro_maxOCRSSI) });
-                BleMvxApplication._reader.rfid.SetSelectCriteria(2, extraSlecetion);
+        //         extraSlecetion.action = new CSLibrary.Structures.SelectAction(CSLibrary.Constants.Target.SELECTED, CSLibrary.Constants.Action.NOTHING_DSLINVB, 0);
+        //         extraSlecetion.mask = new CSLibrary.Structures.SelectMask(CSLibrary.Constants.MemoryBank.BANK3, 0xd0, 8, new byte[] { (byte)(BleMvxApplication._rfMicro_maxOCRSSI) });
+        //         BleMvxApplication._reader.rfid.SetSelectCriteria(2, extraSlecetion);
 
-                // Temperature and Sensor code
-                extraSlecetion.action = new CSLibrary.Structures.SelectAction(CSLibrary.Constants.Target.SELECTED, CSLibrary.Constants.Action.NOTHING_DSLINVB, 0);
-                extraSlecetion.mask = new CSLibrary.Structures.SelectMask(CSLibrary.Constants.MemoryBank.BANK3, 0xe0, 0, new byte[] { 0x00 });
-                BleMvxApplication._reader.rfid.SetSelectCriteria(3, extraSlecetion);
+        //         // Temperature and Sensor code
+        //         extraSlecetion.action = new CSLibrary.Structures.SelectAction(CSLibrary.Constants.Target.SELECTED, CSLibrary.Constants.Action.NOTHING_DSLINVB, 0);
+        //         extraSlecetion.mask = new CSLibrary.Structures.SelectMask(CSLibrary.Constants.MemoryBank.BANK3, 0xe0, 0, new byte[] { 0x00 });
+        //         BleMvxApplication._reader.rfid.SetSelectCriteria(3, extraSlecetion);
 
-                BleMvxApplication._reader.rfid.Options.TagRanging.flags |= CSLibrary.Constants.SelectFlags.SELECT;
-            }
+        //         BleMvxApplication._reader.rfid.Options.TagRanging.flags |= CSLibrary.Constants.SelectFlags.SELECT;
+        //     }
 
-            // Multi bank inventory
-            BleMvxApplication._reader.rfid.Options.TagRanging.multibanks = 2;
-            BleMvxApplication._reader.rfid.Options.TagRanging.bank1 = CSLibrary.Constants.MemoryBank.BANK0;
-            BleMvxApplication._reader.rfid.Options.TagRanging.offset1 = 12; // Address C
-            BleMvxApplication._reader.rfid.Options.TagRanging.count1 = 3;
-            BleMvxApplication._reader.rfid.Options.TagRanging.bank2 = CSLibrary.Constants.MemoryBank.USER;
-            BleMvxApplication._reader.rfid.Options.TagRanging.offset2 = 8;
-            BleMvxApplication._reader.rfid.Options.TagRanging.count2 = 4;
-            BleMvxApplication._reader.rfid.Options.TagRanging.compactmode = false;
-            BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_PRERANGING);
-        }
+        //     // Multi bank inventory
+        //     BleMvxApplication._reader.rfid.Options.TagRanging.multibanks = 2;
+        //     BleMvxApplication._reader.rfid.Options.TagRanging.bank1 = CSLibrary.Constants.MemoryBank.BANK0;
+        //     BleMvxApplication._reader.rfid.Options.TagRanging.offset1 = 12; // Address C
+        //     BleMvxApplication._reader.rfid.Options.TagRanging.count1 = 3;
+        //     BleMvxApplication._reader.rfid.Options.TagRanging.bank2 = CSLibrary.Constants.MemoryBank.USER;
+        //     BleMvxApplication._reader.rfid.Options.TagRanging.offset2 = 8;
+        //     BleMvxApplication._reader.rfid.Options.TagRanging.count2 = 4;
+        //     BleMvxApplication._reader.rfid.Options.TagRanging.compactmode = false;
+        //     BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_PRERANGING);
+        // }
 
         public void SetPower(int index)
         {

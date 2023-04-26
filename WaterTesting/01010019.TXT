@@ -1,6 +1,5 @@
 water temp data
 8:31 am for data below is 7:11 pm in actual time, thus
-
 00:20:00 for data below is 11:00:00 am in actual time (error of around 1 minute)
 
 MN/AT  date      time     int    1ch     2ch    3ch    4ch    unit

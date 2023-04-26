@@ -10,8 +10,10 @@ using Plugin.BLE.Abstractions;
 using Plugin.BLE.Abstractions.Contracts;
 
 
-namespace Plugin.BLE.iOS {
-    public class Adapter : AdapterBase {
+namespace Plugin.BLE.iOS
+{
+    public class Adapter : AdapterBase
+    {
         private readonly AutoResetEvent _stateChanged = new AutoResetEvent(false);
         private readonly CBCentralManager _centralManager;
 

@@ -1,5 +1,6 @@
 using System;
 
+
 namespace Plugin.BLE.Abstractions.Exceptions
 {
     public class DeviceConnectionException : Exception
@@ -13,5 +14,6 @@ namespace Plugin.BLE.Abstractions.Exceptions
             DeviceId = deviceId;
             DeviceName = deviceName;
         }
+
     }
 }

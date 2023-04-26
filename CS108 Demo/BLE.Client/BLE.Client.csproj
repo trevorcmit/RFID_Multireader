@@ -139,12 +139,6 @@
     <Compile Update="PagesViewModelsSet\SpecialFuction\Monza4 QT\InventorySelectionMenu\PageQTInventorySlectionMenu.xaml.cs">
       <DependentUpon>PageQTInventorySlectionMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Update="PagesViewModelsSet\SpecialFuction\Temperature tag with location demo for Tablet\PageTempGPSInventory.xaml.cs">
-      <DependentUpon>PageTempGPSInventory.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="PagesViewModelsSet\SpecialFuction\Temperature tag with location demo for Tablet\PageTempGPSSetting.xaml.cs">
-      <DependentUpon>PageTempGPSSetting.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Pages\PageFM13DT160DeepSleep.xaml.cs">
       <DependentUpon>PageFM13DT160DeepSleep.xaml</DependentUpon>
     </Compile>
@@ -182,12 +176,6 @@
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="PagesViewModelsSet\SpecialFuction\Monza4 QT\InventorySelectionMenu\PageQTInventorySlectionMenu.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="PagesViewModelsSet\SpecialFuction\Temperature tag with location demo for Tablet\PageTempGPSInventory.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="PagesViewModelsSet\SpecialFuction\Temperature tag with location demo for Tablet\PageTempGPSSetting.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\DeviceListPage.xaml">

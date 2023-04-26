@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 
 
-namespace Plugin.BLE.Abstractions {
-    public static class KnownCharacteristics {
+namespace Plugin.BLE.Abstractions
+{
+    public static class KnownCharacteristics
+    {
         static KnownCharacteristics() {
             LookupTable = Characteristics.ToDictionary(c => c.Id, c => c);
         }

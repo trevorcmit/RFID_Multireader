@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Plugin.BLE.Abstractions.Contracts;
 
+
 namespace Plugin.BLE.Abstractions
 {
     public interface ICancellationMaster
@@ -135,5 +136,6 @@ namespace Plugin.BLE.Abstractions
         {
             return Id.GetHashCode();
         }
+
     }
 }

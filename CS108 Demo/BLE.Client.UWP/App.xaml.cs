@@ -16,8 +16,10 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 
-namespace BLE.Client.UWP {
-    sealed partial class App : Application {
+namespace BLE.Client.UWP
+{
+    sealed partial class App : Application
+    {
         public App() {
             this.InitializeComponent();
             this.Suspending += OnSuspending;

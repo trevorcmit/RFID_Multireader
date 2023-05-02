@@ -1,6 +1,9 @@
-﻿namespace BLE.Client.Pages {
-    public partial class PageMainMenu {
-        public PageMainMenu() {
+﻿namespace BLE.Client.Pages
+{
+    public partial class PageMainMenu
+    {
+        public PageMainMenu()
+        {
             InitializeComponent();
             this.Title = "IFM fID-T";
             // Task.Run(AnimateBackground);

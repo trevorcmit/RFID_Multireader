@@ -129,10 +129,11 @@ namespace BLE.Client.Pages {
             switch (countryCode) {
                 case "-1":
                 case "-8":
-                    _freqOrderOptions = new string[] {"Fixed"};
+                    _freqOrderOptions = new string[] { "Fixed" };
                     break;
                 default:
-                    _freqOrderOptions = new string[] {"Hopping"};
+                    // _freqOrderOptions = new string[] { "Hopping" };
+                    _freqOrderOptions = new string[] { "Fixed" };
                     break;
             }
 
@@ -144,7 +145,8 @@ namespace BLE.Client.Pages {
 
             buttonRegion.Text = _regionsName[(int)BleMvxApplication._config.RFID_Region - 1];
             if (Regions.Count == 1) buttonRegion.IsEnabled = false;
-            switch (BleMvxApplication._config.RFID_FrequenceSwitch) {
+            switch (BleMvxApplication._config.RFID_FrequenceSwitch)
+            {
                 case 0:
                     buttonFrequencyOrder.Text = "Hopping";
                     break;
@@ -155,7 +157,9 @@ namespace BLE.Client.Pages {
                     buttonFrequencyOrder.Text = "Agile";
                     break;
             }
+
             if (_freqOrderOptions.Length == 1) buttonFrequencyOrder.IsEnabled = false;
+
             buttonFixedChannel.Text = ActiveFrequencyTextList[BleMvxApplication._config.RFID_FixedChannel];
             checkbuttonFixedChannel();
             entryPower.Text = BleMvxApplication._config.RFID_Antenna_Power[0].ToString();
@@ -225,13 +229,15 @@ namespace BLE.Client.Pages {
 
             switch (buttonFrequencyOrder.Text) {
                 case "Hopping":
-                    BleMvxApplication._config.RFID_FrequenceSwitch = 0;
+                    // BleMvxApplication._config.RFID_FrequenceSwitch = 0;
+                    BleMvxApplication._config.RFID_FrequenceSwitch = 1;
                     break;
                 case "Fixed":
                     BleMvxApplication._config.RFID_FrequenceSwitch = 1;
                     break;
                 case "Agile":
-                    BleMvxApplication._config.RFID_FrequenceSwitch = 2;
+                    // BleMvxApplication._config.RFID_FrequenceSwitch = 2;
+                    BleMvxApplication._config.RFID_FrequenceSwitch = 1;
                     break;
             }
 
@@ -308,13 +314,16 @@ namespace BLE.Client.Pages {
 
             switch (BleMvxApplication._config.RFID_FrequenceSwitch) {
                 case 0:
-                    BleMvxApplication._reader.rfid.SetHoppingChannels(BleMvxApplication._config.RFID_Region);
+                    // BleMvxApplication._reader.rfid.SetHoppingChannels(BleMvxApplication._config.RFID_Region);
+                    BleMvxApplication._reader.rfid.SetFixedChannel(BleMvxApplication._config.RFID_Region, BleMvxApplication._config.RFID_FixedChannel);
                     break;
                 case 1:
+                    // BleMvxApplication._reader.rfid.SetFixedChannel(BleMvxApplication._config.RFID_Region, BleMvxApplication._config.RFID_FixedChannel);
                     BleMvxApplication._reader.rfid.SetFixedChannel(BleMvxApplication._config.RFID_Region, BleMvxApplication._config.RFID_FixedChannel);
                     break;
                 case 2:
-                    BleMvxApplication._reader.rfid.SetAgileChannels(BleMvxApplication._config.RFID_Region);
+                    // BleMvxApplication._reader.rfid.SetAgileChannels(BleMvxApplication._config.RFID_Region);
+                    BleMvxApplication._reader.rfid.SetFixedChannel(BleMvxApplication._config.RFID_Region, BleMvxApplication._config.RFID_FixedChannel);
                     break;
             }
         }

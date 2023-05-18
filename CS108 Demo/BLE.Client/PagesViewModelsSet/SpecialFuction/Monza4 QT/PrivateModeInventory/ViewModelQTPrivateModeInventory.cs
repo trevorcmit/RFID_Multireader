@@ -1,18 +1,23 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-// using System.Collections.Generic;
+using System.Collections.Generic;
 using Acr.UserDialogs;
 using MvvmCross.Core.ViewModels;
-// using MvvmCross.Platform;
+using MvvmCross.Platform;
+
 using System.Windows.Input;
 using Xamarin.Forms;
-using Plugin.BLE.Abstractions.Contracts;
-// using Plugin.BLE.Abstractions;
-// using Plugin.BLE.Abstractions.Extensions;
-using Prism.Mvvm;
-// using Plugin.Share;
-// using Plugin.Share.Abstractions;
 
+
+using Plugin.BLE.Abstractions.Contracts;
+
+using Plugin.BLE.Abstractions;
+using Plugin.BLE.Abstractions.Extensions;
+
+using Prism.Mvvm;
+
+using Plugin.Share;
+using Plugin.Share.Abstractions;
 
 namespace BLE.Client.ViewModels {
     public class ViewModelQTPrivateModeInventory : BaseViewModel {
@@ -84,9 +89,9 @@ namespace BLE.Client.ViewModels {
         }
 
         public override void Suspend() {
-            BleMvxApplication._reader.rfid.StopOperation();
-            BleMvxApplication._reader.rfid.Options.TagRanging.QTMode = false;
-            BleMvxApplication._reader.rfid.StopOperation();
+            BleMvxApplication._reader1.rfid.StopOperation();
+            BleMvxApplication._reader1.rfid.Options.TagRanging.QTMode = false;
+            BleMvxApplication._reader1.rfid.StopOperation();
             ClassBattery.SetBatteryMode(ClassBattery.BATTERYMODE.IDLE);
             SetEvent(false);
             base.Suspend();
@@ -100,20 +105,20 @@ namespace BLE.Client.ViewModels {
         private void SetEvent(bool enable)
         {
             // Cancel RFID event handler
-            BleMvxApplication._reader.rfid.ClearEventHandler();
+            BleMvxApplication._reader1.rfid.ClearEventHandler();
 
             // Key Button event handler
-            BleMvxApplication._reader.notification.ClearEventHandler();
+            BleMvxApplication._reader1.notification.ClearEventHandler();
 
             if (enable)
             {
                 // RFID event handler
-                BleMvxApplication._reader.rfid.OnStateChanged += new EventHandler<CSLibrary.Events.OnStateChangedEventArgs>(StateChangedEvent);
-                BleMvxApplication._reader.rfid.OnAsyncCallback += new EventHandler<CSLibrary.Events.OnAsyncCallbackEventArgs>(TagInventoryEvent);
+                BleMvxApplication._reader1.rfid.OnStateChanged += new EventHandler<CSLibrary.Events.OnStateChangedEventArgs>(StateChangedEvent);
+                BleMvxApplication._reader1.rfid.OnAsyncCallback += new EventHandler<CSLibrary.Events.OnAsyncCallbackEventArgs>(TagInventoryEvent);
 
                 // Key Button event handler
-                BleMvxApplication._reader.notification.OnKeyEvent += new EventHandler<CSLibrary.Notification.HotKeyEventArgs>(HotKeys_OnKeyEvent);
-                BleMvxApplication._reader.notification.OnVoltageEvent += new EventHandler<CSLibrary.Notification.VoltageEventArgs>(VoltageEvent);
+                BleMvxApplication._reader1.notification.OnKeyEvent += new EventHandler<CSLibrary.Notification.HotKeyEventArgs>(HotKeys_OnKeyEvent);
+                BleMvxApplication._reader1.notification.OnVoltageEvent += new EventHandler<CSLibrary.Notification.VoltageEventArgs>(VoltageEvent);
             }
         }
 
@@ -134,66 +139,70 @@ namespace BLE.Client.ViewModels {
             });
         }
 
-        void SetConfigPower() {
-            if (BleMvxApplication._reader.rfid.GetAntennaPort() == 1) {
-                if (BleMvxApplication._config.RFID_PowerSequencing_NumberofPower == 0) {
-                    BleMvxApplication._reader.rfid.SetPowerSequencing(0);
-                    BleMvxApplication._reader.rfid.SetPowerLevel(BleMvxApplication._config.RFID_Antenna_Power[0]);
+        //private TagInfoViewModel _ItemSelected;
+        void SetConfigPower()
+        {
+            if (BleMvxApplication._reader1.rfid.GetAntennaPort() == 1)
+            {
+                if (BleMvxApplication._config1.RFID_PowerSequencing_NumberofPower == 0)
+                {
+                    BleMvxApplication._reader1.rfid.SetPowerSequencing(0);
+                    BleMvxApplication._reader1.rfid.SetPowerLevel(BleMvxApplication._config1.RFID_Antenna_Power[0]);
                 }
                 else
-                    BleMvxApplication._reader.rfid.SetPowerSequencing(BleMvxApplication._config.RFID_PowerSequencing_NumberofPower, BleMvxApplication._config.RFID_PowerSequencing_Level, BleMvxApplication._config.RFID_PowerSequencing_DWell);
+                    BleMvxApplication._reader1.rfid.SetPowerSequencing(BleMvxApplication._config1.RFID_PowerSequencing_NumberofPower, BleMvxApplication._config1.RFID_PowerSequencing_Level, BleMvxApplication._config1.RFID_PowerSequencing_DWell);
             }
             else
             {
-                for (uint cnt = BleMvxApplication._reader.rfid.GetAntennaPort() - 1; cnt >= 0; cnt--)
+                for (uint cnt = BleMvxApplication._reader1.rfid.GetAntennaPort() - 1; cnt >= 0; cnt--)
                 {
-                    BleMvxApplication._reader.rfid.SetPowerLevel(BleMvxApplication._config.RFID_Antenna_Power[cnt], cnt);
+                    BleMvxApplication._reader1.rfid.SetPowerLevel(BleMvxApplication._config1.RFID_Antenna_Power[cnt], cnt);
                 }
             }
         }
 
         void InventorySetting()
         {
-            BleMvxApplication._reader.rfid.CancelAllSelectCriteria();                // Confirm cancel all filter
+            BleMvxApplication._reader1.rfid.CancelAllSelectCriteria();                // Confirm cancel all filter
 
-            switch (BleMvxApplication._config.RFID_FrequenceSwitch)
+            switch (BleMvxApplication._config1.RFID_FrequenceSwitch)
             {
                 case 0:
-                    BleMvxApplication._reader.rfid.SetHoppingChannels(BleMvxApplication._config.RFID_Region);
+                    BleMvxApplication._reader1.rfid.SetHoppingChannels(BleMvxApplication._config1.RFID_Region);
                     break;
                 case 1:
-                    BleMvxApplication._reader.rfid.SetFixedChannel(BleMvxApplication._config.RFID_Region, BleMvxApplication._config.RFID_FixedChannel);
+                    BleMvxApplication._reader1.rfid.SetFixedChannel(BleMvxApplication._config1.RFID_Region, BleMvxApplication._config1.RFID_FixedChannel);
                     break;
                 case 2:
-                    BleMvxApplication._reader.rfid.SetAgileChannels(BleMvxApplication._config.RFID_Region);
+                    BleMvxApplication._reader1.rfid.SetAgileChannels(BleMvxApplication._config1.RFID_Region);
                     break;
             }
 
-            BleMvxApplication._reader.rfid.Options.TagRanging.flags = CSLibrary.Constants.SelectFlags.ZERO;
+            BleMvxApplication._reader1.rfid.Options.TagRanging.flags = CSLibrary.Constants.SelectFlags.ZERO;
 
             // Setting 1
             SetConfigPower();
 
             // Setting 3  // MUST SET for RFMicro
-            BleMvxApplication._config.RFID_DynamicQParms.toggleTarget = BleMvxApplication._config.RFID_ToggleTarget ? 1U : 0;
-            BleMvxApplication._reader.rfid.SetDynamicQParms(BleMvxApplication._config.RFID_DynamicQParms);
+            BleMvxApplication._config1.RFID_DynamicQParms.toggleTarget = BleMvxApplication._config1.RFID_ToggleTarget ? 1U : 0;
+            BleMvxApplication._reader1.rfid.SetDynamicQParms(BleMvxApplication._config1.RFID_DynamicQParms);
 
             // Setting 4
-            BleMvxApplication._config.RFID_FixedQParms.toggleTarget = BleMvxApplication._config.RFID_ToggleTarget ? 1U : 0;
-            BleMvxApplication._reader.rfid.SetFixedQParms(BleMvxApplication._config.RFID_FixedQParms);
+            BleMvxApplication._config1.RFID_FixedQParms.toggleTarget = BleMvxApplication._config1.RFID_ToggleTarget ? 1U : 0;
+            BleMvxApplication._reader1.rfid.SetFixedQParms(BleMvxApplication._config1.RFID_FixedQParms);
 
             // Setting 2
-            BleMvxApplication._reader.rfid.SetOperationMode(BleMvxApplication._config.RFID_OperationMode);
-            //BleMvxApplication._reader.rfid.SetTagGroup(CSLibrary.Constants.Selected.ASSERTED, CSLibrary.Constants.Session.S1, CSLibrary.Constants.SessionTarget.A);
-            BleMvxApplication._reader.rfid.SetCurrentSingulationAlgorithm(BleMvxApplication._config.RFID_Algorithm);
-            BleMvxApplication._reader.rfid.SetCurrentLinkProfile(BleMvxApplication._config.RFID_Profile);
+            BleMvxApplication._reader1.rfid.SetOperationMode(BleMvxApplication._config1.RFID_OperationMode);
+            //BleMvxApplication._reader1.rfid.SetTagGroup(CSLibrary.Constants.Selected.ASSERTED, CSLibrary.Constants.Session.S1, CSLibrary.Constants.SessionTarget.A);
+            BleMvxApplication._reader1.rfid.SetCurrentSingulationAlgorithm(BleMvxApplication._config1.RFID_Algorithm);
+            BleMvxApplication._reader1.rfid.SetCurrentLinkProfile(BleMvxApplication._config1.RFID_Profile);
 
             // Multi bank inventory
-            BleMvxApplication._reader.rfid.Options.TagRanging.multibanks = 0;
-            BleMvxApplication._reader.rfid.Options.TagRanging.compactmode = true;
-            BleMvxApplication._reader.rfid.Options.TagRanging.QTMode = true;
+            BleMvxApplication._reader1.rfid.Options.TagRanging.multibanks = 0;
+            BleMvxApplication._reader1.rfid.Options.TagRanging.compactmode = true;
+            BleMvxApplication._reader1.rfid.Options.TagRanging.QTMode = true;
 
-            BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_PRERANGING);
+            BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_PRERANGING);
         }
 
         void StartInventory()
@@ -210,37 +219,43 @@ namespace BLE.Client.ViewModels {
             }
 
             InventoryStartTime = DateTime.Now;
-            BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_EXERANGING);
+            BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_EXERANGING);
             ClassBattery.SetBatteryMode(ClassBattery.BATTERYMODE.INVENTORY);
             _cancelVoltageValue = true;
 
             RaisePropertyChanged(() => startInventoryButtonText);
         }
 
-        void StopInventory() {
+        void StopInventory()
+        {
             _startInventory = true;
             _startInventoryButtonText = "Start Inventory";
 
             _tagCount = false;
-            BleMvxApplication._reader.rfid.StopOperation();
+            BleMvxApplication._reader1.rfid.StopOperation();
             RaisePropertyChanged(() => startInventoryButtonText);
         }
 
-        void StartInventoryClick() {
-            if (_startInventory) {
+        void StartInventoryClick()
+        {
+            if (_startInventory)
+            {
                 StartInventory();
             }
-            else {
+            else
+            {
                 StopInventory();
             }
         }
 
-        void StartTagCount() {
+        void StartTagCount()
+        {
             tagsCount = 0;
             _tagCount = true;
 
             // Create a timer that waits one second, then invokes every second.
-            Xamarin.Forms.Device.StartTimer(TimeSpan.FromMilliseconds(1000), () => {
+            Xamarin.Forms.Device.StartTimer(TimeSpan.FromMilliseconds(1000), () =>
+            {
                 _InventoryTime = (DateTime.Now - InventoryStartTime).TotalSeconds;
                 RaisePropertyChanged(() => InventoryTime);
 
@@ -260,11 +275,13 @@ namespace BLE.Client.ViewModels {
             });
         }
 
-        void StopInventoryClick() {
-            BleMvxApplication._reader.rfid.StopOperation();
+        void StopInventoryClick()
+        {
+            BleMvxApplication._reader1.rfid.StopOperation();
         }
 
-        void TagInventoryEvent(object sender, CSLibrary.Events.OnAsyncCallbackEventArgs e) {
+        void TagInventoryEvent(object sender, CSLibrary.Events.OnAsyncCallbackEventArgs e)
+        {
             if (e.type != CSLibrary.Constants.CallbackType.TAG_RANGING)
                 return;
 
@@ -276,10 +293,13 @@ namespace BLE.Client.ViewModels {
             if (e.info.Bank1Data[0] != 0x8304 && e.info.Bank1Data[0] != 0x8305)
                 return;
 
-            InvokeOnMainThread(() => {
+            InvokeOnMainThread(() =>
+            {
                 _tagCountForAlert++;
-                if (_tagCountForAlert == 1) {
-                    if (BleMvxApplication._config.RFID_InventoryAlertSound) {
+                if (_tagCountForAlert == 1)
+                {
+                    if (BleMvxApplication._config1.RFID_InventoryAlertSound)
+                    {
                         if (_newTagFound)
                             Xamarin.Forms.DependencyService.Get<ISystemSound>().SystemSound(3);
                         else
@@ -295,13 +315,17 @@ namespace BLE.Client.ViewModels {
             });
         }
 
-        void StateChangedEvent(object sender, CSLibrary.Events.OnStateChangedEventArgs e) {
-            InvokeOnMainThread(() => {
-                switch (e.state) {
+        void StateChangedEvent(object sender, CSLibrary.Events.OnStateChangedEventArgs e)
+        {
+            InvokeOnMainThread(() =>
+            {
+                switch (e.state)
+                {
                     case CSLibrary.Constants.RFState.IDLE:
                         ClassBattery.SetBatteryMode(ClassBattery.BATTERYMODE.IDLE);
                         _cancelVoltageValue = true;
-                        switch (BleMvxApplication._reader.rfid.LastMacErrorCode) {
+                        switch (BleMvxApplication._reader1.rfid.LastMacErrorCode)
+                        {
                             case 0x00:  // normal end
                                 break;
 
@@ -310,7 +334,7 @@ namespace BLE.Client.ViewModels {
                                 break;
 
                             default:
-                                _userDialogs.Alert("Mac error : 0x" + BleMvxApplication._reader.rfid.LastMacErrorCode.ToString("X4"));
+                                _userDialogs.Alert("Mac error : 0x" + BleMvxApplication._reader1.rfid.LastMacErrorCode.ToString("X4"));
                                 break;
                         }
                         break;
@@ -318,11 +342,13 @@ namespace BLE.Client.ViewModels {
             });
         }
 
-        private void AddOrUpdateTagData(CSLibrary.Structures.TagCallbackInfo info) {
+        private void AddOrUpdateTagData(CSLibrary.Structures.TagCallbackInfo info)
+        {
             bool found = false;
             int cnt;
 
-            lock (TagInfoList) {
+            lock (TagInfoList)
+            {
                 string EPC = info.epc.ToString();
                 float RSSI = info.rssi;
 
@@ -368,7 +394,7 @@ namespace BLE.Client.ViewModels {
                         return;
                     }
 
-                    switch (BleMvxApplication._config.BatteryLevelIndicatorFormat)
+                    switch (BleMvxApplication._config1.BatteryLevelIndicatorFormat)
                     {
                         case 0:
                             _labelVoltage = "CS108 Bat. " + ((double)e.Voltage / 1000).ToString("0.000") + "v"; //			v
@@ -417,6 +443,5 @@ namespace BLE.Client.ViewModels {
                 await System.Threading.Tasks.Task.Delay(1000);
             }
         }
-
     }
 }

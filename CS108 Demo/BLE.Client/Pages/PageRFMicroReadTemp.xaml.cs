@@ -9,16 +9,24 @@ namespace BLE.Client.Pages
     {
         public PageRFMicroReadTemp() { InitializeComponent(); }
 
-        protected override void OnAppearing() { base.OnAppearing(); }
+        protected override void OnAppearing() {
+            base.OnAppearing();
+        }
 
-        protected override void OnDisappearing() { base.OnDisappearing(); }
+        protected override void OnDisappearing() {
+            base.OnDisappearing();
+        }
 
         void InputFocused(object sender, EventArgs args) {
             double curY = ((Entry)sender).Y;
             double move;
 
-            if (curY != 0) { move = -(curY - 97.5); }
-            else           { move = -174; }
+            if (curY != 0) {
+                move = -(curY - 97.5);
+            }
+            else {
+                move = -174;
+            }
 
             Content.LayoutTo(new Rectangle(0, move, Content.Bounds.Width, Content.Bounds.Height));
         }
@@ -35,10 +43,14 @@ namespace BLE.Client.Pages
             offset--;
             byte[] header = UnicodeEncoding.Unicode.GetBytes(value.Substring(offset, 1));
 
-            if (header[0] >= 48 && header[0] <= 57)       return (header[0] - 48);
-            else if (header[0] >= 65 && header[0] <= 70)  return (header[0] - 55);
-            else if (header[0] >= 97 && header[0] <= 102) return (header[0] - 87);
-            else                                          return -1;
+            if (header[0] >= 48 && header[0] <= 57)
+                return  (header[0] - 48);
+            else if (header[0] >= 65 && header[0] <= 70)
+                return (header[0] - 55);
+            else if (header[0] >= 97 && header[0] <= 102)
+                return  (header[0] - 87);
+            else
+                return -1;
         }
 
     }

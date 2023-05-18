@@ -1,5 +1,5 @@
 ﻿namespace BLE.Client.Pages {
-  public partial class PageRFMicroNickname {
-		public PageRFMicroNickname() { InitializeComponent(); }
-  }
+    public partial class PageRFMicroNickname {
+		  public PageRFMicroNickname() { InitializeComponent(); }
+    }
 }

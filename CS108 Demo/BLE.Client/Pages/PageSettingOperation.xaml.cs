@@ -4,6 +4,7 @@ using System.Linq;
 // using System.Text;
 // using System.Threading.Tasks;
 using Xamarin.Forms;
+// using Xamarin.Forms.Xaml;
 
 
 namespace BLE.Client.Pages {
@@ -107,10 +108,10 @@ namespace BLE.Client.Pages {
 
         string[] _freqOrderOptions;
 
-        string[] _RFLNAcompressionmodeList = { "0", "1" };
-        string[] _RFLNAGainList = { "1", "7", "13" };
-        string[] _IFLNAGainList = { "24", "18", "12", "6" };
-        string[] _AGCGainList = { "-12", "-6", "0", "6" };
+        string[] _RFLNAcompressionmodeList = {"0", "1"};
+        string[] _RFLNAGainList = {"1", "7", "13"};
+        string[] _IFLNAGainList = {"24", "18", "12", "6"};
+        string[] _AGCGainList = {"-12", "-6", "0", "6"};
 
         public PageSettingOperation() {
             InitializeComponent();
@@ -120,33 +121,30 @@ namespace BLE.Client.Pages {
                 this.Icon.File = "icons8-Settings-50-1-30x30.png";
             }
 
-            stackLayoutInventoryDuration.IsVisible = stackLayoutPower.IsVisible = (BleMvxApplication._reader.rfid.GetAntennaPort() == 1);
+            stackLayoutInventoryDuration.IsVisible = stackLayoutPower.IsVisible = (BleMvxApplication._reader1.rfid.GetAntennaPort() == 1);
 
-        var countryCode = BleMvxApplication._reader.rfid.GetCountryCode();
+        var countryCode = BleMvxApplication._reader1.rfid.GetCountryCode();
 
             if (countryCode == "-2") _regionsName[0] = "FCC";
 
             switch (countryCode) {
                 case "-1":
                 case "-8":
-                    _freqOrderOptions = new string[] { "Fixed" };
+                    _freqOrderOptions = new string[] {"Fixed"};
                     break;
                 default:
-                    // _freqOrderOptions = new string[] { "Hopping" };
-                    _freqOrderOptions = new string[] { "Fixed" };
+                    _freqOrderOptions = new string[] {"Hopping"};
                     break;
             }
 
-            Regions = BleMvxApplication._reader.rfid.GetActiveRegionCode();
+            Regions = BleMvxApplication._reader1.rfid.GetActiveRegionCode();
             ActiveRegionsTextList = Regions.OfType<object>().Select(o => _regionsName[(int)o - 1]).ToArray();
-
-            ActiveFrequencyList = BleMvxApplication._reader.rfid.GetAvailableFrequencyTable(BleMvxApplication._config.RFID_Region);
+            ActiveFrequencyList = BleMvxApplication._reader1.rfid.GetAvailableFrequencyTable(BleMvxApplication._config1.RFID_Region);
             ActiveFrequencyTextList = ActiveFrequencyList.OfType<object>().Select(o => o.ToString()).ToArray();
 
-            buttonRegion.Text = _regionsName[(int)BleMvxApplication._config.RFID_Region - 1];
+            buttonRegion.Text = _regionsName[(int)BleMvxApplication._config1.RFID_Region - 1];
             if (Regions.Count == 1) buttonRegion.IsEnabled = false;
-            switch (BleMvxApplication._config.RFID_FrequenceSwitch)
-            {
+            switch (BleMvxApplication._config1.RFID_FrequenceSwitch) {
                 case 0:
                     buttonFrequencyOrder.Text = "Hopping";
                     break;
@@ -157,41 +155,41 @@ namespace BLE.Client.Pages {
                     buttonFrequencyOrder.Text = "Agile";
                     break;
             }
-
             if (_freqOrderOptions.Length == 1) buttonFrequencyOrder.IsEnabled = false;
-
-            buttonFixedChannel.Text = ActiveFrequencyTextList[BleMvxApplication._config.RFID_FixedChannel];
+            buttonFixedChannel.Text = ActiveFrequencyTextList[BleMvxApplication._config1.RFID_FixedChannel];
             checkbuttonFixedChannel();
-            entryPower.Text = BleMvxApplication._config.RFID_Antenna_Power[0].ToString();
-            entryTagPopulation.Text = BleMvxApplication._config.RFID_TagPopulation.ToString();
+            entryPower.Text = BleMvxApplication._config1.RFID_Antenna_Power[0].ToString();
+            entryTagPopulation.Text = BleMvxApplication._config1.RFID_TagPopulation.ToString();
 
-            if (BleMvxApplication._config.RFID_QOverride) {
+            if (BleMvxApplication._config1.RFID_QOverride) {
                 entryQOverride.IsEnabled = true;
                 buttonQOverride.Text = "Reset";
             }
-            else {
+            else
+            {
                 entryQOverride.IsEnabled = false;
                 buttonQOverride.Text = "Override";
             }
-            buttonSession.Text = BleMvxApplication._config.RFID_TagGroup.session.ToString();
-            if (BleMvxApplication._config.RFID_ToggleTarget) {
+            buttonSession.Text = BleMvxApplication._config1.RFID_TagGroup.session.ToString();
+            if (BleMvxApplication._config1.RFID_ToggleTarget) {
                 buttonTarget.Text = "Toggle A/B";
             }
             else {
-                buttonTarget.Text = BleMvxApplication._config.RFID_TagGroup.target.ToString();
+                buttonTarget.Text = BleMvxApplication._config1.RFID_TagGroup.target.ToString();
             }
-            buttonAlgorithm.Text = BleMvxApplication._config.RFID_Algorithm.ToString();
-            buttonProfile.Text = _profileList[BleMvxApplication._config.RFID_Profile];
+            buttonAlgorithm.Text = BleMvxApplication._config1.RFID_Algorithm.ToString();
+            buttonProfile.Text = _profileList[BleMvxApplication._config1.RFID_Profile];
 
             SetQvalue();
 
-            entryTagDelay.Text = BleMvxApplication._config.RFID_TagDelayTime.ToString();
-            entryInventoryDuration.Text = BleMvxApplication._config.RFID_Antenna_Dwell[0].ToString();
-            switchFocus.IsToggled = BleMvxApplication._config.RFID_Focus;
-            buttonRFLNAcompression.Text = BleMvxApplication._config.RFID_RFLNAcompression.ToString();
-            buttonRFLNAGain.Text = BleMvxApplication._config.RFID_RFLNAGain.ToString();
-            buttonIFLNAGain.Text = BleMvxApplication._config.RFID_IFLNAGain.ToString();
-            buttonAGCGain.Text = BleMvxApplication._config.RFID_AGCGain.ToString();
+            entryTagDelay.Text = BleMvxApplication._config1.RFID_TagDelayTime.ToString();
+            entryInventoryDuration.Text = BleMvxApplication._config1.RFID_Antenna_Dwell[0].ToString();
+            //switchNewTagLocation.IsToggled = BleMvxApplication._config.RFID_NewTagLocation;
+            switchFocus.IsToggled = BleMvxApplication._config1.RFID_Focus;
+            buttonRFLNAcompression.Text = BleMvxApplication._config1.RFID_RFLNAcompression.ToString();
+            buttonRFLNAGain.Text = BleMvxApplication._config1.RFID_RFLNAGain.ToString();
+            buttonIFLNAGain.Text = BleMvxApplication._config1.RFID_IFLNAGain.ToString();
+            buttonAGCGain.Text = BleMvxApplication._config1.RFID_AGCGain.ToString();
             if (buttonRFLNAGain.Text == "13") {
                 buttonRFLNAcompression.Text = "0";
                 buttonRFLNAcompression.IsEnabled = false;
@@ -204,14 +202,17 @@ namespace BLE.Client.Pages {
         protected override void OnAppearing() {
             if (BleMvxApplication._settingPage1TagPopulationChanged) {
                 BleMvxApplication._settingPage1TagPopulationChanged = false;
-                entryTagPopulation.Text = BleMvxApplication._config.RFID_TagPopulation.ToString();
+                entryTagPopulation.Text = BleMvxApplication._config1.RFID_TagPopulation.ToString();
             }
+
             base.OnAppearing();
         }
 
         void checkbuttonFixedChannel() {
-            if (buttonFrequencyOrder.Text == "Fixed") buttonFixedChannel.IsEnabled = true;
-            else                                      buttonFixedChannel.IsEnabled = false;
+            if (buttonFrequencyOrder.Text == "Fixed")
+                buttonFixedChannel.IsEnabled = true;
+            else
+                buttonFixedChannel.IsEnabled = false;
         }
 
         public async void btnOKClicked(object sender, EventArgs e) {
@@ -221,109 +222,108 @@ namespace BLE.Client.Pages {
 
             for (cnt = 0; cnt < _regionsName.Length; cnt++) {
                 if (_regionsName[cnt] == buttonRegion.Text) {
-                    BleMvxApplication._config.RFID_Region = _regionsCode[cnt];
+                    BleMvxApplication._config1.RFID_Region = _regionsCode[cnt];
                     break;
                 }
             }
-            if (cnt == _regionsName.Length) BleMvxApplication._config.RFID_Region = CSLibrary.Constants.RegionCode.UNKNOWN;
+            if (cnt == _regionsName.Length) BleMvxApplication._config1.RFID_Region = CSLibrary.Constants.RegionCode.UNKNOWN;
 
             switch (buttonFrequencyOrder.Text) {
                 case "Hopping":
-                    // BleMvxApplication._config.RFID_FrequenceSwitch = 0;
-                    BleMvxApplication._config.RFID_FrequenceSwitch = 1;
+                    BleMvxApplication._config1.RFID_FrequenceSwitch = 0;
                     break;
                 case "Fixed":
-                    BleMvxApplication._config.RFID_FrequenceSwitch = 1;
+                    BleMvxApplication._config1.RFID_FrequenceSwitch = 1;
                     break;
                 case "Agile":
-                    // BleMvxApplication._config.RFID_FrequenceSwitch = 2;
-                    BleMvxApplication._config.RFID_FrequenceSwitch = 1;
+                    BleMvxApplication._config1.RFID_FrequenceSwitch = 2;
                     break;
             }
 
             for (cnt = 0; cnt < ActiveFrequencyTextList.Length; cnt++) {
                 if (buttonFixedChannel.Text == ActiveFrequencyTextList[cnt]) {
-                    BleMvxApplication._config.RFID_FixedChannel = (uint)cnt;
+                    BleMvxApplication._config1.RFID_FixedChannel = (uint)cnt;
                     break;
                 }
             }
             if (cnt == ActiveFrequencyTextList.Length)
-                BleMvxApplication._config.RFID_FixedChannel = 0;
+                BleMvxApplication._config1.RFID_FixedChannel = 0;
 
-            BleMvxApplication._config.RFID_Antenna_Power[0] = UInt16.Parse(entryPower.Text);
+            BleMvxApplication._config1.RFID_Antenna_Power[0] = UInt16.Parse(entryPower.Text);
 
-            BleMvxApplication._config.RFID_TagPopulation = UInt16.Parse(entryTagPopulation.Text);
+            BleMvxApplication._config1.RFID_TagPopulation = UInt16.Parse(entryTagPopulation.Text);
 
-            BleMvxApplication._config.RFID_QOverride = entryQOverride.IsEnabled;
+            BleMvxApplication._config1.RFID_QOverride = entryQOverride.IsEnabled;
 
             switch (buttonSession.Text) {
                 case "S0":
-                    BleMvxApplication._config.RFID_TagGroup.session = CSLibrary.Constants.Session.S0;
+                    BleMvxApplication._config1.RFID_TagGroup.session = CSLibrary.Constants.Session.S0;
                     break;
+
                 case "S1":
-                    BleMvxApplication._config.RFID_TagGroup.session = CSLibrary.Constants.Session.S1;
+                    BleMvxApplication._config1.RFID_TagGroup.session = CSLibrary.Constants.Session.S1;
                     break;
+
                 case "S2":
-                    BleMvxApplication._config.RFID_TagGroup.session = CSLibrary.Constants.Session.S2;
+                    BleMvxApplication._config1.RFID_TagGroup.session = CSLibrary.Constants.Session.S2;
                     break;
+
                 case "S3":
-                    BleMvxApplication._config.RFID_TagGroup.session = CSLibrary.Constants.Session.S3;
+                    BleMvxApplication._config1.RFID_TagGroup.session = CSLibrary.Constants.Session.S3;
                     break;
             }
 
             switch (buttonTarget.Text) {
                 case "A":
-                    BleMvxApplication._config.RFID_ToggleTarget = false;
-                    BleMvxApplication._config.RFID_TagGroup.target = CSLibrary.Constants.SessionTarget.A;
-                    BleMvxApplication._config.RFID_FixedQParms.toggleTarget = 0;
-                    BleMvxApplication._config.RFID_DynamicQParms.toggleTarget = 0;
+                    BleMvxApplication._config1.RFID_ToggleTarget = false;
+                    BleMvxApplication._config1.RFID_TagGroup.target = CSLibrary.Constants.SessionTarget.A;
+                    BleMvxApplication._config1.RFID_FixedQParms.toggleTarget = 0;
+                    BleMvxApplication._config1.RFID_DynamicQParms.toggleTarget = 0;
                     break;
                 case "B":
-                    BleMvxApplication._config.RFID_ToggleTarget = false;
-                    BleMvxApplication._config.RFID_TagGroup.target = CSLibrary.Constants.SessionTarget.B;
-                    BleMvxApplication._config.RFID_FixedQParms.toggleTarget = 0;
-                    BleMvxApplication._config.RFID_DynamicQParms.toggleTarget = 0;
+                    BleMvxApplication._config1.RFID_ToggleTarget = false;
+                    BleMvxApplication._config1.RFID_TagGroup.target = CSLibrary.Constants.SessionTarget.B;
+                    BleMvxApplication._config1.RFID_FixedQParms.toggleTarget = 0;
+                    BleMvxApplication._config1.RFID_DynamicQParms.toggleTarget = 0;
                     break;
                 default:
-                    BleMvxApplication._config.RFID_ToggleTarget = true;
-                    BleMvxApplication._config.RFID_DynamicQParms.toggleTarget = 1;
-                    BleMvxApplication._config.RFID_FixedQParms.toggleTarget = 1;
+                    BleMvxApplication._config1.RFID_ToggleTarget = true;
+                    BleMvxApplication._config1.RFID_DynamicQParms.toggleTarget = 1;
+                    BleMvxApplication._config1.RFID_FixedQParms.toggleTarget = 1;
                     break;
             }
 
             if (buttonAlgorithm.Text == "DYNAMICQ") {
-                BleMvxApplication._config.RFID_Algorithm = CSLibrary.Constants.SingulationAlgorithm.DYNAMICQ;
+                BleMvxApplication._config1.RFID_Algorithm = CSLibrary.Constants.SingulationAlgorithm.DYNAMICQ;
             }
             else {
-                BleMvxApplication._config.RFID_Algorithm = CSLibrary.Constants.SingulationAlgorithm.FIXEDQ;
+                BleMvxApplication._config1.RFID_Algorithm = CSLibrary.Constants.SingulationAlgorithm.FIXEDQ;
             }
 
-            BleMvxApplication._config.RFID_Profile = UInt16.Parse(buttonProfile.Text.Substring(0, 1));
-            BleMvxApplication._config.RFID_DynamicQParms.startQValue = uint.Parse(entryQOverride.Text);
-            BleMvxApplication._config.RFID_FixedQParms.qValue = uint.Parse(entryQOverride.Text);
+            BleMvxApplication._config1.RFID_Profile = UInt16.Parse(buttonProfile.Text.Substring(0, 1));
+
+            BleMvxApplication._config1.RFID_DynamicQParms.startQValue = uint.Parse(entryQOverride.Text);
+            BleMvxApplication._config1.RFID_FixedQParms.qValue = uint.Parse(entryQOverride.Text);
             
-            BleMvxApplication._config.RFID_TagDelayTime = int.Parse(entryTagDelay.Text);
-            BleMvxApplication._config.RFID_Antenna_Dwell[0] = UInt32.Parse(entryInventoryDuration.Text);
-            BleMvxApplication._config.RFID_Focus = switchFocus.IsToggled;
-            BleMvxApplication._config.RFID_RFLNAcompression = int.Parse(buttonRFLNAcompression.Text);
-            BleMvxApplication._config.RFID_RFLNAGain = int.Parse(buttonRFLNAGain.Text);
-            BleMvxApplication._config.RFID_IFLNAGain = int.Parse(buttonIFLNAGain.Text);
-            BleMvxApplication._config.RFID_AGCGain = int.Parse(buttonAGCGain.Text);
+            BleMvxApplication._config1.RFID_TagDelayTime = int.Parse(entryTagDelay.Text);
+            BleMvxApplication._config1.RFID_Antenna_Dwell[0] = UInt32.Parse(entryInventoryDuration.Text);
+            BleMvxApplication._config1.RFID_Focus = switchFocus.IsToggled;
+            BleMvxApplication._config1.RFID_RFLNAcompression = int.Parse(buttonRFLNAcompression.Text);
+            BleMvxApplication._config1.RFID_RFLNAGain = int.Parse(buttonRFLNAGain.Text);
+            BleMvxApplication._config1.RFID_IFLNAGain = int.Parse(buttonIFLNAGain.Text);
+            BleMvxApplication._config1.RFID_AGCGain = int.Parse(buttonAGCGain.Text);
 
-            BleMvxApplication.SaveConfig();
+            BleMvxApplication.SaveConfig(1);
 
-            switch (BleMvxApplication._config.RFID_FrequenceSwitch) {
+            switch (BleMvxApplication._config1.RFID_FrequenceSwitch) {
                 case 0:
-                    // BleMvxApplication._reader.rfid.SetHoppingChannels(BleMvxApplication._config.RFID_Region);
-                    BleMvxApplication._reader.rfid.SetFixedChannel(BleMvxApplication._config.RFID_Region, BleMvxApplication._config.RFID_FixedChannel);
+                    BleMvxApplication._reader1.rfid.SetHoppingChannels(BleMvxApplication._config1.RFID_Region);
                     break;
                 case 1:
-                    // BleMvxApplication._reader.rfid.SetFixedChannel(BleMvxApplication._config.RFID_Region, BleMvxApplication._config.RFID_FixedChannel);
-                    BleMvxApplication._reader.rfid.SetFixedChannel(BleMvxApplication._config.RFID_Region, BleMvxApplication._config.RFID_FixedChannel);
+                    BleMvxApplication._reader1.rfid.SetFixedChannel(BleMvxApplication._config1.RFID_Region, BleMvxApplication._config1.RFID_FixedChannel);
                     break;
                 case 2:
-                    // BleMvxApplication._reader.rfid.SetAgileChannels(BleMvxApplication._config.RFID_Region);
-                    BleMvxApplication._reader.rfid.SetFixedChannel(BleMvxApplication._config.RFID_Region, BleMvxApplication._config.RFID_FixedChannel);
+                    BleMvxApplication._reader1.rfid.SetAgileChannels(BleMvxApplication._config1.RFID_Region);
                     break;
             }
         }
@@ -338,7 +338,7 @@ namespace BLE.Client.Pages {
 
                 for (cnt = 0; cnt < _regionsName.Length; cnt++) {
                     if (_regionsName[cnt] == answer) {
-                        ActiveFrequencyList = BleMvxApplication._reader.rfid.GetAvailableFrequencyTable(_regionsCode[cnt]);
+                        ActiveFrequencyList = BleMvxApplication._reader1.rfid.GetAvailableFrequencyTable(_regionsCode[cnt]);
                         break;
                     }
                 }
@@ -363,7 +363,8 @@ namespace BLE.Client.Pages {
         public async void buttonFixedChannelClicked(object sender, EventArgs e) {
             var answer = await DisplayActionSheet("Frequence Channel Order", "Cancel", null, ActiveFrequencyTextList);
 
-            if (answer != null && answer !="Cancel") buttonFixedChannel.Text = answer;
+            if (answer != null && answer !="Cancel")
+                buttonFixedChannel.Text = answer;
         }
 
         public async void entryPowerCompleted(object sender, EventArgs e) {
@@ -371,21 +372,23 @@ namespace BLE.Client.Pages {
 
             try {
                 value = uint.Parse(entryPower.Text);
-                if (value < 0 || value > 330) throw new System.ArgumentException("Value not valid", "tagPopulation");
-                // entryPower.Text = value.ToString();
-                entryPower.Text = "330";
+                if (value < 0 || value > 330)
+                    throw new System.ArgumentException("Value not valid", "tagPopulation");
+                entryPower.Text = value.ToString();
             }
             catch (Exception ex) {
                 await DisplayAlert("", "Value not valid!!!", "OK");
-                // entryPower.Text = "300";
-                entryPower.Text = "330";
+                entryPower.Text = "300";
             }
         }
 
         public async void entryTagPopulationCompleted(object sender, EventArgs e) {
+
             //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
             // Attempt at Changing Default value to 8192
             uint tagPopulation = 8192;
+
             //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             try {
@@ -478,24 +481,26 @@ namespace BLE.Client.Pages {
                 buttonTarget.Text = answer;
         }
 
-        public async void buttonAlgorithmClicked(object sender, EventArgs e) {
+        public async void buttonAlgorithmClicked(object sender, EventArgs e)
+        {
             var answer = await DisplayAlert("Algorithm", "", "DYNAMICQ", "FIXEDQ");
             buttonAlgorithm.Text = answer ? "DYNAMICQ" : "FIXEDQ";
         }
 
         void SetQvalue ()
         {
-            switch (buttonAlgorithm.Text) {
+            switch (buttonAlgorithm.Text)
+            {
                 default:
                     entryQOverride.Text = "0";
                     break;
 
                 case "DYNAMICQ":
-                    entryQOverride.Text = BleMvxApplication._config.RFID_DynamicQParms.startQValue.ToString();
+                    entryQOverride.Text = BleMvxApplication._config1.RFID_DynamicQParms.startQValue.ToString();
                     break;
 
                 case "FIXEDQ":
-                    entryQOverride.Text = BleMvxApplication._config.RFID_FixedQParms.qValue.ToString();
+                    entryQOverride.Text = BleMvxApplication._config1.RFID_FixedQParms.qValue.ToString();
                     break;
             }
         }
@@ -505,14 +510,16 @@ namespace BLE.Client.Pages {
             int cnt;
             CSLibrary.Constants.RegionCode region = CSLibrary.Constants.RegionCode.UNKNOWN;
 
-            for (cnt = 0; cnt < _regionsName.Length; cnt++) {
-                if (_regionsName[cnt] == buttonRegion.Text) {
+            for (cnt = 0; cnt < _regionsName.Length; cnt++)
+            {
+                if (_regionsName[cnt] == buttonRegion.Text)
+                {
                     region = _regionsCode[cnt];
                     break;
                 }
             }
 
-            var currentProfileList = BleMvxApplication._reader.rfid.GetActiveLinkProfile(region);
+            var currentProfileList = BleMvxApplication._reader1.rfid.GetActiveLinkProfile(region);
 
             string[] profileList = new string[currentProfileList.Length];
 
@@ -527,7 +534,9 @@ namespace BLE.Client.Pages {
 
         public async void buttonRFLNAcompressionClicked(object sender, EventArgs e) {
             var answer = await DisplayActionSheet(null, "Cancel", null, "0", "1");
-            if (answer != null && answer != "Cancel") buttonRFLNAcompression.Text = answer;
+
+            if (answer != null && answer != "Cancel")
+                buttonRFLNAcompression.Text = answer;
         }
 
         public async void buttonRFLNAGainClicked(object sender, EventArgs e) {
@@ -535,6 +544,7 @@ namespace BLE.Client.Pages {
 
             if (answer != null && answer != "Cancel") {
                 buttonRFLNAGain.Text = answer;
+
                 if (answer == "13") {
                     buttonRFLNAcompression.Text = "0";
                     buttonRFLNAcompression.IsEnabled = false;
@@ -547,11 +557,13 @@ namespace BLE.Client.Pages {
 
         public async void buttonIFLNAGainClicked(object sender, EventArgs e) {
             var answer = await DisplayActionSheet(null, "Cancel", null, "24", "18", "12", "6");
+
             if (answer != null && answer != "Cancel") buttonIFLNAGain.Text = answer;
         }
 
         public async void buttonAGCGainClicked(object sender, EventArgs e) {
             var answer = await DisplayActionSheet(null, "Cancel", null, "-12", "-6", "0", "6");
+
             if (answer != null && answer != "Cancel") buttonAGCGain.Text = answer;
         }
 

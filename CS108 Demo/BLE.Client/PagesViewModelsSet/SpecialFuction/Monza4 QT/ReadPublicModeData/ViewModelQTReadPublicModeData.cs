@@ -15,38 +15,36 @@ using Plugin.BLE.Abstractions;
 using Plugin.BLE.Abstractions.Extensions;
 using CSLibrary.Structures;
 
-namespace BLE.Client.ViewModels
-{
-    public class ViewModelQTReadPublicModeData : BaseViewModel
-    {
+namespace BLE.Client.ViewModels {
+    public class ViewModelQTReadPublicModeData : BaseViewModel {
         private readonly IUserDialogs _userDialogs;
 
-        public string entrySelectedEPC { get; set; }
-        public string entrySelectedPWD { get; set; }
-        public string entryPC { get; set; }
-        public string entryEPC { get; set; }
-        public string entryACCPWD { get; set; }
-        public string entryKILLPWD { get; set; }
-        public string entryTIDUID { get; set; }
-        public string entryUSER { get; set; }
-        public string entryMulti { get; set; }
+        public string entrySelectedEPC {get; set;}
+        public string entrySelectedPWD {get; set;}
+        public string entryPC {get; set;}
+        public string entryEPC {get; set;}
+        public string entryACCPWD {get; set;}
+        public string entryKILLPWD {get; set;}
+        public string entryTIDUID {get; set;}
+        public string entryUSER {get; set;}
+        public string entryMulti {get; set;}
 
-        public string labelPCStatus { get; set; } = "";
-        public string labelEPCStatus { get; set; } = "";
-        public string labelACCPWDStatus { get; set; } = "";
-        public string labelKILLPWDStatus { get; set; } = "";
-        public string labelTIDUIDStatus { get; set; } = "";
-        public string labelUSERStatus { get; set; } = "";
-        public string labelAccessBankText { get; set; } = "Raw";
-        public string labelMultiStatus { get; set; } = "";
+        public string labelPCStatus {get; set;} = "";
+        public string labelEPCStatus {get; set;} = "";
+        public string labelACCPWDStatus {get; set;} = "";
+        public string labelKILLPWDStatus {get; set;} = "";
+        public string labelTIDUIDStatus {get; set;} = "";
+        public string labelUSERStatus {get; set;} = "";
+        public string labelAccessBankText {get; set;} = "Raw";
+        public string labelMultiStatus {get; set;} = "";
 
-        public Boolean switchPCIsToggled { get; set; } = true;
-        public Boolean switchEPCIsToggled { get; set; } = true;
-        public Boolean switchACCPWDIsToggled { get; set; } = true;
-        public Boolean switchKILLPWDIsToggled { get; set; } = true;
-        public Boolean switchTIDUIDIsToggled { get; set; } = true;
-        public Boolean switchUSERIsToggled { get; set; } = false;
-        public Boolean switchMultiIsToggled { get; set; } = false;
+        public Boolean switchPCIsToggled {get; set;} = true;
+        public Boolean switchEPCIsToggled {get; set;} = true;
+        public Boolean switchACCPWDIsToggled {get; set;} = true;
+        public Boolean switchKILLPWDIsToggled {get; set;} = true;
+        public Boolean switchTIDUIDIsToggled {get; set;} = true;
+        public Boolean switchUSERIsToggled {get; set;} = false;
+        public Boolean switchMultiIsToggled {get; set;} = false;
 
         UInt16 _labelTIDOffset = 0;
         UInt16 _labelTIDWord = 2;
@@ -55,24 +53,24 @@ namespace BLE.Client.ViewModels
         string _labelMulti = "Bank 0";
         UInt16 _labelMultiOffset = 0;
         UInt16 _labelMultiWord = 2;
-        public string labelTIDOffset { get { return "Offset=" + _labelTIDOffset.ToString(); } }
-        public string labelTIDWord { get { return "Word=" + _labelTIDWord.ToString(); } }
-        public string labelUSEROffset { get { return "Offset=" + _labelUSEROffset.ToString(); } }
-        public string labelUSERWord { get { return "Word=" + _labelUSERWord.ToString(); } }
+        public string labelTIDOffset {get { return "Offset=" + _labelTIDOffset.ToString(); } }
+        public string labelTIDWord {get { return "Word=" + _labelTIDWord.ToString(); } }
+        public string labelUSEROffset {get { return "Offset=" + _labelUSEROffset.ToString(); } }
+        public string labelUSERWord { get {return "Word=" + _labelUSERWord.ToString();}}
         public string labelMulti { get { return _labelMulti; } }
-        public string labelMultiOffset { get { return "Offset=" + _labelMultiOffset.ToString(); } }
-        public string labelMultiWord { get { return "Word=" + _labelUSERWord.ToString(); } }
+        public string labelMultiOffset { get { return "Offset=" + _labelMultiOffset.ToString();} }
+        public string labelMultiWord { get { return "Word=" + _labelUSERWord.ToString(); }}
 
         public ICommand OnReadButtonCommand { protected set; get; }
         public ICommand OnWriteButtonCommand { protected set; get; }
 
-        public ICommand OnLabelTIDOffsetTapped { protected set; get; }
-        public ICommand OnLabelTIDWordTapped { protected set; get; }
-        public ICommand OnLabelUSEROffsetTapped { protected set; get; }
-        public ICommand OnLabelUSERWordTapped { protected set; get; }
-        public ICommand OnLabelMultiTapped { protected set; get; }
-        public ICommand OnLabelMultiOffsetTapped { protected set; get; }
-        public ICommand OnLabelMultiWordTapped { protected set; get; }
+        public ICommand OnLabelTIDOffsetTapped {protected set; get;}
+        public ICommand OnLabelTIDWordTapped {protected set; get;}
+        public ICommand OnLabelUSEROffsetTapped {protected set; get;}
+        public ICommand OnLabelUSERWordTapped {protected set; get;}
+        public ICommand OnLabelMultiTapped {protected set; get;}
+        public ICommand OnLabelMultiOffsetTapped {protected set; get;}
+        public ICommand OnLabelMultiWordTapped {protected set; get;}
 
         uint accessPwd;
 
@@ -100,8 +98,7 @@ namespace BLE.Client.ViewModels
 
         int _process = 0;
 
-        public ViewModelQTReadPublicModeData(IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
-        {
+        public ViewModelQTReadPublicModeData(IAdapter adapter, IUserDialogs userDialogs) : base(adapter) {
             _userDialogs = userDialogs;
 
             OnReadButtonCommand = new Command(OnReadButtonButtonClick);
@@ -116,15 +113,13 @@ namespace BLE.Client.ViewModels
             OnLabelMultiWordTapped = new Command(onlabelMultiWordTapped);
         }
 
-        public override void Resume()
-        {
+        public override void Resume() {
             base.Resume();
-            BleMvxApplication._reader.rfid.OnAccessCompleted += new EventHandler<CSLibrary.Events.OnAccessCompletedEventArgs>(TagCompletedEvent);
+            BleMvxApplication._reader1.rfid.OnAccessCompleted += new EventHandler<CSLibrary.Events.OnAccessCompletedEventArgs>(TagCompletedEvent);
         }
 
-        public override void Suspend()
-        {
-            BleMvxApplication._reader.rfid.OnAccessCompleted -= new EventHandler<CSLibrary.Events.OnAccessCompletedEventArgs>(TagCompletedEvent);
+        public override void Suspend() {
+            BleMvxApplication._reader1.rfid.OnAccessCompleted -= new EventHandler<CSLibrary.Events.OnAccessCompletedEventArgs>(TagCompletedEvent);
             base.Suspend();
         }
 
@@ -171,14 +166,14 @@ namespace BLE.Client.ViewModels
                         {
                             if (switchPCIsToggled)
                             {
-                                entryPC = BleMvxApplication._reader.rfid.Options.TagReadPC.pc.ToString();
+                                entryPC = BleMvxApplication._reader1.rfid.Options.TagReadPC.pc.ToString();
                                 RaisePropertyChanged(() => entryPC);
                                 labelPCStatus = "Ok";
                                 RaisePropertyChanged(() => labelPCStatus);
                             }
 
-                            _updatedEPCLen = (UInt16)((BleMvxApplication._reader.rfid.Options.TagReadPC.pc.ToUshorts()[0]) >> 11);
-                            _currentPC = BleMvxApplication._reader.rfid.Options.TagReadPC.pc;
+                            _updatedEPCLen = (UInt16)((BleMvxApplication._reader1.rfid.Options.TagReadPC.pc.ToUshorts()[0]) >> 11);
+                            _currentPC = BleMvxApplication._reader1.rfid.Options.TagReadPC.pc;
 
                             if (switchEPCIsToggled)
                             {
@@ -209,7 +204,7 @@ namespace BLE.Client.ViewModels
                     case CSLibrary.Constants.Bank.EPC:
                         if (e.success)
                         {
-                            entryEPC = BleMvxApplication._reader.rfid.Options.TagReadEPC.epc.ToString();
+                            entryEPC = BleMvxApplication._reader1.rfid.Options.TagReadEPC.epc.ToString();
 
                             RaisePropertyChanged(() => entryEPC);
                             labelEPCStatus = "Ok";
@@ -227,7 +222,7 @@ namespace BLE.Client.ViewModels
                     case CSLibrary.Constants.Bank.ACC_PWD:
                         if (e.success)
                         {
-                            entryACCPWD = BleMvxApplication._reader.rfid.Options.TagReadAccPwd.password.ToString();
+                            entryACCPWD = BleMvxApplication._reader1.rfid.Options.TagReadAccPwd.password.ToString();
                             RaisePropertyChanged(() => entryACCPWD);
                             labelACCPWDStatus = "Ok";
                         }
@@ -244,7 +239,7 @@ namespace BLE.Client.ViewModels
                     case CSLibrary.Constants.Bank.KILL_PWD:
                         if (e.success)
                         {
-                            entryKILLPWD = BleMvxApplication._reader.rfid.Options.TagReadKillPwd.password.ToString();
+                            entryKILLPWD = BleMvxApplication._reader1.rfid.Options.TagReadKillPwd.password.ToString();
                             RaisePropertyChanged(() => entryKILLPWD);
                             labelKILLPWDStatus = "Ok";
                         }
@@ -261,7 +256,7 @@ namespace BLE.Client.ViewModels
                     case CSLibrary.Constants.Bank.TID:
                         if (e.success)
                         {
-                            entryTIDUID = BleMvxApplication._reader.rfid.Options.TagReadTid.tid.ToString();
+                            entryTIDUID = BleMvxApplication._reader1.rfid.Options.TagReadTid.tid.ToString();
                             RaisePropertyChanged(() => entryTIDUID);
                             labelTIDUIDStatus = "Ok";
                         }
@@ -278,7 +273,7 @@ namespace BLE.Client.ViewModels
                     case CSLibrary.Constants.Bank.USER:
                         if (e.success)
                         {
-                            entryUSER = BleMvxApplication._reader.rfid.Options.TagReadUser.pData.ToString();
+                            entryUSER = BleMvxApplication._reader1.rfid.Options.TagReadUser.pData.ToString();
                             RaisePropertyChanged(() => entryUSER);
                             labelUSERStatus = "Ok";
                         }
@@ -298,7 +293,7 @@ namespace BLE.Client.ViewModels
                             default:
                                 if (e.success)
                                 {
-                                    entryKILLPWD = BleMvxApplication._reader.rfid.Options.TagRead.pData.ToString();
+                                    entryKILLPWD = BleMvxApplication._reader1.rfid.Options.TagRead.pData.ToString();
                                     RaisePropertyChanged(() => entryKILLPWD);
                                     labelKILLPWDStatus = "Ok";
                                 }
@@ -315,7 +310,7 @@ namespace BLE.Client.ViewModels
                             case 1:
                                 if (e.success)
                                 {
-                                    entryMulti = BleMvxApplication._reader.rfid.Options.TagRead.pData.ToString();
+                                    entryMulti = BleMvxApplication._reader1.rfid.Options.TagRead.pData.ToString();
                                     RaisePropertyChanged(() => entryMulti);
                                     labelMultiStatus = "Ok";
                                 }
@@ -671,34 +666,34 @@ namespace BLE.Client.ViewModels
 				RaisePropertyChanged(() => switchPCIsToggled);
 			}
 
-			if (BleMvxApplication._reader.rfid.State != CSLibrary.Constants.RFState.IDLE)
+			if (BleMvxApplication._reader1.rfid.State != CSLibrary.Constants.RFState.IDLE)
             {
                 //MessageBox.Show("Reader is busy now, please try later.");
                 return;
             }
 
-            //BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_RANGING);
+            //BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_RANGING);
 
-            BleMvxApplication._reader.rfid.CancelAllSelectCriteria();
+            BleMvxApplication._reader1.rfid.CancelAllSelectCriteria();
 
-            BleMvxApplication._reader.rfid.Options.TagSelected.flags = CSLibrary.Constants.SelectMaskFlags.ENABLE_TOGGLE;
+            BleMvxApplication._reader1.rfid.Options.TagSelected.flags = CSLibrary.Constants.SelectMaskFlags.ENABLE_TOGGLE;
             if (BleMvxApplication._geiger_Bank == 1) // if EPC
             {
-                BleMvxApplication._reader.rfid.Options.TagSelected.bank = CSLibrary.Constants.MemoryBank.EPC;
-                BleMvxApplication._reader.rfid.Options.TagSelected.epcMask = new CSLibrary.Structures.S_MASK(entrySelectedEPC);
-                BleMvxApplication._reader.rfid.Options.TagSelected.epcMaskOffset = 0;
-                BleMvxApplication._reader.rfid.Options.TagSelected.epcMaskLength = (uint)BleMvxApplication._reader.rfid.Options.TagSelected.epcMask.Length * 8;
+                BleMvxApplication._reader1.rfid.Options.TagSelected.bank = CSLibrary.Constants.MemoryBank.EPC;
+                BleMvxApplication._reader1.rfid.Options.TagSelected.epcMask = new CSLibrary.Structures.S_MASK(entrySelectedEPC);
+                BleMvxApplication._reader1.rfid.Options.TagSelected.epcMaskOffset = 0;
+                BleMvxApplication._reader1.rfid.Options.TagSelected.epcMaskLength = (uint)BleMvxApplication._reader1.rfid.Options.TagSelected.epcMask.Length * 8;
             }
             else
             {
-                BleMvxApplication._reader.rfid.Options.TagSelected.bank = (CSLibrary.Constants.MemoryBank)(BleMvxApplication._geiger_Bank);
-                BleMvxApplication._reader.rfid.Options.TagSelected.Mask = CSLibrary.Tools.Hex.ToBytes(entrySelectedEPC);
-                BleMvxApplication._reader.rfid.Options.TagSelected.MaskOffset = 0;
-                BleMvxApplication._reader.rfid.Options.TagSelected.MaskLength = (uint)BleMvxApplication._reader.rfid.Options.TagSelected.Mask.Length * 8;
+                BleMvxApplication._reader1.rfid.Options.TagSelected.bank = (CSLibrary.Constants.MemoryBank)(BleMvxApplication._geiger_Bank);
+                BleMvxApplication._reader1.rfid.Options.TagSelected.Mask = CSLibrary.Tools.Hex.ToBytes(entrySelectedEPC);
+                BleMvxApplication._reader1.rfid.Options.TagSelected.MaskOffset = 0;
+                BleMvxApplication._reader1.rfid.Options.TagSelected.MaskLength = (uint)BleMvxApplication._reader1.rfid.Options.TagSelected.Mask.Length * 8;
             }
-            BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_SELECTED);
+            BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_SELECTED);
 
-            BleMvxApplication._reader.rfid.SetCurrentLinkProfile(BleMvxApplication._config.RFID_Profile);
+            BleMvxApplication._reader1.rfid.SetCurrentLinkProfile(BleMvxApplication._config1.RFID_Profile);
 
             if (switchPCIsToggled)
             {
@@ -816,7 +811,7 @@ namespace BLE.Client.ViewModels
 
             accessPwd = Convert.ToUInt32(entrySelectedPWD, 16);
 
-            if (BleMvxApplication._reader.rfid.State != CSLibrary.Constants.RFState.IDLE)
+            if (BleMvxApplication._reader1.rfid.State != CSLibrary.Constants.RFState.IDLE)
             {
                 //MessageBox.Show("Reader is busy now, please try later.");
                 return;
@@ -835,12 +830,12 @@ namespace BLE.Client.ViewModels
                 return;
             }
 
-            BleMvxApplication._reader.rfid.Options.TagSelected.epcMask = new CSLibrary.Structures.S_MASK(/*m_record.pc.ToString() + */entrySelectedEPC);
+            BleMvxApplication._reader1.rfid.Options.TagSelected.epcMask = new CSLibrary.Structures.S_MASK(/*m_record.pc.ToString() + */entrySelectedEPC);
 
-            BleMvxApplication._reader.rfid.Options.TagSelected.flags = CSLibrary.Constants.SelectMaskFlags.ENABLE_TOGGLE;
-            BleMvxApplication._reader.rfid.Options.TagSelected.epcMaskOffset = 0;
-            BleMvxApplication._reader.rfid.Options.TagSelected.epcMaskLength = (uint)BleMvxApplication._reader.rfid.Options.TagSelected.epcMask.Length * 8;
-            BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_SELECTED);
+            BleMvxApplication._reader1.rfid.Options.TagSelected.flags = CSLibrary.Constants.SelectMaskFlags.ENABLE_TOGGLE;
+            BleMvxApplication._reader1.rfid.Options.TagSelected.epcMaskOffset = 0;
+            BleMvxApplication._reader1.rfid.Options.TagSelected.epcMaskLength = (uint)BleMvxApplication._reader1.rfid.Options.TagSelected.epcMask.Length * 8;
+            BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_SELECTED);
 
             //if access bank is checked, read it.
             if (switchACCPWDIsToggled)
@@ -904,118 +899,118 @@ namespace BLE.Client.ViewModels
 
         void ReadPC ()
         {
-			BleMvxApplication._reader.rfid.Options.TagReadPC.accessPassword = accessPwd;
+			BleMvxApplication._reader1.rfid.Options.TagReadPC.accessPassword = accessPwd;
 
-            BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_READ_PC);
+            BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_READ_PC);
 		}
 
         void ReadEPC ()
         {
-			BleMvxApplication._reader.rfid.Options.TagReadEPC.accessPassword = accessPwd;
-            BleMvxApplication._reader.rfid.Options.TagReadEPC.count = _updatedEPCLen;
+			BleMvxApplication._reader1.rfid.Options.TagReadEPC.accessPassword = accessPwd;
+            BleMvxApplication._reader1.rfid.Options.TagReadEPC.count = _updatedEPCLen;
 
-            BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_READ_EPC);
+            BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_READ_EPC);
 		}
 
         void ReadACCPWD ()
         {
-			BleMvxApplication._reader.rfid.Options.TagReadAccPwd.accessPassword = accessPwd;
+			BleMvxApplication._reader1.rfid.Options.TagReadAccPwd.accessPassword = accessPwd;
 
-            BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_READ_ACC_PWD);
+            BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_READ_ACC_PWD);
 		}
 
         void ReadKILLPWD ()
         {
             _process = 0;
-            BleMvxApplication._reader.rfid.Options.TagReadKillPwd.accessPassword = accessPwd;
+            BleMvxApplication._reader1.rfid.Options.TagReadKillPwd.accessPassword = accessPwd;
 
-            BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_READ_KILL_PWD);
+            BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_READ_KILL_PWD);
         }
 
         void ReadTIDUID ()
 		{
-			BleMvxApplication._reader.rfid.Options.TagReadTid.accessPassword = accessPwd;
-			BleMvxApplication._reader.rfid.Options.TagReadTid.offset = _labelTIDOffset;
-			BleMvxApplication._reader.rfid.Options.TagReadTid.count = _labelTIDWord;
+			BleMvxApplication._reader1.rfid.Options.TagReadTid.accessPassword = accessPwd;
+			BleMvxApplication._reader1.rfid.Options.TagReadTid.offset = _labelTIDOffset;
+			BleMvxApplication._reader1.rfid.Options.TagReadTid.count = _labelTIDWord;
 
-			BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_READ_TID);
+			BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_READ_TID);
 		}
 
         void ReadUSER ()
         {
-			BleMvxApplication._reader.rfid.Options.TagReadUser.accessPassword = accessPwd;
-            BleMvxApplication._reader.rfid.Options.TagReadUser.offset = _labelUSEROffset; // m_readAllBank.OffsetUser;
-            BleMvxApplication._reader.rfid.Options.TagReadUser.count = _labelUSERWord; // m_readAllBank.WordUser;
+			BleMvxApplication._reader1.rfid.Options.TagReadUser.accessPassword = accessPwd;
+            BleMvxApplication._reader1.rfid.Options.TagReadUser.offset = _labelUSEROffset; // m_readAllBank.OffsetUser;
+            BleMvxApplication._reader1.rfid.Options.TagReadUser.count = _labelUSERWord; // m_readAllBank.WordUser;
 
-			BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_READ_USER);
+			BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_READ_USER);
         }
 
         void ReadMulti()
         {
             _process = 1;
-            BleMvxApplication._reader.rfid.Options.TagRead.bank = (CSLibrary.Constants.MemoryBank)int.Parse(_labelMulti.Substring(5, 1));
-            BleMvxApplication._reader.rfid.Options.TagRead.accessPassword = accessPwd;
-            BleMvxApplication._reader.rfid.Options.TagRead.offset = _labelMultiOffset; // m_readAllBank.OffsetUser;
-            BleMvxApplication._reader.rfid.Options.TagRead.count = _labelMultiWord; // m_readAllBank.WordUser;
+            BleMvxApplication._reader1.rfid.Options.TagRead.bank = (CSLibrary.Constants.MemoryBank)int.Parse(_labelMulti.Substring(5, 1));
+            BleMvxApplication._reader1.rfid.Options.TagRead.accessPassword = accessPwd;
+            BleMvxApplication._reader1.rfid.Options.TagRead.offset = _labelMultiOffset; // m_readAllBank.OffsetUser;
+            BleMvxApplication._reader1.rfid.Options.TagRead.count = _labelMultiWord; // m_readAllBank.WordUser;
 
-            BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_READ);
+            BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_READ);
         }
 
         void WriteACCPWD ()
         {
-            BleMvxApplication._reader.rfid.Options.TagWriteAccPwd.accessPassword = accessPwd;
-            BleMvxApplication._reader.rfid.Options.TagWriteAccPwd.password = Convert.ToUInt32(entryACCPWD, 16);
+            BleMvxApplication._reader1.rfid.Options.TagWriteAccPwd.accessPassword = accessPwd;
+            BleMvxApplication._reader1.rfid.Options.TagWriteAccPwd.password = Convert.ToUInt32(entryACCPWD, 16);
 
-            BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_ACC_PWD);
+            BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_ACC_PWD);
         }
 
         void WriteKILLPWD ()
         {
             _process = 0;
-            BleMvxApplication._reader.rfid.Options.TagWriteKillPwd.accessPassword = accessPwd;
-            BleMvxApplication._reader.rfid.Options.TagWriteKillPwd.password = Convert.ToUInt32(entryKILLPWD, 16);
+            BleMvxApplication._reader1.rfid.Options.TagWriteKillPwd.accessPassword = accessPwd;
+            BleMvxApplication._reader1.rfid.Options.TagWriteKillPwd.password = Convert.ToUInt32(entryKILLPWD, 16);
 
-            BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_KILL_PWD);
+            BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_KILL_PWD);
         }
 
         void WriteUSER ()
         {
-            BleMvxApplication._reader.rfid.Options.TagWriteUser.accessPassword = accessPwd;
-            BleMvxApplication._reader.rfid.Options.TagWriteUser.offset = _labelUSEROffset; // m_writeAllBank.OffsetUser;
-            BleMvxApplication._reader.rfid.Options.TagWriteUser.count = _labelUSERWord; // m_writeAllBank.WordUser;
-            BleMvxApplication._reader.rfid.Options.TagWriteUser.pData = CSLibrary.Tools.Hex.ToUshorts(entryUSER);
+            BleMvxApplication._reader1.rfid.Options.TagWriteUser.accessPassword = accessPwd;
+            BleMvxApplication._reader1.rfid.Options.TagWriteUser.offset = _labelUSEROffset; // m_writeAllBank.OffsetUser;
+            BleMvxApplication._reader1.rfid.Options.TagWriteUser.count = _labelUSERWord; // m_writeAllBank.WordUser;
+            BleMvxApplication._reader1.rfid.Options.TagWriteUser.pData = CSLibrary.Tools.Hex.ToUshorts(entryUSER);
 
-            BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_USER);
+            BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_USER);
         }
 
         void WriteMulti()
         {
             _process = 1;
-            BleMvxApplication._reader.rfid.Options.TagRead.bank = (CSLibrary.Constants.MemoryBank)int.Parse(_labelMulti.Substring(5, 1));
-            BleMvxApplication._reader.rfid.Options.TagWrite.accessPassword = accessPwd;
-            BleMvxApplication._reader.rfid.Options.TagWrite.offset = _labelMultiOffset; // m_writeAllBank.OffsetUser;
-            BleMvxApplication._reader.rfid.Options.TagWrite.count = _labelMultiWord; // m_writeAllBank.WordUser;
-            BleMvxApplication._reader.rfid.Options.TagWrite.pData = CSLibrary.Tools.Hex.ToUshorts(entryMulti);
+            BleMvxApplication._reader1.rfid.Options.TagRead.bank = (CSLibrary.Constants.MemoryBank)int.Parse(_labelMulti.Substring(5, 1));
+            BleMvxApplication._reader1.rfid.Options.TagWrite.accessPassword = accessPwd;
+            BleMvxApplication._reader1.rfid.Options.TagWrite.offset = _labelMultiOffset; // m_writeAllBank.OffsetUser;
+            BleMvxApplication._reader1.rfid.Options.TagWrite.count = _labelMultiWord; // m_writeAllBank.WordUser;
+            BleMvxApplication._reader1.rfid.Options.TagWrite.pData = CSLibrary.Tools.Hex.ToUshorts(entryMulti);
 
-            BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE);
+            BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE);
         }
 
         void WritePC ()
         {
-            BleMvxApplication._reader.rfid.Options.TagWritePC.accessPassword = accessPwd;
-            BleMvxApplication._reader.rfid.Options.TagWritePC.pc = CSLibrary.Tools.Hex.ToUshort(entryPC);
+            BleMvxApplication._reader1.rfid.Options.TagWritePC.accessPassword = accessPwd;
+            BleMvxApplication._reader1.rfid.Options.TagWritePC.pc = CSLibrary.Tools.Hex.ToUshort(entryPC);
 
-            BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_PC);
+            BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_PC);
         }
             
         void WriteEPC ()
         {
-            BleMvxApplication._reader.rfid.Options.TagWriteEPC.accessPassword = accessPwd;
-            BleMvxApplication._reader.rfid.Options.TagWriteEPC.offset = 0;
-            BleMvxApplication._reader.rfid.Options.TagWriteEPC.count = CSLibrary.Tools.Hex.GetWordCount(entryEPC);
-            BleMvxApplication._reader.rfid.Options.TagWriteEPC.epc = new CSLibrary.Structures.S_EPC(entryEPC);
+            BleMvxApplication._reader1.rfid.Options.TagWriteEPC.accessPassword = accessPwd;
+            BleMvxApplication._reader1.rfid.Options.TagWriteEPC.offset = 0;
+            BleMvxApplication._reader1.rfid.Options.TagWriteEPC.count = CSLibrary.Tools.Hex.GetWordCount(entryEPC);
+            BleMvxApplication._reader1.rfid.Options.TagWriteEPC.epc = new CSLibrary.Structures.S_EPC(entryEPC);
 
-            BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_EPC);
+            BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_EPC);
         }
 
         async void ShowDialog(string Msg)

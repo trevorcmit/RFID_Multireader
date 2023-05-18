@@ -1,5 +1,7 @@
-﻿namespace BLE.Client {
-    public static class ClassBattery {
+﻿namespace BLE.Client
+{
+    public static class ClassBattery
+    {
         public enum BATTERYMODE {
             INVENTORY = 1,
             IDLE = 2,
@@ -26,7 +28,8 @@
 
         static BATTERYMODE _currentInventoryMode;
 
-        static ClassBattery() {
+        static ClassBattery()
+        {
             int cnt;
             for (cnt = 0; cnt < voltageTable1.Length - 2; cnt++)
                 voltageSlope1[cnt] = (capacityTable1[cnt] - capacityTable1[cnt + 1]) / (voltageTable1[cnt] - voltageTable1[cnt + 1]);

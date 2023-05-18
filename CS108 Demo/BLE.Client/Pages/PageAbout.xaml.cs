@@ -3,8 +3,10 @@ using Xamarin.Forms;
 using Xamarin.Essentials;
 
 
-namespace BLE.Client.Pages {
-    public partial class PageAbout {
+namespace BLE.Client.Pages
+{
+    public partial class PageAbout
+    {
         public PageAbout() {
             InitializeComponent();
 
@@ -13,13 +15,13 @@ namespace BLE.Client.Pages {
                 this.Icon.File = "icons8-Settings-50-4-30x30.png";
             }
 
-            labelAppVer.Text = "Application Version " + DependencyService.Get<IAppVersion>().GetVersion() + "-" + DependencyService.Get<IAppVersion>().GetBuild().ToString();
-            labelLibVer.Text = "Library Version " + BleMvxApplication._reader.GetVersion().ToString();
-            labelBtFwVer.Text = "Bluetooth Firmware Version " + Version2String(BleMvxApplication._reader.bluetoothIC.GetFirmwareVersion());
-            labelRFIDFwVer.Text = "RFID Firmware Version " + Version2String(BleMvxApplication._reader.rfid.GetFirmwareVersion());
-            labelSiliconlabFwVer.Text = "SiliconLab IC Firmware Version " + Version2String(BleMvxApplication._reader.siliconlabIC.GetFirmwareVersion());
-            labelPcbVer.Text = "Main Board PCB Version " + GetPCBVersion();
-            labelSerialNumber.Text = "CS108 Serial Number " + BleMvxApplication._reader.siliconlabIC.GetSerialNumberSync();
+            labelAppVer.Text          = "Application Version " + DependencyService.Get<IAppVersion>().GetVersion() + "-" + DependencyService.Get<IAppVersion>().GetBuild().ToString();
+            labelLibVer.Text          = "Library Version " + BleMvxApplication._reader1.GetVersion().ToString();
+            labelBtFwVer.Text         = "Bluetooth Firmware Version " + Version2String(BleMvxApplication._reader1.bluetoothIC.GetFirmwareVersion());
+            labelRFIDFwVer.Text       = "RFID Firmware Version " + Version2String(BleMvxApplication._reader1.rfid.GetFirmwareVersion());
+            labelSiliconlabFwVer.Text = "SiliconLab IC Firmware Version " + Version2String(BleMvxApplication._reader1.siliconlabIC.GetFirmwareVersion());
+            labelPcbVer.Text          = "Main Board PCB Version " + GetPCBVersion ();
+            labelSerialNumber.Text    = "CS108 Serial Number " + BleMvxApplication._reader1.siliconlabIC.GetSerialNumberSync();
         }
 
         string Version2String(uint ver) {
@@ -28,11 +30,14 @@ namespace BLE.Client.Pages {
 
         string GetPCBVersion () {
             try {
-                var ver = BleMvxApplication._reader.siliconlabIC.GetPCBVersion();
+                var ver = BleMvxApplication._reader1.siliconlabIC.GetPCBVersion();
+
                 if (ver.Substring(2, 1) != "0") return ver.Substring(0, 1) + "." + ver.Substring(1, 2);
                 else                            return ver.Substring(0, 1) + "." + ver.Substring(1, 1);
             }
-            catch(Exception ex) { return "No PCB Version"; }
+            catch(Exception ex) {
+                return "No PCB Version";
+            }
         }
 
         public async void buttonOpenPrivacypolicyClicked(object sender, EventArgs args) {

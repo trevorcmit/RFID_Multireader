@@ -2,8 +2,10 @@
 using Xamarin.Forms;
 
 
-namespace BLE.Client.Pages {
-    public class BaseTabbedPage : TabbedPage {
+namespace BLE.Client.Pages
+{
+    public class BaseTabbedPage : TabbedPage
+    {
         protected override void OnAppearing() {
             base.OnAppearing();
             var viewModel = BindingContext as BaseViewModel;

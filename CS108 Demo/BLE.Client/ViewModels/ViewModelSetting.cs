@@ -16,11 +16,11 @@ namespace BLE.Client.ViewModels
 
         public override void Resume() {
             base.Resume();
-            BleMvxApplication._reader.siliconlabIC.OnAccessCompleted += new EventHandler<CSLibrary.SiliconLabIC.Events.OnAccessCompletedEventArgs>(OnAccessCompletedEvent);
+            BleMvxApplication._reader1.siliconlabIC.OnAccessCompleted += new EventHandler<CSLibrary.SiliconLabIC.Events.OnAccessCompletedEventArgs>(OnAccessCompletedEvent);
         }
 
         public override void Suspend() {
-            BleMvxApplication._reader.siliconlabIC.OnAccessCompleted -= new EventHandler<CSLibrary.SiliconLabIC.Events.OnAccessCompletedEventArgs>(OnAccessCompletedEvent);
+            BleMvxApplication._reader1.siliconlabIC.OnAccessCompleted -= new EventHandler<CSLibrary.SiliconLabIC.Events.OnAccessCompletedEventArgs>(OnAccessCompletedEvent);
             base.Suspend();
         }
 

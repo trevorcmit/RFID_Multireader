@@ -1,17 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<pages:BasePage 
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:pages="clr-namespace:BLE.Client.Pages;assembly=BLE.Client"
-    x:Class="BLE.Client.Pages.PageRFMicroSetting"
-    Title="Temp/Humidity Configuration"
->
-
+<pages:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:BLE.Client.Pages;assembly=BLE.Client"
+             x:Class="BLE.Client.Pages.PageTempGPSSetting"
+                Title="Temp with GPS Configuration">
+  
     <ScrollView>
     
         <StackLayout Padding="10, 10, 10, 0">
 
-            <StackLayout Orientation="Horizontal">
+            <StackLayout Orientation="Horizontal" IsVisible="false">
                 <Label Text="Tag Type" WidthRequest="100" VerticalOptions="Center"/>
 				<Button x:Name="buttonTagType" Text ="{Binding buttonTagTypeText, Mode=OneWayToSource }" HorizontalOptions="FillAndExpand" BorderWidth ="1" Clicked="buttonTagTypeClicked" PropertyChanged="buttonTagTypePropertyChanged" />
 			</StackLayout>
@@ -73,7 +71,5 @@
             <Button x:Name="buttonOK" Text="OK" Font="Large" Clicked="ButtonOK_Clicked" HorizontalOptions="FillAndExpand" BackgroundColor="#C3C3C3" TextColor="Black"/>
 
         </StackLayout>
-
     </ScrollView>
-
 </pages:BasePage>

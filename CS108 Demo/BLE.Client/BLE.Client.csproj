@@ -178,6 +178,18 @@
     <EmbeddedResource Update="PagesViewModelsSet\SpecialFuction\Monza4 QT\InventorySelectionMenu\PageQTInventorySlectionMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Pages\DeviceList1Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\DeviceList2Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\DeviceList3Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\DeviceList4Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Pages\DeviceListPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>

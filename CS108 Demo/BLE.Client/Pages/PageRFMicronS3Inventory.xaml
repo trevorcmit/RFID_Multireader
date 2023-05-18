@@ -8,53 +8,116 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 >
 
-  <StackLayout Orientation="Vertical">
+  <StackLayout Orientation="Vertical" VerticalOptions="StartAndExpand"> <!-- Overarching Vertical Stacklayout -->
 
-    <ListView x:Name="liewViewTagData" ItemsSource="{Binding TagInfoList}" SelectedItem="{Binding objItemSelected, Mode=TwoWay}" >
+    <StackLayout Orientation="Vertical" VerticalOptions="StartAndExpand">
+      <ListView x:Name="liewViewTagData" ItemsSource="{Binding TagInfoList}" SelectedItem="{Binding objItemSelected1, Mode=TwoWay}">
         <ListView.Header>
-          <StackLayout BackgroundColor="#cccccc">
+          <StackLayout BackgroundColor="#CDCDCD"> <!-- Gray color of the Column Header row -->
             <Grid>
               <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.6000*" />
-                <ColumnDefinition Width="0.1333*" />
-                <ColumnDefinition Width="0.1333*" />
-                <ColumnDefinition Width="0.1333*" />
+                <ColumnDefinition Width="0.35*"/>    <!-- EPC -->
+                <ColumnDefinition Width="0.20*"/>    <!-- Time -->
+                <ColumnDefinition Width="0.15*"/>    <!-- RSSI -->
+                <ColumnDefinition Width="0.10*"/>    <!-- Temperature -->
+                <ColumnDefinition Width="0.10*"/>    <!-- Times Read-->
               </Grid.ColumnDefinitions>
-              <Label Text="EPC" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Small" VerticalOptions="CenterAndExpand" />
-              <Label Grid.Column="1" Text="OC RSSI" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Small" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" LineBreakMode="WordWrap"/>
-              <Label Grid.Column="2" Text="Celsius" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Small" VerticalOptions="CenterAndExpand" />
-              <Label Grid.Column="3" Text="#" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Small" VerticalOptions="CenterAndExpand" />
+              <Label Grid.Column="0" Text="Tag ID"     VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" />
+              <Label Grid.Column="1" Text="Time"       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" />
+              <Label Grid.Column="2" Text="RSSI"       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" />
+              <Label Grid.Column="3" Text="Cº"         VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" />
+              <Label Grid.Column="4" Text="Read Count" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" />
             </Grid>
           </StackLayout>
         </ListView.Header>
-
         <ListView.ItemTemplate>
-            <DataTemplate>
+              <DataTemplate>
                 <ViewCell>
-                    <StackLayout Orientation="Vertical">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                              <ColumnDefinition Width="0.6000*" />
-                              <ColumnDefinition Width="0.1333*" />
-                              <ColumnDefinition Width="0.1333*" />
-                              <ColumnDefinition Width="0.1333*" />
-                            </Grid.ColumnDefinitions>
-                            <Label Text="{Binding DisplayName}" VerticalTextAlignment="Start" FontSize="Small" />
-                            <Label Grid.Column="1" Text="{Binding OCRSSI}" VerticalTextAlignment="Start" HorizontalTextAlignment="Center"  TextColor="{Binding RSSIColor}"/>
-                            <Label Grid.Column="2" Text="{Binding SensorAvgValue}" VerticalTextAlignment="Start" HorizontalTextAlignment="Start" TextColor="{Binding valueColor}"/>
-                            <Label Grid.Column="3" Text="{Binding SucessCount}" VerticalTextAlignment="Start" HorizontalTextAlignment="Center" />
-                        </Grid>
-                    </StackLayout>
+                  <StackLayout Orientation="Vertical">
+                    <Grid>
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.35*"/>   <!-- EPC -->
+                        <ColumnDefinition Width="0.20*"/>   <!-- Time -->
+                        <ColumnDefinition Width="0.15*"/>   <!-- RSSI -->
+                        <ColumnDefinition Width="0.10*"/>   <!-- Temperature -->
+                        <ColumnDefinition Width="0.10*"/>   <!-- Times Read -->
+                      </Grid.ColumnDefinitions>
+                      <Label Grid.Column="0" Text="{Binding DisplayName}"    VerticalTextAlignment="Start" FontSize="Small"/>
+                      <Label Grid.Column="1" Text="{Binding TimeString}"     VerticalTextAlignment="Start" HorizontalTextAlignment="Center"/>
+                      <Label Grid.Column="2" Text="{Binding OCRSSI}"         VerticalTextAlignment="Start" HorizontalTextAlignment="Center" TextColor="#000000"/>
+                      <Label Grid.Column="3" Text="{Binding SensorAvgValue}" VerticalTextAlignment="Start" HorizontalTextAlignment="Center"/>
+                      <Label Grid.Column="4" Text="{Binding SucessCount}"    VerticalTextAlignment="Start" HorizontalTextAlignment="Center"/>
+                    </Grid>
+                  </StackLayout>
                 </ViewCell>
-            </DataTemplate>
+              </DataTemplate>
         </ListView.ItemTemplate>
-    </ListView>
+      </ListView>
+    </StackLayout>
 
-    <!-- Bottom Inventory/Clear/Share Section --> 
-    <!-- <StackLayout Orientation="Vertical" VerticalOptions="EndAndExpand"> -->
-      <Button Text="{Binding startInventoryButtonText}" Font="Large" CornerRadius="9" Command="{Binding OnStartInventoryButtonCommand}"/>
-    <!-- </StackLayout> -->
+    <StackLayout Orientation="Vertical" VerticalOptions="EndAndExpand">
+      <ListView x:Name="liewViewTagData2" ItemsSource="{Binding TagInfoList2}" SelectedItem="{Binding objItemSelected2, Mode=TwoWay}">
+        <ListView.Header>
+          <StackLayout BackgroundColor="#CDCDCD"> <!-- Gray color of the Column Header row -->
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.35*"/>    <!-- EPC -->
+                <ColumnDefinition Width="0.20*"/>    <!-- Time -->
+                <ColumnDefinition Width="0.15*"/>    <!-- RSSI -->
+                <ColumnDefinition Width="0.10*"/>    <!-- Temperature -->
+                <ColumnDefinition Width="0.10*"/>    <!-- Times Read-->
+              </Grid.ColumnDefinitions>
+              <Label Grid.Column="0" Text="Tag ID"     VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" />
+              <Label Grid.Column="1" Text="Time"       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" />
+              <Label Grid.Column="2" Text="RSSI"       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" />
+              <Label Grid.Column="3" Text="Cº"         VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" />
+              <Label Grid.Column="4" Text="Read Count" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" />
+            </Grid>
+          </StackLayout>
+        </ListView.Header>
+        <ListView.ItemTemplate>
+              <DataTemplate>
+                <ViewCell>
+                  <StackLayout Orientation="Vertical">
+                    <Grid>
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.35*"/>   <!-- EPC -->
+                        <ColumnDefinition Width="0.20*"/>   <!-- Time -->
+                        <ColumnDefinition Width="0.15*"/>   <!-- RSSI -->
+                        <ColumnDefinition Width="0.10*"/>   <!-- Temperature -->
+                        <ColumnDefinition Width="0.10*"/>   <!-- Times Read -->
+                      </Grid.ColumnDefinitions>
+                      <Label Grid.Column="0" Text="{Binding DisplayName}"    VerticalTextAlignment="Start" FontSize="Small"/>
+                      <Label Grid.Column="1" Text="{Binding TimeString}"     VerticalTextAlignment="Start" HorizontalTextAlignment="Center"/>
+                      <Label Grid.Column="2" Text="{Binding OCRSSI}"         VerticalTextAlignment="Start" HorizontalTextAlignment="Center" TextColor="#000000"/>
+                      <Label Grid.Column="3" Text="{Binding SensorAvgValue}" VerticalTextAlignment="Start" HorizontalTextAlignment="Center"/>
+                      <Label Grid.Column="4" Text="{Binding SucessCount}"    VerticalTextAlignment="Start" HorizontalTextAlignment="Center"/>
+                    </Grid>
+                  </StackLayout>
+                </ViewCell>
+              </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView> 
+    </StackLayout>
 
-  </StackLayout>
+    <StackLayout Orientation="Vertical" VerticalOptions="EndAndExpand" > <!-- Bottom Inventory/Clear/Share Section --> 
+      <Button Text="{Binding startInventoryButtonText}" Font="Large" Command="{Binding OnStartInventoryButtonCommand}" />
+      <StackLayout Orientation="Horizontal">
+        <Button Text="Clear" Font="Large" TextColor="White"
+                CornerRadius="11"
+                Command="{Binding OnClearButtonCommand}" 
+                HorizontalOptions="CenterAndExpand"
+                BackgroundColor="#d22030"
+        />
+        <Button Text="Share" Font="Large" TextColor="White"
+                CornerRadius="11"
+                Command="{Binding OnShareDataCommand}"   
+                HorizontalOptions="CenterAndExpand"
+                BackgroundColor="#d22030"
+        />
+      </StackLayout>
+    </StackLayout> <!-- Bottom Inventory/Clear/Share Section -->
+
+  </StackLayout> 
 
 </pages:BasePage>

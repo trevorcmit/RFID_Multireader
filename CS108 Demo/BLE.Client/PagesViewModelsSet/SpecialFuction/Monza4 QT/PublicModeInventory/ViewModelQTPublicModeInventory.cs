@@ -108,33 +108,33 @@ namespace BLE.Client.ViewModels
             base.Resume();
 
             // RFID event handler
-            BleMvxApplication._reader.rfid.OnStateChanged += new EventHandler<CSLibrary.Events.OnStateChangedEventArgs>(StateChangedEvent);
-            BleMvxApplication._reader.rfid.OnAsyncCallback += new EventHandler<CSLibrary.Events.OnAsyncCallbackEventArgs>(TagInventoryEvent);
-            BleMvxApplication._reader.rfid.OnAccessCompleted += new EventHandler<CSLibrary.Events.OnAccessCompletedEventArgs>(TagCompletedEvent);
+            BleMvxApplication._reader1.rfid.OnStateChanged += new EventHandler<CSLibrary.Events.OnStateChangedEventArgs>(StateChangedEvent);
+            BleMvxApplication._reader1.rfid.OnAsyncCallback += new EventHandler<CSLibrary.Events.OnAsyncCallbackEventArgs>(TagInventoryEvent);
+            BleMvxApplication._reader1.rfid.OnAccessCompleted += new EventHandler<CSLibrary.Events.OnAccessCompletedEventArgs>(TagCompletedEvent);
 
             // Key Button event handler
-            BleMvxApplication._reader.notification.OnKeyEvent += new EventHandler<CSLibrary.Notification.HotKeyEventArgs>(HotKeys_OnKeyEvent);
-            BleMvxApplication._reader.notification.OnVoltageEvent += new EventHandler<CSLibrary.Notification.VoltageEventArgs>(VoltageEvent);
+            BleMvxApplication._reader1.notification.OnKeyEvent += new EventHandler<CSLibrary.Notification.HotKeyEventArgs>(HotKeys_OnKeyEvent);
+            BleMvxApplication._reader1.notification.OnVoltageEvent += new EventHandler<CSLibrary.Notification.VoltageEventArgs>(VoltageEvent);
 
             InventorySetting();
         }
 
         public override void Suspend()
         {
-            BleMvxApplication._reader.rfid.CancelAllSelectCriteria();                // Confirm cancel all filter
+            BleMvxApplication._reader1.rfid.CancelAllSelectCriteria();                // Confirm cancel all filter
 
-            BleMvxApplication._reader.rfid.StopOperation();
+            BleMvxApplication._reader1.rfid.StopOperation();
             ClassBattery.SetBatteryMode(ClassBattery.BATTERYMODE.IDLE);
-            BleMvxApplication._reader.barcode.Stop();
+            BleMvxApplication._reader1.barcode.Stop();
 
             // Cancel RFID event handler
-            BleMvxApplication._reader.rfid.OnStateChanged -= new EventHandler<CSLibrary.Events.OnStateChangedEventArgs>(StateChangedEvent);
-            BleMvxApplication._reader.rfid.OnAsyncCallback -= new EventHandler<CSLibrary.Events.OnAsyncCallbackEventArgs>(TagInventoryEvent);
-            BleMvxApplication._reader.rfid.OnAccessCompleted -= new EventHandler<CSLibrary.Events.OnAccessCompletedEventArgs>(TagCompletedEvent);
+            BleMvxApplication._reader1.rfid.OnStateChanged -= new EventHandler<CSLibrary.Events.OnStateChangedEventArgs>(StateChangedEvent);
+            BleMvxApplication._reader1.rfid.OnAsyncCallback -= new EventHandler<CSLibrary.Events.OnAsyncCallbackEventArgs>(TagInventoryEvent);
+            BleMvxApplication._reader1.rfid.OnAccessCompleted -= new EventHandler<CSLibrary.Events.OnAccessCompletedEventArgs>(TagCompletedEvent);
 
             // Key Button event handler
-            BleMvxApplication._reader.notification.OnKeyEvent -= new EventHandler<CSLibrary.Notification.HotKeyEventArgs>(HotKeys_OnKeyEvent);
-            BleMvxApplication._reader.notification.OnVoltageEvent -= new EventHandler<CSLibrary.Notification.VoltageEventArgs>(VoltageEvent);
+            BleMvxApplication._reader1.notification.OnKeyEvent -= new EventHandler<CSLibrary.Notification.HotKeyEventArgs>(HotKeys_OnKeyEvent);
+            BleMvxApplication._reader1.notification.OnVoltageEvent -= new EventHandler<CSLibrary.Notification.VoltageEventArgs>(VoltageEvent);
 
             base.Suspend();
         }
@@ -164,70 +164,70 @@ namespace BLE.Client.ViewModels
         //private TagInfoViewModel _ItemSelected;
         void SetConfigPower()
         {
-            if (BleMvxApplication._reader.rfid.GetAntennaPort() == 1)
+            if (BleMvxApplication._reader1.rfid.GetAntennaPort() == 1)
             {
-                if (BleMvxApplication._config.RFID_PowerSequencing_NumberofPower == 0)
+                if (BleMvxApplication._config1.RFID_PowerSequencing_NumberofPower == 0)
                 {
-                    BleMvxApplication._reader.rfid.SetPowerSequencing(0);
-                    BleMvxApplication._reader.rfid.SetPowerLevel(BleMvxApplication._config.RFID_Antenna_Power[0]);
+                    BleMvxApplication._reader1.rfid.SetPowerSequencing(0);
+                    BleMvxApplication._reader1.rfid.SetPowerLevel(BleMvxApplication._config1.RFID_Antenna_Power[0]);
                 }
                 else
-                    BleMvxApplication._reader.rfid.SetPowerSequencing(BleMvxApplication._config.RFID_PowerSequencing_NumberofPower, BleMvxApplication._config.RFID_PowerSequencing_Level, BleMvxApplication._config.RFID_PowerSequencing_DWell);
+                    BleMvxApplication._reader1.rfid.SetPowerSequencing(BleMvxApplication._config1.RFID_PowerSequencing_NumberofPower, BleMvxApplication._config1.RFID_PowerSequencing_Level, BleMvxApplication._config1.RFID_PowerSequencing_DWell);
             }
             else
             {
-                for (uint cnt = BleMvxApplication._reader.rfid.GetAntennaPort() - 1; cnt >= 0; cnt--)
+                for (uint cnt = BleMvxApplication._reader1.rfid.GetAntennaPort() - 1; cnt >= 0; cnt--)
                 {
-                    BleMvxApplication._reader.rfid.SetPowerLevel(BleMvxApplication._config.RFID_Antenna_Power[cnt], cnt);
+                    BleMvxApplication._reader1.rfid.SetPowerLevel(BleMvxApplication._config1.RFID_Antenna_Power[cnt], cnt);
                 }
             }
         }
 
         void InventorySetting()
         {
-            switch (BleMvxApplication._config.RFID_FrequenceSwitch)
+            switch (BleMvxApplication._config1.RFID_FrequenceSwitch)
             {
                 case 0:
-                    BleMvxApplication._reader.rfid.SetHoppingChannels(BleMvxApplication._config.RFID_Region);
+                    BleMvxApplication._reader1.rfid.SetHoppingChannels(BleMvxApplication._config1.RFID_Region);
                     break;
                 case 1:
-                    BleMvxApplication._reader.rfid.SetFixedChannel(BleMvxApplication._config.RFID_Region, BleMvxApplication._config.RFID_FixedChannel);
+                    BleMvxApplication._reader1.rfid.SetFixedChannel(BleMvxApplication._config1.RFID_Region, BleMvxApplication._config1.RFID_FixedChannel);
                     break;
                 case 2:
-                    BleMvxApplication._reader.rfid.SetAgileChannels(BleMvxApplication._config.RFID_Region);
+                    BleMvxApplication._reader1.rfid.SetAgileChannels(BleMvxApplication._config1.RFID_Region);
                     break;
             }
 
-            BleMvxApplication._reader.rfid.Options.TagRanging.flags = CSLibrary.Constants.SelectFlags.ZERO;
+            BleMvxApplication._reader1.rfid.Options.TagRanging.flags = CSLibrary.Constants.SelectFlags.ZERO;
 
             // Setting 1
             SetConfigPower();
 
             // Setting 3  // MUST SET for RFMicro
-            BleMvxApplication._config.RFID_DynamicQParms.toggleTarget = BleMvxApplication._config.RFID_ToggleTarget ? 1U : 0;
-            BleMvxApplication._reader.rfid.SetDynamicQParms(BleMvxApplication._config.RFID_DynamicQParms);
+            BleMvxApplication._config1.RFID_DynamicQParms.toggleTarget = BleMvxApplication._config1.RFID_ToggleTarget ? 1U : 0;
+            BleMvxApplication._reader1.rfid.SetDynamicQParms(BleMvxApplication._config1.RFID_DynamicQParms);
 
             // Setting 4
-            BleMvxApplication._config.RFID_FixedQParms.toggleTarget = BleMvxApplication._config.RFID_ToggleTarget ? 1U : 0;
-            BleMvxApplication._reader.rfid.SetFixedQParms(BleMvxApplication._config.RFID_FixedQParms);
+            BleMvxApplication._config1.RFID_FixedQParms.toggleTarget = BleMvxApplication._config1.RFID_ToggleTarget ? 1U : 0;
+            BleMvxApplication._reader1.rfid.SetFixedQParms(BleMvxApplication._config1.RFID_FixedQParms);
 
             // Setting 2
-            BleMvxApplication._reader.rfid.SetOperationMode(BleMvxApplication._config.RFID_OperationMode);
-            //BleMvxApplication._reader.rfid.SetTagGroup(CSLibrary.Constants.Selected.ASSERTED, CSLibrary.Constants.Session.S1, CSLibrary.Constants.SessionTarget.A);
-            BleMvxApplication._reader.rfid.SetCurrentSingulationAlgorithm(BleMvxApplication._config.RFID_Algorithm);
-            BleMvxApplication._reader.rfid.SetCurrentLinkProfile(BleMvxApplication._config.RFID_Profile);
+            BleMvxApplication._reader1.rfid.SetOperationMode(BleMvxApplication._config1.RFID_OperationMode);
+            //BleMvxApplication._reader1.rfid.SetTagGroup(CSLibrary.Constants.Selected.ASSERTED, CSLibrary.Constants.Session.S1, CSLibrary.Constants.SessionTarget.A);
+            BleMvxApplication._reader1.rfid.SetCurrentSingulationAlgorithm(BleMvxApplication._config1.RFID_Algorithm);
+            BleMvxApplication._reader1.rfid.SetCurrentLinkProfile(BleMvxApplication._config1.RFID_Profile);
 
             // Multi bank inventory
-            BleMvxApplication._reader.rfid.Options.TagRanging.multibanks = 2;
-            BleMvxApplication._reader.rfid.Options.TagRanging.bank1 = CSLibrary.Constants.MemoryBank.BANK3;
-            BleMvxApplication._reader.rfid.Options.TagRanging.offset1 = 188;
-            BleMvxApplication._reader.rfid.Options.TagRanging.count1 = 2;
-            BleMvxApplication._reader.rfid.Options.TagRanging.bank2 = CSLibrary.Constants.MemoryBank.BANK3;
-            BleMvxApplication._reader.rfid.Options.TagRanging.offset2 = 256;
-            BleMvxApplication._reader.rfid.Options.TagRanging.count2 = 9;
-            BleMvxApplication._reader.rfid.Options.TagRanging.compactmode = false;
+            BleMvxApplication._reader1.rfid.Options.TagRanging.multibanks = 2;
+            BleMvxApplication._reader1.rfid.Options.TagRanging.bank1 = CSLibrary.Constants.MemoryBank.BANK3;
+            BleMvxApplication._reader1.rfid.Options.TagRanging.offset1 = 188;
+            BleMvxApplication._reader1.rfid.Options.TagRanging.count1 = 2;
+            BleMvxApplication._reader1.rfid.Options.TagRanging.bank2 = CSLibrary.Constants.MemoryBank.BANK3;
+            BleMvxApplication._reader1.rfid.Options.TagRanging.offset2 = 256;
+            BleMvxApplication._reader1.rfid.Options.TagRanging.count2 = 9;
+            BleMvxApplication._reader1.rfid.Options.TagRanging.compactmode = false;
 
-            BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_PRERANGING);
+            BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_PRERANGING);
         }
 
         void StartInventory()
@@ -244,7 +244,7 @@ namespace BLE.Client.ViewModels
             }
 
             InventoryStartTime = DateTime.Now;
-            BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_EXERANGING);
+            BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_EXERANGING);
             ClassBattery.SetBatteryMode(ClassBattery.BATTERYMODE.INVENTORY);
             _cancelVoltageValue = true;
 
@@ -257,7 +257,7 @@ namespace BLE.Client.ViewModels
             _startInventoryButtonText = "Start Inventory";
 
             _tagCount = false;
-            BleMvxApplication._reader.rfid.StopOperation();
+            BleMvxApplication._reader1.rfid.StopOperation();
             RaisePropertyChanged(() => startInventoryButtonText);
         }
 
@@ -302,7 +302,7 @@ namespace BLE.Client.ViewModels
 
         void StopInventoryClick()
         {
-            BleMvxApplication._reader.rfid.StopOperation();
+            BleMvxApplication._reader1.rfid.StopOperation();
         }
 
         void TagInventoryEvent(object sender, CSLibrary.Events.OnAsyncCallbackEventArgs e)
@@ -323,7 +323,7 @@ namespace BLE.Client.ViewModels
                 _tagCountForAlert++;
                 if (_tagCountForAlert == 1)
                 {
-                    if (BleMvxApplication._config.RFID_InventoryAlertSound)
+                    if (BleMvxApplication._config1.RFID_InventoryAlertSound)
                     {
                         if (_newTagFound)
                             Xamarin.Forms.DependencyService.Get<ISystemSound>().SystemSound(3);
@@ -349,7 +349,7 @@ namespace BLE.Client.ViewModels
                     case CSLibrary.Constants.RFState.IDLE:
                         ClassBattery.SetBatteryMode(ClassBattery.BATTERYMODE.IDLE);
                         _cancelVoltageValue = true;
-                        switch (BleMvxApplication._reader.rfid.LastMacErrorCode)
+                        switch (BleMvxApplication._reader1.rfid.LastMacErrorCode)
                         {
                             case 0x00:  // normal end
                                 break;
@@ -359,7 +359,7 @@ namespace BLE.Client.ViewModels
                                 break;
 
                             default:
-                                _userDialogs.Alert("Mac error : 0x" + BleMvxApplication._reader.rfid.LastMacErrorCode.ToString("X4"));
+                                _userDialogs.Alert("Mac error : 0x" + BleMvxApplication._reader1.rfid.LastMacErrorCode.ToString("X4"));
                                 break;
                         }
                         break;
@@ -545,18 +545,18 @@ namespace BLE.Client.ViewModels
                             return;
                         }
 
-                        BleMvxApplication._reader.rfid.Options.TagSelected.epcMask = new CSLibrary.Structures.S_MASK(TagInfoList[_ProcessTagNumber].EPC);
-                        BleMvxApplication._reader.rfid.Options.TagSelected.flags = CSLibrary.Constants.SelectMaskFlags.ENABLE_TOGGLE;
-                        BleMvxApplication._reader.rfid.Options.TagSelected.epcMaskOffset = 0;
-                        BleMvxApplication._reader.rfid.Options.TagSelected.epcMaskLength = (uint)BleMvxApplication._reader.rfid.Options.TagSelected.epcMask.Length * 8;
-                        BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_SELECTED);
+                        BleMvxApplication._reader1.rfid.Options.TagSelected.epcMask = new CSLibrary.Structures.S_MASK(TagInfoList[_ProcessTagNumber].EPC);
+                        BleMvxApplication._reader1.rfid.Options.TagSelected.flags = CSLibrary.Constants.SelectMaskFlags.ENABLE_TOGGLE;
+                        BleMvxApplication._reader1.rfid.Options.TagSelected.epcMaskOffset = 0;
+                        BleMvxApplication._reader1.rfid.Options.TagSelected.epcMaskLength = (uint)BleMvxApplication._reader1.rfid.Options.TagSelected.epcMask.Length * 8;
+                        BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_SELECTED);
 
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.accessPassword = 0x0;
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.offset = 240;
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.count = 1;
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.pData = new UInt16[1];
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.pData[0] = 0xa600;
-                        BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_USER);
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.accessPassword = 0x0;
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.offset = 240;
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.count = 1;
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.pData = new UInt16[1];
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.pData[0] = 0xa600;
+                        BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_USER);
                     }
                     break;
 
@@ -565,14 +565,14 @@ namespace BLE.Client.ViewModels
                         UInt32 uut = (UInt32)UnixTime(DateTime.Now);
                         UInt16 Offset = (UInt16)(Math.Abs(BleMvxApplication._coldChain_TempOffset) * 4);
 
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.offset = 0;
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.count = 4;
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.pData = new UInt16[4];
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.pData[0] = (UInt16)(uut >> 16);
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.pData[1] = (UInt16)(uut & 0xffff);
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.pData[2] = (UInt16)BleMvxApplication._coldChain_LogInterval;
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.pData[3] = (UInt16)(Offset);
-                        BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_USER);
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.offset = 0;
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.count = 4;
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.pData = new UInt16[4];
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.pData[0] = (UInt16)(uut >> 16);
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.pData[1] = (UInt16)(uut & 0xffff);
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.pData[2] = (UInt16)BleMvxApplication._coldChain_LogInterval;
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.pData[3] = (UInt16)(Offset);
+                        BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_USER);
                     }
                     break;
 
@@ -585,13 +585,13 @@ namespace BLE.Client.ViewModels
                         UInt16 UTemp1 = (UInt16)(BleMvxApplication._coldChain_Temp1THUnder * 4);
                         UInt16 Count = (UInt16)((BleMvxApplication._coldChain_Temp1THCount << 3) | (BleMvxApplication._coldChain_Temp2THCount << 9));
 
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.offset = 262;
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.count = 3;
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.pData = new UInt16[3];
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.pData[0] = (UInt16)(OTemp1);
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.pData[1] = (UInt16)(UTemp1);
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.pData[2] = Count;
-                        BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_USER);
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.offset = 262;
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.count = 3;
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.pData = new UInt16[3];
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.pData[0] = (UInt16)(OTemp1);
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.pData[1] = (UInt16)(UTemp1);
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.pData[2] = Count;
+                        BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_USER);
                     }
                     break;
 
@@ -602,32 +602,32 @@ namespace BLE.Client.ViewModels
                         UInt16 UTemp2 = (UInt16)(BleMvxApplication._coldChain_Temp2THUnder * 4);
                         UInt16 OTemp2 = (UInt16)(BleMvxApplication._coldChain_Temp2THOver * 4);
 
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.offset = 266;
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.count = 2;
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.pData = new UInt16[2];
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.pData[0] = (UInt16)(OTemp2);
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.pData[1] = (UInt16)(UTemp2);
-                        BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_USER);
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.offset = 266;
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.count = 2;
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.pData = new UInt16[2];
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.pData[0] = (UInt16)(OTemp2);
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.pData[1] = (UInt16)(UTemp2);
+                        BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_USER);
                     }
                     break;
 
                 case 4:
                     {
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.offset = 260;
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.count = 1;
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.pData = new UInt16[1];
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.pData[0] = 0x0001;
-                        BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_USER);
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.offset = 260;
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.count = 1;
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.pData = new UInt16[1];
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.pData[0] = 0x0001;
+                        BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_USER);
                     }
                     break;
 
                 case 5:
                     {
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.offset = 240;
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.count = 1;
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.pData = new UInt16[1];
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.pData[0] = 0xa000;
-                        BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_USER);
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.offset = 240;
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.count = 1;
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.pData = new UInt16[1];
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.pData[0] = 0xa000;
+                        BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_USER);
                     }
                     break;
 
@@ -701,47 +701,47 @@ namespace BLE.Client.ViewModels
                             return;
                         }
 
-                        BleMvxApplication._reader.rfid.Options.TagSelected.epcMask = new CSLibrary.Structures.S_MASK(TagInfoList[_ProcessTagNumber].EPC);
-                        BleMvxApplication._reader.rfid.Options.TagSelected.flags = CSLibrary.Constants.SelectMaskFlags.ENABLE_TOGGLE;
-                        BleMvxApplication._reader.rfid.Options.TagSelected.epcMaskOffset = 0;
-                        BleMvxApplication._reader.rfid.Options.TagSelected.epcMaskLength = (uint)BleMvxApplication._reader.rfid.Options.TagSelected.epcMask.Length * 8;
-                        BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_SELECTED);
+                        BleMvxApplication._reader1.rfid.Options.TagSelected.epcMask = new CSLibrary.Structures.S_MASK(TagInfoList[_ProcessTagNumber].EPC);
+                        BleMvxApplication._reader1.rfid.Options.TagSelected.flags = CSLibrary.Constants.SelectMaskFlags.ENABLE_TOGGLE;
+                        BleMvxApplication._reader1.rfid.Options.TagSelected.epcMaskOffset = 0;
+                        BleMvxApplication._reader1.rfid.Options.TagSelected.epcMaskLength = (uint)BleMvxApplication._reader1.rfid.Options.TagSelected.epcMask.Length * 8;
+                        BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_SELECTED);
 
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.accessPassword = 0x0;
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.offset = 260;
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.count = 1;
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.pData = new UInt16[1];
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.pData[0] = 0x0002;
-                        BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_USER);
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.accessPassword = 0x0;
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.offset = 260;
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.count = 1;
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.pData = new UInt16[1];
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.pData[0] = 0x0002;
+                        BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_USER);
                     }
                     break;
 
                 case 1:
                     {
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.offset = 240;
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.count = 1;
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.pData = new UInt16[1];
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.pData[0] = 0xa600;
-                        BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_USER);
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.offset = 240;
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.count = 1;
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.pData = new UInt16[1];
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.pData[0] = 0xa600;
+                        BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_USER);
                     }
                     break;
 
                 case 2:
                     {
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.offset = 240;
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.count = 1;
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.pData = new UInt16[1];
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.pData[0] = 0xa600;
-                        BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_USER);
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.offset = 240;
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.count = 1;
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.pData = new UInt16[1];
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.pData[0] = 0xa600;
+                        BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_USER);
                     }
                     break;
 
                 case 3:
                     {
-                        BleMvxApplication._reader.rfid.Options.TagReadUser.offset = 264;
-                        BleMvxApplication._reader.rfid.Options.TagReadUser.count = 1;
-                        BleMvxApplication._reader.rfid.Options.TagReadUser.pData = new CSLibrary.Structures.S_DATA(new UInt16[1]);
-                        BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_READ_USER);
+                        BleMvxApplication._reader1.rfid.Options.TagReadUser.offset = 264;
+                        BleMvxApplication._reader1.rfid.Options.TagReadUser.count = 1;
+                        BleMvxApplication._reader1.rfid.Options.TagReadUser.pData = new CSLibrary.Structures.S_DATA(new UInt16[1]);
+                        BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_READ_USER);
                     }
                     break;
 
@@ -749,19 +749,19 @@ namespace BLE.Client.ViewModels
                     {
                         TagInfoList[_ProcessTagNumber].T1 = "OK";
                         TagInfoList[_ProcessTagNumber].T2 = "OK";
-                        if ((BleMvxApplication._reader.rfid.Options.TagReadUser.pData.ToUshorts()[0] & 0x0006) != 0x0000)
+                        if ((BleMvxApplication._reader1.rfid.Options.TagReadUser.pData.ToUshorts()[0] & 0x0006) != 0x0000)
                         {
-                            if ((BleMvxApplication._reader.rfid.Options.TagReadUser.pData.ToUshorts()[0] & 0x0002) != 0x0000)
+                            if ((BleMvxApplication._reader1.rfid.Options.TagReadUser.pData.ToUshorts()[0] & 0x0002) != 0x0000)
                                 TagInfoList[_ProcessTagNumber].T1 = "Fail";
 
-                            if ((BleMvxApplication._reader.rfid.Options.TagReadUser.pData.ToUshorts()[0] & 0x0004) != 0x0000)
+                            if ((BleMvxApplication._reader1.rfid.Options.TagReadUser.pData.ToUshorts()[0] & 0x0004) != 0x0000)
                                 TagInfoList[_ProcessTagNumber].T2 = "Fail";
 
                             // Show Temperature alarm on LED
-                            BleMvxApplication._reader.rfid.Options.TagWriteUser.offset = 264;
-                            BleMvxApplication._reader.rfid.Options.TagWriteUser.count = 1;
-                            BleMvxApplication._reader.rfid.Options.TagWriteUser.pData[0] = (UInt16)(BleMvxApplication._reader.rfid.Options.TagReadUser.pData.ToUshorts()[0] | 0x01);
-                            BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_USER);
+                            BleMvxApplication._reader1.rfid.Options.TagWriteUser.offset = 264;
+                            BleMvxApplication._reader1.rfid.Options.TagWriteUser.count = 1;
+                            BleMvxApplication._reader1.rfid.Options.TagWriteUser.pData[0] = (UInt16)(BleMvxApplication._reader1.rfid.Options.TagReadUser.pData.ToUshorts()[0] | 0x01);
+                            BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_USER);
                         }
                         else
                         {
@@ -773,11 +773,11 @@ namespace BLE.Client.ViewModels
 
                 case 5:
                     {
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.offset = 240;
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.count = 1;
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.pData = new UInt16[1];
-                        BleMvxApplication._reader.rfid.Options.TagWriteUser.pData[0] = 0x0000;
-                        BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_USER);
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.offset = 240;
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.count = 1;
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.pData = new UInt16[1];
+                        BleMvxApplication._reader1.rfid.Options.TagWriteUser.pData[0] = 0x0000;
+                        BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_WRITE_USER);
                     }
                     break;
 
@@ -806,11 +806,11 @@ namespace BLE.Client.ViewModels
         {
             Console.Write("Read User Data Offset:{0} Count:{1}", Offset, Count);
 
-            BleMvxApplication._reader.rfid.Options.TagWriteUser.accessPassword = 0;
-            BleMvxApplication._reader.rfid.Options.TagReadUser.offset = Offset;
-            BleMvxApplication._reader.rfid.Options.TagReadUser.count = Count;
-            BleMvxApplication._reader.rfid.Options.TagReadUser.pData = data;
-            BleMvxApplication._reader.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_READ_USER);
+            BleMvxApplication._reader1.rfid.Options.TagWriteUser.accessPassword = 0;
+            BleMvxApplication._reader1.rfid.Options.TagReadUser.offset = Offset;
+            BleMvxApplication._reader1.rfid.Options.TagReadUser.count = Count;
+            BleMvxApplication._reader1.rfid.Options.TagReadUser.pData = data;
+            BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_READ_USER);
         }
 
         DateTime UnixTimeStampBase = new DateTime(1970, 1, 1, 00, 0, 0, 0);
@@ -841,7 +841,7 @@ namespace BLE.Client.ViewModels
                         return;
                     }
 
-                    switch (BleMvxApplication._config.BatteryLevelIndicatorFormat)
+                    switch (BleMvxApplication._config1.BatteryLevelIndicatorFormat)
                     {
                         case 0:
                             _labelVoltage = "CS108 Bat. " + ((double)e.Voltage / 1000).ToString("0.000") + "v"; //			v

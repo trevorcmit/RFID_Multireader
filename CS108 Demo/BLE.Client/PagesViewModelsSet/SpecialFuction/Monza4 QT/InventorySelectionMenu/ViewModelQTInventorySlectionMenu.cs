@@ -1,9 +1,9 @@
-﻿// using System;
-// using System.Collections.ObjectModel;
-// using System.Collections.Generic;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using Acr.UserDialogs;
 using MvvmCross.Core.ViewModels;
-// using MvvmCross.Platform;
+using MvvmCross.Platform;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Plugin.BLE.Abstractions.Contracts;
@@ -16,18 +16,18 @@ namespace BLE.Client.ViewModels {
         public ICommand OnPublicModeInventoryButtonCommand { protected set; get; }
         public ICommand OnPrivateModeInventoryButtonCommand { protected set; get; }
 
-
         public ViewModelQTInventorySlectionMenu(IAdapter adapter, IUserDialogs userDialogs) : base(adapter) {
             _userDialogs = userDialogs;
-
             OnPublicModeInventoryButtonCommand = new Command(OnPublicModeInventoryButtonClicked);
             OnPrivateModeInventoryButtonCommand = new Command(OnPrivateModeInventoryButtonClicked);
         }
 
         public override void Resume() {
             base.Resume();
-
-            BleMvxApplication._reader.rfid.CancelAllSelectCriteria();
+            BleMvxApplication._reader1.rfid.CancelAllSelectCriteria();
+            BleMvxApplication._reader2.rfid.CancelAllSelectCriteria();
+            BleMvxApplication._reader3.rfid.CancelAllSelectCriteria();
+            BleMvxApplication._reader4.rfid.CancelAllSelectCriteria();
         }
 
         void OnPublicModeInventoryButtonClicked() {

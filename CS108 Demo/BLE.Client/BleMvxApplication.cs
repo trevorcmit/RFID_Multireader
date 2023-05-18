@@ -15,6 +15,7 @@ namespace BLE.Client {
                 INVENTORY,
                 BARCODE,
             }
+
             public FUNCTION Function = FUNCTION.NONE;
             public uint DurationMin = 0;
             public uint DurationMax = 0;
@@ -23,7 +24,7 @@ namespace BLE.Client {
         public string readerID = "";
         public CSLibrary.Constants.Machine readerModel = CSLibrary.Constants.Machine.UNKNOWN;
 
-        public int BatteryLevelIndicatorFormat = 0; // 0 = voltage, other = percentage 
+        public int BatteryLevelIndicatorFormat = 1; // 0 = voltage, other = percentage 
 
         public uint RFID_Profile;
         public int RFID_TagDelayTime;
@@ -64,17 +65,16 @@ namespace BLE.Client {
 
         public bool RFID_Vibration = false;
         public bool RFID_VibrationTag = false;      // false = New, true = All
-        public uint RFID_VibrationWindow = 2;       // 2 seconds
+        public uint RFID_VibrationWindow = 2;      // 2 seconds
         public uint RFID_VibrationTime = 300;       // 300 ms
 
-        public bool[] RFID_AntennaEnable = new bool[16] { true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false };
-        // public uint[] RFID_Antenna_Power = new uint[16] { 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300 };
-        public uint[] RFID_Antenna_Power = new uint[16] { 330, 330, 330, 330, 330, 330, 330, 330, 330, 330, 330, 330, 330, 330, 330, 330 };
-        public uint[] RFID_Antenna_Dwell = new uint[16] { 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000 };
+        public bool[] RFID_AntennaEnable = new bool[16] {true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
+        public uint[] RFID_Antenna_Power = new uint[16] {300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300};
+        public uint[] RFID_Antenna_Dwell = new uint[16] {2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000};
 
         public int RFID_PowerSequencing_NumberofPower = 0;
-        public uint[] RFID_PowerSequencing_Level = new uint[16] { 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300};
-        public uint[] RFID_PowerSequencing_DWell = new uint[16] { 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000 };
+        public uint[] RFID_PowerSequencing_Level = new uint[16] {300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300};
+        public uint[] RFID_PowerSequencing_DWell = new uint[16] {2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000};
 
         public bool RFID_NewTagLocation = false;
         public int RFID_ShareFormat = 0;  // 0 = JSON, 1 = CSV
@@ -101,8 +101,10 @@ namespace BLE.Client {
 
                 if (cnt == 0) {
                     RFID_AntennaEnable[0] = true;
-					if (port == 1) RFID_Antenna_Dwell[0] = 0;
-					else           RFID_Antenna_Dwell[0] = 2000;
+					if (port == 1)
+						RFID_Antenna_Dwell[0] = 0;
+					else
+                        RFID_Antenna_Dwell[0] = 2000;
                 }
                 else {
                     RFID_AntennaEnable[cnt] = false;
@@ -149,10 +151,11 @@ namespace BLE.Client {
 
             RFID_Vibration = false;
             RFID_VibrationTag = false;      // false = New, true = All
-            RFID_VibrationWindow = 2;       // 2 seconds
+            RFID_VibrationWindow = 2;      // 2 seconds
             RFID_VibrationTime = 300;       // 500 ms
 
             RFID_BatteryPollingTime = 300;  // 300s
+
 
             for (int cnt = 0; cnt < RFID_Shortcut.Length; cnt++) {
                 MAINMENUSHORTCUT item = new MAINMENUSHORTCUT();
@@ -176,8 +179,15 @@ namespace BLE.Client {
     }
 
     public class BleMvxApplication : MvxApplication {
-        static public HighLevelInterface _reader = new HighLevelInterface();
-        public static CONFIG _config;
+        static public HighLevelInterface _reader1 = new HighLevelInterface();
+        static public HighLevelInterface _reader2 = new HighLevelInterface();
+        static public HighLevelInterface _reader3 = new HighLevelInterface();
+        static public HighLevelInterface _reader4 = new HighLevelInterface();
+
+        public static CONFIG _config1;
+        public static CONFIG _config2;
+        public static CONFIG _config3;
+        public static CONFIG _config4;
 
         // for Geiger and Read/Write
         public static string _SELECT_EPC = "";
@@ -199,11 +209,6 @@ namespace BLE.Client {
 
         public static int _inventoryEntryPoint = 0;
         public static bool _settingPage1TagPopulationChanged = false;
-        public static bool _settingPage3QvalueChanged = false;
-        public static bool _settingPage4QvalueChanged = false;
-
-        // for Cloud server
-        public static UInt16 _sequenceNumber = 0;
 
         // for battery level display
         public static bool _batteryLow = false;
@@ -231,13 +236,6 @@ namespace BLE.Client {
         public static int _coldChain_Temp2THCount;
         public static int _coldChain_LogInterval;
 
-        // for Xerxes Tag
-        public static int _xerxes_delay;
-
-        // for Focus and Fast ID
-        public static Boolean _focus = false;
-        public static Boolean _fastID = false;
-
         // for Geiger Demo 
         public static int _geiger_Bank = 1;
 
@@ -247,54 +245,167 @@ namespace BLE.Client {
         public override void Initialize() {
             RFMicroTagNicknameViewModel item;
 
-            item = new RFMicroTagNicknameViewModel(); item.EPC = "E282403E000207D6F9770273"; item.Nickname=""; item.TagName = "Left Quad #1";   ViewModelRFMicroNickname._TagNicknameList.Add(item);
-            item = new RFMicroTagNicknameViewModel(); item.EPC = "E282403E000207D6F97786D2"; item.Nickname=""; item.TagName = "Right Quad #1";  ViewModelRFMicroNickname._TagNicknameList.Add(item);
-            item = new RFMicroTagNicknameViewModel(); item.EPC = "E282403E000207D6F9773098"; item.Nickname=""; item.TagName = "Left Glute #1";  ViewModelRFMicroNickname._TagNicknameList.Add(item);
-            item = new RFMicroTagNicknameViewModel(); item.EPC = "E282403E000207D6F97748C0"; item.Nickname=""; item.TagName = "Right Glute #1"; ViewModelRFMicroNickname._TagNicknameList.Add(item);
-            item = new RFMicroTagNicknameViewModel(); item.EPC = "E282403E000207D6F9779863"; item.Nickname=""; item.TagName = "Lower Left #1";  ViewModelRFMicroNickname._TagNicknameList.Add(item);
-            item = new RFMicroTagNicknameViewModel(); item.EPC = "E282403E000207D6F9775A25"; item.Nickname=""; item.TagName = "Lower Right #1"; ViewModelRFMicroNickname._TagNicknameList.Add(item);
-            item = new RFMicroTagNicknameViewModel(); item.EPC = "4761627269656C4C536F636B"; item.Nickname=""; item.TagName = "Left Sock";      ViewModelRFMicroNickname._TagNicknameList.Add(item);
-            item = new RFMicroTagNicknameViewModel(); item.EPC = "4761627269656C52536F636B"; item.Nickname=""; item.TagName = "Right Sock";     ViewModelRFMicroNickname._TagNicknameList.Add(item);
-            item = new RFMicroTagNicknameViewModel(); item.EPC = "E282403E000207D6F9778E53"; item.Nickname=""; item.TagName = "Left Sock";      ViewModelRFMicroNickname._TagNicknameList.Add(item);
+            item = new RFMicroTagNicknameViewModel(); item.EPC = "477265794861743030303031"; item.Nickname = "Black Hat"; ViewModelRFMicroNickname._TagNicknameList.Add(item);
+            item = new RFMicroTagNicknameViewModel(); item.EPC = "426C61636B48617446726F6E"; item.Nickname = "White Hat"; ViewModelRFMicroNickname._TagNicknameList.Add(item);
 
-            // FIRST VIEWMODEL ON LAUNCH
+            item = new RFMicroTagNicknameViewModel(); item.EPC = "E282403E000207D6F9770273"; item.Nickname = "Left Quad";   ViewModelRFMicroNickname._TagNicknameList.Add(item);
+            item = new RFMicroTagNicknameViewModel(); item.EPC = "E282403E000207D6F97786D2"; item.Nickname = "Right Quad";  ViewModelRFMicroNickname._TagNicknameList.Add(item);
+            item = new RFMicroTagNicknameViewModel(); item.EPC = "E282403E000207D6F9773098"; item.Nickname = "Left Glute";  ViewModelRFMicroNickname._TagNicknameList.Add(item);
+            item = new RFMicroTagNicknameViewModel(); item.EPC = "E282403E000207D6F97748C0"; item.Nickname = "Right Glute"; ViewModelRFMicroNickname._TagNicknameList.Add(item);
+            item = new RFMicroTagNicknameViewModel(); item.EPC = "E282403E000207D6F9779863"; item.Nickname = "Left Calf";   ViewModelRFMicroNickname._TagNicknameList.Add(item);
+            item = new RFMicroTagNicknameViewModel(); item.EPC = "E282403E000207D6F9775A25"; item.Nickname = "Right Calf";  ViewModelRFMicroNickname._TagNicknameList.Add(item);
+
             RegisterAppStart<ViewModelMainMenu>();
         }
 
-        static public async Task<bool> LoadConfig(string readerID) {
-            try {
+        static public async Task<bool> LoadConfig(string readerID, int n) {
+            if (n==1) {
+                try {
+                    IFolder rootFolder = FileSystem.Current.LocalStorage;
+                    IFolder sourceFolder = await FileSystem.Current.LocalStorage.CreateFolderAsync("CSLReader", CreationCollisionOption.OpenIfExists);
+                    IFile sourceFile = await sourceFolder.CreateFileAsync(readerID + ".cfg", CreationCollisionOption.OpenIfExists);
+
+                    var contentJSON = await sourceFile.ReadAllTextAsync();
+                    var setting = JsonConvert.DeserializeObject<CONFIG>(contentJSON);
+
+                    if (setting != null) {
+                        _config1 = setting;
+                        return true;
+                    }
+                    else {
+                        _config1 = new CONFIG();
+                    }
+                }
+                catch (Exception ex) {}
+                return false;
+            }
+            else if (n==2) {
+                try {
+                    IFolder rootFolder = FileSystem.Current.LocalStorage;
+                    IFolder sourceFolder = await FileSystem.Current.LocalStorage.CreateFolderAsync("CSLReader", CreationCollisionOption.OpenIfExists);
+                    IFile sourceFile = await sourceFolder.CreateFileAsync(readerID + ".cfg", CreationCollisionOption.OpenIfExists);
+
+                    var contentJSON = await sourceFile.ReadAllTextAsync();
+                    var setting = JsonConvert.DeserializeObject<CONFIG>(contentJSON);
+
+                    if (setting != null) {
+                        _config2 = setting;
+                        return true;
+                    }
+                    else {
+                        _config2 = new CONFIG();
+                    }
+                }
+                catch (Exception ex) {}
+                return false;
+            }
+            else if (n==3) {
+                try {
+                    IFolder rootFolder = FileSystem.Current.LocalStorage;
+                    IFolder sourceFolder = await FileSystem.Current.LocalStorage.CreateFolderAsync("CSLReader", CreationCollisionOption.OpenIfExists);
+                    IFile sourceFile = await sourceFolder.CreateFileAsync(readerID + ".cfg", CreationCollisionOption.OpenIfExists);
+
+                    var contentJSON = await sourceFile.ReadAllTextAsync();
+                    var setting = JsonConvert.DeserializeObject<CONFIG>(contentJSON);
+
+                    if (setting != null) {
+                        _config3 = setting;
+                        return true;
+                    }
+                    else {
+                        _config3 = new CONFIG();
+                    }
+                }
+                catch (Exception ex) {}
+                return false;
+            }
+            else if (n==4) {
+                try {
+                    IFolder rootFolder = FileSystem.Current.LocalStorage;
+                    IFolder sourceFolder = await FileSystem.Current.LocalStorage.CreateFolderAsync("CSLReader", CreationCollisionOption.OpenIfExists);
+                    IFile sourceFile = await sourceFolder.CreateFileAsync(readerID + ".cfg", CreationCollisionOption.OpenIfExists);
+
+                    var contentJSON = await sourceFile.ReadAllTextAsync();
+                    var setting = JsonConvert.DeserializeObject<CONFIG>(contentJSON);
+
+                    if (setting != null) {
+                        _config4 = setting;
+                        return true;
+                    }
+                    else {
+                        _config4 = new CONFIG();
+                    }
+                }
+                catch (Exception ex) {}
+                return false;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        static async public void SaveConfig(int n) {
+            // Integer input 'n' represents number of reader instance (i.e. n=1 is BleMvxApplication._reader1)
+            if (n==1) { // FOR READER #1
                 IFolder rootFolder = FileSystem.Current.LocalStorage;
                 IFolder sourceFolder = await FileSystem.Current.LocalStorage.CreateFolderAsync("CSLReader", CreationCollisionOption.OpenIfExists);
-                IFile sourceFile = await sourceFolder.CreateFileAsync(readerID + ".cfg", CreationCollisionOption.OpenIfExists);
-
-                var contentJSON = await sourceFile.ReadAllTextAsync();
-                var setting = JsonConvert.DeserializeObject<CONFIG>(contentJSON);
-
-                if (setting != null) {
-                    _config = setting;
-                    return true;
-                }
-                else { _config = new CONFIG(); }
+                IFile sourceFile = await sourceFolder.CreateFileAsync(_config1.readerID + ".cfg", CreationCollisionOption.ReplaceExisting);
+                string contentJSON = JsonConvert.SerializeObject(_config1);
+                await sourceFile.WriteAllTextAsync(contentJSON);
             }
-            catch (Exception ex) {}
-            return false;
+            else if (n==2) { // FOR READER #2
+                IFolder rootFolder = FileSystem.Current.LocalStorage;
+                IFolder sourceFolder = await FileSystem.Current.LocalStorage.CreateFolderAsync("CSLReader", CreationCollisionOption.OpenIfExists);
+                IFile sourceFile = await sourceFolder.CreateFileAsync(_config2.readerID + ".cfg", CreationCollisionOption.ReplaceExisting);
+                string contentJSON = JsonConvert.SerializeObject(_config2);
+                await sourceFile.WriteAllTextAsync(contentJSON);
+            }
+            else if (n==3) { // FOR READER #3
+                IFolder rootFolder = FileSystem.Current.LocalStorage;
+                IFolder sourceFolder = await FileSystem.Current.LocalStorage.CreateFolderAsync("CSLReader", CreationCollisionOption.OpenIfExists);
+                IFile sourceFile = await sourceFolder.CreateFileAsync(_config3.readerID + ".cfg", CreationCollisionOption.ReplaceExisting);
+                string contentJSON = JsonConvert.SerializeObject(_config3);
+                await sourceFile.WriteAllTextAsync(contentJSON);
+            }
+            else if (n==4) { // FOR READER #4
+                IFolder rootFolder = FileSystem.Current.LocalStorage;
+                IFolder sourceFolder = await FileSystem.Current.LocalStorage.CreateFolderAsync("CSLReader", CreationCollisionOption.OpenIfExists);
+                IFile sourceFile = await sourceFolder.CreateFileAsync(_config4.readerID + ".cfg", CreationCollisionOption.ReplaceExisting);
+                string contentJSON = JsonConvert.SerializeObject(_config4);
+                await sourceFile.WriteAllTextAsync(contentJSON);
+            }
         }
 
-        static async public void SaveConfig() {
-            IFolder rootFolder = FileSystem.Current.LocalStorage;
-            IFolder sourceFolder = await FileSystem.Current.LocalStorage.CreateFolderAsync("CSLReader", CreationCollisionOption.OpenIfExists);
-            IFile sourceFile = await sourceFolder.CreateFileAsync(_config.readerID + ".cfg", CreationCollisionOption.ReplaceExisting);
-
-            string contentJSON = JsonConvert.SerializeObject(_config);
-            await sourceFile.WriteAllTextAsync(contentJSON);
-        }
-
-        static public void ResetConfig(uint port = 1) {
-            var readerID = _config.readerID;
-            var readerModel = _config.readerModel;
-            _config = new CONFIG();
-            _config.readerID = readerID;
-            _config.readerModel = readerModel;
+        static public void ResetConfig(int n, uint port=1) {
+            if (n==1) {
+                var readerID = _config1.readerID;
+                var readerModel = _config1.readerModel;
+                _config1 = new CONFIG();
+                _config1.readerID = readerID;
+                _config1.readerModel = readerModel;
+            }
+            else if (n==2) {
+                var readerID = _config2.readerID;
+                var readerModel = _config2.readerModel;
+                _config2 = new CONFIG();
+                _config2.readerID = readerID;
+                _config2.readerModel = readerModel;
+            }
+            else if (n==3) {
+                var readerID = _config3.readerID;
+                var readerModel = _config3.readerModel;
+                _config3 = new CONFIG();
+                _config3.readerID = readerID;
+                _config3.readerModel = readerModel;
+            }
+            else if (n==4) {
+                var readerID = _config4.readerID;
+                var readerModel = _config4.readerModel;
+                _config4 = new CONFIG();
+                _config4.readerID = readerID;
+                _config4.readerModel = readerModel;
+            }
         }
 
     }

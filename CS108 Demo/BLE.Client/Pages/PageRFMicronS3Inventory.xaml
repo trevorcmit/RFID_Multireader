@@ -13,7 +13,7 @@
     <StackLayout Orientation="Vertical" VerticalOptions="StartAndExpand">
       <ListView x:Name="liewViewTagData" ItemsSource="{Binding TagInfoList}" SelectedItem="{Binding objItemSelected1, Mode=TwoWay}">
         <ListView.Header>
-          <StackLayout BackgroundColor="#CDCDCD"> <!-- Gray color of the Column Header row -->
+          <StackLayout BackgroundColor="#CCCCCC"> <!-- Gray color of the Column Header row -->
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.35*"/>    <!-- EPC -->
@@ -55,17 +55,18 @@
       </ListView>
     </StackLayout>
 
+    <!-- 
     <StackLayout Orientation="Vertical" VerticalOptions="EndAndExpand">
       <ListView x:Name="liewViewTagData2" ItemsSource="{Binding TagInfoList2}" SelectedItem="{Binding objItemSelected2, Mode=TwoWay}">
         <ListView.Header>
-          <StackLayout BackgroundColor="#CDCDCD"> <!-- Gray color of the Column Header row -->
+          <StackLayout BackgroundColor="#CDCDCD">
             <Grid>
               <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.35*"/>    <!-- EPC -->
-                <ColumnDefinition Width="0.20*"/>    <!-- Time -->
-                <ColumnDefinition Width="0.15*"/>    <!-- RSSI -->
-                <ColumnDefinition Width="0.10*"/>    <!-- Temperature -->
-                <ColumnDefinition Width="0.10*"/>    <!-- Times Read-->
+                <ColumnDefinition Width="0.35*"/>
+                <ColumnDefinition Width="0.20*"/>
+                <ColumnDefinition Width="0.15*"/>
+                <ColumnDefinition Width="0.10*"/>
+                <ColumnDefinition Width="0.10*"/>
               </Grid.ColumnDefinitions>
               <Label Grid.Column="0" Text="Tag ID"     VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" />
               <Label Grid.Column="1" Text="Time"       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" />
@@ -81,11 +82,11 @@
                   <StackLayout Orientation="Vertical">
                     <Grid>
                       <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.35*"/>   <!-- EPC -->
-                        <ColumnDefinition Width="0.20*"/>   <!-- Time -->
-                        <ColumnDefinition Width="0.15*"/>   <!-- RSSI -->
-                        <ColumnDefinition Width="0.10*"/>   <!-- Temperature -->
-                        <ColumnDefinition Width="0.10*"/>   <!-- Times Read -->
+                        <ColumnDefinition Width="0.35*"/>
+                        <ColumnDefinition Width="0.20*"/> 
+                        <ColumnDefinition Width="0.15*"/> 
+                        <ColumnDefinition Width="0.10*"/>
+                        <ColumnDefinition Width="0.10*"/>
                       </Grid.ColumnDefinitions>
                       <Label Grid.Column="0" Text="{Binding DisplayName}"    VerticalTextAlignment="Start" FontSize="Small"/>
                       <Label Grid.Column="1" Text="{Binding TimeString}"     VerticalTextAlignment="Start" HorizontalTextAlignment="Center"/>
@@ -99,6 +100,7 @@
         </ListView.ItemTemplate>
       </ListView> 
     </StackLayout>
+    -->
 
     <StackLayout Orientation="Vertical" VerticalOptions="EndAndExpand" > <!-- Bottom Inventory/Clear/Share Section --> 
       <Button Text="{Binding startInventoryButtonText}" Font="Large" Command="{Binding OnStartInventoryButtonCommand}" />

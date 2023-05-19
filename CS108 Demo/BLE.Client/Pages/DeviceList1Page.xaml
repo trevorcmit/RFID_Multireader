@@ -5,7 +5,8 @@
     xmlns:pages="clr-namespace:BLE.Client.Pages;assembly=BLE.Client"
     x:Class="BLE.Client.Pages.DeviceList1Page"
     Title="List of CS108 Detected #1"
-    x:Name="DevicePage">
+    x:Name="DevicePage"
+>
 
     <pages:BaseTabbedPage.Resources>
 

@@ -71,7 +71,7 @@ namespace BLE.Client.ViewModels
             if (n==1) {
                 if (BleMvxApplication._reader1.Status != CSLibrary.HighLevelInterface.READERSTATE.DISCONNECT) {
                     connectedButton1 = "Connected to " + BleMvxApplication._reader1.ReaderName + "/Select Another";
-                    connectedButtonTextColor1 = "Green";
+                    connectedButtonTextColor1 = "#00C261"; // formerly "Green"
                 }
                 else {
                     connectedButton1 = "Press to Scan/Connect Reader 1";
@@ -85,7 +85,7 @@ namespace BLE.Client.ViewModels
             if (n==2) {
                 if (BleMvxApplication._reader2.Status != CSLibrary.HighLevelInterface.READERSTATE.DISCONNECT) {
                     connectedButton2 = "Connected to " + BleMvxApplication._reader2.ReaderName + "/Select Another";
-                    connectedButtonTextColor2 = "Green";
+                    connectedButtonTextColor2 = "#00C261"; // formerly "Green"
                 }
                 else {
                     connectedButton2 = "Press to Scan/Connect Reader 2";

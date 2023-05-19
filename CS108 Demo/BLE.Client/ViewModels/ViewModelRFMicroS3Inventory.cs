@@ -15,11 +15,10 @@ using System.Windows.Input;
 using Xamarin;
 using Xamarin.Forms;
 using Xamarin.Essentials;
-// using Xamarin.Essentials.FilePicker;
 
 // New Imports for Bluetooth Autoconnect
-using Plugin.BLE.Abstractions.Extensions;
-using System.Threading;
+// using Plugin.BLE.Abstractions.Extensions;
+// using System.Threading;
 
 
 
@@ -35,8 +34,7 @@ namespace BLE.Client.ViewModels
             public string TimeString { get { return this._TimeString; } set { this.SetProperty(ref this._TimeString, value); } }
             /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            private string _EPC;
-            public string EPC { get { return this._EPC; } set { this.SetProperty(ref this._EPC, value); } }
+            private string _EPC; public string EPC { get { return this._EPC; } set { this.SetProperty(ref this._EPC, value); } }
             private string _DisplayName; public string DisplayName { get { return this._DisplayName; } set { this.SetProperty(ref this._DisplayName, value); } }
             private uint _OCRSSI; public uint OCRSSI { get { return this._OCRSSI; } set { this.SetProperty(ref this._OCRSSI, value); } }
             private string _sensorAvgValue; public string SensorAvgValue { get { return this._sensorAvgValue;} set { this.SetProperty(ref this._sensorAvgValue, value); } }
@@ -125,8 +123,8 @@ namespace BLE.Client.ViewModels
             rssi_result = await FilePicker.PickAsync();
 
             // Save every second and we cycle by half seconds
-            _active_time   = 2000;
-            _inactive_time = 2000;
+            _active_time   = 10000;
+            _inactive_time = 10000;
 
             RaisePropertyChanged(() => active_time);
             RaisePropertyChanged(() => inactive_time);
@@ -159,7 +157,7 @@ namespace BLE.Client.ViewModels
         private void DownEvent(object sender, System.Timers.ElapsedEventArgs e)
         {
             StopInventory();    // Turn on for Duty Cycle
-            // AutoSaveData();    // Autosave while Down is occurring
+            AutoSaveData();    // Autosave while Down is occurring
             activetimer.Enabled = true;
             downtimer.Enabled = false;
         }
@@ -180,7 +178,8 @@ namespace BLE.Client.ViewModels
                 BleMvxApplication._reader1.notification.OnVoltageEvent += new EventHandler<CSLibrary.Notification.VoltageEventArgs>(VoltageEvent1);
             }
 
-            if (BleMvxApplication._reader2.Status != CSLibrary.HighLevelInterface.READERSTATE.DISCONNECT) {
+            if (BleMvxApplication._reader2.Status != CSLibrary.HighLevelInterface.READERSTATE.DISCONNECT)
+            {
                 BleMvxApplication._reader2.rfid.OnAsyncCallback += new EventHandler<CSLibrary.Events.OnAsyncCallbackEventArgs>(TagInventoryEvent2);
                 BleMvxApplication._reader2.notification.OnKeyEvent += new EventHandler<CSLibrary.Notification.HotKeyEventArgs>(HotKeys_OnKeyEvent);
                 BleMvxApplication._reader2.notification.OnVoltageEvent += new EventHandler<CSLibrary.Notification.VoltageEventArgs>(VoltageEvent2);
@@ -412,8 +411,6 @@ namespace BLE.Client.ViewModels
                 BleMvxApplication._reader2.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_EXERANGING);
             }
 
-            // BleMvxApplication._reader2.rfid.StopOperation();
-
             ClassBattery.SetBatteryMode(ClassBattery.BATTERYMODE.INVENTORY);
             _cancelVoltageValue = true;
             RaisePropertyChanged(() => startInventoryButtonText);
@@ -427,24 +424,18 @@ namespace BLE.Client.ViewModels
             BleMvxApplication._reader1.rfid.StopOperation();
             BleMvxApplication._reader2.rfid.StopOperation();
 
-            if (BleMvxApplication._reader2.Status != CSLibrary.HighLevelInterface.READERSTATE.DISCONNECT)
-            {
-                SetPower(BleMvxApplication._rfMicro_Power, 2);
-                BleMvxApplication._reader2.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_EXERANGING);
-            }
-
-            // BleMvxApplication._reader3.rfid.StopOperation();
-            // BleMvxApplication._reader4.rfid.StopOperation();
-
             RaisePropertyChanged(() => startInventoryButtonText);
         }
 
-        void StartInventoryClick() {
-            if (_startInventory) {
+        void StartInventoryClick()
+        {
+            if (_startInventory)
+            {
                 activetimer.Enabled = true; 
                 StartInventory(); 
             }
-            else {
+            else
+            {
                 StopInventory();
                 activetimer.Enabled = false;
                 downtimer.Enabled = false; 
@@ -466,7 +457,8 @@ namespace BLE.Client.ViewModels
             if (e.type != CSLibrary.Constants.CallbackType.TAG_RANGING) return;
             if (e.info.Bank1Data == null || e.info.Bank2Data == null) return;
             InvokeOnMainThread(() => {
-                AddOrUpdateTagData(e.info, 2);
+                AddOrUpdateTagData(e.info, 1);
+                // AddOrUpdateTagData(e.info, 2);
                 // AddUpdateData(e.info, 2);
             });
         }
@@ -511,171 +503,171 @@ namespace BLE.Client.ViewModels
             }
         }
 
-        private void AddUpdateData(CSLibrary.Structures.TagCallbackInfo info, int readerID)
-        {
-            InvokeOnMainThread(() =>
-            {
-                bool found = false;
-                int cnt;
+        // private void AddUpdateData(CSLibrary.Structures.TagCallbackInfo info, int readerID)
+        // {
+        //     InvokeOnMainThread(() =>
+        //     {
+        //         bool found = false;
+        //         int cnt;
 
-                UInt16 sensorCode = (UInt16)(info.Bank1Data[0] & 0x1ff);    // address c
-                UInt16 ocRSSI     = info.Bank1Data[1];                      // address d
-                UInt16 temp       = info.Bank1Data[2];                      // address e
+        //         UInt16 sensorCode = (UInt16)(info.Bank1Data[0] & 0x1ff);    // address c
+        //         UInt16 ocRSSI     = info.Bank1Data[1];                      // address d
+        //         UInt16 temp       = info.Bank1Data[2];                      // address e
 
-                if (readerID==1) {
-                    lock (TagInfoList) {
-                        for (cnt = 0; cnt < TagInfoList.Count; cnt++)
-                        {
-                            if (TagInfoList[cnt].EPC==info.epc.ToString())
-                            {
-                                TagInfoList[cnt].OCRSSI = ocRSSI;
-                                if (ocRSSI >= BleMvxApplication._rfMicro_minOCRSSI && ocRSSI <= BleMvxApplication._rfMicro_maxOCRSSI)
-                                {
-                                    if (temp >= 1300 && temp <= 3500)
-                                    {
-                                        TagInfoList[cnt].SucessCount++;
-                                        UInt64 caldata = (UInt64)(((UInt64)info.Bank2Data[0] << 48) | ((UInt64)info.Bank2Data[1] << 32) | ((UInt64)info.Bank2Data[2] << 16) | ((UInt64)info.Bank2Data[3]));
+        //         if (readerID==1) {
+        //             lock (TagInfoList) {
+        //                 for (cnt = 0; cnt < TagInfoList.Count; cnt++)
+        //                 {
+        //                     if (TagInfoList[cnt].EPC==info.epc.ToString())
+        //                     {
+        //                         TagInfoList[cnt].OCRSSI = ocRSSI;
+        //                         if (ocRSSI >= BleMvxApplication._rfMicro_minOCRSSI && ocRSSI <= BleMvxApplication._rfMicro_maxOCRSSI)
+        //                         {
+        //                             if (temp >= 1300 && temp <= 3500)
+        //                             {
+        //                                 TagInfoList[cnt].SucessCount++;
+        //                                 UInt64 caldata = (UInt64)(((UInt64)info.Bank2Data[0] << 48) | ((UInt64)info.Bank2Data[1] << 32) | ((UInt64)info.Bank2Data[2] << 16) | ((UInt64)info.Bank2Data[3]));
                                                     
-                                        double SAV = Math.Round(getTempC(temp, caldata), 2);                                               
-                                        TagInfoList[cnt].SensorAvgValue = SAV.ToString();
-                                        TagInfoList[cnt].TimeString = DateTime.Now.ToString("HH:mm:ss");
+        //                                 double SAV = Math.Round(getTempC(temp, caldata), 2);                                               
+        //                                 TagInfoList[cnt].SensorAvgValue = SAV.ToString();
+        //                                 TagInfoList[cnt].TimeString = DateTime.Now.ToString("HH:mm:ss");
 
-                                        try {
-                                            if (!tag_List.Contains(TagInfoList[cnt].EPC)) { // Check Tag_List contains tags, add new data
-                                                tag_List.Add(TagInfoList[cnt].EPC);
-                                            }
+        //                                 try {
+        //                                     if (!tag_List.Contains(TagInfoList[cnt].EPC)) { // Check Tag_List contains tags, add new data
+        //                                         tag_List.Add(TagInfoList[cnt].EPC);
+        //                                     }
 
-                                            if (!tag_Time.ContainsKey(TagInfoList[cnt].EPC)) { // Check Tag_Time contains tags, add new data
-                                                List<string> t_time = new List<string>{TagInfoList[cnt].TimeString};
-                                                tag_Time.Add(TagInfoList[cnt].EPC, t_time);
-                                            }
-                                            else {
-                                                tag_Time[TagInfoList[cnt].EPC].Add(TagInfoList[cnt].TimeString);
-                                            }
+        //                                     if (!tag_Time.ContainsKey(TagInfoList[cnt].EPC)) { // Check Tag_Time contains tags, add new data
+        //                                         List<string> t_time = new List<string>{TagInfoList[cnt].TimeString};
+        //                                         tag_Time.Add(TagInfoList[cnt].EPC, t_time);
+        //                                     }
+        //                                     else {
+        //                                         tag_Time[TagInfoList[cnt].EPC].Add(TagInfoList[cnt].TimeString);
+        //                                     }
 
-                                            if (!tag_Data.ContainsKey(TagInfoList[cnt].EPC)) { // Check Tag_Data contains tags, add new data
-                                                List<string> t_data = new List<string>{TagInfoList[cnt].SensorAvgValue};
-                                                tag_Data.Add(TagInfoList[cnt].EPC, t_data);
-                                            }
-                                            else {
-                                                tag_Data[TagInfoList[cnt].EPC].Add(TagInfoList[cnt].SensorAvgValue);
-                                            }
+        //                                     if (!tag_Data.ContainsKey(TagInfoList[cnt].EPC)) { // Check Tag_Data contains tags, add new data
+        //                                         List<string> t_data = new List<string>{TagInfoList[cnt].SensorAvgValue};
+        //                                         tag_Data.Add(TagInfoList[cnt].EPC, t_data);
+        //                                     }
+        //                                     else {
+        //                                         tag_Data[TagInfoList[cnt].EPC].Add(TagInfoList[cnt].SensorAvgValue);
+        //                                     }
 
-                                            if (!tag_RSSI.ContainsKey(TagInfoList[cnt].EPC)) {
-                                                List<string> t_rssi = new List<string>{TagInfoList[cnt].OCRSSI.ToString()};
-                                                tag_RSSI.Add(TagInfoList[cnt].EPC, t_rssi);
-                                            }
-                                            else {
-                                                tag_RSSI[TagInfoList[cnt].EPC].Add(TagInfoList[cnt].OCRSSI.ToString());
-                                            }
-                                        }
-                                        finally {}              
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    found = true;
-                }
+        //                                     if (!tag_RSSI.ContainsKey(TagInfoList[cnt].EPC)) {
+        //                                         List<string> t_rssi = new List<string>{TagInfoList[cnt].OCRSSI.ToString()};
+        //                                         tag_RSSI.Add(TagInfoList[cnt].EPC, t_rssi);
+        //                                     }
+        //                                     else {
+        //                                         tag_RSSI[TagInfoList[cnt].EPC].Add(TagInfoList[cnt].OCRSSI.ToString());
+        //                                     }
+        //                                 }
+        //                                 finally {}              
+        //                             }
+        //                         }
+        //                     }
+        //                 }
+        //             }
+        //             found = true;
+        //         }
 
-                else if (readerID==2) {
-                    lock (TagInfoList2) {
-                        for (cnt = 0; cnt < TagInfoList2.Count; cnt++)
-                        {
-                            if (TagInfoList2[cnt].EPC==info.epc.ToString())
-                            {
-                                TagInfoList2[cnt].OCRSSI = ocRSSI;
-                                if (ocRSSI >= BleMvxApplication._rfMicro_minOCRSSI && ocRSSI <= BleMvxApplication._rfMicro_maxOCRSSI)
-                                {
-                                    if (temp >= 1300 && temp <= 3500)
-                                    {
-                                        TagInfoList2[cnt].SucessCount++;
-                                        UInt64 caldata = (UInt64)(((UInt64)info.Bank2Data[0] << 48) | ((UInt64)info.Bank2Data[1] << 32) | ((UInt64)info.Bank2Data[2] << 16) | ((UInt64)info.Bank2Data[3]));
+        //         else if (readerID==2) {
+        //             lock (TagInfoList2) {
+        //                 for (cnt = 0; cnt < TagInfoList2.Count; cnt++)
+        //                 {
+        //                     if (TagInfoList2[cnt].EPC==info.epc.ToString())
+        //                     {
+        //                         TagInfoList2[cnt].OCRSSI = ocRSSI;
+        //                         if (ocRSSI >= BleMvxApplication._rfMicro_minOCRSSI && ocRSSI <= BleMvxApplication._rfMicro_maxOCRSSI)
+        //                         {
+        //                             if (temp >= 1300 && temp <= 3500)
+        //                             {
+        //                                 TagInfoList2[cnt].SucessCount++;
+        //                                 UInt64 caldata = (UInt64)(((UInt64)info.Bank2Data[0] << 48) | ((UInt64)info.Bank2Data[1] << 32) | ((UInt64)info.Bank2Data[2] << 16) | ((UInt64)info.Bank2Data[3]));
                                                     
-                                        double SAV = Math.Round(getTempC(temp, caldata), 2);                                               
-                                        TagInfoList2[cnt].SensorAvgValue = SAV.ToString();
-                                        TagInfoList2[cnt].TimeString = DateTime.Now.ToString("HH:mm:ss");
+        //                                 double SAV = Math.Round(getTempC(temp, caldata), 2);                                               
+        //                                 TagInfoList2[cnt].SensorAvgValue = SAV.ToString();
+        //                                 TagInfoList2[cnt].TimeString = DateTime.Now.ToString("HH:mm:ss");
 
-                                        try {
-                                            if (!tag_List.Contains(TagInfoList2[cnt].EPC)) { // Check Tag_List contains tags, add new data
-                                                tag_List.Add(TagInfoList2[cnt].EPC);
-                                            }
+        //                                 try {
+        //                                     if (!tag_List.Contains(TagInfoList2[cnt].EPC)) { // Check Tag_List contains tags, add new data
+        //                                         tag_List.Add(TagInfoList2[cnt].EPC);
+        //                                     }
 
-                                            if (!tag_Time.ContainsKey(TagInfoList2[cnt].EPC)) { // Check Tag_Time contains tags, add new data
-                                                List<string> t_time = new List<string>{TagInfoList2[cnt].TimeString};
-                                                tag_Time.Add(TagInfoList2[cnt].EPC, t_time);
-                                            }
-                                            else {
-                                                tag_Time[TagInfoList2[cnt].EPC].Add(TagInfoList2[cnt].TimeString);
-                                            }
+        //                                     if (!tag_Time.ContainsKey(TagInfoList2[cnt].EPC)) { // Check Tag_Time contains tags, add new data
+        //                                         List<string> t_time = new List<string>{TagInfoList2[cnt].TimeString};
+        //                                         tag_Time.Add(TagInfoList2[cnt].EPC, t_time);
+        //                                     }
+        //                                     else {
+        //                                         tag_Time[TagInfoList2[cnt].EPC].Add(TagInfoList2[cnt].TimeString);
+        //                                     }
 
-                                            if (!tag_Data.ContainsKey(TagInfoList2[cnt].EPC)) { // Check Tag_Data contains tags, add new data
-                                                List<string> t_data = new List<string>{TagInfoList2[cnt].SensorAvgValue};
-                                                tag_Data.Add(TagInfoList2[cnt].EPC, t_data);
-                                            }
-                                            else {
-                                                tag_Data[TagInfoList2[cnt].EPC].Add(TagInfoList2[cnt].SensorAvgValue);
-                                            }
+        //                                     if (!tag_Data.ContainsKey(TagInfoList2[cnt].EPC)) { // Check Tag_Data contains tags, add new data
+        //                                         List<string> t_data = new List<string>{TagInfoList2[cnt].SensorAvgValue};
+        //                                         tag_Data.Add(TagInfoList2[cnt].EPC, t_data);
+        //                                     }
+        //                                     else {
+        //                                         tag_Data[TagInfoList2[cnt].EPC].Add(TagInfoList2[cnt].SensorAvgValue);
+        //                                     }
 
-                                            if (!tag_RSSI.ContainsKey(TagInfoList2[cnt].EPC)) {
-                                                List<string> t_rssi = new List<string>{TagInfoList2[cnt].OCRSSI.ToString()};
-                                                tag_RSSI.Add(TagInfoList2[cnt].EPC, t_rssi);
-                                            }
-                                            else {
-                                                tag_RSSI[TagInfoList2[cnt].EPC].Add(TagInfoList2[cnt].OCRSSI.ToString());
-                                            }
-                                        }
-                                        finally {}              
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    found = true;
-                }
+        //                                     if (!tag_RSSI.ContainsKey(TagInfoList2[cnt].EPC)) {
+        //                                         List<string> t_rssi = new List<string>{TagInfoList2[cnt].OCRSSI.ToString()};
+        //                                         tag_RSSI.Add(TagInfoList2[cnt].EPC, t_rssi);
+        //                                     }
+        //                                     else {
+        //                                         tag_RSSI[TagInfoList2[cnt].EPC].Add(TagInfoList2[cnt].OCRSSI.ToString());
+        //                                     }
+        //                                 }
+        //                                 finally {}              
+        //                             }
+        //                         }
+        //                     }
+        //                 }
+        //             }
+        //             found = true;
+        //         }
 
-                if (!found)
-                {
-                    RFMicroTagInfoViewModel item = new RFMicroTagInfoViewModel();
-                    item.EPC = info.epc.ToString();
-                    item.DisplayName = item.EPC;
-                    item.OCRSSI = ocRSSI;
-                    item.SucessCount = 0;
-                    item.SensorAvgValue = "";
+        //         if (!found)
+        //         {
+        //             RFMicroTagInfoViewModel item = new RFMicroTagInfoViewModel();
+        //             item.EPC = info.epc.ToString();
+        //             item.DisplayName = item.EPC;
+        //             item.OCRSSI = ocRSSI;
+        //             item.SucessCount = 0;
+        //             item.SensorAvgValue = "";
 
-                    if (ocRSSI >= BleMvxApplication._rfMicro_minOCRSSI && ocRSSI <= BleMvxApplication._rfMicro_maxOCRSSI)
-                    {
-                        if (temp >= 1300 && temp <= 3500) {
-                            UInt64 caldata = (UInt64)(((UInt64)info.Bank2Data[0]<<48) | ((UInt64)info.Bank2Data[1]<<32) | ((UInt64)info.Bank2Data[2]<<16) | ((UInt64)info.Bank2Data[3]));
-                            double SAV = Math.Round(getTempC(temp, caldata), 2); 
+        //             if (ocRSSI >= BleMvxApplication._rfMicro_minOCRSSI && ocRSSI <= BleMvxApplication._rfMicro_maxOCRSSI)
+        //             {
+        //                 if (temp >= 1300 && temp <= 3500) {
+        //                     UInt64 caldata = (UInt64)(((UInt64)info.Bank2Data[0]<<48) | ((UInt64)info.Bank2Data[1]<<32) | ((UInt64)info.Bank2Data[2]<<16) | ((UInt64)info.Bank2Data[3]));
+        //                     double SAV = Math.Round(getTempC(temp, caldata), 2); 
 
-                            item.SensorAvgValue = SAV.ToString();
-                            item.TimeString = DateTime.Now.ToString("HH:mm:ss");
-                            item.SucessCount += 1;
+        //                     item.SensorAvgValue = SAV.ToString();
+        //                     item.TimeString = DateTime.Now.ToString("HH:mm:ss");
+        //                     item.SucessCount += 1;
 
-                            if (epcs.Contains(item.EPC))
-                            {
-                                List<string> t_time = new List<string>{ item.TimeString };
-                                List<string> t_data = new List<string>{ item.SensorAvgValue };
-                                List<string> t_rssi = new List<string>{ item.OCRSSI.ToString() };
+        //                     if (epcs.Contains(item.EPC))
+        //                     {
+        //                         List<string> t_time = new List<string>{ item.TimeString };
+        //                         List<string> t_data = new List<string>{ item.SensorAvgValue };
+        //                         List<string> t_rssi = new List<string>{ item.OCRSSI.ToString() };
 
-                                try
-                                {
-                                    tag_Time.Add(item.EPC, t_time);
-                                    tag_Data.Add(item.EPC, t_data);
-                                    tag_RSSI.Add(item.EPC, t_rssi);
-                                    tag_List.Add(item.EPC);
-                                }
-                                finally {}
-                            }
-                            if      (readerID==1) { TagInfoList.Insert(0, item); }
-                            else if (readerID==2) { TagInfoList2.Insert(0, item); }
-                        }
-                    }                                             
+        //                         try
+        //                         {
+        //                             tag_Time.Add(item.EPC, t_time);
+        //                             tag_Data.Add(item.EPC, t_data);
+        //                             tag_RSSI.Add(item.EPC, t_rssi);
+        //                             tag_List.Add(item.EPC);
+        //                         }
+        //                         finally {}
+        //                     }
+        //                     if      (readerID==1) { TagInfoList.Insert(0, item); }
+        //                     else if (readerID==2) { TagInfoList2.Insert(0, item); }
+        //                 }
+        //             }                                             
                                      
-                }
-            });
-        }
+        //         }
+        //     });
+        // }
 
         private void AddOrUpdateTagData(CSLibrary.Structures.TagCallbackInfo info, int readerID)
         {

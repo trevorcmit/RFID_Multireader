@@ -32,7 +32,8 @@ namespace BLE.Client.ViewModels
         private string _version;
         public string version { get; set; }
 
-        public Guid PreviousGuid {
+        public Guid PreviousGuid
+        {
             get { return _previousGuid; }
             set {
                 _previousGuid = value;
@@ -50,17 +51,17 @@ namespace BLE.Client.ViewModels
         public bool IsRefreshing => Adapter.IsScanning;
         public bool IsStateOn => _bluetoothLe.IsOn;
         public string StateText => GetStateText();
-        public DeviceListItemViewModel SelectedDevice {
-            get {return null;}
+        public DeviceListItemViewModel SelectedDevice
+        {
+            get { return null; }
             set {
-                if (value != null) {
-                    HandleSelectedDevice(value);
-                }
+                if (value != null) { HandleSelectedDevice(value); }
                 RaisePropertyChanged();
             }
         }
 
-        public MvxCommand StopScanCommand => new MvxCommand(() => {
+        public MvxCommand StopScanCommand => new MvxCommand(() =>
+        {
             try {
                 Devices.Clear();
                 _cancellationTokenSource.Cancel();
@@ -74,7 +75,8 @@ namespace BLE.Client.ViewModels
 
         // Parameterless Initializer for Variable Name Change
         protected static IAdapter Adapter1;
-        public DeviceList1ViewModel(IBluetoothLE bluetoothLe, IAdapter adapter, IUserDialogs userDialogs, ISettings settings, IPermissions permissions) : base(adapter) {
+        public DeviceList1ViewModel(IBluetoothLE bluetoothLe, IAdapter adapter, IUserDialogs userDialogs, ISettings settings, IPermissions permissions) : base(adapter)
+        {
             _bluetoothLe = bluetoothLe;
             _userDialogs = userDialogs;
             _settings = settings;
@@ -88,25 +90,29 @@ namespace BLE.Client.ViewModels
             BleMvxApplication._reader1.DisconnectAsync();
         }
 
-        private Task GetPreviousGuidAsync() {
+        private Task GetPreviousGuidAsync()
+        {
             return Task.Run(() => {
                 var guidString = _settings.GetValueOrDefault("lastguid", null);
                 PreviousGuid = !string.IsNullOrEmpty(guidString) ? Guid.Parse(guidString) : Guid.Empty;
             });
         }
 
-        private void OnDeviceConnectionLost(object sender, DeviceErrorEventArgs e) {
+        private void OnDeviceConnectionLost(object sender, DeviceErrorEventArgs e)
+        {
             Devices.FirstOrDefault(d => d.Id == e.Device.Id)?.Update();
             _userDialogs.HideLoading();
             _userDialogs.ErrorToast("Error", $"Connection LOST {e.Device.Name} Please reconnect reader", TimeSpan.FromMilliseconds(5000));
         }
 
-        private void OnStateChanged(object sender, BluetoothStateChangedArgs e) {
+        private void OnStateChanged(object sender, BluetoothStateChangedArgs e)
+        {
             RaisePropertyChanged(nameof(IsStateOn));
             RaisePropertyChanged(nameof(StateText));
         }
 
-        private string GetStateText() {
+        private string GetStateText()
+        {
             try {
                 switch (_bluetoothLe.State) {
                     case BluetoothState.Unavailable:
@@ -131,14 +137,16 @@ namespace BLE.Client.ViewModels
 
         bool _scanAgain = true;
 
-        private void Adapter_ScanTimeoutElapsed(object sender, EventArgs e) {
+        private void Adapter_ScanTimeoutElapsed(object sender, EventArgs e)
+        {
             RaisePropertyChanged(() => IsRefreshing);
             CleanupCancellationToken();
 
             if (_scanAgain) ScanForDevices();
         }
 
-        private void OnDeviceDiscovered(object sender, DeviceEventArgs args) {
+        private void OnDeviceDiscovered(object sender, DeviceEventArgs args)
+        {
             try {
                 bool CS108Service = false;
 
@@ -172,7 +180,8 @@ namespace BLE.Client.ViewModels
             }
         }
 
-        private void AddOrUpdateDevice(IDevice device) {
+        private void AddOrUpdateDevice(IDevice device)
+        {
             InvokeOnMainThread(() => {
                 try {
                     var vm = Devices.FirstOrDefault(d => d.Device.Id == device.Id);
@@ -189,7 +198,8 @@ namespace BLE.Client.ViewModels
             });
         }
 
-        public override async void Resume() {
+        public override async void Resume()
+        {
             try {
                 base.Resume();
                 await GetPreviousGuidAsync();
@@ -201,7 +211,8 @@ namespace BLE.Client.ViewModels
             }
         }
 
-        private void GetSystemConnectedOrPairedDevices() {
+        private void GetSystemConnectedOrPairedDevices()
+        {
             try {
                 //heart rate
                 var guid = Guid.Parse("0000180d-0000-1000-8000-00805f9b34fb");
@@ -336,7 +347,8 @@ namespace BLE.Client.ViewModels
 
         public MvxCommand ConnectToPreviousCommand => new MvxCommand(ConnectToPreviousDeviceAsync, CanConnectToPrevious);
 
-        private async void ConnectToPreviousDeviceAsync() {
+        private async void ConnectToPreviousDeviceAsync()
+        {
             IDevice device;
             try {
                 CancellationTokenSource tokenSource = new CancellationTokenSource();
@@ -370,11 +382,13 @@ namespace BLE.Client.ViewModels
             }
         }
 
-        private bool CanConnectToPrevious() {
+        private bool CanConnectToPrevious()
+        {
             return PreviousGuid != default(Guid);
         }
 
-        private async void ConnectAndDisposeDevice(DeviceListItemViewModel item) {
+        private async void ConnectAndDisposeDevice(DeviceListItemViewModel item)
+        {
             try {
                 using (item.Device) {
                     await Adapter.ConnectToDeviceAsync(item.Device);
@@ -389,18 +403,21 @@ namespace BLE.Client.ViewModels
             }
         }
 
-        private void OnDeviceDisconnected(object sender, DeviceEventArgs e) {
+        private void OnDeviceDisconnected(object sender, DeviceEventArgs e)
+        {
             Devices.FirstOrDefault(d => d.Id == e.Device.Id)?.Update();
             _userDialogs.HideLoading();
             _userDialogs.Toast($"Disconnected {e.Device.Name}");
         }
 
-        public MvxCommand<DeviceListItemViewModel> CopyGuidCommand => new MvxCommand<DeviceListItemViewModel>(device => {
+        public MvxCommand<DeviceListItemViewModel> CopyGuidCommand => new MvxCommand<DeviceListItemViewModel>(device =>
+        {
             PreviousGuid = device.Id;
         });
     }
 
-    public class DeviceList2ViewModel : BaseViewModel {
+    public class DeviceList2ViewModel : BaseViewModel
+    {
         private readonly IBluetoothLE _bluetoothLe;
         private readonly IUserDialogs _userDialogs;
         private readonly ISettings _settings;

@@ -1,18 +1,9 @@
-﻿// Default BaseViewModel Imports
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using Plugin.BLE.Abstractions.Contracts;
-
-// New Imports for Bluetooth Autoconnect
-using Acr.UserDialogs;
-using Plugin.BLE.Abstractions;
-using Plugin.BLE.Abstractions.Extensions;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Threading;
 
 
 namespace BLE.Client.ViewModels
@@ -29,37 +20,42 @@ namespace BLE.Client.ViewModels
         protected const string CharacteristicIdKey = "CharacteristicIdNavigationKey";
         protected const string DescriptorIdKey = "DescriptorIdNavigationKey";
 
-        public BaseViewModel(IAdapter adapter) {
+        public BaseViewModel(IAdapter adapter)
+        {
             Adapter = adapter;
         }
 
-        public virtual void Resume() {
+        public virtual void Resume()
+        {
             Mvx.Trace("Resume {0}", GetType().Name);
         }
 
-        public virtual void Suspend() {
+        public virtual void Suspend()
+        {
             Mvx.Trace("Suspend {0}", GetType().Name);
         }
 
-        protected override void InitFromBundle(IMvxBundle parameters) {
+        protected override void InitFromBundle(IMvxBundle parameters)
+        {
             base.InitFromBundle(parameters);
             Bundle = parameters;
         }
 
         protected IMvxBundle Bundle {get; private set;}
 
-        protected IDevice GetDeviceFromBundle(IMvxBundle parameters) {
+        protected IDevice GetDeviceFromBundle(IMvxBundle parameters)
+        {
             if (!parameters.Data.ContainsKey(DeviceIdKey)) return null;
             var deviceId = parameters.Data[DeviceIdKey];
 
             return Adapter.ConnectedDevices.FirstOrDefault(d => d.Id.ToString().Equals(deviceId));
-
         }
 
-        protected Task<IService> GetServiceFromBundleAsync(IMvxBundle parameters) {
-
+        protected Task<IService> GetServiceFromBundleAsync(IMvxBundle parameters)
+        {
             var device = GetDeviceFromBundle(parameters);
-            if (device == null || !parameters.Data.ContainsKey(ServiceIdKey)) {
+            if (device == null || !parameters.Data.ContainsKey(ServiceIdKey))
+            {
                 return Task.FromResult<IService>(null);
             }
 
@@ -67,18 +63,22 @@ namespace BLE.Client.ViewModels
             return device.GetServiceAsync(Guid.Parse(serviceId));
         }
 
-        protected async Task<ICharacteristic> GetCharacteristicFromBundleAsync(IMvxBundle parameters) {
+        protected async Task<ICharacteristic> GetCharacteristicFromBundleAsync(IMvxBundle parameters)
+        {
             var service = await GetServiceFromBundleAsync(parameters);
-            if (service == null || !parameters.Data.ContainsKey(CharacteristicIdKey)) {
+            if (service == null || !parameters.Data.ContainsKey(CharacteristicIdKey))
+            {
                 return null;
             }
             var characteristicId = parameters.Data[CharacteristicIdKey];
             return await service.GetCharacteristicAsync(Guid.Parse(characteristicId));
         }
 
-        protected async Task<IDescriptor> GetDescriptorFromBundleAsync(IMvxBundle parameters) {
+        protected async Task<IDescriptor> GetDescriptorFromBundleAsync(IMvxBundle parameters)
+        {
             var characteristic = await GetCharacteristicFromBundleAsync(parameters);
-            if (characteristic == null || !parameters.Data.ContainsKey(DescriptorIdKey)) {
+            if (characteristic == null || !parameters.Data.ContainsKey(DescriptorIdKey))
+            {
                 return null;
             }
             var descriptorId = parameters.Data[DescriptorIdKey];

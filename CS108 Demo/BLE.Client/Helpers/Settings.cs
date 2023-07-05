@@ -2,10 +2,13 @@ using Plugin.Settings;
 using Plugin.Settings.Abstractions;
 
 
-namespace BLE.Client.Helpers {
-	public static class Settings {
-		private static ISettings AppSettings {
-			get {return CrossSettings.Current;}
+namespace BLE.Client.Helpers
+{
+	public static class Settings
+	{
+		private static ISettings AppSettings
+		{
+			get { return CrossSettings.Current; }
 		}
 
 		#region Setting Constants
@@ -15,7 +18,8 @@ namespace BLE.Client.Helpers {
 
 		#endregion
 
-		public static string GeneralSettings {
+		public static string GeneralSettings
+		{
 			get {return AppSettings.GetValueOrDefault(SettingsKey, SettingsDefault);}
 			set {AppSettings.AddOrUpdateValue(SettingsKey, value);}
 		}

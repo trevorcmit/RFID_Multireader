@@ -9,11 +9,8 @@ namespace BLE.Client.ViewModels
 {
     public class RFMicroTagNicknameViewModel : BindableBase
     {
-        private string _EPC;
-        public string EPC { get { return this._EPC; } set { this.SetProperty(ref this._EPC, value); } }
-
-        private string _Nickname;
-        public string Nickname { get { return this._Nickname; } set { this.SetProperty(ref this._Nickname, value); } }
+        private string _EPC; public string EPC { get { return this._EPC; } set { this.SetProperty(ref this._EPC, value); } }
+        private string _Nickname; public string Nickname { get { return this._Nickname; } set { this.SetProperty(ref this._Nickname, value); } }
     }
 
     public class ViewModelRFMicroNickname : BaseViewModel
@@ -28,25 +25,30 @@ namespace BLE.Client.ViewModels
 
         #endregion
 
-        public ViewModelRFMicroNickname(IAdapter adapter, IUserDialogs userDialogs) : base(adapter) {
+        public ViewModelRFMicroNickname(IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
+        {
             _userDialogs = userDialogs;
         }
 
         ~ViewModelRFMicroNickname() {}
 
-        public override void Resume() {
+        public override void Resume()
+        {
             base.Resume();
         }
 
-        public override void Suspend() {
+        public override void Suspend()
+        {
             base.Suspend();
         }
 
-        protected override void InitFromBundle(IMvxBundle parameters) {
+        protected override void InitFromBundle(IMvxBundle parameters)
+        {
             base.InitFromBundle(parameters);
         }
 
-        async void ShowDialog(string Msg) {
+        async void ShowDialog(string Msg)
+        {
             var config = new ProgressDialogConfig() {
                 Title = Msg,
                 IsDeterministic = true,

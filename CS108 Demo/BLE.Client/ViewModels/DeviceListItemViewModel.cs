@@ -15,12 +15,14 @@ namespace BLE.Client.ViewModels
         public int Rssi => Device.Rssi;
         public string Name => Device.Name;
 
-        public DeviceListItemViewModel(IDevice device) {
+        public DeviceListItemViewModel(IDevice device)
+        {
             Device = device;
         }
 
-        public void Update(IDevice newDevice = null) {
-            if (newDevice != null) {Device = newDevice;}
+        public void Update(IDevice newDevice = null)
+        {
+            if (newDevice != null) { Device = newDevice; }
             RaisePropertyChanged(nameof(IsConnected));
             RaisePropertyChanged(nameof(Rssi));
         }

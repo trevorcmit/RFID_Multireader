@@ -53,7 +53,8 @@ namespace BLE.Client.Pages {
             entryVibrationTime.Text = BleMvxApplication._config1.RFID_VibrationTime.ToString();
         }
 
-        protected override void OnAppearing() {
+        protected override void OnAppearing()
+        {
             base.OnAppearing();
         }
 

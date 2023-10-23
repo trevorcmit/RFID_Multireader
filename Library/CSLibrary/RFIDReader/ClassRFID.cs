@@ -1510,13 +1510,8 @@ namespace CSLibrary
 			MacWriteRegister(MACREGISTER.HST_QUERY_CFG, value);
 
 			return Result.OK;
-
-			/*            return (m_Result = MacWriteRegister(MACREGISTER.HST_QUERY_CFG,
-							(uint)tagGroup.target << 4 |
-							(uint)tagGroup.session << 5 |
-							(uint)tagGroup.selected << 7));
-			*/
 		}
+        
 		/// <summary>
 		/// Get Tag Group
 		/// </summary>

@@ -12,7 +12,8 @@ namespace BLE.Client.Pages
 {
     public partial class PageMainMenu
     {
-        public PageMainMenu() {
+        public PageMainMenu()
+        {
             InitializeComponent();
             this.Title = "IFM fID-T Multireader";
             // Task.Run(AnimateBackground);

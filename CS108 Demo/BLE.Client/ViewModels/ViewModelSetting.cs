@@ -10,21 +10,25 @@ namespace BLE.Client.ViewModels
     {
         private readonly IUserDialogs _userDialogs;
 
-        public ViewModelSetting(IAdapter adapter, IUserDialogs userDialogs) : base(adapter) {
+        public ViewModelSetting(IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
+        {
             _userDialogs = userDialogs;
         }
 
-        public override void Resume() {
+        public override void Resume()
+        {
             base.Resume();
             BleMvxApplication._reader1.siliconlabIC.OnAccessCompleted += new EventHandler<CSLibrary.SiliconLabIC.Events.OnAccessCompletedEventArgs>(OnAccessCompletedEvent);
         }
 
-        public override void Suspend() {
+        public override void Suspend()
+        {
             BleMvxApplication._reader1.siliconlabIC.OnAccessCompleted -= new EventHandler<CSLibrary.SiliconLabIC.Events.OnAccessCompletedEventArgs>(OnAccessCompletedEvent);
             base.Suspend();
         }
 
-        protected override void InitFromBundle(IMvxBundle parameters) {
+        protected override void InitFromBundle(IMvxBundle parameters)
+        {
             base.InitFromBundle(parameters);
         }
 

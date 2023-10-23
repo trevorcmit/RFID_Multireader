@@ -31,7 +31,7 @@
           </StackLayout>
         </ListView.Header>
         <ListView.ItemTemplate>
-              <DataTemplate>
+          <DataTemplate>
                 <ViewCell>
                   <StackLayout Orientation="Vertical">
                     <Grid>
@@ -50,12 +50,12 @@
                     </Grid>
                   </StackLayout>
                 </ViewCell>
-              </DataTemplate>
+          </DataTemplate>
         </ListView.ItemTemplate>
       </ListView>
     </StackLayout>
 
-    <!-- 
+    
     <StackLayout Orientation="Vertical" VerticalOptions="EndAndExpand">
       <ListView x:Name="liewViewTagData2" ItemsSource="{Binding TagInfoList2}" SelectedItem="{Binding objItemSelected2, Mode=TwoWay}">
         <ListView.Header>
@@ -100,7 +100,7 @@
         </ListView.ItemTemplate>
       </ListView> 
     </StackLayout>
-    -->
+    
 
     <StackLayout Orientation="Vertical" VerticalOptions="EndAndExpand" > <!-- Bottom Inventory/Clear/Share Section --> 
       <Button Text="{Binding startInventoryButtonText}" Font="Large" Command="{Binding OnStartInventoryButtonCommand}" />

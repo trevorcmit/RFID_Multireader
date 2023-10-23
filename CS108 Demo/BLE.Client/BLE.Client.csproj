@@ -124,21 +124,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="PagesViewModelsSet\SpecialFuction\Monza4 QT\PublicModeInventory\PageQTPublicModeInventory.xaml.cs">
-      <DependentUpon>PageQTPublicModeInventory.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="PagesViewModelsSet\SpecialFuction\Monza4 QT\PrivateModeInventory\PageQTPrivateModeInventory.xaml.cs">
-      <DependentUpon>PageQTPrivateModeInventory.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="PagesViewModelsSet\SpecialFuction\Monza4 QT\ReadPublicModeData\PageQTReadPublicModeData.xaml.cs">
-      <DependentUpon>PageQTReadPublicModeData.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="PagesViewModelsSet\SpecialFuction\Monza4 QT\ReadWritePrivateModeData\PageQTReadWritePrivateModeData.xaml.cs">
-      <DependentUpon>PageQTReadWritePrivateModeData.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="PagesViewModelsSet\SpecialFuction\Monza4 QT\InventorySelectionMenu\PageQTInventorySlectionMenu.xaml.cs">
-      <DependentUpon>PageQTInventorySlectionMenu.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Pages\PageFM13DT160DeepSleep.xaml.cs">
       <DependentUpon>PageFM13DT160DeepSleep.xaml</DependentUpon>
     </Compile>
@@ -161,21 +146,6 @@
 
   <ItemGroup>
     <EmbeddedResource Update="BleMvxFormsApp.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="PagesViewModelsSet\SpecialFuction\Monza4 QT\PublicModeInventory\PageQTPublicModeInventory.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="PagesViewModelsSet\SpecialFuction\Monza4 QT\PrivateModeInventory\PageQTPrivateModeInventory.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="PagesViewModelsSet\SpecialFuction\Monza4 QT\ReadPublicModeData\PageQTReadPublicModeData.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="PagesViewModelsSet\SpecialFuction\Monza4 QT\ReadWritePrivateModeData\PageQTReadWritePrivateModeData.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="PagesViewModelsSet\SpecialFuction\Monza4 QT\InventorySelectionMenu\PageQTInventorySlectionMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\DeviceList1Page.xaml">
@@ -418,6 +388,10 @@
     <EmbeddedResource Update="Pages\ServiceListPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="PagesViewModelsSet\SpecialFuction\Monza4 QT\" />
   </ItemGroup>
 
 </Project>

@@ -258,7 +258,8 @@ namespace BLE.Client.ViewModels
             }
         }
 
-        private void CleanupCancellationToken() {
+        private void CleanupCancellationToken()
+        {
             try {
                 _cancellationTokenSource.Dispose();
                 _cancellationTokenSource = null;

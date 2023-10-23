@@ -57,7 +57,8 @@ namespace BLE.Client.ViewModels
         }
 
         // MUST be geant location permission
-        private async void GetLocationPermission() {
+        private async void GetLocationPermission()
+        {
             if (await _permissions.CheckPermissionStatusAsync(Permission.Location) != PermissionStatus.Granted) {
                 if (Device.RuntimePlatform == Device.Android)
                     await _userDialogs.AlertAsync("This app collects location data in the background. In terms of the features using this location data in the background, this App collects location data when it is reading temperature RFID tag in the “Magnus S3 with GPS for Advantech” page.  The purpose of this is to correlate the RFID tag with the actual GNSS location of the tag.  In other words, this is to track the physical location of the logistics item tagged with the RFID tag.");

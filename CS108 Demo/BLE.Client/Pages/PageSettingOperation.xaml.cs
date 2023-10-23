@@ -14,7 +14,8 @@ namespace BLE.Client.Pages {
         double[] ActiveFrequencyList;
         string[] ActiveFrequencyTextList;
 
-        CSLibrary.Constants.RegionCode [] _regionsCode = new CSLibrary.Constants.RegionCode[] {
+        CSLibrary.Constants.RegionCode [] _regionsCode = new CSLibrary.Constants.RegionCode[]
+        {
             CSLibrary.Constants.RegionCode.FCC,
             CSLibrary.Constants.RegionCode.ETSI,
             CSLibrary.Constants.RegionCode.CN,
@@ -56,7 +57,8 @@ namespace BLE.Client.Pages {
             CSLibrary.Constants.RegionCode.BA,
             CSLibrary.Constants.RegionCode.VI
         };
-        string[] _regionsName = new string[] {
+        string[] _regionsName = new string[]
+        {
             "USACanada",
             "Europe",
             "China",
@@ -113,7 +115,8 @@ namespace BLE.Client.Pages {
         string[] _IFLNAGainList = {"24", "18", "12", "6"};
         string[] _AGCGainList = {"-12", "-6", "0", "6"};
 
-        public PageSettingOperation() {
+        public PageSettingOperation()
+        {
             InitializeComponent();
 
             if (Device.RuntimePlatform == Device.iOS) {
@@ -170,13 +173,17 @@ namespace BLE.Client.Pages {
                 entryQOverride.IsEnabled = false;
                 buttonQOverride.Text = "Override";
             }
+
             buttonSession.Text = BleMvxApplication._config1.RFID_TagGroup.session.ToString();
-            if (BleMvxApplication._config1.RFID_ToggleTarget) {
+            if (BleMvxApplication._config1.RFID_ToggleTarget)
+            {
                 buttonTarget.Text = "Toggle A/B";
             }
-            else {
+            else
+            {
                 buttonTarget.Text = BleMvxApplication._config1.RFID_TagGroup.target.ToString();
             }
+            
             buttonAlgorithm.Text = BleMvxApplication._config1.RFID_Algorithm.ToString();
             buttonProfile.Text = _profileList[BleMvxApplication._config1.RFID_Profile];
 

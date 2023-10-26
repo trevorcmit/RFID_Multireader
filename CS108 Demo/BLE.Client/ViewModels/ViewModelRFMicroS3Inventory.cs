@@ -27,8 +27,7 @@ namespace BLE.Client.ViewModels
         {
             /////////////////////////////////////////////////////////////////////////////////////////////////////////
             // CLASS UPDATES/ADDITIONS
-            private string _TimeString; // Time at which last tag was read
-            public string TimeString { get { return this._TimeString; } set { this.SetProperty(ref this._TimeString, value); } }
+            private string _TimeString; public string TimeString { get { return this._TimeString; } set { this.SetProperty(ref this._TimeString, value); } }
             /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             private string _EPC; public string EPC { get { return this._EPC; } set { this.SetProperty(ref this._EPC, value); } }
@@ -56,7 +55,9 @@ namespace BLE.Client.ViewModels
         private string _startInventoryButtonText = "Start Inventory";
         public string startInventoryButtonText { get { return _startInventoryButtonText; } }
 
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////
+        private string _HeaderColor1 = "#FF4F4F"; public string HeaderColor1 { get { return _HeaderColor1; } }
+        private string _HeaderColor2 = "#FF4F4F"; public string HeaderColor2 { get { return _HeaderColor2; } }
+
         /////////////////////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////////////////////
         // For Saving Data / CSV exporting
@@ -64,6 +65,11 @@ namespace BLE.Client.ViewModels
         Dictionary<string, List<string>> tag_Time = new Dictionary<string, List<string>>();
         Dictionary<string, List<string>> tag_Data = new Dictionary<string, List<string>>();
         Dictionary<string, List<string>> tag_RSSI = new Dictionary<string, List<string>>();
+
+        List<string> tag_List2 = new List<string>();
+        Dictionary<string, List<string>> tag_Time2 = new Dictionary<string, List<string>>();
+        Dictionary<string, List<string>> tag_Data2 = new Dictionary<string, List<string>>();
+        Dictionary<string, List<string>> tag_RSSI2 = new Dictionary<string, List<string>>();
 
         ///////////////// Public/Private Variables for Body Model /////////////////
         private List<string> _epcs; public List<string> epcs { get => _epcs; set { _epcs = value; OnPropertyChanged("epcs"); } }
@@ -80,6 +86,8 @@ namespace BLE.Client.ViewModels
 
         public FileResult pick_result;  // Save FilePicker.PickAsync() result for use in Autosave function
         public FileResult rssi_result; 
+        public FileResult pick_result2;
+        public FileResult rssi_result2;
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName = null)
@@ -89,10 +97,8 @@ namespace BLE.Client.ViewModels
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         public bool _startInventory = true;
-        bool _cancelVoltageValue = false;
         #endregion
 
 
@@ -118,6 +124,9 @@ namespace BLE.Client.ViewModels
             // Necessary part for picking autosave location
             pick_result = await FilePicker.PickAsync();
             rssi_result = await FilePicker.PickAsync();
+
+            pick_result2 = await FilePicker.PickAsync();
+            rssi_result2 = await FilePicker.PickAsync();
 
             // Save every second and we cycle by half seconds
             _active_time   = 5000;
@@ -149,6 +158,22 @@ namespace BLE.Client.ViewModels
             activetimer.Enabled = false;
             downtimer.Enabled = true;
             // StartInventory();   // Turn on for Duty Cycle
+
+            // if (BleMvxApplication._reader1.Status != CSLibrary.HighLevelInterface.READERSTATE.DISCONNECT)
+            // {
+            //     // SetPower(BleMvxApplication._rfMicro_Power, 1);
+            //     // BleMvxApplication._reader1.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_EXERANGING);
+            //     BleMvxApplication._reader1.rfid.SetPowerLevel(300); 
+
+            //     _HeaderColor1 = "#5FFF6F";
+            //     RaisePropertyChanged(() => HeaderColor1);
+            // }
+
+            // // BleMvxApplication._reader2.rfid.StopOperation();
+            // BleMvxApplication._reader2.rfid.SetPowerLevel(0); 
+
+            // _HeaderColor2 = "#FF4F4F";
+            // RaisePropertyChanged(() => HeaderColor2);
         }
 
         private void DownEvent(object sender, System.Timers.ElapsedEventArgs e)
@@ -157,6 +182,22 @@ namespace BLE.Client.ViewModels
             AutoSaveData();    // Autosave while Down is occurring
             activetimer.Enabled = true;
             downtimer.Enabled = false;
+
+            // if (BleMvxApplication._reader2.Status != CSLibrary.HighLevelInterface.READERSTATE.DISCONNECT)
+            // {
+            //     // SetPower(BleMvxApplication._rfMicro_Power, 2);
+            //     // BleMvxApplication._reader2.rfid.StartOperation(CSLibrary.Constants.Operation.TAG_EXERANGING);
+            //     BleMvxApplication._reader2.rfid.SetPowerLevel(300); 
+
+            //     _HeaderColor2 = "#5FFF6F";
+            //     RaisePropertyChanged(() => HeaderColor2);
+            // }
+
+            // // BleMvxApplication._reader1.rfid.StopOperation();
+            // BleMvxApplication._reader1.rfid.SetPowerLevel(0); 
+
+            // _HeaderColor1 = "#FF4F4F";
+            // RaisePropertyChanged(() => HeaderColor1);
         }
 
         //////////////////////////////////////////////////////////////////
@@ -294,8 +335,7 @@ namespace BLE.Client.ViewModels
                 BleMvxApplication._reader1.rfid.SetCurrentSingulationAlgorithm(BleMvxApplication._config1.RFID_Algorithm);
                 BleMvxApplication._reader1.rfid.SetCurrentLinkProfile(BleMvxApplication._config1.RFID_Profile);
 
-                // BleMvxApplication._reader1.rfid.SetTagGroup(CSLibrary.Constants.Selected.ASSERTED, BleMvxApplication._config1.RFID_TagGroup.session, (BleMvxApplication._rfMicro_Target != 1) ? CSLibrary.Constants.SessionTarget.A : CSLibrary.Constants.SessionTarget.B);
-                BleMvxApplication._reader1.rfid.SetTagGroup(CSLibrary.Constants.Selected.ASSERTED, CSLibrary.Constants.Session.S2, (BleMvxApplication._rfMicro_Target != 1) ? CSLibrary.Constants.SessionTarget.A : CSLibrary.Constants.SessionTarget.B);
+                BleMvxApplication._reader1.rfid.SetTagGroup(CSLibrary.Constants.Selected.ASSERTED, CSLibrary.Constants.Session.S0, CSLibrary.Constants.SessionTarget.A);
 
                 // extraSlecetion Section
                 CSLibrary.Structures.SelectCriterion extraSlecetion = new CSLibrary.Structures.SelectCriterion();
@@ -359,9 +399,7 @@ namespace BLE.Client.ViewModels
 
                 BleMvxApplication._reader2.rfid.SetOperationMode(BleMvxApplication._config2.RFID_OperationMode);
 
-                // BleMvxApplication._reader2.rfid.SetTagGroup(CSLibrary.Constants.Selected.ASSERTED, BleMvxApplication._config2.RFID_TagGroup.session, (BleMvxApplication._rfMicro_Target != 1) ? CSLibrary.Constants.SessionTarget.A : CSLibrary.Constants.SessionTarget.B);
-                // BleMvxApplication._reader2.rfid.SetTagGroup(CSLibrary.Constants.Selected.ASSERTED, BleMvxApplication._config1.RFID_TagGroup.session, CSLibrary.Constants.SessionTarget.B);
-                BleMvxApplication._reader2.rfid.SetTagGroup(CSLibrary.Constants.Selected.ASSERTED, CSLibrary.Constants.Session.S3, (BleMvxApplication._rfMicro_Target != 1) ? CSLibrary.Constants.SessionTarget.A : CSLibrary.Constants.SessionTarget.B);
+                BleMvxApplication._reader2.rfid.SetTagGroup(CSLibrary.Constants.Selected.ASSERTED, CSLibrary.Constants.Session.S0, CSLibrary.Constants.SessionTarget.A);
 
                 BleMvxApplication._reader2.rfid.SetCurrentSingulationAlgorithm(BleMvxApplication._config2.RFID_Algorithm);
                 BleMvxApplication._reader2.rfid.SetCurrentLinkProfile(BleMvxApplication._config2.RFID_Profile);
@@ -417,7 +455,6 @@ namespace BLE.Client.ViewModels
             }
 
             ClassBattery.SetBatteryMode(ClassBattery.BATTERYMODE.INVENTORY);
-            _cancelVoltageValue = true;
             RaisePropertyChanged(() => startInventoryButtonText);
         }
 
@@ -436,8 +473,8 @@ namespace BLE.Client.ViewModels
         {
             if (_startInventory)
             {
-                activetimer.Enabled = true; 
                 StartInventory(); 
+                activetimer.Enabled = true; 
             }
             else
             {
@@ -474,7 +511,6 @@ namespace BLE.Client.ViewModels
             {
                 case CSLibrary.Constants.RFState.IDLE:
                     ClassBattery.SetBatteryMode(ClassBattery.BATTERYMODE.IDLE);
-                    _cancelVoltageValue = true;
                     switch (BleMvxApplication._reader1.rfid.LastMacErrorCode)
                     {
                         case 0x00:  // normal end
@@ -496,11 +532,11 @@ namespace BLE.Client.ViewModels
             {
                 case CSLibrary.Constants.RFState.IDLE:
                     ClassBattery.SetBatteryMode(ClassBattery.BATTERYMODE.IDLE);
-                    _cancelVoltageValue = true;
-                    switch (BleMvxApplication._reader2.rfid.LastMacErrorCode) {
+                    switch (BleMvxApplication._reader2.rfid.LastMacErrorCode)
+                    {
                         case 0x00:  // normal end
                             break;
-                        case 0x0309:    // 
+                        case 0x0309:
                             _userDialogs.Alert("Too near to metal, please move CS108 away from metal and start inventory again.");
                             break;
                         default:
@@ -511,6 +547,20 @@ namespace BLE.Client.ViewModels
             }
         }
 
+        // private void add_update_tagdata(CSLibrary.Structures.TagCallbackInfo info, int readerID)
+        // {
+        //     InvokeOnMainThread(() =>
+        //     {
+        //         bool found = false;
+        //         int cnt;
+
+        //         UInt16 sensorCode = (UInt16)(info.Bank1Data[0] & 0x1ff);  // address c
+        //         UInt16 ocRSSI     = info.Bank1Data[1];                    // address d
+        //         UInt16 temp       = info.Bank1Data[2];                    // address e
+        //         UInt64 caldata    = (UInt64)(((UInt64)info.Bank2Data[0] << 48) | ((UInt64)info.Bank2Data[1] << 32) | ((UInt64)info.Bank2Data[2] << 16) | ((UInt64)info.Bank2Data[3]));
+        //     });
+        // }
+
         private void AddOrUpdateTagData(CSLibrary.Structures.TagCallbackInfo info, int readerID)
         {
             InvokeOnMainThread(() =>
@@ -518,19 +568,24 @@ namespace BLE.Client.ViewModels
                 bool found = false;
                 int cnt;
 
-                if (readerID==1) {
-                    lock (TagInfoList) {
-                        UInt16 sensorCode = (UInt16)(info.Bank1Data[0] & 0x1ff);  // address c
-                        UInt16 ocRSSI     = info.Bank1Data[1];                    // address d
-                        UInt16 temp       = info.Bank1Data[2];                    // address e
+                UInt16 sensorCode = (UInt16)(info.Bank1Data[0] & 0x1ff);  // address c
+                UInt16 ocRSSI     = info.Bank1Data[1];                    // address d
+                UInt16 temp       = info.Bank1Data[2];                    // address e
 
-                        for (cnt = 0; cnt < TagInfoList.Count; cnt++) {
+                if (readerID==1)
+                {
+                    lock (TagInfoList)
+                    {
+
+                        for (cnt = 0; cnt < TagInfoList.Count; cnt++)
+                        {
                             if (TagInfoList[cnt].EPC==info.epc.ToString())
                             {
                                 TagInfoList[cnt].OCRSSI = ocRSSI;
 
                                 if (ocRSSI >= BleMvxApplication._rfMicro_minOCRSSI && ocRSSI <= BleMvxApplication._rfMicro_maxOCRSSI) {
-                                            if (temp >= 1300 && temp <= 3500) {
+                                            if (temp >= 1300 && temp <= 3500)
+                                            {
                                                 TagInfoList[cnt].SucessCount++;
                                                 UInt64 caldata = (UInt64)(((UInt64)info.Bank2Data[0] << 48) | ((UInt64)info.Bank2Data[1] << 32) | ((UInt64)info.Bank2Data[2] << 16) | ((UInt64)info.Bank2Data[3]));
 
@@ -546,7 +601,8 @@ namespace BLE.Client.ViewModels
                                                             TagInfoList[cnt].SensorAvgValue = SAV.ToString();
                                                             TagInfoList[cnt].TimeString = DateTime.Now.ToString("HH:mm:ss");
 
-                                                            try {
+                                                            try
+                                                            {
                                                                 if (!tag_List.Contains(TagInfoList[cnt].EPC)) { // Check Tag_List contains tags, add new data
                                                                     tag_List.Add(TagInfoList[cnt].EPC);
                                                                 }
@@ -588,22 +644,24 @@ namespace BLE.Client.ViewModels
                             }
                         }
 
-                        if (!found) {
-                                RFMicroTagInfoViewModel item = new RFMicroTagInfoViewModel();
+                        if (!found)
+                        {
+                            RFMicroTagInfoViewModel item = new RFMicroTagInfoViewModel();
 
-                                item.EPC = info.epc.ToString();
-                                item.DisplayName = item.EPC;
-                                item.OCRSSI = ocRSSI;
-                                item.SucessCount = 0;
-                                item.SensorAvgValue = "";
+                            item.EPC = info.epc.ToString();
+                            item.DisplayName = item.EPC;
+                            item.OCRSSI = ocRSSI;
+                            item.SucessCount = 0;
+                            item.SensorAvgValue = "";
 
-                                if (ocRSSI >= BleMvxApplication._rfMicro_minOCRSSI && ocRSSI <= BleMvxApplication._rfMicro_maxOCRSSI) {
+                            if (ocRSSI >= BleMvxApplication._rfMicro_minOCRSSI && ocRSSI <= BleMvxApplication._rfMicro_maxOCRSSI) {
                                     switch (BleMvxApplication._rfMicro_SensorType) {
                                         case 0:
                                             break;
                                         default:
                                             if (temp >= 1300 && temp <= 3500) {
                                                 item.SucessCount++;
+
                                                 UInt64 caldata = (UInt64)(((UInt64)info.Bank2Data[0]<<48) | ((UInt64)info.Bank2Data[1]<<32) | ((UInt64)info.Bank2Data[2]<<16) | ((UInt64)info.Bank2Data[3]));
 
                                                 if (caldata == 0) item.SensorAvgValue = "NoCalData";
@@ -619,8 +677,8 @@ namespace BLE.Client.ViewModels
                                                             item.SensorAvgValue = SAV.ToString();
                                                             item.TimeString = DateTime.Now.ToString("HH:mm:ss");
 
-                                                            if (epcs.Contains(item.EPC))
-                                                            {
+                                                            // if (epcs.Contains(item.EPC))
+                                                            // {
                                                                 List<string> t_time = new List<string>{ item.TimeString };
                                                                 List<string> t_data = new List<string>{ item.SensorAvgValue };
                                                                 List<string> t_rssi = new List<string>{ item.OCRSSI.ToString() };
@@ -633,7 +691,7 @@ namespace BLE.Client.ViewModels
                                                                     tag_List.Add(item.EPC);
                                                                 }
                                                                 finally {}
-                                                            }
+                                                            // }
                                                             break;
                                                     }
                                             }
@@ -646,12 +704,10 @@ namespace BLE.Client.ViewModels
                     }
                 }   // if readerID==1
 
-                if (readerID==2) {
-                    lock (TagInfoList2) {
-                        UInt16 sensorCode = (UInt16)(info.Bank1Data[0] & 0x1ff);  // address c
-                        UInt16 ocRSSI     = info.Bank1Data[1];                    // address d
-                        UInt16 temp       = info.Bank1Data[2];                    // address e
-
+                if (readerID==2)
+                {
+                    lock (TagInfoList2)
+                    {
                         for (cnt = 0; cnt < TagInfoList2.Count; cnt++)
                         {
                             if (TagInfoList2[cnt].EPC==info.epc.ToString())
@@ -659,7 +715,8 @@ namespace BLE.Client.ViewModels
                                 TagInfoList2[cnt].OCRSSI = ocRSSI;
 
                                 if (ocRSSI >= BleMvxApplication._rfMicro_minOCRSSI && ocRSSI <= BleMvxApplication._rfMicro_maxOCRSSI) {
-                                            if (temp >= 1300 && temp <= 3500) {
+                                            if (temp >= 1300 && temp <= 3500)
+                                            {
                                                 TagInfoList2[cnt].SucessCount++;
                                                 UInt64 caldata = (UInt64)(((UInt64)info.Bank2Data[0] << 48) | ((UInt64)info.Bank2Data[1] << 32) | ((UInt64)info.Bank2Data[2] << 16) | ((UInt64)info.Bank2Data[3]));
 
@@ -676,32 +733,32 @@ namespace BLE.Client.ViewModels
                                                             TagInfoList2[cnt].TimeString = DateTime.Now.ToString("HH:mm:ss");
 
                                                             try {
-                                                                if (!tag_List.Contains(TagInfoList2[cnt].EPC)) { // Check Tag_List contains tags, add new data
-                                                                    tag_List.Add(TagInfoList2[cnt].EPC);
+                                                                if (!tag_List2.Contains(TagInfoList2[cnt].EPC)) { // Check Tag_List contains tags, add new data
+                                                                    tag_List2.Add(TagInfoList2[cnt].EPC);
                                                                 }
 
-                                                                if (!tag_Time.ContainsKey(TagInfoList2[cnt].EPC)) { // Check Tag_Time contains tags, add new data
+                                                                if (!tag_Time2.ContainsKey(TagInfoList2[cnt].EPC)) { // Check Tag_Time contains tags, add new data
                                                                     List<string> t_time = new List<string>{TagInfoList2[cnt].TimeString};
-                                                                    tag_Time.Add(TagInfoList2[cnt].EPC, t_time);
+                                                                    tag_Time2.Add(TagInfoList2[cnt].EPC, t_time);
                                                                 }
                                                                 else {
-                                                                    tag_Time[TagInfoList2[cnt].EPC].Add(TagInfoList2[cnt].TimeString);
+                                                                    tag_Time2[TagInfoList2[cnt].EPC].Add(TagInfoList2[cnt].TimeString);
                                                                 }
 
-                                                                if (!tag_Data.ContainsKey(TagInfoList2[cnt].EPC)) { // Check Tag_Data contains tags, add new data
+                                                                if (!tag_Data2.ContainsKey(TagInfoList2[cnt].EPC)) { // Check Tag_Data contains tags, add new data
                                                                     List<string> t_data = new List<string>{TagInfoList2[cnt].SensorAvgValue};
-                                                                    tag_Data.Add(TagInfoList2[cnt].EPC, t_data);
+                                                                    tag_Data2.Add(TagInfoList2[cnt].EPC, t_data);
                                                                 }
                                                                 else {
-                                                                    tag_Data[TagInfoList2[cnt].EPC].Add(TagInfoList2[cnt].SensorAvgValue);
+                                                                    tag_Data2[TagInfoList2[cnt].EPC].Add(TagInfoList2[cnt].SensorAvgValue);
                                                                 }
 
-                                                                if (!tag_RSSI.ContainsKey(TagInfoList2[cnt].EPC)) {
+                                                                if (!tag_RSSI2.ContainsKey(TagInfoList2[cnt].EPC)) {
                                                                     List<string> t_rssi = new List<string>{TagInfoList2[cnt].OCRSSI.ToString()};
-                                                                    tag_RSSI.Add(TagInfoList2[cnt].EPC, t_rssi);
+                                                                    tag_RSSI2.Add(TagInfoList2[cnt].EPC, t_rssi);
                                                                 }
                                                                 else {
-                                                                    tag_RSSI[TagInfoList2[cnt].EPC].Add(TagInfoList2[cnt].OCRSSI.ToString());
+                                                                    tag_RSSI2[TagInfoList2[cnt].EPC].Add(TagInfoList2[cnt].OCRSSI.ToString());
                                                                 }
                                                             }
                                                             finally {}
@@ -717,7 +774,8 @@ namespace BLE.Client.ViewModels
                             }
                         }
 
-                        if (!found) {
+                        if (!found)
+                        {
                             RFMicroTagInfoViewModel item = new RFMicroTagInfoViewModel();
 
                             item.EPC = info.epc.ToString();
@@ -748,21 +806,21 @@ namespace BLE.Client.ViewModels
                                                             item.SensorAvgValue = SAV.ToString();
                                                             item.TimeString = DateTime.Now.ToString("HH:mm:ss");
 
-                                                            if (epcs.Contains(item.EPC))
-                                                            {
+                                                            // if (epcs.Contains(item.EPC))
+                                                            // {
                                                                 List<string> t_time = new List<string>{ item.TimeString };
                                                                 List<string> t_data = new List<string>{ item.SensorAvgValue };
                                                                 List<string> t_rssi = new List<string>{ item.OCRSSI.ToString() };
 
                                                                 try
                                                                 {
-                                                                    tag_Time.Add(item.EPC, t_time);
-                                                                    tag_Data.Add(item.EPC, t_data);
-                                                                    tag_RSSI.Add(item.EPC, t_rssi);
-                                                                    tag_List.Add(item.EPC);
+                                                                    tag_Time2.Add(item.EPC, t_time);
+                                                                    tag_Data2.Add(item.EPC, t_data);
+                                                                    tag_RSSI2.Add(item.EPC, t_rssi);
+                                                                    tag_List2.Add(item.EPC);
                                                                 }
                                                                 finally {}
-                                                            }
+                                                            // }
                                                             break;
                                                     }
                                             }
@@ -782,33 +840,34 @@ namespace BLE.Client.ViewModels
         {
             InvokeOnMainThread(() =>
             {
-                string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "tags.txt");
-                using (StreamWriter writer = new StreamWriter(fileName, true)) {
+                // string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "tags.txt");
+                // using (StreamWriter writer = new StreamWriter(fileName, true)) {
 
                 // var file = await Xamarin.Essentials.FilePicker.PickAsync();
                 // using (StreamWriter writer = new StreamWriter(file.FileName, true)) {
 
-                    foreach (string name in tag_List)
-                    {
-                        writer.WriteLine(name + "\n" + "[");
-                        foreach (var i in tag_Time[name]) { writer.WriteLine(i); }
-                        writer.WriteLine("]\n[");
-                        foreach (var j in tag_Data[name]) { writer.WriteLine(j); }
-                        writer.WriteLine("]\n ");
-                    }
-                }
+                //     foreach (string name in tag_List)
+                //     {
+                //         writer.WriteLine(name + "\n" + "[");
+                //         foreach (var i in tag_Time[name]) { writer.WriteLine(i); }
+                //         writer.WriteLine("]\n[");
+                //         foreach (var j in tag_Data[name]) { writer.WriteLine(j); }
+                //         writer.WriteLine("]\n ");
+                //     }
+                // }
 
             });
         }
 
         private void AutoSaveData() // Function for Sharing time series data from tags
         {
-            InvokeOnMainThread(()=> {
-                // string fpath = "tags_" + r.ToString() + ".csv";
-                // string rssipath = "RSSI_" + r.ToString() + ".csv";
-
+            InvokeOnMainThread(()=>
+            {
                 string fileName = pick_result.FullPath;    // Get file name from picker
                 string rssiName = rssi_result.FullPath;    // Get file name from picker
+
+                string fileName2 = pick_result2.FullPath;    // Get file name from picker
+                string rssiName2 = rssi_result2.FullPath;    // Get file name from picker
 
                 // string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), fpath);
                 // string rssiName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), rssipath);
@@ -835,6 +894,32 @@ namespace BLE.Client.ViewModels
                         foreach (var i in tag_Time[name]) { writer.WriteLine(i); }
                         writer.WriteLine("]\n[");
                         foreach (var j in tag_RSSI[name]) { writer.WriteLine(j); }
+                        writer.WriteLine("]\n ");
+                    }
+                    writer.Close();
+                }
+
+                File.WriteAllText(fileName2, String.Empty); // Empty text file to rewrite database
+                using (StreamWriter writer = new StreamWriter(fileName2, true))
+                {
+                    foreach (string name in tag_List2)
+                    {
+                        writer.WriteLine(name + "\n" + "[");
+                        foreach (var i in tag_Time2[name]) { writer.WriteLine(i); }
+                        writer.WriteLine("]\n[");
+                        foreach (var j in tag_Data2[name]) { writer.WriteLine(j); }
+                        writer.WriteLine("]\n ");
+                    }
+                    writer.Close();
+                }
+
+                File.WriteAllText(rssiName2, String.Empty); // Empty text file to rewrite database
+                using (StreamWriter writer = new StreamWriter(rssiName2, true)) {
+                    foreach (string name in tag_List2) {
+                        writer.WriteLine(name + "\n" + "[");
+                        foreach (var i in tag_Time2[name]) { writer.WriteLine(i); }
+                        writer.WriteLine("]\n[");
+                        foreach (var j in tag_RSSI2[name]) { writer.WriteLine(j); }
                         writer.WriteLine("]\n ");
                     }
                     writer.Close();

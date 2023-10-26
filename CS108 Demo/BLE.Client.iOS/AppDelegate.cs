@@ -5,12 +5,15 @@ using MvvmCross.Platform;
 using UIKit;
 
 
-namespace BLE.Client.iOS {
+namespace BLE.Client.iOS
+{
     [Register("AppDelegate")]
-    public partial class AppDelegate : MvxApplicationDelegate {
+    public partial class AppDelegate : MvxApplicationDelegate
+    {
         UIWindow _window;
 
-        public override bool FinishedLaunching(UIApplication app, NSDictionary options) {
+        public override bool FinishedLaunching(UIApplication app, NSDictionary options)
+        {
             System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
 
             _window = new UIWindow(UIScreen.MainScreen.Bounds);

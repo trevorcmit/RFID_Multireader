@@ -13,7 +13,7 @@
     <StackLayout Orientation="Vertical" VerticalOptions="StartAndExpand">
       <ListView x:Name="liewViewTagData" ItemsSource="{Binding TagInfoList}" SelectedItem="{Binding objItemSelected1, Mode=TwoWay}">
         <ListView.Header>
-          <StackLayout BackgroundColor="#CCCCCC"> <!-- Gray color of the Column Header row -->
+          <StackLayout BackgroundColor="{Binding HeaderColor1}"> <!-- Gray color of the Column Header row -->
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.35*"/>    <!-- EPC -->
@@ -32,24 +32,24 @@
         </ListView.Header>
         <ListView.ItemTemplate>
           <DataTemplate>
-                <ViewCell>
-                  <StackLayout Orientation="Vertical">
-                    <Grid>
-                      <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.35*"/>   <!-- EPC -->
-                        <ColumnDefinition Width="0.20*"/>   <!-- Time -->
-                        <ColumnDefinition Width="0.15*"/>   <!-- RSSI -->
-                        <ColumnDefinition Width="0.10*"/>   <!-- Temperature -->
-                        <ColumnDefinition Width="0.10*"/>   <!-- Times Read -->
-                      </Grid.ColumnDefinitions>
-                      <Label Grid.Column="0" Text="{Binding DisplayName}"    VerticalTextAlignment="Start" FontSize="Small"/>
-                      <Label Grid.Column="1" Text="{Binding TimeString}"     VerticalTextAlignment="Start" HorizontalTextAlignment="Center"/>
-                      <Label Grid.Column="2" Text="{Binding OCRSSI}"         VerticalTextAlignment="Start" HorizontalTextAlignment="Center" TextColor="#000000"/>
-                      <Label Grid.Column="3" Text="{Binding SensorAvgValue}" VerticalTextAlignment="Start" HorizontalTextAlignment="Center"/>
-                      <Label Grid.Column="4" Text="{Binding SucessCount}"    VerticalTextAlignment="Start" HorizontalTextAlignment="Center"/>
-                    </Grid>
-                  </StackLayout>
-                </ViewCell>
+            <ViewCell>
+              <StackLayout Orientation="Vertical">
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.35*"/>   <!-- EPC -->
+                    <ColumnDefinition Width="0.20*"/>   <!-- Time -->
+                    <ColumnDefinition Width="0.15*"/>   <!-- RSSI -->
+                    <ColumnDefinition Width="0.10*"/>   <!-- Temperature -->
+                    <ColumnDefinition Width="0.10*"/>   <!-- Times Read -->
+                  </Grid.ColumnDefinitions>
+                  <Label Grid.Column="0" Text="{Binding DisplayName}"    VerticalTextAlignment="Start" FontSize="Small"/>
+                  <Label Grid.Column="1" Text="{Binding TimeString}"     VerticalTextAlignment="Start" HorizontalTextAlignment="Center"/>
+                  <Label Grid.Column="2" Text="{Binding OCRSSI}"         VerticalTextAlignment="Start" HorizontalTextAlignment="Center" TextColor="#000000"/>
+                  <Label Grid.Column="3" Text="{Binding SensorAvgValue}" VerticalTextAlignment="Start" HorizontalTextAlignment="Center"/>
+                  <Label Grid.Column="4" Text="{Binding SucessCount}"    VerticalTextAlignment="Start" HorizontalTextAlignment="Center"/>
+                </Grid>
+              </StackLayout>
+            </ViewCell>
           </DataTemplate>
         </ListView.ItemTemplate>
       </ListView>
@@ -59,7 +59,7 @@
     <StackLayout Orientation="Vertical" VerticalOptions="EndAndExpand">
       <ListView x:Name="liewViewTagData2" ItemsSource="{Binding TagInfoList2}" SelectedItem="{Binding objItemSelected2, Mode=TwoWay}">
         <ListView.Header>
-          <StackLayout BackgroundColor="#CDCDCD">
+          <StackLayout BackgroundColor="{Binding HeaderColor2}">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.35*"/>
@@ -77,26 +77,26 @@
           </StackLayout>
         </ListView.Header>
         <ListView.ItemTemplate>
-              <DataTemplate>
-                <ViewCell>
-                  <StackLayout Orientation="Vertical">
-                    <Grid>
-                      <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.35*"/>
-                        <ColumnDefinition Width="0.20*"/> 
-                        <ColumnDefinition Width="0.15*"/> 
-                        <ColumnDefinition Width="0.10*"/>
-                        <ColumnDefinition Width="0.10*"/>
-                      </Grid.ColumnDefinitions>
-                      <Label Grid.Column="0" Text="{Binding DisplayName}"    VerticalTextAlignment="Start" FontSize="Small"/>
-                      <Label Grid.Column="1" Text="{Binding TimeString}"     VerticalTextAlignment="Start" HorizontalTextAlignment="Center"/>
-                      <Label Grid.Column="2" Text="{Binding OCRSSI}"         VerticalTextAlignment="Start" HorizontalTextAlignment="Center" TextColor="#000000"/>
-                      <Label Grid.Column="3" Text="{Binding SensorAvgValue}" VerticalTextAlignment="Start" HorizontalTextAlignment="Center"/>
-                      <Label Grid.Column="4" Text="{Binding SucessCount}"    VerticalTextAlignment="Start" HorizontalTextAlignment="Center"/>
-                    </Grid>
-                  </StackLayout>
-                </ViewCell>
-              </DataTemplate>
+          <DataTemplate>
+            <ViewCell>
+              <StackLayout Orientation="Vertical">
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.35*"/>
+                    <ColumnDefinition Width="0.20*"/> 
+                    <ColumnDefinition Width="0.15*"/> 
+                    <ColumnDefinition Width="0.10*"/>
+                    <ColumnDefinition Width="0.10*"/>
+                  </Grid.ColumnDefinitions>
+                  <Label Grid.Column="0" Text="{Binding DisplayName}"    VerticalTextAlignment="Start" FontSize="Small"/>
+                  <Label Grid.Column="1" Text="{Binding TimeString}"     VerticalTextAlignment="Start" HorizontalTextAlignment="Center"/>
+                  <Label Grid.Column="2" Text="{Binding OCRSSI}"         VerticalTextAlignment="Start" HorizontalTextAlignment="Center" TextColor="#000000"/>
+                  <Label Grid.Column="3" Text="{Binding SensorAvgValue}" VerticalTextAlignment="Start" HorizontalTextAlignment="Center"/>
+                  <Label Grid.Column="4" Text="{Binding SucessCount}"    VerticalTextAlignment="Start" HorizontalTextAlignment="Center"/>
+                </Grid>
+              </StackLayout>
+            </ViewCell>
+          </DataTemplate>
         </ListView.ItemTemplate>
       </ListView> 
     </StackLayout>
